@@ -1,0 +1,10 @@
+^C:\USERS\LOUIS PROFFIT\ONEDRIVE\DOCUMENTS\X2A\P3\INF443 INFORMATIQUE GRAPHIQUE 3D\PROJET\SCENES\PROJET_PLANETE\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/Louis Proffit/OneDrive/Documents/X2A/P3/INF443 Informatique graphique 3D/Projet/scenes/projet_planete" "-BC:/Users/Louis Proffit/OneDrive/Documents/X2A/P3/INF443 Informatique graphique 3D/Projet/scenes/projet_planete/build" --check-stamp-file "C:/Users/Louis Proffit/OneDrive/Documents/X2A/P3/INF443 Informatique graphique 3D/Projet/scenes/projet_planete/build/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
