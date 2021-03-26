@@ -133,7 +133,7 @@ void initialize_data()
 	planet_1 = mesh_drawable(create_colored_sphere(color_blue_low, color_blue_high, color_grey_low, color_grey_high));
 	planet_1.shading.phong.specular = 0.0f;
 
-	image_raw const im = image_load_png("../assets/earth_texture_2.png");
+	image_raw const im = image_load_png("assets/earth_texture_2.png");
 
 	// Send this image to the GPU, and get its identifier texture_image_id
 	GLuint const texture_image_id = opengl_texture_to_gpu(im, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
