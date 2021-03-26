@@ -1,6 +1,6 @@
-^C:\USERS\LOUIS PROFFIT\ONEDRIVE\DOCUMENTS\X2A\P3\INF443 INFORMATIQUE GRAPHIQUE 3D\PROJET\SCENES\PROJET_PLANETE\BUILD\CMAKEFILES\B8D5D308F9AF49CFB6D945165EAE2E3B\GENERATE.STAMP.RULE
+^C:\USERS\LOUIS PROFFIT\ONEDRIVE\GIT\INF443\SCENES\PROJET_PLANETE\BUILD\CMAKEFILES\DE42C2FD9ECD79FD59609C3821E8B6D3\GENERATE.STAMP.RULE
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/Louis Proffit/OneDrive/Documents/X2A/P3/INF443 Informatique graphique 3D/Projet/scenes/projet_planete" "-BC:/Users/Louis Proffit/OneDrive/Documents/X2A/P3/INF443 Informatique graphique 3D/Projet/scenes/projet_planete/build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/Louis Proffit/OneDrive/Documents/X2A/P3/INF443 Informatique graphique 3D/Projet/scenes/projet_planete/build/projet_planete.sln"
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/Louis Proffit/OneDrive/Git/INF443/scenes/projet_planete" "-BC:/Users/Louis Proffit/OneDrive/Git/INF443/scenes/projet_planete/build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/Louis Proffit/OneDrive/Git/INF443/scenes/projet_planete/build/projet_planete.sln"
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

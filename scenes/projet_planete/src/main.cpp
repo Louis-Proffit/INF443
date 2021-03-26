@@ -1,10 +1,8 @@
 #include "vcl/vcl.hpp"
 #include <iostream>
 
-#include "terrain.hpp"
-#include "tree.hpp"
 #include "sphere.hpp"
-#include "mushroom.hpp"
+#include "plane.hpp"
 
 using namespace vcl;
 
@@ -46,8 +44,18 @@ const vec3 color_grey_high = { float(10) / 255, float(10) / 255, float(10) / 255
 const vec3 color_green_low = { float(50) / 255, float(205) / 255, float(50) / 255 };
 const vec3 color_green_high = { float(34) / 255, float(139) / 255, float(34) / 255 };
 
+float planete_radius = 1.0f;
+float plane_altitude = 1.1f;
 mesh_drawable planet_1;
-mesh_drawable planet_2;
+
+Plane plane_1(plane_altitude);
+hierarchy_mesh_drawable plane_1_visual;
+Plane plane_2(plane_altitude);
+hierarchy_mesh_drawable plane_2_visual;
+Plane plane_3(plane_altitude);
+hierarchy_mesh_drawable plane_3_visual;
+Plane plane_4(plane_altitude);
+hierarchy_mesh_drawable plane_4_visual;
 
 int main(int, char* argv[])
 {
@@ -125,20 +133,33 @@ void initialize_data()
 	planet_1 = mesh_drawable(create_colored_sphere(color_blue_low, color_blue_high, color_grey_low, color_grey_high));
 	planet_1.shading.phong.specular = 0.0f;
 
+	image_raw const im = image_load_png("../assets/earth_texture_2.png");
 
-	planet_2 = mesh_drawable(create_colored_sphere(color_grey_low, color_grey_high, color_green_low, color_green_high));
-	planet_2.transform.translate = vec3(0.0f, 2.0f, 2.0f);
-	/*planet_2.transform.rotate = rotation(vec3(0.0f, 1.0f, 0.0f), pi / 2.0f);*/
-	planet_2.shading.phong.specular = 0.0f;
+	// Send this image to the GPU, and get its identifier texture_image_id
+	GLuint const texture_image_id = opengl_texture_to_gpu(im, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
+
+	// Associate the texture_image_id to the image texture used when displaying visual
+	planet_1.texture = texture_image_id;
+
+	plane_1_visual = plane_1.get_mesh_drawable();
+	plane_2_visual = plane_2.get_mesh_drawable();
+	plane_3_visual = plane_3.get_mesh_drawable();
+	plane_4_visual = plane_4.get_mesh_drawable();
 }
 
 
 void display_scene()
 {
 	draw(planet_1, scene);
-	draw(planet_2, scene);
-	/*draw_wireframe(planet_1, scene);
-	draw_wireframe(planet_2, scene);*/
+
+	plane_1.update_plane_visual(&plane_1_visual);
+	draw(plane_1_visual, scene);
+	plane_2.update_plane_visual(&plane_2_visual);
+	draw(plane_2_visual, scene);
+	plane_3.update_plane_visual(&plane_3_visual);
+	draw(plane_3_visual, scene);
+	plane_4.update_plane_visual(&plane_4_visual);
+	draw(plane_4_visual, scene);
 }
 
 

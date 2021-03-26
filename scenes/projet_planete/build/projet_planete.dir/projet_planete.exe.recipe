@@ -2,10 +2,10 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\Louis Proffit\OneDrive\Documents\X2A\P3\INF443 Informatique graphique 3D\Projet\scenes\projet_planete\build\x64\RelWithDebInfo\ZERO_CHECK</FullPath>
+      <FullPath>C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\build\x64\RelWithDebInfo\ZERO_CHECK</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>C:\Users\Louis Proffit\OneDrive\Documents\X2A\P3\INF443 Informatique graphique 3D\Projet\scenes\projet_planete\projet_planete.exe</FullPath>
+      <FullPath>C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\projet_planete.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

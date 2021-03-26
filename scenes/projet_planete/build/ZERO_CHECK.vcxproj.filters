@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="C:\Users\Louis Proffit\OneDrive\Documents\X2A\P3\INF443 Informatique graphique 3D\Projet\scenes\projet_planete\build\CMakeFiles\b8d5d308f9af49cfb6d945165eae2e3b\generate.stamp.rule">
+    <CustomBuild Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\build\CMakeFiles\de42c2fd9ecd79fd59609c3821e8b6d3\generate.stamp.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{3849D789-DC7B-39DF-8DA0-7010C66934AA}</UniqueIdentifier>
+      <UniqueIdentifier>{F21F0FDB-279B-3729-A0E6-9B66AD281E2A}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

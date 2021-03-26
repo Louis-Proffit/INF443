@@ -4,6 +4,20 @@ using namespace vcl;
 
 const unsigned int number_of_steps = 5;
 const float sphere_radius = 1.0f;
+const float min_lattitude_v = log(tan(0.01 * pi / 4));
+const float max_lattitude_v = log(tan(1.99 * pi / 4));
+
+vec2 get_point_texture(vec3 position);
+
+vec2 get_point_texture(vec3 position) {
+    float lattitude = pi / 2 - acos(position.z / sphere_radius);
+    float longitude = atan2(position.x, position.y);
+
+    float u = (-longitude + pi) / (2 * pi);
+    float v = 0.15 * log(tan((pi / 4 + lattitude / 2))) + 0.5;
+    /*float v = (log(tan((pi / 4 + 0.99 * lattitude / 2))) - min_lattitude_v) / (max_lattitude_v - min_lattitude_v);*/
+    return vec2(u, v);
+}
 
 vec3 get_point_on_sphere(vec3 position) {
     float size = norm(position);
@@ -144,16 +158,23 @@ mesh create_sphere()
             current_mesh.connectivity.push_back(uint3(index_middle_2, index_3, index_middle_3));
         }
     }
+
+    current_mesh.uv.resize(current_mesh.position.size());
+    for (int i = 0; i < current_mesh.position.size(); i++) {
+        current_mesh.uv[i] = get_point_texture(current_mesh.position[i]);
+    }
+
     current_mesh.fill_empty_field();
+    return current_mesh;
 
-    mesh result = shake_sphere(current_mesh);
+    /*mesh result = shake_sphere(current_mesh);
 
-    return result;
+    return result*/
 }
 
 mesh create_colored_sphere(vec3 color_1_low, vec3 color_1_high, vec3 color_2_low, vec3 color_2_high) {
     mesh current_sphere = create_sphere();
-    const unsigned int number_of_triangles = current_sphere.connectivity.size();
+    /*const unsigned int number_of_triangles = current_sphere.connectivity.size();
 
     mesh result;
     vec3 vertex_1, vertex_2, vertex_3;
@@ -179,7 +200,8 @@ mesh create_colored_sphere(vec3 color_1_low, vec3 color_1_high, vec3 color_2_low
 
     result.fill_empty_field();
 
-    return result;
+    return result;*/
+    return current_sphere;
 }
 
 

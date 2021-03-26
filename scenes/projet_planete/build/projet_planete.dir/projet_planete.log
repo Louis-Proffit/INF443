@@ -1,11 +1,5 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(504,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(505,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
-  Sphere.cpp
-C:\Users\Louis Proffit\OneDrive\Documents\X2A\P3\INF443 Informatique graphique 3D\Projet\scenes\projet_planete\src\Sphere.cpp(20,11): warning C4189: 'angle1': local variable is initialized but not referenced
-C:\Users\Louis Proffit\OneDrive\Documents\X2A\P3\INF443 Informatique graphique 3D\Projet\scenes\projet_planete\src\Sphere.cpp(21,11): warning C4189: 'angle2': local variable is initialized but not referenced
-C:\Users\Louis Proffit\OneDrive\Documents\X2A\P3\INF443 Informatique graphique 3D\Projet\scenes\projet_planete\src\Sphere.cpp(22,11): warning C4189: 'angle3': local variable is initialized but not referenced
-C:\Users\Louis Proffit\OneDrive\Documents\X2A\P3\INF443 Informatique graphique 3D\Projet\scenes\projet_planete\src\Sphere.cpp(102,27): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Louis Proffit\OneDrive\Documents\X2A\P3\INF443 Informatique graphique 3D\Projet\scenes\projet_planete\src\Sphere.cpp(129,27): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Louis Proffit\OneDrive\Documents\X2A\P3\INF443 Informatique graphique 3D\Projet\scenes\projet_planete\src\Sphere.cpp(163,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Louis Proffit\OneDrive\Documents\X2A\P3\INF443 Informatique graphique 3D\Projet\scenes\projet_planete\src\Sphere.cpp(188,23): warning C4018: '<': signed/unsigned mismatch
-  projet_planete.vcxproj -> C:\Users\Louis Proffit\OneDrive\Documents\X2A\P3\INF443 Informatique graphique 3D\Projet\scenes\projet_planete\projet_planete.exe
+  plane.cpp
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\plane.cpp(23,29): warning C4305: 'initializing': truncation from 'double' to 'float'
+  projet_planete.vcxproj -> C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\projet_planete.exe
