@@ -2,7 +2,8 @@
 #include <iostream>
 
 #include "sphere.hpp"
-#include "plane.hpp"
+#include "objects.hpp"
+#include "constants.hpp"
 
 using namespace vcl;
 
@@ -28,7 +29,6 @@ struct scene_environment
 };
 scene_environment scene;
 
-
 void mouse_move_callback(GLFWwindow* window, double xpos, double ypos);
 void window_size_callback(GLFWwindow* window, int width, int height);
 
@@ -44,18 +44,22 @@ const vec3 color_grey_high = { float(10) / 255, float(10) / 255, float(10) / 255
 const vec3 color_green_low = { float(50) / 255, float(205) / 255, float(50) / 255 };
 const vec3 color_green_high = { float(34) / 255, float(139) / 255, float(34) / 255 };
 
-float planete_radius = 1.0f;
-float plane_altitude = 1.1f;
-mesh_drawable planet_1;
+timer_interval timer;
+
+mesh_drawable planet;
 
 Plane plane_1(plane_altitude);
 hierarchy_mesh_drawable plane_1_visual;
+trajectory_drawable plane_1_trajectory(1000);
 Plane plane_2(plane_altitude);
 hierarchy_mesh_drawable plane_2_visual;
-Plane plane_3(plane_altitude);
-hierarchy_mesh_drawable plane_3_visual;
-Plane plane_4(plane_altitude);
-hierarchy_mesh_drawable plane_4_visual;
+trajectory_drawable plane_2_trajectory(1000);
+Satelite satelite_1(satelite_altitude);
+hierarchy_mesh_drawable satelite_1_visual;
+trajectory_drawable satelite_1_trajectory(2000);
+Satelite satelite_2(satelite_altitude);
+hierarchy_mesh_drawable satelite_2_visual;
+trajectory_drawable satelite_2_trajectory(2000);
 
 int main(int, char* argv[])
 {
@@ -82,7 +86,7 @@ int main(int, char* argv[])
 		scene.light = scene.camera.position();
 		user.fps_record.update();
 		
-		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glClear(GL_DEPTH_BUFFER_BIT);
 		imgui_create_frame();
@@ -129,9 +133,13 @@ void initialize_data()
 	scene.camera.distance_to_center = 2.5f;
 	scene.camera.look_at({4,3,2}, {0,0,0}, {0,0,1});
 
+	timer.t_min = 0;
+	timer.t_max = 10; 
+	timer.t = timer.t_min;
+
     // Create visual terrain surface
-	planet_1 = mesh_drawable(create_colored_sphere(color_blue_low, color_blue_high, color_grey_low, color_grey_high));
-	planet_1.shading.phong.specular = 0.0f;
+	planet = mesh_drawable(create_colored_sphere(color_blue_low, color_blue_high, color_grey_low, color_grey_high));
+	planet.shading.phong.specular = 0.0f;
 
 	image_raw const im = image_load_png("assets/earth_texture_2.png");
 
@@ -139,27 +147,46 @@ void initialize_data()
 	GLuint const texture_image_id = opengl_texture_to_gpu(im, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
 
 	// Associate the texture_image_id to the image texture used when displaying visual
-	planet_1.texture = texture_image_id;
+	planet.texture = texture_image_id;
 
 	plane_1_visual = plane_1.get_mesh_drawable();
 	plane_2_visual = plane_2.get_mesh_drawable();
-	plane_3_visual = plane_3.get_mesh_drawable();
-	plane_4_visual = plane_4.get_mesh_drawable();
+	satelite_1_visual = satelite_1.get_mesh_drawable();
+	satelite_2_visual = satelite_2.get_mesh_drawable();
 }
 
 
 void display_scene()
 {
-	draw(planet_1, scene);
+
+	timer.update();
+	float const t = timer.t;
+
+	draw(planet, scene);
+
+
+	plane_1_trajectory.visual.color = vec3(1, 0, 0);
+	plane_2_trajectory.visual.color = vec3(1, 0, 0);
+	satelite_1_trajectory.visual.color = vec3(1, 0, 0);
+	satelite_2_trajectory.visual.color = vec3(1, 0, 0);
+
+	plane_1_trajectory.add(plane_1_visual["fin"].global_transform.translate, t);
+	plane_2_trajectory.add(plane_2_visual["fin"].global_transform.translate, t);
+	satelite_1_trajectory.add(satelite_1_visual["body"].global_transform.translate, t);
+	satelite_2_trajectory.add(satelite_2_visual["body"].global_transform.translate, t);
 
 	plane_1.update_plane_visual(&plane_1_visual);
 	draw(plane_1_visual, scene);
+	draw(plane_1_trajectory, scene);
 	plane_2.update_plane_visual(&plane_2_visual);
 	draw(plane_2_visual, scene);
-	plane_3.update_plane_visual(&plane_3_visual);
-	draw(plane_3_visual, scene);
-	plane_4.update_plane_visual(&plane_4_visual);
-	draw(plane_4_visual, scene);
+	draw(plane_2_trajectory, scene);
+	satelite_1.update_plane_visual(&satelite_1_visual);
+	draw(satelite_1_visual, scene);
+	draw(satelite_1_trajectory, scene);
+	satelite_2.update_plane_visual(&satelite_2_visual);
+	draw(satelite_2_visual, scene);
+	draw(satelite_2_trajectory, scene);
 }
 
 

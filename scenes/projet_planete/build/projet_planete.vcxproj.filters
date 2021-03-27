@@ -217,7 +217,7 @@
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\terrain.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\tree.cpp">
+    <ClCompile Include="..\src\satelite.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1347,16 +1347,13 @@
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\Sphere.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\blabla.hpp">
+    <ClInclude Include="..\src\constants.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\plane.hpp">
+    <ClInclude Include="..\src\objects.hpp">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\terrain.hpp">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\tree.hpp">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

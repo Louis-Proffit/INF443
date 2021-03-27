@@ -1,6 +1,6 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(504,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(505,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  satelite.cpp
   main.cpp
   plane.cpp
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\plane.cpp(23,29): warning C4305: 'initializing': truncation from 'double' to 'float'
   projet_planete.vcxproj -> C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\projet_planete.exe

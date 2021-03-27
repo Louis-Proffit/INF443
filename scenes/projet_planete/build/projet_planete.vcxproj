@@ -769,14 +769,13 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\simplexnoise\simplexnoise1234.hpp" />
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\Sphere.cpp" />
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\Sphere.hpp" />
-    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\blabla.hpp" />
+    <ClInclude Include="..\src\constants.hpp" />
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp" />
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\plane.cpp" />
-    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\plane.hpp" />
+    <ClInclude Include="..\src\objects.hpp" />
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\terrain.cpp" />
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\terrain.hpp" />
-    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\tree.cpp" />
-    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\tree.hpp" />
+    <ClCompile Include="..\src\satelite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\build\ZERO_CHECK.vcxproj">
