@@ -3,31 +3,8 @@
 
 #include "sphere.hpp"
 #include "objects.hpp"
-#include "constants.hpp"
 
 using namespace vcl;
-
-struct gui_parameters {
-	bool display_frame = true;
-	bool add_sphere = true;
-};
-
-struct user_interaction_parameters {
-	vec2 mouse_prev;
-	timer_fps fps_record;
-	mesh_drawable global_frame;
-	gui_parameters gui;
-	bool cursor_on_gui;
-};
-user_interaction_parameters user;
-
-struct scene_environment
-{
-	camera_around_center camera;
-	mat4 projection;
-	vec3 light;
-};
-scene_environment scene;
 
 void mouse_move_callback(GLFWwindow* window, double xpos, double ypos);
 void window_size_callback(GLFWwindow* window, int width, int height);
@@ -36,7 +13,6 @@ void initialize_data();
 void display_scene();
 void display_interface();
 
-
 const vec3 color_blue_low = { float(0) / 255, float(191) / 255, float(255) / 255 };
 const vec3 color_blue_high = { float(30) / 255, float(144) / 255, float(255) / 255 };
 const vec3 color_grey_low = { float(40) / 255, float(40) / 255, float(40) / 255 };
@@ -44,16 +20,13 @@ const vec3 color_grey_high = { float(10) / 255, float(10) / 255, float(10) / 255
 const vec3 color_green_low = { float(50) / 255, float(205) / 255, float(50) / 255 };
 const vec3 color_green_high = { float(34) / 255, float(139) / 255, float(34) / 255 };
 
+user_interaction_parameters user;
+scene_environment scene;
 timer_interval timer;
 
 mesh_drawable planet;
-
-Plane plane_1(plane_altitude);
-hierarchy_mesh_drawable plane_1_visual;
-trajectory_drawable plane_1_trajectory(1000);
-Plane plane_2(plane_altitude);
-hierarchy_mesh_drawable plane_2_visual;
-trajectory_drawable plane_2_trajectory(1000);
+Plane* plane_1;
+Plane* plane_2;
 Satelite satelite_1(satelite_altitude);
 hierarchy_mesh_drawable satelite_1_visual;
 trajectory_drawable satelite_1_trajectory(2000);
@@ -149,8 +122,9 @@ void initialize_data()
 	// Associate the texture_image_id to the image texture used when displaying visual
 	planet.texture = texture_image_id;
 
-	plane_1_visual = plane_1.get_mesh_drawable();
-	plane_2_visual = plane_2.get_mesh_drawable();
+	plane_1 = new Plane();
+	plane_2 = new Plane();
+
 	satelite_1_visual = satelite_1.get_mesh_drawable();
 	satelite_2_visual = satelite_2.get_mesh_drawable();
 }
@@ -164,26 +138,20 @@ void display_scene()
 
 	draw(planet, scene);
 
-
-	plane_1_trajectory.visual.color = vec3(1, 0, 0);
-	plane_2_trajectory.visual.color = vec3(1, 0, 0);
 	satelite_1_trajectory.visual.color = vec3(1, 0, 0);
 	satelite_2_trajectory.visual.color = vec3(1, 0, 0);
 
-	plane_1_trajectory.add(plane_1_visual["fin"].global_transform.translate, t);
-	plane_2_trajectory.add(plane_2_visual["fin"].global_transform.translate, t);
 	satelite_1_trajectory.add(satelite_1_visual["body"].global_transform.translate, t);
 	satelite_2_trajectory.add(satelite_2_visual["body"].global_transform.translate, t);
 
-	plane_1.update_plane_visual(&plane_1_visual);
-	draw(plane_1_visual, scene);
-	draw(plane_1_trajectory, scene);
-	plane_2.update_plane_visual(&plane_2_visual);
-	draw(plane_2_visual, scene);
-	draw(plane_2_trajectory, scene);
+	/*plane_1->update_and_draw(scene);*/
+
+	/*plane_2->update_and_draw(scene);*/
+
 	satelite_1.update_plane_visual(&satelite_1_visual);
 	draw(satelite_1_visual, scene);
 	draw(satelite_1_trajectory, scene);
+
 	satelite_2.update_plane_visual(&satelite_2_visual);
 	draw(satelite_2_visual, scene);
 	draw(satelite_2_trajectory, scene);
@@ -222,13 +190,5 @@ void mouse_move_callback(GLFWwindow* window, double xpos, double ypos)
 
 	user.mouse_prev = p1;
 }
-
-void opengl_uniform(GLuint shader, scene_environment const& current_scene)
-{
-	opengl_uniform(shader, "projection", current_scene.projection);
-	opengl_uniform(shader, "view", scene.camera.matrix_view());
-	opengl_uniform(shader, "light", scene.light, false);
-}
-
 
 

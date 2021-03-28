@@ -1,0 +1,1779 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\base\basic_types\basic_types.cpp">
+      <Filter>vcl\base\basic_types</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\base\error\error.cpp">
+      <Filter>vcl\base\error</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\base\rand\rand.cpp">
+      <Filter>vcl\base\rand</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\base\string\string.cpp">
+      <Filter>vcl\base\string</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\containers\buffer\test\test_buffer.cpp">
+      <Filter>vcl\containers\buffer\test</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\containers\buffer_stack\special_types\special_types.cpp">
+      <Filter>vcl\containers\buffer_stack\special_types</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\containers\buffer_stack\test\test_buffer_stack.cpp">
+      <Filter>vcl\containers\buffer_stack\test</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\containers\grid\test\test_grid.cpp">
+      <Filter>vcl\containers\grid\test</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\containers\grid_stack\grid_stack_2D\test\test_grid_stack_2D.cpp">
+      <Filter>vcl\containers\grid_stack\grid_stack_2D\test</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\containers\offset_grid\offset_grid.cpp">
+      <Filter>vcl\containers\offset_grid</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\curve_drawable\curve_drawable.cpp">
+      <Filter>vcl\display\drawable\curve_drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\hierarchy_mesh_drawable\hierarchy_mesh_drawable.cpp">
+      <Filter>vcl\display\drawable\hierarchy_mesh_drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\hierarchy_mesh_drawable\hierarchy_mesh_drawable_node\hierarchy_mesh_drawable_node.cpp">
+      <Filter>vcl\display\drawable\hierarchy_mesh_drawable\hierarchy_mesh_drawable_node</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_drawable\mesh_drawable.cpp">
+      <Filter>vcl\display\drawable\mesh_drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_normal_drawable\mesh_normal_drawable.cpp">
+      <Filter>vcl\display\drawable\mesh_normal_drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_wireframe_drawable\mesh_wireframe_drawable.cpp">
+      <Filter>vcl\display\drawable\mesh_wireframe_drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\segments_drawable\segments_drawable.cpp">
+      <Filter>vcl\display\drawable\segments_drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\shading_parameters\shading_parameters.cpp">
+      <Filter>vcl\display\drawable\shading_parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\trajectory_drawable\trajectory_drawable.cpp">
+      <Filter>vcl\display\drawable\trajectory_drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\image\image.cpp">
+      <Filter>vcl\display\image</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\opengl\debug\debug.cpp">
+      <Filter>vcl\display\opengl\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\opengl\helper\opengl_helper.cpp">
+      <Filter>vcl\display\opengl\helper</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\opengl\shaders\shaders.cpp">
+      <Filter>vcl\display\opengl\shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\opengl\texture\texture.cpp">
+      <Filter>vcl\display\opengl\texture</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\opengl\uniform\uniform.cpp">
+      <Filter>vcl\display\opengl\uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\window\window.cpp">
+      <Filter>vcl\display\window</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\files\files.cpp">
+      <Filter>vcl\files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\camera\camera_around_center\camera_around_center.cpp">
+      <Filter>vcl\interaction\camera\camera_around_center</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\camera\camera_base\camera_base.cpp">
+      <Filter>vcl\interaction\camera\camera_base</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\camera\camera_head\camera_head.cpp">
+      <Filter>vcl\interaction\camera\camera_head</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\camera\camera_spherical_coordinates\camera_spherical_coordinates.cpp">
+      <Filter>vcl\interaction\camera\camera_spherical_coordinates</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\camera\common_functions\common_functions.cpp">
+      <Filter>vcl\interaction\camera\common_functions</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\glfw_interaction\glfw_interaction.cpp">
+      <Filter>vcl\interaction\glfw_interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\gui\gui.cpp">
+      <Filter>vcl\interaction\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\timer\timer_basic\timer_basic.cpp">
+      <Filter>vcl\interaction\timer\timer_basic</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\timer\timer_event_periodic\timer_event_periodic.cpp">
+      <Filter>vcl\interaction\timer\timer_event_periodic</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\timer\timer_fps\timer_fps.cpp">
+      <Filter>vcl\interaction\timer\timer_fps</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\timer\timer_interval\timer_interval.cpp">
+      <Filter>vcl\interaction\timer\timer_interval</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\tracker\velocity_tracker\velocity_tracker.cpp">
+      <Filter>vcl\interaction\tracker\velocity_tracker</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\math\affine\affine_rt\affine_rt.cpp">
+      <Filter>vcl\math\affine\affine_rt</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\math\affine\affine_rts\affine_rts.cpp">
+      <Filter>vcl\math\affine\affine_rts</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\math\frame\frame.cpp">
+      <Filter>vcl\math\frame</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\math\interpolation\interpolation.cpp">
+      <Filter>vcl\math\interpolation</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\math\matrix\matrix_stack\special_types\definition\special_types.cpp">
+      <Filter>vcl\math\matrix\matrix_stack\special_types\definition</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\math\matrix\matrix_stack\special_types\mat4\mat4.cpp">
+      <Filter>vcl\math\matrix\matrix_stack\special_types\mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\math\matrix\test\test_matrix_stack.cpp">
+      <Filter>vcl\math\matrix\test</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\math\projection\projection.cpp">
+      <Filter>vcl\math\projection</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\math\quaternion\quaternion.cpp">
+      <Filter>vcl\math\quaternion</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\math\rotation\rotation.cpp">
+      <Filter>vcl\math\rotation</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\math\rotation\test\test_rotation.cpp">
+      <Filter>vcl\math\rotation\test</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\math\vec_mat\test\test_vec_mat.cpp">
+      <Filter>vcl\math\vec_mat\test</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\math\vec_mat\vec_mat.cpp">
+      <Filter>vcl\math\vec_mat</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\shaders_preset\shaders_preset.cpp">
+      <Filter>vcl\shaders_preset</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\shape\curve\curve.cpp">
+      <Filter>vcl\shape\curve</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\shape\intersection\intersection.cpp">
+      <Filter>vcl\shape\intersection</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\shape\mesh\loader\obj\obj.cpp">
+      <Filter>vcl\shape\mesh\loader\obj</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\shape\mesh\primitive\mesh_primitive.cpp">
+      <Filter>vcl\shape\mesh\primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\shape\mesh\structure\mesh.cpp">
+      <Filter>vcl\shape\mesh\structure</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\shape\noise\noise.cpp">
+      <Filter>vcl\shape\noise</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\glad\src\glad.cpp">
+      <Filter>third_party\src\glad\src</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\imgui\imgui.cpp">
+      <Filter>third_party\src\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\imgui\imgui_demo.cpp">
+      <Filter>third_party\src\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\imgui\imgui_draw.cpp">
+      <Filter>third_party\src\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\imgui\imgui_impl_glfw.cpp">
+      <Filter>third_party\src\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\imgui\imgui_impl_opengl3.cpp">
+      <Filter>third_party\src\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\imgui\imgui_widgets.cpp">
+      <Filter>third_party\src\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\lodepng\lodepng.cpp">
+      <Filter>third_party\src\lodepng</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\simplexnoise\simplexnoise1234.cpp">
+      <Filter>third_party\src\simplexnoise</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\sphere.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete_2\src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\orbiters.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\scene_helper.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\base\base.hpp">
+      <Filter>vcl\base</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\base\basic_types\basic_types.hpp">
+      <Filter>vcl\base\basic_types</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\base\error\error.hpp">
+      <Filter>vcl\base\error</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\base\rand\rand.hpp">
+      <Filter>vcl\base\rand</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\base\stl\stl.hpp">
+      <Filter>vcl\base\stl</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\base\string\string.hpp">
+      <Filter>vcl\base\string</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\base\types\types.hpp">
+      <Filter>vcl\base\types</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\containers\buffer\buffer.hpp">
+      <Filter>vcl\containers\buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\containers\buffer\test\test_buffer.hpp">
+      <Filter>vcl\containers\buffer\test</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\containers\buffer_stack\buffer_stack.hpp">
+      <Filter>vcl\containers\buffer_stack</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\containers\buffer_stack\implementation\buffer_stack.hpp">
+      <Filter>vcl\containers\buffer_stack\implementation</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\containers\buffer_stack\implementation\buffer_stack2.hpp">
+      <Filter>vcl\containers\buffer_stack\implementation</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\containers\buffer_stack\implementation\buffer_stack3.hpp">
+      <Filter>vcl\containers\buffer_stack\implementation</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\containers\buffer_stack\implementation\buffer_stack4.hpp">
+      <Filter>vcl\containers\buffer_stack\implementation</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\containers\buffer_stack\special_types\special_types.hpp">
+      <Filter>vcl\containers\buffer_stack\special_types</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\containers\buffer_stack\test\test_buffer_stack.hpp">
+      <Filter>vcl\containers\buffer_stack\test</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\containers\containers.hpp">
+      <Filter>vcl\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\containers\grid\grid.hpp">
+      <Filter>vcl\containers\grid</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\containers\grid\grid_2D\grid_2D.hpp">
+      <Filter>vcl\containers\grid\grid_2D</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\containers\grid\grid_3D\grid_3D.hpp">
+      <Filter>vcl\containers\grid\grid_3D</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\containers\grid\test\test_grid.hpp">
+      <Filter>vcl\containers\grid\test</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\containers\grid_stack\grid_stack.hpp">
+      <Filter>vcl\containers\grid_stack</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\containers\grid_stack\grid_stack_2D\grid_stack_2D.hpp">
+      <Filter>vcl\containers\grid_stack\grid_stack_2D</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\containers\grid_stack\grid_stack_2D\test\test_grid_stack_2D.hpp">
+      <Filter>vcl\containers\grid_stack\grid_stack_2D\test</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\containers\offset_grid\offset_grid.hpp">
+      <Filter>vcl\containers\offset_grid</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\display.hpp">
+      <Filter>vcl\display</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\curve_drawable\curve_drawable.hpp">
+      <Filter>vcl\display\drawable\curve_drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\drawable.hpp">
+      <Filter>vcl\display\drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\hierarchy_mesh_drawable\hierarchy_mesh_drawable.hpp">
+      <Filter>vcl\display\drawable\hierarchy_mesh_drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\hierarchy_mesh_drawable\hierarchy_mesh_drawable_node\hierarchy_mesh_drawable_node.hpp">
+      <Filter>vcl\display\drawable\hierarchy_mesh_drawable\hierarchy_mesh_drawable_node</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_drawable\mesh_drawable.hpp">
+      <Filter>vcl\display\drawable\mesh_drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_normal_drawable\mesh_normal_drawable.hpp">
+      <Filter>vcl\display\drawable\mesh_normal_drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_wireframe_drawable\mesh_wireframe_drawable.hpp">
+      <Filter>vcl\display\drawable\mesh_wireframe_drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\segments_drawable\segments_drawable.hpp">
+      <Filter>vcl\display\drawable\segments_drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\shading_parameters\shading_parameters.hpp">
+      <Filter>vcl\display\drawable\shading_parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\trajectory_drawable\trajectory_drawable.hpp">
+      <Filter>vcl\display\drawable\trajectory_drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\image\image.hpp">
+      <Filter>vcl\display\image</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\opengl\debug\debug.hpp">
+      <Filter>vcl\display\opengl\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\opengl\glad\glad.hpp">
+      <Filter>vcl\display\opengl\glad</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\opengl\helper\opengl_helper.hpp">
+      <Filter>vcl\display\opengl\helper</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\opengl\opengl.hpp">
+      <Filter>vcl\display\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\opengl\shaders\shaders.hpp">
+      <Filter>vcl\display\opengl\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\opengl\texture\texture.hpp">
+      <Filter>vcl\display\opengl\texture</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\opengl\uniform\uniform.hpp">
+      <Filter>vcl\display\opengl\uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\window\window.hpp">
+      <Filter>vcl\display\window</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\files\files.hpp">
+      <Filter>vcl\files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\camera\camera.hpp">
+      <Filter>vcl\interaction\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\camera\camera_around_center\camera_around_center.hpp">
+      <Filter>vcl\interaction\camera\camera_around_center</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\camera\camera_base\camera_base.hpp">
+      <Filter>vcl\interaction\camera\camera_base</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\camera\camera_head\camera_head.hpp">
+      <Filter>vcl\interaction\camera\camera_head</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\camera\camera_spherical_coordinates\camera_spherical_coordinates.hpp">
+      <Filter>vcl\interaction\camera\camera_spherical_coordinates</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\camera\common_functions\common_functions.hpp">
+      <Filter>vcl\interaction\camera\common_functions</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\glfw_interaction\glfw_interaction.hpp">
+      <Filter>vcl\interaction\glfw_interaction</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\gui\gui.hpp">
+      <Filter>vcl\interaction\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\interaction.hpp">
+      <Filter>vcl\interaction</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\timer\timer.hpp">
+      <Filter>vcl\interaction\timer</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\timer\timer_basic\timer_basic.hpp">
+      <Filter>vcl\interaction\timer\timer_basic</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\timer\timer_event_periodic\timer_event_periodic.hpp">
+      <Filter>vcl\interaction\timer\timer_event_periodic</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\timer\timer_fps\timer_fps.hpp">
+      <Filter>vcl\interaction\timer\timer_fps</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\timer\timer_interval\timer_interval.hpp">
+      <Filter>vcl\interaction\timer\timer_interval</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\tracker\tracker.hpp">
+      <Filter>vcl\interaction\tracker</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\tracker\velocity_tracker\velocity_tracker.hpp">
+      <Filter>vcl\interaction\tracker\velocity_tracker</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\math\affine\affine.hpp">
+      <Filter>vcl\math\affine</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\math\affine\affine_rt\affine_rt.hpp">
+      <Filter>vcl\math\affine\affine_rt</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\math\affine\affine_rts\affine_rts.hpp">
+      <Filter>vcl\math\affine\affine_rts</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\math\frame\frame.hpp">
+      <Filter>vcl\math\frame</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\math\interpolation\interpolation.hpp">
+      <Filter>vcl\math\interpolation</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\math\math.hpp">
+      <Filter>vcl\math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\math\matrix\matrix.hpp">
+      <Filter>vcl\math\matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\math\matrix\matrix_stack\matrix_stack.hpp">
+      <Filter>vcl\math\matrix\matrix_stack</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\math\matrix\matrix_stack\special_types\definition\special_types.hpp">
+      <Filter>vcl\math\matrix\matrix_stack\special_types\definition</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\math\matrix\matrix_stack\special_types\mat4\mat4.hpp">
+      <Filter>vcl\math\matrix\matrix_stack\special_types\mat4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\math\matrix\matrix_stack\special_types\special_types.hpp">
+      <Filter>vcl\math\matrix\matrix_stack\special_types</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\math\matrix\test\test_matrix_stack.hpp">
+      <Filter>vcl\math\matrix\test</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\math\projection\projection.hpp">
+      <Filter>vcl\math\projection</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\math\quaternion\quaternion.hpp">
+      <Filter>vcl\math\quaternion</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\math\rotation\rotation.hpp">
+      <Filter>vcl\math\rotation</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\math\rotation\test\test_rotation.hpp">
+      <Filter>vcl\math\rotation\test</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\math\vec_mat\test\test_vec_mat.hpp">
+      <Filter>vcl\math\vec_mat\test</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\math\vec_mat\vec_mat.hpp">
+      <Filter>vcl\math\vec_mat</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\shaders_preset\shaders_preset.hpp">
+      <Filter>vcl\shaders_preset</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\shape\curve\curve.hpp">
+      <Filter>vcl\shape\curve</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\shape\intersection\intersection.hpp">
+      <Filter>vcl\shape\intersection</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\shape\mesh\loader\loader.hpp">
+      <Filter>vcl\shape\mesh\loader</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\shape\mesh\loader\obj\obj.hpp">
+      <Filter>vcl\shape\mesh\loader\obj</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\shape\mesh\mesh.hpp">
+      <Filter>vcl\shape\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\shape\mesh\primitive\mesh_primitive.hpp">
+      <Filter>vcl\shape\mesh\primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\shape\mesh\structure\mesh.hpp">
+      <Filter>vcl\shape\mesh\structure</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\shape\noise\noise.hpp">
+      <Filter>vcl\shape\noise</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\shape\shape.hpp">
+      <Filter>vcl\shape</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\vcl.hpp">
+      <Filter>vcl</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Cholesky\LDLT.h">
+      <Filter>third_party\src\eigen\Eigen\src\Cholesky</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Cholesky\LLT.h">
+      <Filter>third_party\src\eigen\Eigen\src\Cholesky</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Cholesky\LLT_LAPACKE.h">
+      <Filter>third_party\src\eigen\Eigen\src\Cholesky</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\CholmodSupport\CholmodSupport.h">
+      <Filter>third_party\src\eigen\Eigen\src\CholmodSupport</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\Array.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\ArrayBase.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\ArrayWrapper.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\Assign.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\AssignEvaluator.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\Assign_MKL.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\BandMatrix.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\Block.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\BooleanRedux.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\CommaInitializer.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\ConditionEstimator.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\CoreEvaluators.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\CoreIterators.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\CwiseBinaryOp.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\CwiseNullaryOp.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\CwiseTernaryOp.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\CwiseUnaryOp.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\CwiseUnaryView.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\DenseBase.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\DenseCoeffsBase.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\DenseStorage.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\Diagonal.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\DiagonalMatrix.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\DiagonalProduct.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\Dot.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\EigenBase.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\ForceAlignedAccess.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\Fuzzy.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\GeneralProduct.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\GenericPacketMath.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\GlobalFunctions.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\IO.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\Inverse.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\Map.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\MapBase.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\MathFunctions.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\MathFunctionsImpl.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\Matrix.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\MatrixBase.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\NestByValue.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\NoAlias.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\NumTraits.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\PermutationMatrix.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\PlainObjectBase.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\Product.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\ProductEvaluators.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\Random.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\Redux.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\Ref.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\Replicate.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\ReturnByValue.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\Reverse.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\Select.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\SelfAdjointView.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\SelfCwiseBinaryOp.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\Solve.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\SolveTriangular.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\SolverBase.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\StableNorm.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\Stride.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\Swap.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\Transpose.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\Transpositions.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\TriangularMatrix.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\VectorBlock.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\VectorwiseOp.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\Visitor.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\arch\AVX\Complex.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\arch\AVX</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\arch\AVX\MathFunctions.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\arch\AVX</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\arch\AVX\PacketMath.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\arch\AVX</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\arch\AVX\TypeCasting.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\arch\AVX</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\arch\AVX512\MathFunctions.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\arch\AVX512</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\arch\AVX512\PacketMath.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\arch\AVX512</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\arch\AltiVec\Complex.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\arch\AltiVec</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\arch\AltiVec\MathFunctions.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\arch\AltiVec</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\arch\AltiVec\PacketMath.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\arch\AltiVec</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\arch\CUDA\Complex.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\arch\CUDA</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\arch\CUDA\Half.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\arch\CUDA</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\arch\CUDA\MathFunctions.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\arch\CUDA</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\arch\CUDA\PacketMath.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\arch\CUDA</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\arch\CUDA\PacketMathHalf.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\arch\CUDA</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\arch\CUDA\TypeCasting.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\arch\CUDA</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\arch\Default\ConjHelper.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\arch\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\arch\Default\Settings.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\arch\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\arch\NEON\Complex.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\arch\NEON</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\arch\NEON\MathFunctions.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\arch\NEON</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\arch\NEON\PacketMath.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\arch\NEON</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\arch\SSE\Complex.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\arch\SSE</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\arch\SSE\MathFunctions.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\arch\SSE</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\arch\SSE\PacketMath.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\arch\SSE</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\arch\SSE\TypeCasting.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\arch\SSE</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\arch\ZVector\Complex.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\arch\ZVector</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\arch\ZVector\MathFunctions.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\arch\ZVector</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\arch\ZVector\PacketMath.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\arch\ZVector</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\functors\AssignmentFunctors.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\functors</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\functors\BinaryFunctors.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\functors</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\functors\NullaryFunctors.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\functors</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\functors\StlFunctors.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\functors</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\functors\TernaryFunctors.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\functors</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\functors\UnaryFunctors.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\functors</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\products\GeneralBlockPanelKernel.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\products</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\products\GeneralMatrixMatrix.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\products</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\products\GeneralMatrixMatrixTriangular.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\products</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\products\GeneralMatrixMatrixTriangular_BLAS.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\products</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\products\GeneralMatrixMatrix_BLAS.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\products</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\products\GeneralMatrixVector.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\products</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\products\GeneralMatrixVector_BLAS.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\products</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\products\Parallelizer.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\products</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\products\SelfadjointMatrixMatrix.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\products</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\products\SelfadjointMatrixMatrix_BLAS.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\products</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\products\SelfadjointMatrixVector.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\products</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\products\SelfadjointMatrixVector_BLAS.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\products</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\products\SelfadjointProduct.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\products</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\products\SelfadjointRank2Update.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\products</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\products\TriangularMatrixMatrix.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\products</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\products\TriangularMatrixMatrix_BLAS.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\products</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\products\TriangularMatrixVector.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\products</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\products\TriangularMatrixVector_BLAS.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\products</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\products\TriangularSolverMatrix.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\products</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\products\TriangularSolverMatrix_BLAS.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\products</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\products\TriangularSolverVector.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\products</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\util\BlasUtil.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\util</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\util\Constants.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\util</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\util\DisableStupidWarnings.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\util</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\util\ForwardDeclarations.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\util</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\util\MKL_support.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\util</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\util\Macros.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\util</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\util\Memory.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\util</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\util\Meta.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\util</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\util\NonMPL2.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\util</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\util\ReenableStupidWarnings.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\util</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\util\StaticAssert.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\util</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Core\util\XprHelper.h">
+      <Filter>third_party\src\eigen\Eigen\src\Core\util</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Eigenvalues\ComplexEigenSolver.h">
+      <Filter>third_party\src\eigen\Eigen\src\Eigenvalues</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Eigenvalues\ComplexSchur.h">
+      <Filter>third_party\src\eigen\Eigen\src\Eigenvalues</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Eigenvalues\ComplexSchur_LAPACKE.h">
+      <Filter>third_party\src\eigen\Eigen\src\Eigenvalues</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Eigenvalues\EigenSolver.h">
+      <Filter>third_party\src\eigen\Eigen\src\Eigenvalues</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Eigenvalues\GeneralizedEigenSolver.h">
+      <Filter>third_party\src\eigen\Eigen\src\Eigenvalues</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Eigenvalues\GeneralizedSelfAdjointEigenSolver.h">
+      <Filter>third_party\src\eigen\Eigen\src\Eigenvalues</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Eigenvalues\HessenbergDecomposition.h">
+      <Filter>third_party\src\eigen\Eigen\src\Eigenvalues</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Eigenvalues\MatrixBaseEigenvalues.h">
+      <Filter>third_party\src\eigen\Eigen\src\Eigenvalues</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Eigenvalues\RealQZ.h">
+      <Filter>third_party\src\eigen\Eigen\src\Eigenvalues</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Eigenvalues\RealSchur.h">
+      <Filter>third_party\src\eigen\Eigen\src\Eigenvalues</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Eigenvalues\RealSchur_LAPACKE.h">
+      <Filter>third_party\src\eigen\Eigen\src\Eigenvalues</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Eigenvalues\SelfAdjointEigenSolver.h">
+      <Filter>third_party\src\eigen\Eigen\src\Eigenvalues</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Eigenvalues\SelfAdjointEigenSolver_LAPACKE.h">
+      <Filter>third_party\src\eigen\Eigen\src\Eigenvalues</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Eigenvalues\Tridiagonalization.h">
+      <Filter>third_party\src\eigen\Eigen\src\Eigenvalues</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Geometry\AlignedBox.h">
+      <Filter>third_party\src\eigen\Eigen\src\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Geometry\AngleAxis.h">
+      <Filter>third_party\src\eigen\Eigen\src\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Geometry\EulerAngles.h">
+      <Filter>third_party\src\eigen\Eigen\src\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Geometry\Homogeneous.h">
+      <Filter>third_party\src\eigen\Eigen\src\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Geometry\Hyperplane.h">
+      <Filter>third_party\src\eigen\Eigen\src\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Geometry\OrthoMethods.h">
+      <Filter>third_party\src\eigen\Eigen\src\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Geometry\ParametrizedLine.h">
+      <Filter>third_party\src\eigen\Eigen\src\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Geometry\Quaternion.h">
+      <Filter>third_party\src\eigen\Eigen\src\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Geometry\Rotation2D.h">
+      <Filter>third_party\src\eigen\Eigen\src\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Geometry\RotationBase.h">
+      <Filter>third_party\src\eigen\Eigen\src\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Geometry\Scaling.h">
+      <Filter>third_party\src\eigen\Eigen\src\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Geometry\Transform.h">
+      <Filter>third_party\src\eigen\Eigen\src\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Geometry\Translation.h">
+      <Filter>third_party\src\eigen\Eigen\src\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Geometry\Umeyama.h">
+      <Filter>third_party\src\eigen\Eigen\src\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Geometry\arch\Geometry_SSE.h">
+      <Filter>third_party\src\eigen\Eigen\src\Geometry\arch</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Householder\BlockHouseholder.h">
+      <Filter>third_party\src\eigen\Eigen\src\Householder</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Householder\Householder.h">
+      <Filter>third_party\src\eigen\Eigen\src\Householder</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Householder\HouseholderSequence.h">
+      <Filter>third_party\src\eigen\Eigen\src\Householder</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\IterativeLinearSolvers\BasicPreconditioners.h">
+      <Filter>third_party\src\eigen\Eigen\src\IterativeLinearSolvers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\IterativeLinearSolvers\BiCGSTAB.h">
+      <Filter>third_party\src\eigen\Eigen\src\IterativeLinearSolvers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\IterativeLinearSolvers\ConjugateGradient.h">
+      <Filter>third_party\src\eigen\Eigen\src\IterativeLinearSolvers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\IterativeLinearSolvers\IncompleteCholesky.h">
+      <Filter>third_party\src\eigen\Eigen\src\IterativeLinearSolvers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\IterativeLinearSolvers\IncompleteLUT.h">
+      <Filter>third_party\src\eigen\Eigen\src\IterativeLinearSolvers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\IterativeLinearSolvers\IterativeSolverBase.h">
+      <Filter>third_party\src\eigen\Eigen\src\IterativeLinearSolvers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\IterativeLinearSolvers\LeastSquareConjugateGradient.h">
+      <Filter>third_party\src\eigen\Eigen\src\IterativeLinearSolvers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\IterativeLinearSolvers\SolveWithGuess.h">
+      <Filter>third_party\src\eigen\Eigen\src\IterativeLinearSolvers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\Jacobi\Jacobi.h">
+      <Filter>third_party\src\eigen\Eigen\src\Jacobi</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\LU\Determinant.h">
+      <Filter>third_party\src\eigen\Eigen\src\LU</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\LU\FullPivLU.h">
+      <Filter>third_party\src\eigen\Eigen\src\LU</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\LU\InverseImpl.h">
+      <Filter>third_party\src\eigen\Eigen\src\LU</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\LU\PartialPivLU.h">
+      <Filter>third_party\src\eigen\Eigen\src\LU</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\LU\PartialPivLU_LAPACKE.h">
+      <Filter>third_party\src\eigen\Eigen\src\LU</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\LU\arch\Inverse_SSE.h">
+      <Filter>third_party\src\eigen\Eigen\src\LU\arch</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\MetisSupport\MetisSupport.h">
+      <Filter>third_party\src\eigen\Eigen\src\MetisSupport</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\OrderingMethods\Amd.h">
+      <Filter>third_party\src\eigen\Eigen\src\OrderingMethods</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\OrderingMethods\Eigen_Colamd.h">
+      <Filter>third_party\src\eigen\Eigen\src\OrderingMethods</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\OrderingMethods\Ordering.h">
+      <Filter>third_party\src\eigen\Eigen\src\OrderingMethods</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\PaStiXSupport\PaStiXSupport.h">
+      <Filter>third_party\src\eigen\Eigen\src\PaStiXSupport</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\PardisoSupport\PardisoSupport.h">
+      <Filter>third_party\src\eigen\Eigen\src\PardisoSupport</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\QR\ColPivHouseholderQR.h">
+      <Filter>third_party\src\eigen\Eigen\src\QR</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\QR\ColPivHouseholderQR_LAPACKE.h">
+      <Filter>third_party\src\eigen\Eigen\src\QR</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\QR\CompleteOrthogonalDecomposition.h">
+      <Filter>third_party\src\eigen\Eigen\src\QR</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\QR\FullPivHouseholderQR.h">
+      <Filter>third_party\src\eigen\Eigen\src\QR</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\QR\HouseholderQR.h">
+      <Filter>third_party\src\eigen\Eigen\src\QR</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\QR\HouseholderQR_LAPACKE.h">
+      <Filter>third_party\src\eigen\Eigen\src\QR</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SPQRSupport\SuiteSparseQRSupport.h">
+      <Filter>third_party\src\eigen\Eigen\src\SPQRSupport</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SVD\BDCSVD.h">
+      <Filter>third_party\src\eigen\Eigen\src\SVD</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SVD\JacobiSVD.h">
+      <Filter>third_party\src\eigen\Eigen\src\SVD</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SVD\JacobiSVD_LAPACKE.h">
+      <Filter>third_party\src\eigen\Eigen\src\SVD</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SVD\SVDBase.h">
+      <Filter>third_party\src\eigen\Eigen\src\SVD</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SVD\UpperBidiagonalization.h">
+      <Filter>third_party\src\eigen\Eigen\src\SVD</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCholesky\SimplicialCholesky.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCholesky</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCholesky\SimplicialCholesky_impl.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCholesky</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCore\AmbiVector.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCore</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCore\CompressedStorage.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCore</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCore\ConservativeSparseSparseProduct.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCore</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCore\MappedSparseMatrix.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCore</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCore\SparseAssign.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCore</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCore\SparseBlock.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCore</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCore\SparseColEtree.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCore</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCore\SparseCompressedBase.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCore</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCore\SparseCwiseBinaryOp.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCore</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCore\SparseCwiseUnaryOp.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCore</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCore\SparseDenseProduct.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCore</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCore\SparseDiagonalProduct.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCore</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCore\SparseDot.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCore</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCore\SparseFuzzy.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCore</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCore\SparseMap.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCore</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCore\SparseMatrix.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCore</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCore\SparseMatrixBase.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCore</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCore\SparsePermutation.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCore</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCore\SparseProduct.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCore</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCore\SparseRedux.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCore</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCore\SparseRef.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCore</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCore\SparseSelfAdjointView.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCore</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCore\SparseSolverBase.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCore</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCore\SparseSparseProductWithPruning.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCore</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCore\SparseTranspose.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCore</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCore\SparseTriangularView.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCore</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCore\SparseUtil.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCore</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCore\SparseVector.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCore</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCore\SparseView.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCore</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseCore\TriangularSolver.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseCore</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseLU\SparseLU.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseLU</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseLU\SparseLUImpl.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseLU</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseLU\SparseLU_Memory.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseLU</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseLU\SparseLU_Structs.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseLU</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseLU\SparseLU_SupernodalMatrix.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseLU</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseLU\SparseLU_Utils.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseLU</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseLU\SparseLU_column_bmod.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseLU</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseLU\SparseLU_column_dfs.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseLU</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseLU\SparseLU_copy_to_ucol.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseLU</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseLU\SparseLU_gemm_kernel.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseLU</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseLU\SparseLU_heap_relax_snode.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseLU</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseLU\SparseLU_kernel_bmod.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseLU</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseLU\SparseLU_panel_bmod.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseLU</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseLU\SparseLU_panel_dfs.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseLU</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseLU\SparseLU_pivotL.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseLU</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseLU\SparseLU_pruneL.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseLU</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseLU\SparseLU_relax_snode.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseLU</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SparseQR\SparseQR.h">
+      <Filter>third_party\src\eigen\Eigen\src\SparseQR</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\StlSupport\StdDeque.h">
+      <Filter>third_party\src\eigen\Eigen\src\StlSupport</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\StlSupport\StdList.h">
+      <Filter>third_party\src\eigen\Eigen\src\StlSupport</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\StlSupport\StdVector.h">
+      <Filter>third_party\src\eigen\Eigen\src\StlSupport</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\StlSupport\details.h">
+      <Filter>third_party\src\eigen\Eigen\src\StlSupport</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\SuperLUSupport\SuperLUSupport.h">
+      <Filter>third_party\src\eigen\Eigen\src\SuperLUSupport</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\UmfPackSupport\UmfPackSupport.h">
+      <Filter>third_party\src\eigen\Eigen\src\UmfPackSupport</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\misc\Image.h">
+      <Filter>third_party\src\eigen\Eigen\src\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\misc\Kernel.h">
+      <Filter>third_party\src\eigen\Eigen\src\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\misc\RealSvd2x2.h">
+      <Filter>third_party\src\eigen\Eigen\src\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\misc\blas.h">
+      <Filter>third_party\src\eigen\Eigen\src\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\misc\lapack.h">
+      <Filter>third_party\src\eigen\Eigen\src\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\misc\lapacke.h">
+      <Filter>third_party\src\eigen\Eigen\src\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\misc\lapacke_mangling.h">
+      <Filter>third_party\src\eigen\Eigen\src\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\plugins\ArrayCwiseBinaryOps.h">
+      <Filter>third_party\src\eigen\Eigen\src\plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\plugins\ArrayCwiseUnaryOps.h">
+      <Filter>third_party\src\eigen\Eigen\src\plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\plugins\BlockMethods.h">
+      <Filter>third_party\src\eigen\Eigen\src\plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\plugins\CommonCwiseBinaryOps.h">
+      <Filter>third_party\src\eigen\Eigen\src\plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\plugins\CommonCwiseUnaryOps.h">
+      <Filter>third_party\src\eigen\Eigen\src\plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\plugins\MatrixCwiseBinaryOps.h">
+      <Filter>third_party\src\eigen\Eigen\src\plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\eigen\Eigen\src\plugins\MatrixCwiseUnaryOps.h">
+      <Filter>third_party\src\eigen\Eigen\src\plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\glad\include\glad\glad.hpp">
+      <Filter>third_party\src\glad\include\glad</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\imgui\imconfig.h">
+      <Filter>third_party\src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\imgui\imgui.h">
+      <Filter>third_party\src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\imgui\imgui_impl_glfw.h">
+      <Filter>third_party\src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\imgui\imgui_impl_opengl3.h">
+      <Filter>third_party\src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\imgui\imgui_internal.h">
+      <Filter>third_party\src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\imgui\imstb_rectpack.h">
+      <Filter>third_party\src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\imgui\imstb_textedit.h">
+      <Filter>third_party\src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\imgui\imstb_truetype.h">
+      <Filter>third_party\src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\lodepng\lodepng.h">
+      <Filter>third_party\src\lodepng</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\simplexnoise\simplexnoise1234.hpp">
+      <Filter>third_party\src\simplexnoise</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\sphere.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\orbiters.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\scene_helper.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete_2\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{F9C3E939-96D3-3718-B9B7-C56687A1A364}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party">
+      <UniqueIdentifier>{B763F2DF-772C-3783-A44C-BBECCB989AF1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src">
+      <UniqueIdentifier>{FF6BA6B3-3C49-3624-910D-B671DD95854B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen">
+      <UniqueIdentifier>{A9DAEBCC-F40B-3450-A7AA-E9FC33105565}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen">
+      <UniqueIdentifier>{380DAAE8-DFD8-39FE-8719-C3BBFE354D45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src">
+      <UniqueIdentifier>{83FAF5DB-E108-31E0-B221-54081B945EED}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\Cholesky">
+      <UniqueIdentifier>{0D26ECF1-8590-32B4-B908-625ADB33A6A8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\CholmodSupport">
+      <UniqueIdentifier>{229DAEB8-A5DE-347E-AF13-38C275377E30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\Core">
+      <UniqueIdentifier>{482D6D84-3A68-3D25-A105-9BE55FFF6F33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\Core\arch">
+      <UniqueIdentifier>{B9072921-F523-3051-B2F4-B59F8B6D8346}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\Core\arch\AVX">
+      <UniqueIdentifier>{136FEAF2-AF92-3540-ADD6-9D9AF3C81034}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\Core\arch\AVX512">
+      <UniqueIdentifier>{06BAC461-524E-3D75-B003-E3F20E09A99F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\Core\arch\AltiVec">
+      <UniqueIdentifier>{9F7E0B0D-EB07-3955-9814-3C9A12A79DA7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\Core\arch\CUDA">
+      <UniqueIdentifier>{8D5CB3DF-12B6-3A90-B0FB-B6A0461C4E7F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\Core\arch\Default">
+      <UniqueIdentifier>{A026DAD0-D938-3D4E-8BFE-41D7C152545E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\Core\arch\NEON">
+      <UniqueIdentifier>{76D2982B-9DE0-33A0-96FE-09E2A26E2F46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\Core\arch\SSE">
+      <UniqueIdentifier>{DF8E184F-6E7B-32F1-91E1-F48CA28FB61D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\Core\arch\ZVector">
+      <UniqueIdentifier>{A5A0613A-9591-3228-B9DB-FDC60637F141}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\Core\functors">
+      <UniqueIdentifier>{811BE64F-3027-3A85-B88C-9941D531ACB3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\Core\products">
+      <UniqueIdentifier>{F3A7168C-6628-350C-8D29-8AB39B2E1CD6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\Core\util">
+      <UniqueIdentifier>{A6C63001-A8AA-33EE-A8D0-7FE26D414781}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\Eigenvalues">
+      <UniqueIdentifier>{41B69882-7CE4-3251-BAD2-E06DEE50971B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\Geometry">
+      <UniqueIdentifier>{C1BD5EBC-D3CF-35FD-B426-4DA957BCE809}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\Geometry\arch">
+      <UniqueIdentifier>{7995CAB1-83CE-3006-811C-0C0A7D1742C7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\Householder">
+      <UniqueIdentifier>{55451EE2-004E-3FF8-80DE-BE9D6D1C18F9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\IterativeLinearSolvers">
+      <UniqueIdentifier>{9F6F8293-49FE-32EF-B237-60E91D1359AF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\Jacobi">
+      <UniqueIdentifier>{3441E0FA-4D30-3A28-AD15-52FCE1F6790A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\LU">
+      <UniqueIdentifier>{C32AFC7B-7164-3999-9836-92AA9DE2F4A7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\LU\arch">
+      <UniqueIdentifier>{941CC269-2F9D-389F-A19F-0B2AA5770F2C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\MetisSupport">
+      <UniqueIdentifier>{A37C28A8-34FA-343A-8F89-9E2DC61A42BE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\OrderingMethods">
+      <UniqueIdentifier>{D4A21DD2-D488-3AF4-BA2C-60A9FD254761}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\PaStiXSupport">
+      <UniqueIdentifier>{2CBA8170-A752-34CC-BE8B-68EE914C318D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\PardisoSupport">
+      <UniqueIdentifier>{B19B6E5F-C2E2-3077-8B74-0443F61D9548}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\QR">
+      <UniqueIdentifier>{733BAADA-0331-39E6-9D2C-DECA1C1F9E82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\SPQRSupport">
+      <UniqueIdentifier>{47122457-502C-32C1-9515-5616A1B9EE4E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\SVD">
+      <UniqueIdentifier>{8DDC7A40-AF75-31E2-998B-4F3716BA168B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\SparseCholesky">
+      <UniqueIdentifier>{DA6A5B02-FCF3-3A6C-9B2B-81C74ADB2F1E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\SparseCore">
+      <UniqueIdentifier>{FCCEECDF-A9C6-3915-825C-29194E80B23D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\SparseLU">
+      <UniqueIdentifier>{9EC2DCAC-92E9-3711-97AE-959C89FB1B59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\SparseQR">
+      <UniqueIdentifier>{26350CDB-69DB-3C39-9CFC-1701DB498A62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\StlSupport">
+      <UniqueIdentifier>{A23A090A-3BA4-3020-9282-C61308ADB24E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\SuperLUSupport">
+      <UniqueIdentifier>{0D74D87E-C1B5-3260-AE88-E694D89B34F8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\UmfPackSupport">
+      <UniqueIdentifier>{D35113A1-9D3D-3586-90E8-06055DCB7CBA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\misc">
+      <UniqueIdentifier>{05B79034-8FAF-36FF-9302-6984CCF64AA3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\eigen\Eigen\src\plugins">
+      <UniqueIdentifier>{FCFD6DF5-0654-31ED-91D5-CC60A189FAC6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\glad">
+      <UniqueIdentifier>{48B6EA91-1A58-346E-BFD6-9E2332997466}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\glad\include">
+      <UniqueIdentifier>{59F412A6-140B-3ADD-ACAC-87687CC87C15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\glad\include\glad">
+      <UniqueIdentifier>{D229FECD-BE4E-3A89-8FE7-F67F03F565CB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\glad\src">
+      <UniqueIdentifier>{8EEE0596-5019-362B-9FD0-27760734167E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\imgui">
+      <UniqueIdentifier>{45C080AC-567A-359A-8E1B-57F099615D63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\lodepng">
+      <UniqueIdentifier>{754B5E12-3287-3693-9C05-D91576CFAD12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\simplexnoise">
+      <UniqueIdentifier>{E54C257B-397B-373D-9D7D-34A716C7AEB9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl">
+      <UniqueIdentifier>{DE3B638C-D7D9-3995-AFC0-50ADDE47F684}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\base">
+      <UniqueIdentifier>{813CC209-2EF4-3EB9-B883-698266BB6EA3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\base\basic_types">
+      <UniqueIdentifier>{0AC63005-BB8E-3B12-BB31-FAFC5EC9BED7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\base\error">
+      <UniqueIdentifier>{902F5D42-F5C9-3D03-ADD0-1D7C5C3D96A0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\base\rand">
+      <UniqueIdentifier>{AC1017AF-6D52-3093-8F5E-D4AB4B9AE829}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\base\stl">
+      <UniqueIdentifier>{1E1F5893-30B6-3E23-9055-CF72001A7E11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\base\string">
+      <UniqueIdentifier>{3CFA0F86-27BC-3817-B33C-8C304C4A465D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\base\types">
+      <UniqueIdentifier>{B93D8886-D5A3-3F50-AFD2-C75C9E8EBCCA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\containers">
+      <UniqueIdentifier>{18B3A757-FA42-3E91-BEFE-9725F68A4207}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\containers\buffer">
+      <UniqueIdentifier>{C9EB4E72-A7F2-3F0D-9033-A7CA9F76FE6B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\containers\buffer\test">
+      <UniqueIdentifier>{7E42F077-90F5-303A-846F-2878FECEC981}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\containers\buffer_stack">
+      <UniqueIdentifier>{EB9A78E9-3F64-36FE-9B4A-F26155090B97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\containers\buffer_stack\implementation">
+      <UniqueIdentifier>{BA5F1BB9-53EE-3E04-983B-A14F42B4EF09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\containers\buffer_stack\special_types">
+      <UniqueIdentifier>{C93BB595-B951-3808-8B62-C83514887E38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\containers\buffer_stack\test">
+      <UniqueIdentifier>{E974D7E5-F740-3D63-94A0-68320B926040}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\containers\grid">
+      <UniqueIdentifier>{27ACA8F6-358E-31FE-9229-8A4E168B7757}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\containers\grid\grid_2D">
+      <UniqueIdentifier>{1DC6F451-D615-3EA4-8161-8F715D2E7D76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\containers\grid\grid_3D">
+      <UniqueIdentifier>{B5331C52-AC78-392E-9A18-9BE3C51BD8DC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\containers\grid\test">
+      <UniqueIdentifier>{C3CB3050-BB58-31CD-B351-85085683A5F8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\containers\grid_stack">
+      <UniqueIdentifier>{A32351F4-5D13-38BB-90D4-665222E669A9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\containers\grid_stack\grid_stack_2D">
+      <UniqueIdentifier>{364E443F-D544-3996-ABDF-A954AB83C518}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\containers\grid_stack\grid_stack_2D\test">
+      <UniqueIdentifier>{EBF26BE1-EDF9-3BBC-9E32-9CDD221AA57B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\containers\offset_grid">
+      <UniqueIdentifier>{41EFDDBC-3F2F-3ACB-996E-49E9FAECF11F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\display">
+      <UniqueIdentifier>{254F119D-83E1-3E1E-8BF1-1C3D5DB18000}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\display\drawable">
+      <UniqueIdentifier>{50B6DCAE-CAE7-3882-B49D-D297F178052C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\display\drawable\curve_drawable">
+      <UniqueIdentifier>{3DCFD0F4-C614-3CC5-8126-204E4A3FC2E7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\display\drawable\hierarchy_mesh_drawable">
+      <UniqueIdentifier>{2A6245B7-82A3-310A-B884-3A3CE1BD8571}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\display\drawable\hierarchy_mesh_drawable\hierarchy_mesh_drawable_node">
+      <UniqueIdentifier>{767D7846-974A-3A00-8115-42064101CB41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\display\drawable\mesh_drawable">
+      <UniqueIdentifier>{E9875D6A-33F3-367E-A17E-BEECB8F3234B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\display\drawable\mesh_normal_drawable">
+      <UniqueIdentifier>{5877A059-89DC-3993-A00B-7F1D0D62E247}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\display\drawable\mesh_wireframe_drawable">
+      <UniqueIdentifier>{5351C858-DD3C-3341-9BCB-EAD9FAA29708}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\display\drawable\segments_drawable">
+      <UniqueIdentifier>{41B679FD-9B63-342D-9545-F3EE324A8166}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\display\drawable\shading_parameters">
+      <UniqueIdentifier>{ED71690B-97B9-3A61-9659-4594CB57E9C9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\display\drawable\trajectory_drawable">
+      <UniqueIdentifier>{30F1AA76-3086-3FE3-95BB-314E00FD507C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\display\image">
+      <UniqueIdentifier>{1EDB50B8-8F0C-31DD-9C1B-DEC5567E849E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\display\opengl">
+      <UniqueIdentifier>{24DFB249-9FD9-3B03-AC78-C8E77840F2DC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\display\opengl\debug">
+      <UniqueIdentifier>{DD0626A4-6AB4-3157-BB3B-A098E20C914F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\display\opengl\glad">
+      <UniqueIdentifier>{162E959C-4E07-3C49-8676-09703627F498}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\display\opengl\helper">
+      <UniqueIdentifier>{7CABD966-1B21-3715-97E6-220BA383404D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\display\opengl\shaders">
+      <UniqueIdentifier>{85D4EEAB-0FD4-3BBC-94D9-13BAE74B1810}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\display\opengl\texture">
+      <UniqueIdentifier>{CB7B13B0-6713-35DC-8743-074512114AB8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\display\opengl\uniform">
+      <UniqueIdentifier>{23A31C84-BBDE-3705-A6C6-9EB3204D482E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\display\window">
+      <UniqueIdentifier>{E5DB209E-3577-32EA-9982-4B807DBBEBA5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\files">
+      <UniqueIdentifier>{C6F23F5D-1A32-3CFC-AD17-5D41DFF31B61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\interaction">
+      <UniqueIdentifier>{D61BFAC5-BAFB-3324-8B29-1ADEA174B04B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\interaction\camera">
+      <UniqueIdentifier>{7E243C7D-05B6-355E-B0E0-35CA2110ED42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\interaction\camera\camera_around_center">
+      <UniqueIdentifier>{F0321B59-59A4-3D28-9A2C-38EB7B3A6D2B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\interaction\camera\camera_base">
+      <UniqueIdentifier>{A0234DC6-DB7B-3184-9D43-A9D121EAAD97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\interaction\camera\camera_head">
+      <UniqueIdentifier>{EA1EBF64-EF74-3661-908B-806D62079A2F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\interaction\camera\camera_spherical_coordinates">
+      <UniqueIdentifier>{B3DF5D7A-E7A4-3F22-9F14-59792A147907}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\interaction\camera\common_functions">
+      <UniqueIdentifier>{A950AB93-3DA6-3499-AB76-065AC50AA0C0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\interaction\glfw_interaction">
+      <UniqueIdentifier>{16462A55-BA96-3A1F-837C-CD6B48E750E2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\interaction\gui">
+      <UniqueIdentifier>{EB100F79-D6D8-3094-AC4C-A8821A12B29B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\interaction\timer">
+      <UniqueIdentifier>{3A53C849-A88F-32A8-9194-AF309A5FB054}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\interaction\timer\timer_basic">
+      <UniqueIdentifier>{E3052CCC-AD29-399D-8326-AD601C3D02FF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\interaction\timer\timer_event_periodic">
+      <UniqueIdentifier>{3452457C-AE2B-36B9-913D-D60A3EE798E3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\interaction\timer\timer_fps">
+      <UniqueIdentifier>{552EF67F-BB92-3174-8A1A-A31894377462}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\interaction\timer\timer_interval">
+      <UniqueIdentifier>{FC4900AB-0DC2-3F47-976F-B0BD12570634}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\interaction\tracker">
+      <UniqueIdentifier>{B9AE18F2-C867-3B4D-96C3-D8143DA34F55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\interaction\tracker\velocity_tracker">
+      <UniqueIdentifier>{CEA520AB-130C-3D20-BC0D-738BA7138C3D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\math">
+      <UniqueIdentifier>{8D6AED88-4EF3-3780-8A97-51E9C0964776}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\math\affine">
+      <UniqueIdentifier>{73A05ED2-96F5-354A-AAD9-B9E3A57D3041}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\math\affine\affine_rt">
+      <UniqueIdentifier>{9BF6F362-E079-378D-B28C-CA7FDC02EA59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\math\affine\affine_rts">
+      <UniqueIdentifier>{F734072B-D297-324C-933C-3A42429ABF9C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\math\frame">
+      <UniqueIdentifier>{C270FCEE-B7F6-34CC-A758-8A06BE54CCD0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\math\interpolation">
+      <UniqueIdentifier>{08C3AE03-E483-3F8A-9266-B1FA31D9C4CA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\math\matrix">
+      <UniqueIdentifier>{8EEF2C0C-8FD1-3E5F-8A89-8EB25E82C50B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\math\matrix\matrix_stack">
+      <UniqueIdentifier>{09FFB01D-B506-3988-A408-EE7DAADD75E3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\math\matrix\matrix_stack\special_types">
+      <UniqueIdentifier>{EC4104B1-EC27-3B44-B430-D0989C615564}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\math\matrix\matrix_stack\special_types\definition">
+      <UniqueIdentifier>{56B194E1-CA1B-39C0-A407-B3C571ED6216}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\math\matrix\matrix_stack\special_types\mat4">
+      <UniqueIdentifier>{2A056AE2-8F82-37B9-8DA8-436C6C401EE4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\math\matrix\test">
+      <UniqueIdentifier>{07979F06-E2A2-33D6-9026-6B4DD3F458E2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\math\projection">
+      <UniqueIdentifier>{6098B05D-372C-3EC5-8D0C-64603CECA5AF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\math\quaternion">
+      <UniqueIdentifier>{D7D5332A-2CF2-3FB4-83CF-DF4977F5FEE2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\math\rotation">
+      <UniqueIdentifier>{E5EE7831-B225-336A-8954-C3533E341ECF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\math\rotation\test">
+      <UniqueIdentifier>{57EDC3E4-F4F4-37F4-948F-EB5E9CE8451A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\math\vec_mat">
+      <UniqueIdentifier>{541A304C-E400-3CAB-9B91-18F5F6E14535}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\math\vec_mat\test">
+      <UniqueIdentifier>{81FDE603-147B-3CA5-BFCE-F37E8AC59D0A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\shaders_preset">
+      <UniqueIdentifier>{13BFBDE7-45B0-3E82-8240-3A9CF882D658}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\shape">
+      <UniqueIdentifier>{0517FD60-AEAC-32E9-86AB-F808DD8E6D1A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\shape\curve">
+      <UniqueIdentifier>{FE517EE6-66A1-32FD-97CB-C518388BF86B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\shape\intersection">
+      <UniqueIdentifier>{5FF206B1-BD2B-399C-9707-C059EF6A3EAC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\shape\mesh">
+      <UniqueIdentifier>{F81D2423-0D41-3071-A0F4-EFCBE8FD6A81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\shape\mesh\loader">
+      <UniqueIdentifier>{27DD4BEB-F657-394B-B176-B0E0E5446941}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\shape\mesh\loader\obj">
+      <UniqueIdentifier>{19759588-DED4-39FA-A70C-4080DBA49A05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\shape\mesh\primitive">
+      <UniqueIdentifier>{AE230633-A251-34B7-8B9D-ED93D544DC32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\shape\mesh\structure">
+      <UniqueIdentifier>{7EF3FFCF-E452-3BE0-86B4-114DDBF19468}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\shape\noise">
+      <UniqueIdentifier>{16C12BDC-92FC-3491-BA52-16EDCBC98C59}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,5 +1,4 @@
 #include "objects.hpp"
-#include "constants.hpp"
 
 using namespace vcl;
 

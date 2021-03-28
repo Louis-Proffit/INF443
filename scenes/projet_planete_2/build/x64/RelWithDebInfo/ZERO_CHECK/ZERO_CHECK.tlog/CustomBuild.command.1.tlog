@@ -1,0 +1,10 @@
+^C:\USERS\LOUIS PROFFIT\ONEDRIVE\GIT\INF443\SCENES\PROJET_PLANETE_2\BUILD\CMAKEFILES\0A3B88FA3C89C12111AE670353105E98\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/Louis Proffit/OneDrive/Git/INF443/scenes/projet_planete_2" "-BC:/Users/Louis Proffit/OneDrive/Git/INF443/scenes/projet_planete_2/build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/Louis Proffit/OneDrive/Git/INF443/scenes/projet_planete_2/build/projet_planete_2.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
