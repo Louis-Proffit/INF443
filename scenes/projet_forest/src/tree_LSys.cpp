@@ -1,21 +1,26 @@
 #include "tree_LSys.hpp"
+#include "vcl/vcl.hpp"
+#include <iostream>
+#include <string>
 
-void MeshGenerator::GenerateModel(std::string system, int iterations, std::string modelName, glm::vec3 startingPoint, float radius, int pointsPerLevel)
+using namespace vcl;
+
+mesh MeshGenerator::GenerateModel(std::string system, int iterations, std::string modelName, vec3 startingPoint, float radius, int pointsPerLevel)
 {
-    m_model = new Model(modelName);
-    m_model->GetMesh()->m_compileSAT = false;
+    mesh result;
     system = m_system.ApplyAxioms(system, iterations);
-    std::vector<std::pair<glm::vec3, glm::vec3>> pointCollections;
-    glm::vec3 radiusVector = glm::vec3(radius, 0, 0);
-    std::vector<std::pair<glm::vec3, std::pair<glm::vec3, glm::vec3>>> pointStack;
+    std::vector<std::pair<vec3, vec3>> pointCollections;
+    vec3 radiusVector = vec3(radius, 0, 0);
+    std::vector<std::pair<vec3, std::pair<vec3, vec3>>> pointStack;
     std::vector<int> closeOffIndeces;
-    glm::vec3 translationVector = glm::vec3(0, translationOffset, 0);
-    glm::quat rotationX = glm::quat(glm::vec3(rotationOffset, 0, 0));
-    glm::quat negRotationX = glm::quat(glm::vec3(-rotationOffset, 0, 0));
-    glm::quat rotationY = glm::quat(glm::vec3(0, rotationOffset, 0));
-    glm::quat negRotationY = glm::quat(glm::vec3(0, -rotationOffset, 0));
-    glm::quat rotationZ = glm::quat(glm::vec3(0, 0, rotationOffset));
-    glm::quat negRotationZ = glm::quat(glm::vec3(0, 0, -rotationOffset));
+    vec3 translationVector = vec3(0, translationOffset, 0);
+    /*quaternion rotationX = quat(vec3(rotationOffset, 0, 0));
+    quat negRotationX = quat(vec3(-rotationOffset, 0, 0));
+    quat rotationY = quat(vec3(0, rotationOffset, 0));
+    quat negRotationY = quat(vec3(0, -rotationOffset, 0));
+    quat rotationZ = quat(vec3(0, 0, rotationOffset));
+    quat negRotationZ = quat(vec3(0, 0, -rotationOffset));*/
+
     for (int i = 0; i < system.size(); i++)
     {
         switch (system[i])
@@ -32,36 +37,36 @@ void MeshGenerator::GenerateModel(std::string system, int iterations, std::strin
         case 'S': //scale larger
             radiusVector *= scaleOffset;
             break;
-        case 'x':
-            translationVector = glm::rotate(rotationX, translationVector);
+        /*case 'x':
+            translationVector = rotate(rotationX, translationVector);
             break;
         case 'X':
-            translationVector = glm::rotate(negRotationX, translationVector);
+            translationVector = rotate(negRotationX, translationVector);
             break;
         case 'y':
-            translationVector = glm::rotate(rotationY, translationVector);
+            translationVector = rotate(rotationY, translationVector);
             break;
         case 'Y':
-            translationVector = glm::rotate(negRotationY, translationVector);
+            translationVector = rotate(negRotationY, translationVector);
             break;
         case 'z':
-            translationVector = glm::rotate(rotationZ, translationVector);
+            translationVector = rotate(rotationZ, translationVector);
             break;
         case 'Z':
-            translationVector = glm::rotate(negRotationZ, translationVector);
-            break;
+            translationVector = rotate(negRotationZ, translationVector);
+            break;*/
         case '[': //push point onto the stack
             if (pointCollections.size() > 0)
             {
-                std::pair<glm::vec3, glm::vec3> pointCollectionBack = pointCollections.back();
-                pointStack.push_back(std::make_pair(pointCollectionBack.first, std::make_pair(pointCollectionBack.second, translationVector)));
+                std::pair<vec3, vec3> pointCollectionBack = pointCollections.back();
+                pointStack.push_back(make_pair(pointCollectionBack.first, std::make_pair(pointCollectionBack.second, translationVector)));
             }
             else
-                pointStack.push_back(std::make_pair(startingPoint, std::make_pair(radiusVector, translationVector)));
+                pointStack.push_back(make_pair(startingPoint, std::make_pair(radiusVector, translationVector)));
             break;
         case ']':
         { //pop point from the stack
-            std::pair<glm::vec3, std::pair<glm::vec3, glm::vec3>> popped = pointStack.back();
+            std::pair<vec3, std::pair<vec3, vec3>> popped = pointStack.back();
             pointStack.pop_back();
             startingPoint = popped.first;
             radiusVector = popped.second.first;
@@ -84,32 +89,59 @@ void MeshGenerator::GenerateModel(std::string system, int iterations, std::strin
         }
     }
     //Create the vertices for the mesh
-    std::vector<std::vector<glm::vec3>> meshGeometry;
+    /*vector<vector<vec3>> meshGeometry;
     for (int i = 0; i < pointCollections.size(); i++)
     {
-        std::vector<glm::vec3> pointsForIteration;
+        vector<vec3> pointsForIteration;
         for (int n = 0; n < pointsPerLevel; n++)
         {
-            glm::vec3 vertex;
+            vec3 vertex;
             vertex = pointCollections[i].first;
-            glm::vec3 radVec = pointCollections[i].second;
-            glm::vec3 rotAxis = vertex;
+            vec3 radVec = pointCollections[i].second;
+            vec3 rotAxis = vertex;
             if (i - 1 > 0)
                 rotAxis = rotAxis - pointCollections[i - 1].first;
-            if (glm::length(vertex) > 0)
-                rotAxis = glm::normalize(rotAxis);
+            if (length(vertex) > 0)
+                rotAxis = normalize(rotAxis);
             else if (i + 1 < pointCollections.size())
                 rotAxis = pointCollections[i + 1].first - rotAxis;
             else //Assume 0,1,0
-                rotAxis = glm::vec3(0, 1, 0);
+                rotAxis = vec3(0, 1, 0);
             float theta = 2 * PI / pointsPerLevel * n;
-            radVec = radVec * cos(theta) + (glm::cross(rotAxis, radVec)) * sin(theta) + rotAxis * (glm::dot(rotAxis, radVec)) * (1 - cos(theta));
+            radVec = radVec * cos(theta) + (cross(rotAxis, radVec)) * sin(theta) + rotAxis * (dot(rotAxis, radVec)) * (1 - cos(theta));
             pointsForIteration.push_back(vertex + radVec);
         }
         meshGeometry.push_back(pointsForIteration);
+    }*/
+    int longueur = pointCollections.size();
+    result.position.resize(longueur * pointsPerLevel);
+    for (int i = 0; i < longueur; i++)
+    {
+        for (int n = 0; n < pointsPerLevel; n++)
+        {
+            vec3 vertex;
+            vertex = pointCollections[i].first;
+            vec3 radVec = pointCollections[i].second;
+            vec3 rotAxis = vertex;
+            if (i - 1 > 0)
+                rotAxis = rotAxis - pointCollections[i - 1].first;
+            if ((vertex.x * vertex.x + vertex.y * vertex.y + vertex.z + vertex.z) > 0)
+            {
+                if (norm(rotAxis) > 0)
+                    normalize(rotAxis);
+            }
+            else if (i + 1 < pointCollections.size())
+                rotAxis = pointCollections[i + 1].first - rotAxis;
+            else //Assume 0,1,0
+                rotAxis = vec3(0, 1, 0);
+            float theta = 2 * PI / pointsPerLevel * n;
+            radVec = radVec * cos(theta) + (cross(rotAxis, radVec)) * sin(theta) + rotAxis * (dot(rotAxis, radVec)) * (1 - cos(theta));
+            result.position[n + i * pointsPerLevel];
+        }
     }
+
     //Create the face geometry for the mesh
-    for (int i = 0; i < meshGeometry.size(); i++)
+    /*for (int i = 0; i < meshGeometry.size(); i++)
     {
         int currentSize = meshGeometry[i].size();
         int nextRowSize = meshGeometry[(i + 1) % meshGeometry.size()].size();
@@ -145,7 +177,40 @@ void MeshGenerator::GenerateModel(std::string system, int iterations, std::strin
         }
         if (closedOff)
             closeOffIndeces.erase(closeOffIndeces.begin());
+    }*/
+    for (int i = 0; i < longueur - 1; i++)
+    {
+        int currentSize = pointsPerLevel;
+        int nextRowSize = pointsPerLevel;
+        bool closedOff = false;
+        for (int k = 0; k < pointsPerLevel - 1; k++)
+        {
+            const unsigned int idx = k + pointsPerLevel * i;
+            //Draw to the next layer of points, unless this is the first or last layer.
+            //In those situations the shape needs to close, so connect those to the center points.
+            if (closedOff || (closeOffIndeces.size() > 0 && i == closeOffIndeces.front()))
+            {
+                const uint3 triangle_1 = {idx, (idx + 1 + pointsPerLevel), idx + 1};
+                result.connectivity.push_back(triangle_1);
+                closedOff = true;
+                continue;
+            }
+            //Need to draw the face
+            // __
+            //|\ |
+            //|_\|
+            //Two triangles per face
+            //Draw the first triangle of the face
+
+            const uint3 triangle_1 = {idx, idx + 1 + pointsPerLevel, idx + 1};
+            const uint3 triangle_2 = {idx, idx + pointsPerLevel, idx + 1 + pointsPerLevel};
+
+            result.connectivity.push_back(triangle_1);
+            result.connectivity.push_back(triangle_2);
+        }
+        if (closedOff)
+            closeOffIndeces.erase(closeOffIndeces.begin());
     }
-    //Call compile shape to do this when this function is called instead of when the object needs to be rendered
-    m_model->compileShape();
+    result.fill_empty_field();
+    return result;
 }

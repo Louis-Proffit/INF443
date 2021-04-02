@@ -1,13 +1,12 @@
 #include "LSystem.hpp"
-#include "string"
 
-typedef std::map<char, string>::iterator iter;
+typedef std::map<char, std::string>::iterator iter;
 
 LSytem::LSytem()
 {
 }
 
-void LSytem::AddAxiom(char key, string rule) //Une Key se transforme en string; par ex F - > F+F
+void LSytem::AddAxiom(char key, std::string rule) //Une Key se transforme en std::string; par ex F - > F+F
 {
     axioms[key] = rule;
 }
@@ -17,9 +16,9 @@ void LSytem::ClearAxioms()
     axioms.clear();
 }
 
-string LSytem::ApplyAxioms(string system)
+std::string LSytem::ApplyAxioms(std::string system)
 {
-    string applied = "";
+    std::string applied = "";
 
     for (int c = 0; c < system.size(); c++)
     {
@@ -40,11 +39,11 @@ string LSytem::ApplyAxioms(string system)
     return applied;
 }
 
-string LSytem::ApplyAxioms(string system, int iterations)
+std::string LSytem::ApplyAxioms(std::string system, int iterations)
 {
     if (iterations <= 0)
         return system;
-    string applied = system;
+    std::string applied = system;
     for (int i = 0; i < iterations; i++)
     {
         applied = ApplyAxioms(applied);

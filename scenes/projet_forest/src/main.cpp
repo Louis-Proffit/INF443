@@ -6,6 +6,8 @@
 
 #include "interpolation.hpp"
 #include "scene_helper.hpp"
+#include "tree_LSys.hpp"
+#include "LSystem.hpp"
 
 using namespace vcl;
 
@@ -25,8 +27,10 @@ void display_scene();
 //void display_frame();
 
 mesh terrain;
+mesh tree;
 mesh_drawable terrain_visual;
 perlin_noise_parameters parameters;
+mesh_drawable tree_real;
 
 int main(int, char *argv[])
 {
@@ -43,6 +47,11 @@ int main(int, char *argv[])
 	glfwSetWindowSizeCallback(window, window_size_callback);
 
 	std::cout << "Initialize data ..." << std::endl;
+
+	/*LSytem *l = new LSytem();
+	l->AddAxiom('R', "F+[R]+[R]FR");
+	l->AddAxiom('F', "FF");
+	std::cout << l->ApplyAxioms("R", 5) << std::endl;*/
 	initialize_data();
 
 	std::cout << "Start animation loop ..." << std::endl;
@@ -105,11 +114,22 @@ void initialize_data()
 	terrain = create_terrain();
 	terrain_visual = mesh_drawable(terrain);
 	update_terrain(terrain, terrain_visual, parameters);
+
+	MeshGenerator *klm = new MeshGenerator();
+	klm->m_system.ClearAxioms();
+	klm->rotationOffset = 0.4485496f;
+	klm->translationOffset = 1.0f;
+	klm->m_system.AddAxiom('R', "F+[R]+[R]FR");
+	klm->m_system.AddAxiom('F', "FF");
+	tree = klm->GenerateModel("R", 1, "Tree2", vec3(0, 0, 0), .1f, 5);
+
+	tree_real = mesh_drawable(tree);
 }
 
 void display_scene()
 {
 	draw(terrain_visual, scene);
+	draw(tree_real, scene);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
