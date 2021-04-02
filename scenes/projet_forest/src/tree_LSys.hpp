@@ -13,9 +13,9 @@ class MeshGenerator
 public:
     LSytem m_system;
     float rotationOffset = PI / 8;
-    float scaleOffset = 1.5f;
+    float scaleOffset = 5.0f;
     float translationOffset = 1.0f;
-    mesh GenerateModel(std::string system, int iterations, std::string modelName, vec3 startingPoint, float radius, int pointsPerLevel);
+    mesh GenerateModel(std::string system, int iterations, std::string modelName, vec3 startingPoint, float radius);
 
 private:
 };

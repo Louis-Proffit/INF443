@@ -115,20 +115,61 @@ void initialize_data()
 	terrain_visual = mesh_drawable(terrain);
 	update_terrain(terrain, terrain_visual, parameters);
 
+	// Pour générer un objet de type arbre
 	MeshGenerator *klm = new MeshGenerator();
 	klm->m_system.ClearAxioms();
+	klm->rotationOffset = 0.3926991f;
+	klm->translationOffset = 0.1f;
+	klm->m_system.AddAxiom('F', "F[Fz[zFZXFZYF]Z[ZFxzFyzF]C+]");
+	//tree = klm->GenerateModel("+TT+F", 4, "Fougere", vec3(0, 0, 0), 0.01f);
+
+	std::cout << "Generating Tree2..." << std::endl;
+	klm->m_system.ClearAxioms();
 	klm->rotationOffset = 0.4485496f;
-	klm->translationOffset = 1.0f;
-	klm->m_system.AddAxiom('R', "F+[R]+[R]FR");
+	klm->translationOffset = 0.1f;
+	klm->scaleOffset = 1.0f;
+	klm->m_system.AddAxiom('R', "F[ZxR][zR]FR");
 	klm->m_system.AddAxiom('F', "FF");
-	tree = klm->GenerateModel("R", 1, "Tree2", vec3(0, 0, 0), .1f, 5);
+	//tree = klm->GenerateModel("R", 7, "Tree2", vec3(0, 0, 0), .01f);
+
+	std::cout << "Generating Tree3..." << std::endl;
+	klm->m_system.ClearAxioms();
+	klm->rotationOffset = 0.3f;
+	klm->translationOffset = 0.4f;
+	klm->m_system.AddAxiom('R', "FFF[FXYZ[FxRxF[zFRzXFC]R[ZFZyFC]]yFRyF]");
+	//tree = klm->GenerateModel("+TT+R", 2, "Brin", vec3(0, 0, 0), .1f);
+
+	std::cout << "Generating Tree4..." << std::endl;
+	klm->m_system.ClearAxioms();
+	klm->rotationOffset = 0.1f;
+	klm->translationOffset = 0.1f;
+	klm->scaleOffset = 1.0f;
+	klm->m_system.AddAxiom('R', "F[[yyBBzB]XB]");
+	klm->m_system.AddAxiom('B', "XXYYYYYYYYFRFzzFRRC");
+	//tree = klm->GenerateModel("+TT+R", 7, "Tree4", vec3(0, 0, 0), .1f);     //WTF CA RESSEMBLE à RIEN
+
+	std::cout << "Generating Tree5..." << std::endl;
+	klm->m_system.ClearAxioms();
+	klm->rotationOffset = .4f;
+	klm->translationOffset = .2f;
+	klm->scaleOffset = 1.0f;
+	klm->m_system.AddAxiom('R', "YYTF[xFR]C[XFRFR]");
+	//tree = klm->GenerateModel("+TT+R", 7, "Tree5", vec3(0, 0, 0), .2f);*/
+
+	std::cout << "Generating RealTree" << std::endl;
+	klm->m_system.ClearAxioms();
+	klm->translationOffset = .2f;
+	klm->scaleOffset = 1.5f;
+	klm->m_system.AddAxiom('X', "F[zFRzXFC]X[ZFZyFC]FX");
+	klm->m_system.AddAxiom('F', "F");
+	tree = klm->GenerateModel("X", 3, "Test", vec3(0, 0, 0), .05f);
 
 	tree_real = mesh_drawable(tree);
 }
 
 void display_scene()
 {
-	draw(terrain_visual, scene);
+	//draw(terrain_visual, scene);
 	draw(tree_real, scene);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
