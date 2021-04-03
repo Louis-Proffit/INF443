@@ -8,6 +8,7 @@
 #include "scene_helper.hpp"
 #include "tree_LSys.hpp"
 #include "LSystem.hpp"
+#include "Shader.hpp"
 
 using namespace vcl;
 
@@ -24,13 +25,21 @@ void window_size_callback(GLFWwindow *window, int width, int height);
 void initialize_data();
 void display_interface();
 void display_scene();
-//void display_frame();
+std::vector<float> generate_rotations(int N);
 
+const unsigned int N = 75;
 mesh terrain;
 mesh tree;
 mesh_drawable terrain_visual;
+mesh_drawable billboard_grass;
 perlin_noise_parameters parameters;
 mesh_drawable tree_real;
+std::vector<float> rot = generate_rotations(N);
+void create_grass(int nbQuad, int ku, int kv);
+
+const float LOD1 = 5.0f;
+const float LOD2 = 10.0f;
+const float LOD3 = 20.0f;
 
 int main(int, char *argv[])
 {
@@ -47,11 +56,6 @@ int main(int, char *argv[])
 	glfwSetWindowSizeCallback(window, window_size_callback);
 
 	std::cout << "Initialize data ..." << std::endl;
-
-	/*LSytem *l = new LSytem();
-	l->AddAxiom('R', "F+[R]+[R]FR");
-	l->AddAxiom('F', "FF");
-	std::cout << l->ApplyAxioms("R", 5) << std::endl;*/
 	initialize_data();
 
 	std::cout << "Start animation loop ..." << std::endl;
@@ -62,7 +66,7 @@ int main(int, char *argv[])
 		scene.light = scene.camera.position();
 		user.fps_record.update();
 
-		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+		glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glClear(GL_DEPTH_BUFFER_BIT);
 		imgui_create_frame();
@@ -107,8 +111,8 @@ void initialize_data()
 
 	user.global_frame = mesh_drawable(mesh_primitive_frame());
 	user.gui.display_frame = false;
-	scene.camera.distance_to_center = 2.5f;
-	scene.camera.look_at({4, 3, 3}, {0, 0, 3}, {0, 0, 3});
+	scene.camera.distance_to_center = 4.5f;
+	scene.camera.look_at({4, 3, 3}, {0, 0, 3}, {0, 1, 3});
 
 	// Create visual terrain surface
 	terrain = create_terrain();
@@ -116,7 +120,7 @@ void initialize_data()
 	update_terrain(terrain, terrain_visual, parameters);
 
 	// Pour générer un objet de type arbre
-	MeshGenerator *klm = new MeshGenerator();
+	/*MeshGenerator *klm = new MeshGenerator();
 	klm->m_system.ClearAxioms();
 	klm->rotationOffset = 0.3926991f;
 	klm->translationOffset = 0.1f;
@@ -137,7 +141,7 @@ void initialize_data()
 	klm->rotationOffset = 0.3f;
 	klm->translationOffset = 0.4f;
 	klm->m_system.AddAxiom('R', "FFF[FXYZ[FxRxF[zFRzXFC]R[ZFZyFC]]yFRyF]");
-	//tree = klm->GenerateModel("+TT+R", 2, "Brin", vec3(0, 0, 0), .1f);
+	tree = klm->GenerateModel("+TT+R", 2, "Brin", vec3(0, 0, 0), .1f);
 
 	std::cout << "Generating Tree4..." << std::endl;
 	klm->m_system.ClearAxioms();
@@ -154,7 +158,7 @@ void initialize_data()
 	klm->translationOffset = .2f;
 	klm->scaleOffset = 1.0f;
 	klm->m_system.AddAxiom('R', "YYTF[xFR]C[XFRFR]");
-	//tree = klm->GenerateModel("+TT+R", 7, "Tree5", vec3(0, 0, 0), .2f);*/
+	//tree = klm->GenerateModel("+TT+R", 7, "Tree5", vec3(0, 0, 0), .2f);
 
 	std::cout << "Generating RealTree" << std::endl;
 	klm->m_system.ClearAxioms();
@@ -162,15 +166,51 @@ void initialize_data()
 	klm->scaleOffset = 1.5f;
 	klm->m_system.AddAxiom('X', "F[zFRzXFC]X[ZFZyFC]FX");
 	klm->m_system.AddAxiom('F', "F");
-	tree = klm->GenerateModel("X", 3, "Test", vec3(0, 0, 0), .05f);
+	//tree = klm->GenerateModel("X", 3, "Test", vec3(0, 0, 0), .05f);
 
-	tree_real = mesh_drawable(tree);
+	tree_real = mesh_drawable(tree);*/
+
+	//Pour faire de l'herbe
+
+	billboard_grass = mesh_drawable(mesh_primitive_quadrangle({-1, 0, 0}, {1, 0, 0}, {1, 0, 2}, {-1, 0, 2}));
+	billboard_grass.transform.scale = 0.3f;
+	billboard_grass.texture = opengl_texture_to_gpu(image_load_png("/Users/paultheron/Desktop/Projet/INF443/scenes/projet_forest/assets/textures/grass_texture.png"));
 }
 
 void display_scene()
 {
-	//draw(terrain_visual, scene);
-	draw(tree_real, scene);
+	draw(terrain_visual, scene);
+
+	//draw(tree_real, scene);
+	glDepthMask(false);
+	for (unsigned int ku = 0; ku < N; ++ku)
+	{
+		for (unsigned int kv = 0; kv < N; ++kv)
+		{
+			// Compute local parametric coordinates (u,v) \in [0,1]
+			const float u = ku / (N - 1.0f);
+			const float v = kv / (N - 1.0f);
+			vec3 p = evaluate_terrain(u, v);
+			p.z += parameters.terrain_height * noise_perlin({p.x / 20 + 0.5f, p.y / 20 + 0.5f}, parameters.octave, parameters.persistency, parameters.frequency_gain);
+			vec3 distance_with_camera = p - scene.camera.position();
+			billboard_grass.transform.translate = p;
+			float dist_length = norm(distance_with_camera);
+
+			if (dist_length < LOD1)
+			{
+				create_grass(3, ku, kv);
+			}
+			if (dist_length >= LOD1 && dist_length < LOD2)
+			{
+				create_grass(2, ku, kv);
+			}
+			if (dist_length >= LOD2 && dist_length < LOD3)
+			{
+				create_grass(1, ku, kv);
+			}
+		}
+	}
+	glDepthMask(true);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
@@ -198,7 +238,7 @@ void window_size_callback(GLFWwindow *, int width, int height)
 	float const aspect = width / static_cast<float>(height);
 	float const fov = 50.0f * pi / 180.0f;
 	float const z_min = 0.1f;
-	float const z_max = 100.0f;
+	float const z_max = 1000.0f;
 	scene.projection = projection_perspective(fov, aspect, z_min, z_max);
 	scene.projection_inverse = projection_perspective_inverse(fov, aspect, z_min, z_max);
 }
@@ -221,4 +261,45 @@ void mouse_move_callback(GLFWwindow *window, double xpos, double ypos)
 	}
 	picking_position(user.picking, key_positions, state, scene, p1);
 	user.mouse_prev = p1;
+}
+
+std::vector<float> generate_rotations(int N)
+{
+	std::vector<float> res;
+	for (int i = 0; i < N; i++)
+	{
+		float u = rand_interval() * 3.14f;
+		float v = rand_interval() * 3.14f;
+		res.push_back(u);
+		res.push_back(v);
+	}
+	return res;
+}
+
+void create_grass(int nbQuad, int ku, int kv)
+{
+	if (nbQuad == 3)
+	{
+		billboard_grass.transform.scale = 0.1f + rot[ku * kv % (2 * N)] * 0.3f / 3.14f;
+		billboard_grass.transform.rotate = rotation();
+		draw(billboard_grass, scene);
+		billboard_grass.transform.rotate = rotation(vec3{0, 0, 1}, rot[kv]);
+		draw(billboard_grass, scene);
+		billboard_grass.transform.rotate = rotation(vec3{0, 0, 1}, rot[kv + ku]);
+		draw(billboard_grass, scene);
+	}
+	if (nbQuad == 2)
+	{
+		billboard_grass.transform.scale = 0.1f + rot[ku * kv % (2 * N)] * 0.3f / 3.14f;
+		billboard_grass.transform.rotate = rotation();
+		draw(billboard_grass, scene);
+		billboard_grass.transform.rotate = rotation(vec3{0, 0, 1}, rot[kv]);
+		draw(billboard_grass, scene);
+	}
+	if (nbQuad == 1)
+	{
+		billboard_grass.transform.scale = 0.1f + rot[ku * kv % (2 * N)] * 0.3f / 3.14f;
+		billboard_grass.transform.rotate = rotation();
+		draw(billboard_grass, scene);
+	}
 }
