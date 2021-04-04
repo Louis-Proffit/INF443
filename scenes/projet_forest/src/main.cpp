@@ -120,8 +120,8 @@ void initialize_data()
 	update_terrain(terrain, terrain_visual, parameters);
 
 	// Pour générer un objet de type arbre
-	/*MeshGenerator *klm = new MeshGenerator();
-	klm->m_system.ClearAxioms();
+	MeshGenerator *klm = new MeshGenerator();
+	/*klm->m_system.ClearAxioms();
 	klm->rotationOffset = 0.3926991f;
 	klm->translationOffset = 0.1f;
 	klm->m_system.AddAxiom('F', "F[Fz[zFZXFZYF]Z[ZFxzFyzF]C+]");
@@ -158,17 +158,18 @@ void initialize_data()
 	klm->translationOffset = .2f;
 	klm->scaleOffset = 1.0f;
 	klm->m_system.AddAxiom('R', "YYTF[xFR]C[XFRFR]");
-	//tree = klm->GenerateModel("+TT+R", 7, "Tree5", vec3(0, 0, 0), .2f);
+	//tree = klm->GenerateModel("+TT+R", 7, "Tree5", vec3(0, 0, 0), .2f);*/
 
 	std::cout << "Generating RealTree" << std::endl;
 	klm->m_system.ClearAxioms();
-	klm->translationOffset = .2f;
+	klm->translationOffset = .1f;
 	klm->scaleOffset = 1.5f;
-	klm->m_system.AddAxiom('X', "F[zFRzXFC]X[ZFZyFC]FX");
-	klm->m_system.AddAxiom('F', "F");
-	//tree = klm->GenerateModel("X", 3, "Test", vec3(0, 0, 0), .05f);
+	klm->rotationOffset = 3.14f / 4;
+	klm->m_system.AddAxiom('T', "F[[[[xT]XT]yT]YT]FT");
+	klm->m_system.AddAxiom('F', "FF");
+	tree = klm->GenerateModel("T", 2, "Test", vec3(0, 0, 0), .01f);
 
-	tree_real = mesh_drawable(tree);*/
+	tree_real = mesh_drawable(tree);
 
 	//Pour faire de l'herbe
 
@@ -179,10 +180,10 @@ void initialize_data()
 
 void display_scene()
 {
-	draw(terrain_visual, scene);
+	//draw(terrain_visual, scene);
 
-	//draw(tree_real, scene);
-	glDepthMask(false);
+	draw(tree_real, scene);
+	/*glDepthMask(false);
 	for (unsigned int ku = 0; ku < N; ++ku)
 	{
 		for (unsigned int kv = 0; kv < N; ++kv)
@@ -210,7 +211,7 @@ void display_scene()
 			}
 		}
 	}
-	glDepthMask(true);
+	glDepthMask(true);*/
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }

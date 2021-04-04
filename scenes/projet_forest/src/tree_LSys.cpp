@@ -71,6 +71,7 @@ mesh MeshGenerator::GenerateModel(std::string system, int iterations, std::strin
             startingPoint = popped.first;
             radiusVector = popped.second.first;
             translationVector = popped.second.second;
+            closeOffIndeces.push_back(pointCollections.size() - 1);
         }
         break;
         case 'c':
@@ -81,13 +82,14 @@ mesh MeshGenerator::GenerateModel(std::string system, int iterations, std::strin
             pointCollections.push_back(std::make_pair(startingPoint, radiusVector));
             break;
         case 'F':
-            startingPoint += translationVector;
             pointCollections.push_back(std::make_pair(startingPoint, radiusVector));
+            startingPoint += translationVector;
             break;
         default:
             break;
         }
     }
+
     int longueur = pointCollections.size();
     for (int i = 0; i < longueur - 1; i++)
     {
@@ -95,23 +97,29 @@ mesh MeshGenerator::GenerateModel(std::string system, int iterations, std::strin
         vertex_sommet = pointCollections[i + 1].first;
         vec3 radVec = pointCollections[i].second;
         vec3 base = pointCollections[i].first;
-        if ((closeOffIndeces.size() > 0 && i == closeOffIndeces.front()))
+        std::cout << closeOffIndeces.front() << std::endl;
+        //std::cout << i << std::endl;
+        if //i == closeOffIndeces.front())
         {
-            mesh cone;
-            cone = mesh_primitive_cone(norm(radVec), norm(radVec), base, {0, 0, 1});
             closeOffIndeces.erase(closeOffIndeces.begin());
-            result.push_back(cone);
+            continue;
         }
         else
         {
-            mesh cylindre;
-            cylindre = mesh_primitive_cylinder(norm(radVec), base, vertex_sommet, 10, 20, true);
+            if (norm(vertex_sommet - base) == 0)
+            {
+                continue;
+            }
+            else
+            {
+                mesh cylindre;
+                cylindre = mesh_primitive_cylinder(norm(radVec), base, vertex_sommet, 10, 20, true);
 
-            result.push_back(cylindre);
+                result.push_back(cylindre);
+            }
         }
-        result.color.fill({0.345f, 0.435f, 0.176f});
     }
-
+    result.color.fill({0.345f, 0.435f, 0.176f});
     /* int longueur = pointCollections.size();
     result.position.resize(longueur * pointsPerLevel + longueur);
     for (int i = 0; i < longueur; i++)
