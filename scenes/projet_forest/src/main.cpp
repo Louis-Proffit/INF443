@@ -1,13 +1,13 @@
 #include "vcl/vcl.hpp"
 #include <iostream>
 
-#include "terrain.hpp"
-#include "tree.hpp"
+#include "terrain/terrain.hpp"
+#include "tree_Lsystem/tree.hpp"
 
-#include "interpolation.hpp"
+#include "animation/interpolation.hpp"
 #include "scene_helper.hpp"
-#include "tree_LSys.hpp"
-#include "LSystem.hpp"
+#include "tree_Lsystem/tree_LSys.hpp"
+#include "tree_Lsystem/LSystem.hpp"
 
 using namespace vcl;
 
@@ -113,75 +113,24 @@ void initialize_data()
 	scene.camera.distance_to_center = 4.5f;
 	scene.camera.look_at({4, 3, 3}, {0, 0, 3}, {0, 1, 3});
 
-	// Create visual terrain surface
+	////////////////////////////////////////
+	/////// Génération du terrain /////////
+	////////////////////////////////////////
 	terrain = create_terrain();
 	terrain_visual = mesh_drawable(terrain);
 	update_terrain(terrain, terrain_visual, parameters);
 
-	// Pour générer un objet de type arbre
-	MeshGenerator *klm = new MeshGenerator();
-	klm->m_system.ClearAxioms();
-	klm->rotationOffset = 0.3926991f;
-	klm->translationOffset = 0.1f;
-	klm->m_system.AddAxiom('F', "F[Fz[zFZXFZYF]Z[ZFxzFyzF]C+]");
-	tree = klm->GenerateModel("+TT+F", 4, "Fougere", vec3(0, 0, 0), 0.01f);
+	////////////////////////////////////////
+	/////// Génération des arbres /////////
+	////////////////////////////////////////
 
-	/*std::cout << "Generating Tree2..." << std::endl;
-	klm->m_system.ClearAxioms();
-	klm->rotationOffset = 0.4485496f;
-	klm->translationOffset = 0.1f;
-	klm->scaleOffset = 1.0f;
-	klm->m_system.AddAxiom('R', "F[ZxR][zR]FR");
-	klm->m_system.AddAxiom('F', "FF");
-	//tree = klm->GenerateModel("R", 7, "Tree2", vec3(0, 0, 0), .01f);*/
-
-	/*std::cout << "Generating Tree3..." << std::endl;
-	klm->m_system.ClearAxioms();
-	klm->rotationOffset = 0.3f;
-	klm->translationOffset = 0.4f;
-	klm->m_system.AddAxiom('R', "FFF[FXYZ[FxRxF[zFRzXFC]R[ZFZyFC]]yFRyF]");
-	tree = klm->GenerateModel("+TT+R", 5, "Brin", vec3(0, 0, 0), .1f);*/
-
-	/*std::cout << "Generating Tree4..." << std::endl;
-	klm->m_system.ClearAxioms();
-	klm->rotationOffset = 0.1f;
-	klm->translationOffset = 0.1f;
-	klm->scaleOffset = 1.0f;
-	klm->m_system.AddAxiom('R', "F[[yyBBzB]XB]");
-	klm->m_system.AddAxiom('B', "XXYYYYYYYYFRFzzFRRC");
-	tree = klm->GenerateModel("+TT+R", 7, "Tree4", vec3(0, 0, 0), .1f); */
-	//WTF CA RESSEMBLE à RIEN
-
-	/*std::cout << "Generating Tree5..." << std::endl;
-	klm->m_system.ClearAxioms();
-	klm->rotationOffset = .4f;
-	klm->translationOffset = .2f;
-	klm->scaleOffset = 1.0f;
-	klm->m_system.AddAxiom('R', "YYTF[xFR]C[XFRFR]"); 
-	tree = klm->GenerateModel("+TT+R", 7, "Tree5", vec3(0, 0, 0), .02f); */
-	// Ca fait une sorte de buisson
-
-	std::cout << "Generating RealTree" << std::endl;
-	klm->m_system.ClearAxioms();
-	klm->translationOffset = .1f;
-	klm->scaleOffset = 1.5f;
-	klm->rotationOffset = 3.14f / 4;
-	klm->m_system.AddAxiom('H', "F[[[[[[xH]XH]yxH]YXH]yXH]YxH]tFH");
-	klm->m_system.AddAxiom('F', "FF");
-	tree = klm->GenerateModel("H", 4, "Test", vec3(0, 0, 0), .01f); // Attention ne pas faire avec plus que 4 sinon ca fait bug l'affichage
-
-	/*std::cout << "Generating RealTree2" << std::endl;
-	klm->m_system.ClearAxioms();
-	klm->translationOffset = .1f;
-	klm->scaleOffset = 1.5f;
-	klm->rotationOffset = 3.14f / 4;
-	klm->m_system.AddAxiom('H', "F[[[[xH]XH]yH]YH]tFH");
-	klm->m_system.AddAxiom('F', "FF");
-	tree = klm->GenerateModel("H", 4, "Test", vec3(0, 0, 0), .01f);*/
+	tree = init_tree();
 
 	tree_real = mesh_drawable(tree);
 
-	//Pour faire de l'herbe
+	////////////////////////////////////////
+	/////// Génération de l'herbe /////////
+	////////////////////////////////////////
 
 	billboard_grass = mesh_drawable(mesh_primitive_quadrangle({-1, 0, 0}, {1, 0, 0}, {1, 0, 2}, {-1, 0, 2}));
 	billboard_grass.transform.scale = 0.3f;
@@ -192,7 +141,7 @@ void display_scene()
 {
 	//draw(terrain_visual, scene);
 
-	draw(tree_real, scene);
+	//draw(tree_real, scene);
 	/*glDepthMask(false);
 	for (unsigned int ku = 0; ku < N; ++ku)
 	{
