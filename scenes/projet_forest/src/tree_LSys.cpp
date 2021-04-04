@@ -20,9 +20,21 @@ mesh MeshGenerator::GenerateModel(std::string system, int iterations, std::strin
     rotation negRotationY = rotation({0, -1, 0}, rotationOffset);
     rotation rotationZ = rotation({0, 0, 1}, rotationOffset);
     rotation negRotationZ = rotation({0, 0, -1}, rotationOffset);
+    mesh cylindre;
+    mesh feuille;
+    vec3 endingpoint;
+
+    std::cout << system << std::endl;
+    pointCollections.push_back(std::make_pair(startingPoint, radiusVector));
+    vec3 precPoint;
+    precPoint = startingPoint;
+    bool relie = true;
 
     for (int i = 0; i < system.size(); i++)
     {
+        /*std::cout << startingPoint << std::endl;
+        std::cout << translationVector << std::endl;
+        std::cout << " " << std::endl;*/
         switch (system[i])
         {
         case 't': //translate
@@ -71,35 +83,71 @@ mesh MeshGenerator::GenerateModel(std::string system, int iterations, std::strin
             startingPoint = popped.first;
             radiusVector = popped.second.first;
             translationVector = popped.second.second;
-            closeOffIndeces.push_back(pointCollections.size() - 1);
+            //relie = false;
+            pointCollections.push_back(std::make_pair(startingPoint, radiusVector));
+            precPoint = startingPoint;
         }
         break;
         case 'c':
         case 'C':
             closeOffIndeces.push_back(pointCollections.size() - 1);
+            pointCollections.push_back(std::make_pair(startingPoint, radiusVector));
+            precPoint = startingPoint;
             break;
         case '+': //pushes the current point to be used on the geometry
             pointCollections.push_back(std::make_pair(startingPoint, radiusVector));
             break;
         case 'F':
-            pointCollections.push_back(std::make_pair(startingPoint, radiusVector));
             startingPoint += translationVector;
+            pointCollections.push_back(std::make_pair(startingPoint, radiusVector));
+            if (relie)
+            {
+                if (norm(startingPoint - precPoint) != 0)
+                {
+                    mesh cylindre;
+                    cylindre = mesh_primitive_cylinder(norm(radiusVector), precPoint, startingPoint, 10, 20, true);
+                    cylindre.color.fill({0.345f, 0.435f, 0.176f});
+                    result.push_back(cylindre);
+                }
+            }
+            else
+            {
+                relie = true;
+            }
+            precPoint = startingPoint;
+            break;
+        case 'H':
+            startingPoint += translationVector;
+            pointCollections.push_back(std::make_pair(startingPoint, radiusVector));
+            if (norm(startingPoint - precPoint) != 0)
+            {
+                mesh cylindre;
+                cylindre = mesh_primitive_cylinder(norm(radiusVector), precPoint, startingPoint, 10, 20, true);
+                cylindre.color.fill({0.345f, 0.435f, 0.176f});
+                result.push_back(cylindre);
+            }
+            //std::cout << startingPoint << std::endl;
+            //std::cout << " " << std::endl;
+            feuille = mesh_primitive_sphere(0.05f, startingPoint, 40, 20);
+            feuille.color.fill({1.0f, 0, 0});
+            result.push_back(feuille);
             break;
         default:
             break;
         }
     }
 
-    int longueur = pointCollections.size();
+    /*int longueur = pointCollections.size();
     for (int i = 0; i < longueur - 1; i++)
     {
         vec3 vertex_sommet;
         vertex_sommet = pointCollections[i + 1].first;
         vec3 radVec = pointCollections[i].second;
         vec3 base = pointCollections[i].first;
-        std::cout << closeOffIndeces.front() << std::endl;
-        //std::cout << i << std::endl;
-        if //i == closeOffIndeces.front())
+        //std::cout << closeOffIndeces.front() << std::endl;
+        std::cout << base << std::endl;
+    }*/
+    /*if (false) //i == closeOffIndeces.front())
         {
             closeOffIndeces.erase(closeOffIndeces.begin());
             continue;
@@ -114,12 +162,12 @@ mesh MeshGenerator::GenerateModel(std::string system, int iterations, std::strin
             {
                 mesh cylindre;
                 cylindre = mesh_primitive_cylinder(norm(radVec), base, vertex_sommet, 10, 20, true);
+                cylindre.color.fill({0.345f, 0.435f, 0.176f});
 
                 result.push_back(cylindre);
             }
         }
-    }
-    result.color.fill({0.345f, 0.435f, 0.176f});
+    }*/
     /* int longueur = pointCollections.size();
     result.position.resize(longueur * pointsPerLevel + longueur);
     for (int i = 0; i < longueur; i++)
