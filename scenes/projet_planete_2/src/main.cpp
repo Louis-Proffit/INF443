@@ -23,7 +23,7 @@ timer_interval timer;
 planet* earth;
 
 int number_of_planes = 5;
-int number_of_satelites = 50;
+int number_of_satelites = 3;
 std::vector<orbiter*> orbiters;
 
 int main(int, char* argv[])
@@ -105,7 +105,7 @@ void initialize_data()
 	timer.t = timer.t_min;
 
     /* Création de la planète */
-	earth = new planet("assets/earth_texture_10k.png");
+	earth = new planet();
 
 	/* Initialisation des orbiters */
 	for (int i = 0 ; i < number_of_planes ; i++) orbiters.push_back(new orbiter(orbiter_type::PLANE));

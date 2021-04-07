@@ -205,25 +205,16 @@
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\simplexnoise\simplexnoise1234.cpp">
       <Filter>third_party\src\simplexnoise</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\Sphere.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\objects.cpp">
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\orbiters.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\plane.cpp">
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\satelite.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\terrain.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\tools.cpp">
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1350,19 +1341,16 @@
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\simplexnoise\simplexnoise1234.hpp">
       <Filter>third_party\src\simplexnoise</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\Sphere.hpp">
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\constants.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\objects.hpp">
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\orbiters.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\satelite.hpp">
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\terrain.hpp">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\tools.hpp">
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.hpp">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

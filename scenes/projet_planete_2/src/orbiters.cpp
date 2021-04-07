@@ -93,12 +93,12 @@ orbiter::orbiter(orbiter_type _orbiter_type)
 	current_rotate = 0;
 	switch (_orbiter_type) {
 	case orbiter_type::PLANE:
-		trajectory_visual = trajectory_drawable(10);
+		trajectory_visual = trajectory_drawable(100);
 		orbiter_visual = get_plane_mesh_drawable(rotation_axis, rotation_angle);
 		rotation_speed = plane_rotation_speed;
 		break;
 	case orbiter_type::SATELITE:
-		trajectory_visual = trajectory_drawable(50);
+		trajectory_visual = trajectory_drawable(500);
 		orbiter_visual = get_satelite_mesh_drawable(rotation_axis, rotation_angle);
 		rotation_speed = satelite_rotation_speed;
 		break;

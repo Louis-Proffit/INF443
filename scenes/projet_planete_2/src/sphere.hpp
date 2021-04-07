@@ -2,11 +2,33 @@
 
 #include "vcl/vcl.hpp"
 
+enum class terrain_type {
+	DESERT,
+	MOUNTAIN,
+	FIELD,
+	CITY,
+	FOREST,
+	EMPTY
+};
+
+struct triangle {
+	vcl::uint3 positions;
+	triangle* neighbour_1;
+	triangle* neighbour_2;
+	triangle* neighbour_3;
+	terrain_type _terrain_type;
+};
+
+struct sphere {
+	vcl::buffer<vcl::vec3> positions;
+	vcl::buffer<triangle> triangles;
+};
+
 struct planet {
 	vcl::mesh_drawable planet_visual;
 	vcl::vec3 rotation_axis;
 	float rotation_angle;
-	planet(std::string file_name);
+	planet();
 	void update(float time);
 };
 

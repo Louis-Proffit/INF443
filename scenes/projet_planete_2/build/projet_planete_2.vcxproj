@@ -767,13 +767,13 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\lodepng\lodepng.h" />
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\simplexnoise\simplexnoise1234.cpp" />
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\simplexnoise\simplexnoise1234.hpp" />
-    <ClCompile Include="..\src\sphere.cpp" />
-    <ClInclude Include="..\src\sphere.hpp" />
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete_2\src\main.cpp" />
-    <ClCompile Include="..\src\orbiters.cpp" />
-    <ClInclude Include="..\src\orbiters.hpp" />
-    <ClCompile Include="..\src\scene_helper.cpp" />
-    <ClInclude Include="..\src\scene_helper.hpp" />
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete_2\src\orbiters.cpp" />
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete_2\src\orbiters.hpp" />
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete_2\src\scene_helper.cpp" />
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete_2\src\scene_helper.hpp" />
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete_2\src\sphere.cpp" />
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete_2\src\sphere.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete_2\build\ZERO_CHECK.vcxproj">

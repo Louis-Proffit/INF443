@@ -205,16 +205,16 @@
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\simplexnoise\simplexnoise1234.cpp">
       <Filter>third_party\src\simplexnoise</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\sphere.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete_2\src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\orbiters.cpp">
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete_2\src\orbiters.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\scene_helper.cpp">
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete_2\src\scene_helper.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete_2\src\sphere.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1341,13 +1341,13 @@
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\simplexnoise\simplexnoise1234.hpp">
       <Filter>third_party\src\simplexnoise</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\sphere.hpp">
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete_2\src\orbiters.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\orbiters.hpp">
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete_2\src\scene_helper.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\scene_helper.hpp">
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete_2\src\sphere.hpp">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

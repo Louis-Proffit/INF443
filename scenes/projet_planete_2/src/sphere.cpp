@@ -2,15 +2,15 @@
 
 using namespace vcl;
 
-mesh_drawable create_sphere(std::string texture_file_name);
+mesh_drawable create_sphere();
 vec2 get_point_texture_mercator(vec3 position);
 vec2 get_point_texture_equicylindrical(vec3 position);
 vec3 get_point_on_sphere(vec3 position);
 mesh create_isocaedre();
 
-planet::planet(std::string texture_file_name) {
+planet::planet() {
     rotation_axis = vec3(0, 0, 1);
-    planet_visual = create_sphere(texture_file_name);
+    planet_visual = create_sphere();
     rotation_angle = 0;
 }
 
@@ -20,7 +20,7 @@ void planet::update(float time)
     planet_visual.transform.rotate = rotation(rotation_axis, rotation_angle);
 }
 
-mesh_drawable create_sphere(std::string texture_file_name)
+mesh_drawable create_sphere()
 {
     mesh current_mesh = create_isocaedre();
     unsigned int number_of_triangles, number_of_positions;
@@ -97,11 +97,11 @@ mesh_drawable create_sphere(std::string texture_file_name)
     image_raw earth_surface_texture;
     try
     {
-        earth_surface_texture = image_load_png(texture_file_name);
+        earth_surface_texture = image_load_png("assets/earth_texture_10k.png");
     }
     catch (const std::exception&)
     {
-        earth_surface_texture = image_load_png("../" + texture_file_name);
+        earth_surface_texture = image_load_png("../assets/earth_texture_10k.png");
     }
     GLuint const earth_surface_texture_id = opengl_texture_to_gpu(earth_surface_texture, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
     result.texture = earth_surface_texture_id;

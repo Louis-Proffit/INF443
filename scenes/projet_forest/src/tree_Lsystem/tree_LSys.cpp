@@ -128,7 +128,7 @@ mesh MeshGenerator::GenerateModel(std::string system, int iterations, std::strin
             }
             //std::cout << startingPoint << std::endl;
             //std::cout << " " << std::endl;
-            feuille = mesh_primitive_sphere(0.05f, startingPoint, 40, 20);
+            feuille = mesh_primitive_sphere(0.01f, startingPoint, 40, 20);
             feuille.color.fill({1.0f, 0, 0});
             result.push_back(feuille);
             break;

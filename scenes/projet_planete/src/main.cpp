@@ -1,38 +1,30 @@
 #include "vcl/vcl.hpp"
 #include <iostream>
 
+#include "scene_helper.hpp"
+#include "orbiters.hpp"
 #include "sphere.hpp"
-#include "objects.hpp"
 
 using namespace vcl;
 
 void mouse_move_callback(GLFWwindow* window, double xpos, double ypos);
 void window_size_callback(GLFWwindow* window, int width, int height);
+void update_and_draw(planet* _planet);
+void update_and_draw(orbiter* _orbiter);
 
 void initialize_data();
 void display_scene();
 void display_interface();
 
-const vec3 color_blue_low = { float(0) / 255, float(191) / 255, float(255) / 255 };
-const vec3 color_blue_high = { float(30) / 255, float(144) / 255, float(255) / 255 };
-const vec3 color_grey_low = { float(40) / 255, float(40) / 255, float(40) / 255 };
-const vec3 color_grey_high = { float(10) / 255, float(10) / 255, float(10) / 255 };
-const vec3 color_green_low = { float(50) / 255, float(205) / 255, float(50) / 255 };
-const vec3 color_green_high = { float(34) / 255, float(139) / 255, float(34) / 255 };
-
 user_interaction_parameters user;
 scene_environment scene;
 timer_interval timer;
 
-mesh_drawable planet;
-Plane* plane_1;
-Plane* plane_2;
-Satelite satelite_1(satelite_altitude);
-hierarchy_mesh_drawable satelite_1_visual;
-trajectory_drawable satelite_1_trajectory(2000);
-Satelite satelite_2(satelite_altitude);
-hierarchy_mesh_drawable satelite_2_visual;
-trajectory_drawable satelite_2_trajectory(2000);
+planet* earth;
+
+int number_of_planes = 0;
+int number_of_satelites = 0;
+std::vector<orbiter*> orbiters;
 
 int main(int, char* argv[])
 {
@@ -59,7 +51,7 @@ int main(int, char* argv[])
 		scene.light = scene.camera.position();
 		user.fps_record.update();
 		
-		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+		glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glClear(GL_DEPTH_BUFFER_BIT);
 		imgui_create_frame();
@@ -101,60 +93,36 @@ void initialize_data()
 	curve_drawable::default_shader = shader_uniform_color;
 	segments_drawable::default_shader = shader_uniform_color;
 	
+	/* Paramétrisation du user*/
 	user.global_frame = mesh_drawable(mesh_primitive_frame());
 	user.gui.display_frame = false;
 	scene.camera.distance_to_center = 2.5f;
 	scene.camera.look_at({4,3,2}, {0,0,0}, {0,0,1});
 
+	/* Création du timer */
 	timer.t_min = 0;
 	timer.t_max = 10; 
 	timer.t = timer.t_min;
 
-    // Create visual terrain surface
-	planet = mesh_drawable(create_colored_sphere(color_blue_low, color_blue_high, color_grey_low, color_grey_high));
-	planet.shading.phong.specular = 0.0f;
+    /* Création de la planète */
+	earth = new planet();
 
-	image_raw const im = image_load_png("assets/earth_texture_2.png");
-
-	// Send this image to the GPU, and get its identifier texture_image_id
-	GLuint const texture_image_id = opengl_texture_to_gpu(im, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
-
-	// Associate the texture_image_id to the image texture used when displaying visual
-	planet.texture = texture_image_id;
-
-	plane_1 = new Plane();
-	plane_2 = new Plane();
-
-	satelite_1_visual = satelite_1.get_mesh_drawable();
-	satelite_2_visual = satelite_2.get_mesh_drawable();
+	/* Initialisation des orbiters */
+	for (int i = 0 ; i < number_of_planes ; i++) orbiters.push_back(new orbiter(orbiter_type::PLANE));
+	for (int i = 0 ; i < number_of_satelites; i++) orbiters.push_back(new orbiter(orbiter_type::SATELITE));
 }
 
 
 void display_scene()
 {
-
 	timer.update();
-	float const t = timer.t;
+	float const time = timer.t;
 
-	draw(planet, scene);
+	update_and_draw(earth);
 
-	satelite_1_trajectory.visual.color = vec3(1, 0, 0);
-	satelite_2_trajectory.visual.color = vec3(1, 0, 0);
-
-	satelite_1_trajectory.add(satelite_1_visual["body"].global_transform.translate, t);
-	satelite_2_trajectory.add(satelite_2_visual["body"].global_transform.translate, t);
-
-	/*plane_1->update_and_draw(scene);*/
-
-	/*plane_2->update_and_draw(scene);*/
-
-	satelite_1.update_plane_visual(&satelite_1_visual);
-	draw(satelite_1_visual, scene);
-	draw(satelite_1_trajectory, scene);
-
-	satelite_2.update_plane_visual(&satelite_2_visual);
-	draw(satelite_2_visual, scene);
-	draw(satelite_2_trajectory, scene);
+	for (int i = 0; i < orbiters.size(); i++) {
+		update_and_draw(orbiters[i]);
+	}
 }
 
 
@@ -189,6 +157,18 @@ void mouse_move_callback(GLFWwindow* window, double xpos, double ypos)
 	}
 
 	user.mouse_prev = p1;
+}
+
+void update_and_draw(orbiter* _orbiter) {
+	_orbiter->update(timer.t);
+	_orbiter->trajectory_visual.visual.color.x = 1.0f;
+	draw(_orbiter->orbiter_visual, scene);
+	draw(_orbiter->trajectory_visual, scene);
+}
+
+void update_and_draw(planet* _planet) {
+	_planet->update(timer.t);
+	draw(_planet->planet_visual, scene);
 }
 
 
