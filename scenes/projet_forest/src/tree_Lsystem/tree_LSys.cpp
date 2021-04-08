@@ -24,7 +24,7 @@ mesh MeshGenerator::GenerateModel(std::string system, int iterations, std::strin
     mesh feuille;
     vec3 endingpoint;
 
-    std::cout << system << std::endl;
+    // std::cout << system << std::endl;
     pointCollections.push_back(std::make_pair(startingPoint, radiusVector));
     vec3 precPoint;
     precPoint = startingPoint;

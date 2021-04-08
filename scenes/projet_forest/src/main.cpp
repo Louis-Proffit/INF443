@@ -8,6 +8,7 @@
 #include "scene_helper.hpp"
 #include "tree_Lsystem/tree_LSys.hpp"
 #include "tree_Lsystem/LSystem.hpp"
+#include "terrain/heightmap.hpp"
 
 using namespace vcl;
 
@@ -17,15 +18,16 @@ user_interaction_parameters user;
 buffer<vec3> key_positions;
 buffer<float> key_times;
 timer_interval timer;
-
+Heightmap::HillAlgorithmParameters params = Heightmap::HillAlgorithmParameters(100, 100, 20, 2, 10, 0.1f, 2.0f);
+std::vector<std::vector<float>> gen = Heightmap::generateRandomHeightData(params);
 //================================================
 //			Variables Declaration
 //=================================================
 
 const unsigned int N = 100;
-const float LOD1 = 5.0f;
+/*const float LOD1 = 5.0f;
 const float LOD2 = 10.0f;
-const float LOD3 = 20.0f;
+const float LOD3 = 20.0f;*/
 
 //================================================
 //			Functions declaration
@@ -166,7 +168,8 @@ void display_scene()
 	//				Draw terrain
 	//=================================================
 
-	//draw(terrain_visual, scene);
+	draw(terrain_visual, scene);
+	draw_wireframe(terrain_visual, scene);
 
 	//================================================
 	//				Draw tree
@@ -177,7 +180,7 @@ void display_scene()
 	//================================================
 	//				Draw Billboards
 	//=================================================
-	glDepthMask(false);
+	/*glDepthMask(false);
 	for (unsigned int ku = 0; ku < N; ++ku)
 	{
 		for (unsigned int kv = 0; kv < N; ++kv)
@@ -205,7 +208,7 @@ void display_scene()
 			}
 		}
 	}
-	glDepthMask(true);
+	glDepthMask(true);*/
 
 	//================================================
 	//					FIN
