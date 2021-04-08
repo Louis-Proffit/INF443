@@ -18,6 +18,19 @@ buffer<vec3> key_positions;
 buffer<float> key_times;
 timer_interval timer;
 
+//================================================
+//			Variables Declaration
+//=================================================
+
+const unsigned int N = 100;
+const float LOD1 = 5.0f;
+const float LOD2 = 10.0f;
+const float LOD3 = 20.0f;
+
+//================================================
+//			Functions declaration
+//=================================================
+
 void mouse_move_callback(GLFWwindow *window, double xpos, double ypos);
 void window_size_callback(GLFWwindow *window, int width, int height);
 
@@ -25,20 +38,20 @@ void initialize_data();
 void display_interface();
 void display_scene();
 std::vector<float> generate_rotations(int N);
+void create_grass(int nbQuad, int ku, int kv);
 
-const unsigned int N = 100;
+//================================================
+//				Mesh Declaration
+//=================================================
+
 mesh terrain;
 mesh tree;
 mesh_drawable terrain_visual;
 mesh_drawable billboard_grass;
 perlin_noise_parameters parameters;
 mesh_drawable tree_real;
-std::vector<float> rot = generate_rotations(N);
-void create_grass(int nbQuad, int ku, int kv);
 
-const float LOD1 = 5.0f;
-const float LOD2 = 10.0f;
-const float LOD3 = 20.0f;
+std::vector<float> rot = generate_rotations(N);
 
 int main(int, char *argv[])
 {
@@ -101,6 +114,11 @@ int main(int, char *argv[])
 
 void initialize_data()
 {
+
+	//================================================
+	//			Initialize default shader
+	//=================================================
+
 	GLuint const shader_mesh = opengl_create_shader_program(opengl_shader_preset("mesh_vertex"), opengl_shader_preset("mesh_fragment"));
 	GLuint const shader_uniform_color = opengl_create_shader_program(opengl_shader_preset("single_color_vertex"), opengl_shader_preset("single_color_fragment"));
 	GLuint const texture_white = opengl_texture_to_gpu(image_raw{1, 1, image_color_type::rgba, {255, 255, 255, 255}});
@@ -109,29 +127,33 @@ void initialize_data()
 	curve_drawable::default_shader = shader_uniform_color;
 	segments_drawable::default_shader = shader_uniform_color;
 
+	//================================================
+	//				Initialize camera
+	//=================================================
+
 	user.global_frame = mesh_drawable(mesh_primitive_frame());
 	user.gui.display_frame = false;
 	scene.camera.distance_to_center = 4.5f;
 	scene.camera.look_at({4, 3, 3}, {0, 0, 3}, {0, 1, 3});
 
-	////////////////////////////////////////
-	/////// Génération du terrain /////////
-	////////////////////////////////////////
+	//================================================
+	//				Terrain Declaration
+	//=================================================
 	terrain = create_terrain();
 	terrain_visual = mesh_drawable(terrain);
 	update_terrain(terrain, terrain_visual, parameters);
 
-	////////////////////////////////////////
-	/////// Génération des arbres /////////
-	////////////////////////////////////////
+	//================================================
+	//				Tree Declaration
+	//=================================================
 
 	tree = init_tree();
 
 	tree_real = mesh_drawable(tree);
 
-	////////////////////////////////////////
-	/////// Génération de l'herbe /////////
-	////////////////////////////////////////
+	//================================================
+	//			BillBoards Declaration
+	//=================================================
 
 	billboard_grass = mesh_drawable(mesh_primitive_quadrangle({-1, 0, 0}, {1, 0, 0}, {1, 0, 2}, {-1, 0, 2}));
 	billboard_grass.transform.scale = 0.3f;
@@ -140,9 +162,21 @@ void initialize_data()
 
 void display_scene()
 {
+	//================================================
+	//				Draw terrain
+	//=================================================
+
 	//draw(terrain_visual, scene);
 
+	//================================================
+	//				Draw tree
+	//=================================================
+
 	/*draw(tree_real, scene);*/
+
+	//================================================
+	//				Draw Billboards
+	//=================================================
 	glDepthMask(false);
 	for (unsigned int ku = 0; ku < N; ++ku)
 	{
@@ -172,6 +206,10 @@ void display_scene()
 		}
 	}
 	glDepthMask(true);
+
+	//================================================
+	//					FIN
+	//=================================================
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
