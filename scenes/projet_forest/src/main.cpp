@@ -18,8 +18,11 @@ user_interaction_parameters user;
 buffer<vec3> key_positions;
 buffer<float> key_times;
 timer_interval timer;
-Heightmap::HillAlgorithmParameters params = Heightmap::HillAlgorithmParameters(100, 100, 20, 2, 10, 0.1f, 2.0f);
-std::vector<std::vector<float>> gen = Heightmap::generateRandomHeightData(params);
+HillAlgorithmParameters params = HillAlgorithmParameters(100, 100, 40, 0, 5.0f, 0.1f, 5.0f);
+std::vector<std::vector<float>> gen = generateRandomHeightData(params);
+
+HillAlgorithmParameters params2 = HillAlgorithmParameters();
+std::vector<std::vector<float>> genfile = generateFileHeightData("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/textures/heightmap.png", params2);
 //================================================
 //			Variables Declaration
 //=================================================
@@ -141,9 +144,10 @@ void initialize_data()
 	//================================================
 	//				Terrain Declaration
 	//=================================================
-	terrain = create_terrain();
+
+	terrain = createFromHeightData(genfile, params2);
 	terrain_visual = mesh_drawable(terrain);
-	update_terrain(terrain, terrain_visual, parameters);
+	//update_terrain(terrain, terrain_visual, parameters);
 
 	//================================================
 	//				Tree Declaration

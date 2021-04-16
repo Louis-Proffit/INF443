@@ -5,7 +5,7 @@
 
 using namespace vcl;
 
-std::vector<std::vector<float>> Heightmap::generateRandomHeightData(const HillAlgorithmParameters &params)
+std::vector<std::vector<float>> generateRandomHeightData(const HillAlgorithmParameters &params)
 {
 
     std::vector<std::vector<float>> heightData(params.rows, std::vector<float>(params.columns, 0.0f)); // Constructor de la class vector pour avoir un vector de vectors (matrice) tous initialisés à 0
@@ -52,51 +52,128 @@ std::vector<std::vector<float>> Heightmap::generateRandomHeightData(const HillAl
     return heightData;
 }
 
-void Heightmap::createFromHeightData(const std::vector<std::vector<float>> &heightData)
+mesh createFromHeightData(const std::vector<std::vector<float>> &heightData, const HillAlgorithmParameters &params)
 {
-    if (_isInitialized)
+    int rows = params.rows;
+    int columns = params.columns;
+
+    mesh terrain; // temporary terrain storage (CPU only)
+    terrain.position.resize(rows * columns);
+    terrain.uv.resize(rows * columns);
+
+    // Fill terrain geometry
+    for (unsigned int ku = 0; ku < rows; ++ku)
     {
-        deleteMesh();
-    }
-
-    _heightData = heightData;
-    _rows = _heightData.size();
-    _columns = _heightData[0].size();
-    _numVertices = _rows * _columns;
-
-    // First, prepare VAO and VBO for vertex data
-    glGenVertexArrays(1, &_vao);
-    glBindVertexArray(_vao);
-    _vbo.createVBO(_numVertices * getVertexByteSize()); // Preallocate memory
-    _vbo.bindVBO();
-
-    if (hasPositions())
-    {
-        setUpVertices();
-    }
-
-    if (hasTextureCoordinates())
-    {
-        setUpTextureCoordinates();
-    }
-
-    if (hasNormals())
-    {
-        if (!hasPositions())
+        for (unsigned int kv = 0; kv < columns; ++kv)
         {
-            setUpVertices();
-        }
+            const float u = ku / (rows - 1.0f);
+            const float v = kv / (columns - 1.0f);
+            float const x = 20 * (u - 0.5f);
+            float const y = 20 * (v - 0.5f);
+            if (heightData[ku][kv] - heightData[0][0] != 0)
+            {
+                std::cout << heightData[ku][kv] << std::endl;
+            }
+            vec3 const p = vec3(x, y, heightData[ku][kv]);
 
-        setUpNormals();
+            // Store vertex coordinates
+            terrain.position[kv + columns * ku] = p;
+            terrain.uv[kv + columns * ku] = {p.x, p.y};
+        }
     }
 
-    setUpIndexBuffer();
+    // Generate triangle organization
+    //  Parametric surface with uniform grid sampling: generate 2 triangles for each grid cell
+    for (size_t ku = 0; ku < rows - 1; ++ku)
+    {
+        for (size_t kv = 0; kv < columns - 1; ++kv)
+        {
+            const unsigned int idx = kv + columns * ku; // current vertex offset
 
-    // Clear the data, we won't need it anymore
-    _vertices.clear();
-    _textureCoordinates.clear();
-    _normals.clear();
+            const uint3 triangle_1 = {idx, idx + 1 + rows, idx + 1};
+            const uint3 triangle_2 = {idx, idx + rows, idx + 1 + rows};
 
-    // If get here, we have succeeded with generating heightmap
-    _isInitialized = true;
+            terrain.connectivity.push_back(triangle_1);
+            terrain.connectivity.push_back(triangle_2);
+        }
+    }
+
+    terrain.fill_empty_field(); // need to call this function to fill the other buffer with default values (normal, color, etc)
+    return terrain;
+}
+
+std::vector<std::vector<float>> generateFileHeightData(const std::string &filename, HillAlgorithmParameters &params)
+{
+    image_raw im = image_load_png(filename);
+    //params.rows = im.height;
+    //params.columns = im.width;
+    int rows = im.height;
+    int columns = im.width;
+    params.rows = rows;
+    params.columns = columns;
+    float echelle = params.hillMaxHeight;
+    size_t const N = size_t(im.width) * size_t(im.height);
+    float min = 1;
+    float max = 0;
+    vec3 p;
+    std::vector<std::vector<float>> heightData(params.rows, std::vector<float>(params.columns, 0.0f));
+    if (im.color_type == image_color_type::rgb)
+    {
+        for (size_t k = 0; k < N; ++k)
+        {
+            p = vec3(im.data[3 * k + 0], im.data[3 * k + 1], im.data[3 * k + 2]) / 255.0f;
+            min = std::min(min, p.x);
+            max = std::max(max, p.x);
+        }
+    }
+    else if (im.color_type == image_color_type::rgba)
+    {
+        for (size_t k = 0; k < N; ++k)
+        {
+            p = vec3(im.data[4 * k + 0], im.data[4 * k + 1], im.data[4 * k + 2]) / 255.0f;
+            //std::cout << p << std::endl;
+            if (p.x < min)
+            {
+                min = p.x;
+            }
+            if (p.x > max)
+            {
+                max = p.x;
+            }
+        }
+        std::cout << min << std::endl;
+        std::cout << max << std::endl;
+    }
+    if (im.color_type == image_color_type::rgb)
+    {
+        for (unsigned int ku = 0; ku < rows; ++ku)
+        {
+            for (unsigned int kv = 0; kv < columns; ++kv)
+            {
+                p = vec3(im.data[3 * (ku + kv) + 0], im.data[3 * (ku + kv) + 1], im.data[3 * (ku + kv) + 2]) / 255.0f;
+                heightData[ku][kv] = ((p.x - min) / (max - min)) * echelle;
+            }
+        }
+    }
+    else if (im.color_type == image_color_type::rgba)
+    {
+        for (unsigned int ku = 0; ku < rows; ++ku)
+        {
+            for (unsigned int kv = 0; kv < columns; ++kv)
+            {
+                p = vec3(im.data[4 * (ku + kv) + 0], im.data[4 * (ku + kv) + 1], im.data[4 * (ku + kv) + 2]) / 255.0f;
+                //std::cout << p.x << std::endl;
+                heightData[ku][kv] = (vec3(im.data[4 * (ku + kv) + 0], im.data[4 * (ku + kv) + 1], im.data[4 * (ku + kv) + 2]) / 255.0f).x;
+                //std::cout << heightData[ku][kv] << std::endl;
+            }
+        }
+    }
+    for (unsigned int ku = 100; ku < 175; ++ku)
+    {
+        for (unsigned int kv = 100; kv < 115; ++kv)
+        {
+            // std::cout << (vec3(im.data[4 * (ku + kv) + 0], im.data[4 * (ku + kv) + 1], im.data[4 * (ku + kv) + 2]) / 255.0f).x << std::endl;
+        }
+    }
+    return heightData;
 }
