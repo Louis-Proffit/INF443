@@ -9,11 +9,14 @@
 #include "tree_Lsystem/tree_LSys.hpp"
 #include "tree_Lsystem/LSystem.hpp"
 #include "terrain/heightmap.hpp"
+#include "SkyBox/skybox.hpp"
 
 using namespace vcl;
 
 scene_environment scene;
 user_interaction_parameters user;
+
+skybox cube;
 
 buffer<vec3> key_positions;
 buffer<float> key_times;
@@ -22,7 +25,7 @@ HillAlgorithmParameters params = HillAlgorithmParameters(100, 100, 40, 0, 5.0f, 
 std::vector<std::vector<float>> gen = generateRandomHeightData(params);
 
 HillAlgorithmParameters params2 = HillAlgorithmParameters();
-std::vector<std::vector<float>> genfile = generateFileHeightData("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/textures/heightmap_4.png", params2);
+std::vector<std::vector<float>> genfile = generateFileHeightData("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/textures/heightmap_5.png", params2);
 //================================================
 //			Variables Declaration
 //=================================================
@@ -146,10 +149,16 @@ void initialize_data()
 	//=================================================
 
 	terrain = createFromHeightData(genfile, params2);
-	std::cout << params2.columns << std::endl;
+	std::cout << params2.rows << std::endl;
 	terrain_visual = mesh_drawable(terrain);
 	//update_terrain(terrain, terrain_visual, parameters);
+	/*image_raw const sol = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/textures/texture_heightmap_4.png");
+	GLuint const texture_ter_id = opengl_texture_to_gpu(sol, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
+	terrain_visual.texture = texture_ter_id;*/
+	//terrain = mesh_primitive_grid();
+	//terrain_visual = mesh_drawable(terrain);
 
+	cube.init_skybox();
 	//================================================
 	//				Tree Declaration
 	//=================================================
@@ -164,7 +173,7 @@ void initialize_data()
 
 	billboard_grass = mesh_drawable(mesh_primitive_quadrangle({-1, 0, 0}, {1, 0, 0}, {1, 0, 2}, {-1, 0, 2}));
 	billboard_grass.transform.scale = 0.3f;
-	billboard_grass.texture = opengl_texture_to_gpu(image_load_png("assets/textures/grass_texture.png"));
+	billboard_grass.texture = opengl_texture_to_gpu(image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/textures/grass_texture.png"));
 }
 
 void display_scene()
@@ -173,8 +182,14 @@ void display_scene()
 	//				Draw terrain
 	//=================================================
 
-	//draw(terrain_visual, scene);
+	draw(terrain_visual, scene);
 	//draw_wireframe(terrain_visual, scene);
+
+	draw(cube.dface_devant, scene);
+	draw(cube.dface_derriere, scene);
+	draw(cube.dface_droite, scene);
+	draw(cube.dface_gauche, scene);
+	draw(cube.dface_haut, scene);
 
 	//================================================
 	//				Draw tree

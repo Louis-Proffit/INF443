@@ -69,12 +69,12 @@ mesh createFromHeightData(const std::vector<std::vector<float>> &heightData, con
             const float u = ku / (rows - 1.0f);
             const float v = kv / (columns - 1.0f);
             float const x = 20 * (u - 0.5f);
-            float const y = 20 * (v - 0.5f);
+            float const y = 20 * columns / rows * (v - 0.5f);
             vec3 const p = vec3(x, y, heightData[ku][kv]);
 
             // Store vertex coordinates
             terrain.position[kv + columns * ku] = p;
-            terrain.uv[kv + columns * ku] = {p.x, p.y};
+            terrain.uv[kv + columns * ku] = {v, 1 - u};
         }
     }
 
@@ -86,8 +86,8 @@ mesh createFromHeightData(const std::vector<std::vector<float>> &heightData, con
         {
             const unsigned int idx = kv + columns * ku; // current vertex offset
 
-            const uint3 triangle_1 = {idx, idx + 1 + rows, idx + 1};
-            const uint3 triangle_2 = {idx, idx + rows, idx + 1 + rows};
+            const uint3 triangle_1 = {idx, idx + 1 + columns, idx + 1};
+            const uint3 triangle_2 = {idx, idx + columns, idx + 1 + columns};
 
             terrain.connectivity.push_back(triangle_1);
             terrain.connectivity.push_back(triangle_2);
@@ -137,8 +137,9 @@ std::vector<std::vector<float>> generateFileHeightData(const std::string &filena
                 max = p.x;
             }
         }
+        /* // Pour le debugging
         std::cout << min << std::endl;
-        std::cout << max << std::endl;
+        std::cout << max << std::endl;*/
     }
     if (im.color_type == image_color_type::rgb)
     {
