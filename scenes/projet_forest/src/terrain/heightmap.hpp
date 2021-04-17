@@ -33,7 +33,7 @@ struct HillAlgorithmParameters
         this->hillRadiusMin = 0;
         this->hillRadiusMax = 0;
         this->hillMinHeight = 0;
-        this->hillMaxHeight = 1;
+        this->hillMaxHeight = 1.5;
     }
 };
 

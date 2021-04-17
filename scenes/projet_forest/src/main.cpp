@@ -22,7 +22,7 @@ HillAlgorithmParameters params = HillAlgorithmParameters(100, 100, 40, 0, 5.0f, 
 std::vector<std::vector<float>> gen = generateRandomHeightData(params);
 
 HillAlgorithmParameters params2 = HillAlgorithmParameters();
-std::vector<std::vector<float>> genfile = generateFileHeightData("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/textures/heightmap.png", params2);
+std::vector<std::vector<float>> genfile = generateFileHeightData("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/textures/heightmap_4.png", params2);
 //================================================
 //			Variables Declaration
 //=================================================
@@ -146,6 +146,7 @@ void initialize_data()
 	//=================================================
 
 	terrain = createFromHeightData(genfile, params2);
+	std::cout << params2.columns << std::endl;
 	terrain_visual = mesh_drawable(terrain);
 	//update_terrain(terrain, terrain_visual, parameters);
 
@@ -172,8 +173,8 @@ void display_scene()
 	//				Draw terrain
 	//=================================================
 
-	draw(terrain_visual, scene);
-	draw_wireframe(terrain_visual, scene);
+	//draw(terrain_visual, scene);
+	//draw_wireframe(terrain_visual, scene);
 
 	//================================================
 	//				Draw tree

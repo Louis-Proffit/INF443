@@ -70,10 +70,6 @@ mesh createFromHeightData(const std::vector<std::vector<float>> &heightData, con
             const float v = kv / (columns - 1.0f);
             float const x = 20 * (u - 0.5f);
             float const y = 20 * (v - 0.5f);
-            if (heightData[ku][kv] - heightData[0][0] != 0)
-            {
-                std::cout << heightData[ku][kv] << std::endl;
-            }
             vec3 const p = vec3(x, y, heightData[ku][kv]);
 
             // Store vertex coordinates
@@ -161,18 +157,11 @@ std::vector<std::vector<float>> generateFileHeightData(const std::string &filena
         {
             for (unsigned int kv = 0; kv < columns; ++kv)
             {
-                p = vec3(im.data[4 * (ku + kv) + 0], im.data[4 * (ku + kv) + 1], im.data[4 * (ku + kv) + 2]) / 255.0f;
+                p = vec3(im.data[4 * (columns * ku + kv) + 0], im.data[4 * (columns * ku + kv) + 1], im.data[4 * (columns * ku + kv) + 2]) / 255.0f;
                 //std::cout << p.x << std::endl;
-                heightData[ku][kv] = (vec3(im.data[4 * (ku + kv) + 0], im.data[4 * (ku + kv) + 1], im.data[4 * (ku + kv) + 2]) / 255.0f).x;
+                heightData[ku][kv] = (p.x - min) / (max - min) * echelle;
                 //std::cout << heightData[ku][kv] << std::endl;
             }
-        }
-    }
-    for (unsigned int ku = 100; ku < 175; ++ku)
-    {
-        for (unsigned int kv = 100; kv < 115; ++kv)
-        {
-            // std::cout << (vec3(im.data[4 * (ku + kv) + 0], im.data[4 * (ku + kv) + 1], im.data[4 * (ku + kv) + 2]) / 255.0f).x << std::endl;
         }
     }
     return heightData;
