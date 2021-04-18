@@ -29,16 +29,13 @@ HillAlgorithmParameters params = HillAlgorithmParameters(100, 100, 40, 0, 5.0f, 
 std::vector<std::vector<float>> gen = generateRandomHeightData(params);
 
 HillAlgorithmParameters params2 = HillAlgorithmParameters();
-<<<<<<< HEAD
 /*std::vector<std::vector<float>> genfile = generateFileHeightData("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/textures/heightmap_5.png", params2);*/
-std::vector<std::vector<float>> genfile = generateFileHeightData("../assets/textures/heightmap_5.png", params2);
-=======
+
 std::vector<std::vector<float>> genfile = generateFileHeightData("../assets/textures/heightmap_5.png", params2);
 
 GLuint texture_rock = 0;
 GLuint texture_snow = 0;
 GLuint shader_heightmap = 0;
->>>>>>> refs/remotes/origin/main
 //================================================
 //			Variables Declaration
 //=================================================
@@ -202,7 +199,7 @@ void initialize_data()
 	//================================================
 	//				SkyBox Declaration
 	//=================================================
-	/*cube.init_skybox();*/
+	cube.init_skybox();
 
 	//================================================
 	//				Tree Declaration
@@ -218,10 +215,7 @@ void initialize_data()
 
 	billboard_grass = mesh_drawable(mesh_primitive_quadrangle({-1, 0, 0}, {1, 0, 0}, {1, 0, 2}, {-1, 0, 2}));
 	billboard_grass.transform.scale = 0.3f;
-<<<<<<< HEAD
 	/*billboard_grass.texture = opengl_texture_to_gpu(image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/textures/grass_texture.png"));*/
-=======
->>>>>>> refs/remotes/origin/main
 	billboard_grass.texture = opengl_texture_to_gpu(image_load_png("../assets/textures/grass_texture.png"));
 }
 
@@ -257,7 +251,7 @@ void display_scene()
 	//				Draw tree
 	//=================================================
 
-	/*draw(tree_real, scene);*/
+	//draw(tree_real, scene);
 
 	//================================================
 	//				Draw Billboards
@@ -408,8 +402,6 @@ std::string openShader(std::string const &shader_name)
 	if (shader_name == "planet_post_fragment")
 	{
 #include "../assets/planet_post/planet.frag.glsl"
-<<<<<<< HEAD
-=======
 		return s;
 	}
 	if (shader_name == "heightmap_frag")
@@ -420,7 +412,6 @@ std::string openShader(std::string const &shader_name)
 	if (shader_name == "heightmap_vert")
 	{
 #include "../assets/heightmap/heightmap.vert.glsl"
->>>>>>> refs/remotes/origin/main
 		return s;
 	}
 
