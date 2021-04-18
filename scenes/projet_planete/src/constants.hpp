@@ -39,12 +39,14 @@ const float satelite_scale = 0.01f;
 const float satelite_rotation_speed = 0.0001f;
 
 // Planet graphics
-const int sphere_division_steps = 4;
+const int sphere_division_steps = 5;
 const float sphere_radius = 1.0f;
 const float sphere_rotation_speed = 0.0f;
 
-// Character constants
-const float character_height = 0.2f;
+
+// islands constants
+const float island_radius = 0.2f;
+const float island_relief_coefficient = 1.01f;
 
 const vcl::vec3 color_sea_low = vcl::vec3(float(0) / 255, float(191) / 255, float(255) / 255);
 const vcl::vec3 color_sea_high = vcl::vec3(float(30) / 255, float(144) / 255, float(255) / 255);

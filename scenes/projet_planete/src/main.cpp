@@ -19,8 +19,6 @@ void display_interface();
 
 user_interaction_parameters user;
 scene_environment scene;
-camera_around_center camera_third_person;
-camera_around_center camera_first_person;
 timer_interval timer;
 
 planet* earth;
@@ -52,10 +50,7 @@ int main(int, char* argv[])
 	glEnable(GL_DEPTH_TEST);
 	while (!glfwWindowShouldClose(window))
 	{
-		if (user.gui.camera_around_center) scene.camera = &camera_third_person;
-		else scene.camera = &camera_first_person;
-
-		if (user.gui.camera_around_center) scene.light = scene.camera->position();
+		scene.light = scene.camera.position();
 
 		user.fps_record.update();
 		
@@ -105,12 +100,8 @@ void initialize_data()
 	/* Paramétrisation du user*/
 	user.global_frame = mesh_drawable(mesh_primitive_frame());
 	user.gui.display_frame = false;
-	camera_third_person.distance_to_center = 2.5f;
-	camera_third_person.look_at({ 4,3,2 }, { 0,0,0 }, { 0,0,1 });
-	camera_first_person.distance_to_center = planet_radius + character_height;
-	camera_first_person.look_at({ 4,3,2 }, { 0,0,0 }, { 5,5,5 });
-
-	scene.camera = &camera_third_person;
+	scene.camera.distance_to_center = 2.5f;
+	scene.camera.look_at({ 4,3,2 }, { 0,0,0 }, { 0,0,1 });
 
 	/* Création du timer */
 	timer.t_min = 0;
@@ -146,7 +137,6 @@ void display_scene()
 void display_interface()
 {
 	ImGui::Checkbox("Frame", &user.gui.display_frame);
-	ImGui::Checkbox("Camera around center", &user.gui.camera_around_center);
 }
 
 
@@ -154,7 +144,11 @@ void window_size_callback(GLFWwindow* , int width, int height)
 {
 	glViewport(0, 0, width, height);
 	float const aspect = width / static_cast<float>(height);
-	scene.projection = projection_perspective(50.0f * pi / 180.0f, aspect, 0.1f, 100.0f);
+	float const fov = 50.0f * pi / 180.0f;
+	float const z_min = 0.1f;
+	float const z_max = 100.0f;
+	scene.projection = projection_perspective(fov, aspect, z_min, z_max);
+	scene.projection_inverse = projection_perspective_inverse(fov, aspect, z_min, z_max);
 }
 
 
@@ -165,28 +159,17 @@ void mouse_move_callback(GLFWwindow* window, double xpos, double ypos)
 	glfw_state state = glfw_current_state(window);
 
 	auto& camera = scene.camera;
-
-	if (user.cursor_on_gui) {
-		user.mouse_prev = p1;
-		return;
-	}
-
-	if(user.gui.camera_around_center){
-		if(state.mouse_click_left && !state.key_ctrl)
-			camera_third_person.manipulator_rotate_trackball(p0, p1);
-		if(state.mouse_click_left && state.key_ctrl)
-			camera_third_person.manipulator_translate_in_plane(p1-p0);
-		if(state.mouse_click_right)
-			camera_third_person.manipulator_scale_distance_to_center( (p1-p0).y );
-	}
-	else {
+	if (!user.cursor_on_gui && !state.key_shift) {
 		if (state.mouse_click_left && !state.key_ctrl)
-			camera_first_person.manipulator_rotate_trackball(p0, p1);
+			scene.camera.manipulator_rotate_trackball(p0, p1);
 		if (state.mouse_click_left && state.key_ctrl)
-			camera_first_person.manipulator_translate_in_plane(p1 - p0);
+			camera.manipulator_translate_in_plane(p1 - p0);
 		if (state.mouse_click_right)
-			camera_first_person.manipulator_scale_distance_to_center((p1 - p0).y);
+			camera.manipulator_scale_distance_to_center((p1 - p0).y);
 	}
+
+	// Handle mouse picking
+	picking_position(user.picking, earth->islands_centers, state, scene, p1);
 
 	user.mouse_prev = p1;
 
@@ -200,8 +183,8 @@ void update_and_draw(orbiter* _orbiter) {
 }
 
 void update_and_draw(planet* _planet) {
-	_planet->update(timer.t);
 	draw(_planet->planet_visual, scene);
+	display_islands(_planet->island_visuals, scene, user.picking);
 }
 
 
