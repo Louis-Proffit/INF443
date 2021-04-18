@@ -18,7 +18,7 @@ public:
 	static GLuint defaultShader;
 
 	float waterLevel = 1.0f;
-	float depthMultiplier = 6.0f;
+	float depthMultiplier = 1.0f;
 	float waterBlendMultiplier = 60.0f;
 	vcl::vec3 waterColorDeep = vcl::vec3(0.1f, 0.1f, 0.1f);
 	vcl::vec3 waterColorSurface = vcl::vec3(0.3f, 0.5f, 1.0f);

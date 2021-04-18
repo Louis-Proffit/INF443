@@ -66,15 +66,28 @@ mesh createFromHeightData(const std::vector<std::vector<float>> &heightData, con
     {
         for (unsigned int kv = 0; kv < columns; ++kv)
         {
+            vec3 p;
             const float u = ku / (rows - 1.0f);
             const float v = kv / (columns - 1.0f);
             float const x = 20 * (u - 0.5f);
             float const y = 20 * columns / rows * (v - 0.5f);
-            vec3 const p = vec3(x, y, heightData[ku][kv]);
+            if ((ku > 0) && (ku < rows - 1) && (kv > 0) && (kv < columns - 1))
+            {
+                p = vec3(x, y,
+                         (heightData[ku][kv] + heightData[ku - 1][kv - 1] + heightData[ku - 1][kv] + heightData[ku - 1][kv + 1] +
+                          heightData[ku][kv - 1] + heightData[ku][kv + 1] + heightData[ku + 1][kv - 1] + heightData[ku + 1][kv] +
+                          heightData[ku + 1][kv + 1]) /
+                             9);
+                //p = vec3(x, y, heightData[ku][kv]);
+            }
+            else
+            {
+                p = vec3(x, y, heightData[ku][kv]);
+            }
 
             // Store vertex coordinates
             terrain.position[kv + columns * ku] = p;
-            terrain.uv[kv + columns * ku] = {v, 1 - u};
+            terrain.uv[kv + columns * ku] = {x, y};
         }
     }
 
