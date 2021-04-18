@@ -29,8 +29,16 @@ HillAlgorithmParameters params = HillAlgorithmParameters(100, 100, 40, 0, 5.0f, 
 std::vector<std::vector<float>> gen = generateRandomHeightData(params);
 
 HillAlgorithmParameters params2 = HillAlgorithmParameters();
+<<<<<<< HEAD
 /*std::vector<std::vector<float>> genfile = generateFileHeightData("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/textures/heightmap_5.png", params2);*/
 std::vector<std::vector<float>> genfile = generateFileHeightData("../assets/textures/heightmap_5.png", params2);
+=======
+std::vector<std::vector<float>> genfile = generateFileHeightData("../assets/textures/heightmap_5.png", params2);
+
+GLuint texture_rock = 0;
+GLuint texture_snow = 0;
+GLuint shader_heightmap = 0;
+>>>>>>> refs/remotes/origin/main
 //================================================
 //			Variables Declaration
 //=================================================
@@ -66,13 +74,14 @@ mesh_drawable billboard_grass;
 perlin_noise_parameters parameters;
 mesh_drawable tree_real;
 
+int const width = 1280, height = 1024;
+
 std::vector<float> rot = generate_rotations(N);
 
 int main(int, char *argv[])
 {
 	std::cout << "Run " << argv[0] << std::endl;
 
-	int const width = 2048, height = 1780;
 	GLFWwindow *window = create_window(width, height);
 	window_size_callback(window, width, height);
 	std::cout << opengl_info_display() << std::endl;
@@ -94,7 +103,7 @@ int main(int, char *argv[])
 		scene.light = scene.camera.position();
 		user.fps_record.update();
 
-		waterPostProc.startRenderToFrameBuffer();
+		//waterPostProc.startRenderToFrameBuffer();
 
 		glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
@@ -102,7 +111,7 @@ int main(int, char *argv[])
 
 		display_scene();
 
-		waterPostProc.stopRenderToFrameBuffer();
+		//waterPostProc.stopRenderToFrameBuffer();
 		imgui_create_frame();
 		if (user.fps_record.event)
 		{
@@ -116,7 +125,7 @@ int main(int, char *argv[])
 		if (user.gui.display_frame)
 			draw(user.global_frame, scene);
 
-		waterPostProc.renderColorbuffer(scene.camera, scene.projection);
+		//waterPostProc.renderColorbuffer(scene.camera, scene.projection);
 		display_interface();
 		//display_scene();
 		//display_frame();
@@ -151,6 +160,8 @@ void initialize_data()
 	curve_drawable::default_shader = shader_uniform_color;
 	segments_drawable::default_shader = shader_uniform_color;
 
+	shader_heightmap = opengl_create_shader_program(openShader("heightmap_vert"), openShader("heightmap_frag"));
+
 	// TEST NOUVEAUX SHADERS
 	GLuint const shader_post_processing = opengl_create_shader_program(openShader("post_processing_vertex"), openShader("post_processing_fragment"));
 
@@ -158,7 +169,7 @@ void initialize_data()
 	PostProcessing::initialiseRenderQuad();
 
 	GLuint postProcShader = opengl_create_shader_program(openShader("planet_post_vertex"), openShader("planet_post_fragment"));
-	waterPostProc = PostProcessing(postProcShader, 2048, 1780);
+	waterPostProc = PostProcessing(postProcShader, width, height);
 
 	//================================================
 	//				Initialize camera
@@ -175,7 +186,12 @@ void initialize_data()
 
 	terrain = createFromHeightData(genfile, params2);
 	std::cout << params2.rows << std::endl;
-	terrain_visual = mesh_drawable(terrain);
+	terrain_visual = mesh_drawable(terrain, shader_heightmap);
+	terrain_visual.texture = opengl_texture_to_gpu(image_load_png("../assets/textures/texture_grass.png"), GL_REPEAT /**GL_TEXTURE_WRAP_S*/, GL_REPEAT /**GL_TEXTURE_WRAP_T*/);
+
+	texture_rock = opengl_texture_to_gpu(image_load_png("../assets/textures/rock2.png"), GL_REPEAT /**GL_TEXTURE_WRAP_S*/, GL_REPEAT /**GL_TEXTURE_WRAP_T*/);
+	texture_snow = opengl_texture_to_gpu(image_load_png("../assets/textures/snow.png"), GL_REPEAT /**GL_TEXTURE_WRAP_S*/, GL_REPEAT /**GL_TEXTURE_WRAP_T*/);
+
 	//update_terrain(terrain, terrain_visual, parameters);
 	/*image_raw const sol = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/textures/texture_heightmap_4.png");
 	GLuint const texture_ter_id = opengl_texture_to_gpu(sol, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
@@ -202,7 +218,10 @@ void initialize_data()
 
 	billboard_grass = mesh_drawable(mesh_primitive_quadrangle({-1, 0, 0}, {1, 0, 0}, {1, 0, 2}, {-1, 0, 2}));
 	billboard_grass.transform.scale = 0.3f;
+<<<<<<< HEAD
 	/*billboard_grass.texture = opengl_texture_to_gpu(image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/textures/grass_texture.png"));*/
+=======
+>>>>>>> refs/remotes/origin/main
 	billboard_grass.texture = opengl_texture_to_gpu(image_load_png("../assets/textures/grass_texture.png"));
 }
 
@@ -212,6 +231,19 @@ void display_scene()
 	//				Draw terrain
 	//=================================================
 
+	glUseProgram(shader_heightmap);
+	glActiveTexture(GL_TEXTURE1);
+	opengl_check;
+	glBindTexture(GL_TEXTURE_2D, texture_rock);
+	opengl_check;
+	opengl_uniform(shader_heightmap, "image_texture_rock", 1);
+	opengl_check;
+	glActiveTexture(GL_TEXTURE2);
+	opengl_check;
+	glBindTexture(GL_TEXTURE_2D, texture_snow);
+	opengl_check;
+	opengl_uniform(shader_heightmap, "image_texture_snow", 2);
+	opengl_check;
 	draw(terrain_visual, scene);
 	//draw_wireframe(terrain_visual, scene);
 
@@ -219,7 +251,7 @@ void display_scene()
 	//				Draw SkyBox
 	//=================================================
 
-	//cube.draw_skybox(scene);
+	cube.draw_skybox(scene);
 
 	//================================================
 	//				Draw tree
@@ -376,6 +408,19 @@ std::string openShader(std::string const &shader_name)
 	if (shader_name == "planet_post_fragment")
 	{
 #include "../assets/planet_post/planet.frag.glsl"
+<<<<<<< HEAD
+=======
+		return s;
+	}
+	if (shader_name == "heightmap_frag")
+	{
+#include "../assets/heightmap/heightmap.frag.glsl"
+		return s;
+	}
+	if (shader_name == "heightmap_vert")
+	{
+#include "../assets/heightmap/heightmap.vert.glsl"
+>>>>>>> refs/remotes/origin/main
 		return s;
 	}
 
