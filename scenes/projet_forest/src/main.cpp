@@ -11,12 +11,16 @@
 #include "terrain/heightmap.hpp"
 #include "SkyBox/skybox.hpp"
 
+#include "preprocess/post_processing.hpp"
+
 using namespace vcl;
 
 scene_environment scene;
 user_interaction_parameters user;
 
 skybox cube;
+
+PostProcessing waterPostProc;
 
 buffer<vec3> key_positions;
 buffer<float> key_times;
@@ -48,6 +52,8 @@ void display_scene();
 std::vector<float> generate_rotations(int N);
 void create_grass(int nbQuad, int ku, int kv);
 
+std::string openShader(std::string const &shader_name);
+
 //================================================
 //				Mesh Declaration
 //=================================================
@@ -65,7 +71,7 @@ int main(int, char *argv[])
 {
 	std::cout << "Run " << argv[0] << std::endl;
 
-	int const width = 1280, height = 1024;
+	int const width = 2048, height = 1780;
 	GLFWwindow *window = create_window(width, height);
 	window_size_callback(window, width, height);
 	std::cout << opengl_info_display() << std::endl;
@@ -87,9 +93,15 @@ int main(int, char *argv[])
 		scene.light = scene.camera.position();
 		user.fps_record.update();
 
+		waterPostProc.startRenderToFrameBuffer();
+
 		glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glClear(GL_DEPTH_BUFFER_BIT);
+
+		display_scene();
+
+		waterPostProc.stopRenderToFrameBuffer();
 		imgui_create_frame();
 		if (user.fps_record.event)
 		{
@@ -103,8 +115,9 @@ int main(int, char *argv[])
 		if (user.gui.display_frame)
 			draw(user.global_frame, scene);
 
+		waterPostProc.renderColorbuffer(scene.camera, scene.projection);
 		display_interface();
-		display_scene();
+		//display_scene();
 		//display_frame();
 
 		ImGui::End();
@@ -116,6 +129,8 @@ int main(int, char *argv[])
 	imgui_cleanup();
 	glfwDestroyWindow(window);
 	glfwTerminate();
+
+	PostProcessing::deleteRenderQuad();
 
 	return 0;
 }
@@ -134,6 +149,15 @@ void initialize_data()
 	mesh_drawable::default_texture = texture_white;
 	curve_drawable::default_shader = shader_uniform_color;
 	segments_drawable::default_shader = shader_uniform_color;
+
+	// TEST NOUVEAUX SHADERS
+	GLuint const shader_post_processing = opengl_create_shader_program(openShader("post_processing_vertex"), openShader("post_processing_fragment"));
+
+	PostProcessing::defaultShader = shader_post_processing;
+	PostProcessing::initialiseRenderQuad();
+
+	GLuint postProcShader = opengl_create_shader_program(openShader("planet_post_vertex"), openShader("planet_post_fragment"));
+	waterPostProc = PostProcessing(postProcShader, 2048, 1780);
 
 	//================================================
 	//				Initialize camera
@@ -158,7 +182,11 @@ void initialize_data()
 	//terrain = mesh_primitive_grid();
 	//terrain_visual = mesh_drawable(terrain);
 
+	//================================================
+	//				SkyBox Declaration
+	//=================================================
 	cube.init_skybox();
+
 	//================================================
 	//				Tree Declaration
 	//=================================================
@@ -182,8 +210,12 @@ void display_scene()
 	//				Draw terrain
 	//=================================================
 
-	//draw(terrain_visual, scene);
+	draw(terrain_visual, scene);
 	//draw_wireframe(terrain_visual, scene);
+
+	//================================================
+	//				Draw SkyBox
+	//=================================================
 
 	//cube.draw_skybox(scene);
 
@@ -320,4 +352,31 @@ void create_grass(int nbQuad, int ku, int kv)
 		billboard_grass.transform.rotate = rotation();
 		draw(billboard_grass, scene);
 	}
+}
+
+std::string openShader(std::string const &shader_name)
+{
+	if (shader_name == "post_processing_vertex")
+	{
+#include "/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/post_processing/post_processing.vert.glsl"
+		return s;
+	}
+	if (shader_name == "post_processing_fragment")
+	{
+#include "/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/post_processing/post_processing.frag.glsl"
+		return s;
+	}
+	if (shader_name == "planet_post_vertex")
+	{
+#include "/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/planet_post/planet.vert.glsl"
+		return s;
+	}
+	if (shader_name == "planet_post_fragment")
+	{
+#include "/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/planet_post/planet.frag.glsl"
+		return s;
+	}
+
+	error_vcl("Shader not found");
+	return "Error";
 }
