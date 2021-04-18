@@ -205,14 +205,23 @@
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\simplexnoise\simplexnoise1234.cpp">
       <Filter>third_party\src\simplexnoise</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_forest\src\SkyBox\skybox.cpp">
+      <Filter>src\SkyBox</Filter>
+    </ClCompile>
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_forest\src\animation\interpolation.cpp">
       <Filter>src\animation</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_forest\src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_forest\src\preprocess\post_processing.cpp">
+      <Filter>src\preprocess</Filter>
+    </ClCompile>
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_forest\src\scene_helper.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_forest\src\terrain\heightmap.cpp">
+      <Filter>src\terrain</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_forest\src\terrain\terrain.cpp">
       <Filter>src\terrain</Filter>
@@ -1350,11 +1359,20 @@
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\simplexnoise\simplexnoise1234.hpp">
       <Filter>third_party\src\simplexnoise</Filter>
     </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_forest\src\SkyBox\skybox.hpp">
+      <Filter>src\SkyBox</Filter>
+    </ClInclude>
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_forest\src\animation\interpolation.hpp">
       <Filter>src\animation</Filter>
     </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_forest\src\preprocess\post_processing.hpp">
+      <Filter>src\preprocess</Filter>
+    </ClInclude>
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_forest\src\scene_helper.hpp">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_forest\src\terrain\heightmap.hpp">
+      <Filter>src\terrain</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_forest\src\terrain\terrain.hpp">
       <Filter>src\terrain</Filter>
@@ -1376,8 +1394,14 @@
     <Filter Include="src">
       <UniqueIdentifier>{78101D36-8C72-3F44-B57B-7B30EC3FB4FF}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\SkyBox">
+      <UniqueIdentifier>{94015254-7B4A-3744-A48E-89F07C90BB46}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\animation">
       <UniqueIdentifier>{44CAB55B-116B-3881-A218-F277AF936E80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\preprocess">
+      <UniqueIdentifier>{8E1A9B8A-66D3-3C9F-8BF0-A71941A8E38D}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\terrain">
       <UniqueIdentifier>{D97417D3-FFAF-3BA3-A956-983FA50D9F3F}</UniqueIdentifier>

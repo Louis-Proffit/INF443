@@ -29,7 +29,8 @@ HillAlgorithmParameters params = HillAlgorithmParameters(100, 100, 40, 0, 5.0f, 
 std::vector<std::vector<float>> gen = generateRandomHeightData(params);
 
 HillAlgorithmParameters params2 = HillAlgorithmParameters();
-std::vector<std::vector<float>> genfile = generateFileHeightData("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/textures/heightmap_5.png", params2);
+/*std::vector<std::vector<float>> genfile = generateFileHeightData("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/textures/heightmap_5.png", params2);*/
+std::vector<std::vector<float>> genfile = generateFileHeightData("../assets/textures/heightmap_5.png", params2);
 //================================================
 //			Variables Declaration
 //=================================================
@@ -185,7 +186,7 @@ void initialize_data()
 	//================================================
 	//				SkyBox Declaration
 	//=================================================
-	cube.init_skybox();
+	/*cube.init_skybox();*/
 
 	//================================================
 	//				Tree Declaration
@@ -201,7 +202,8 @@ void initialize_data()
 
 	billboard_grass = mesh_drawable(mesh_primitive_quadrangle({-1, 0, 0}, {1, 0, 0}, {1, 0, 2}, {-1, 0, 2}));
 	billboard_grass.transform.scale = 0.3f;
-	billboard_grass.texture = opengl_texture_to_gpu(image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/textures/grass_texture.png"));
+	/*billboard_grass.texture = opengl_texture_to_gpu(image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/textures/grass_texture.png"));*/
+	billboard_grass.texture = opengl_texture_to_gpu(image_load_png("../assets/textures/grass_texture.png"));
 }
 
 void display_scene()
@@ -358,22 +360,22 @@ std::string openShader(std::string const &shader_name)
 {
 	if (shader_name == "post_processing_vertex")
 	{
-#include "/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/post_processing/post_processing.vert.glsl"
+#include "../assets/post_processing/post_processing.vert.glsl"
 		return s;
 	}
 	if (shader_name == "post_processing_fragment")
 	{
-#include "/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/post_processing/post_processing.frag.glsl"
+#include "../assets/post_processing/post_processing.frag.glsl"
 		return s;
 	}
 	if (shader_name == "planet_post_vertex")
 	{
-#include "/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/planet_post/planet.vert.glsl"
+#include "../assets/planet_post/planet.vert.glsl"
 		return s;
 	}
 	if (shader_name == "planet_post_fragment")
 	{
-#include "/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/planet_post/planet.frag.glsl"
+#include "../assets/planet_post/planet.frag.glsl"
 		return s;
 	}
 

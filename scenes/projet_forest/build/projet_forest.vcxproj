@@ -59,7 +59,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_forest\build</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_forest\build\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">projet_forest.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">projet_forest</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
@@ -769,13 +769,19 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\lodepng\lodepng.h" />
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\simplexnoise\simplexnoise1234.cpp" />
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\simplexnoise\simplexnoise1234.hpp" />
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_forest\src\SkyBox\skybox.cpp" />
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_forest\src\SkyBox\skybox.hpp" />
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_forest\src\animation\interpolation.cpp">
       <ObjectFileName>$(IntDir)/src/animation/interpolation.cpp.obj</ObjectFileName>
     </ClCompile>
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_forest\src\animation\interpolation.hpp" />
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_forest\src\main.cpp" />
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_forest\src\preprocess\post_processing.cpp" />
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_forest\src\preprocess\post_processing.hpp" />
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_forest\src\scene_helper.cpp" />
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_forest\src\scene_helper.hpp" />
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_forest\src\terrain\heightmap.cpp" />
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_forest\src\terrain\heightmap.hpp" />
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_forest\src\terrain\terrain.cpp" />
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_forest\src\terrain\terrain.hpp" />
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_forest\src\tree_Lsystem\LSystem.cpp" />

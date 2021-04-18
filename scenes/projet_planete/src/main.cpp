@@ -18,6 +18,8 @@ void display_interface();
 
 user_interaction_parameters user;
 scene_environment scene;
+camera_around_center camera_third_person;
+camera_around_center camera_first_person;
 timer_interval timer;
 
 planet* earth;
@@ -48,13 +50,18 @@ int main(int, char* argv[])
 	glEnable(GL_DEPTH_TEST);
 	while (!glfwWindowShouldClose(window))
 	{
-		scene.light = scene.camera.position();
+		if (user.gui.camera_around_center) scene.camera = &camera_third_person;
+		else scene.camera = &camera_first_person;
+
+		if (user.gui.camera_around_center) scene.light = scene.camera->position();
+
 		user.fps_record.update();
 		
 		glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glClear(GL_DEPTH_BUFFER_BIT);
 		imgui_create_frame();
+
 		if(user.fps_record.event) {
 			std::string const title = "VCL Display - "+str(user.fps_record.fps)+" fps";
 			glfwSetWindowTitle(window, title.c_str());
@@ -96,8 +103,12 @@ void initialize_data()
 	/* Paramétrisation du user*/
 	user.global_frame = mesh_drawable(mesh_primitive_frame());
 	user.gui.display_frame = false;
-	scene.camera.distance_to_center = 2.5f;
-	scene.camera.look_at({4,3,2}, {0,0,0}, {0,0,1});
+	camera_third_person.distance_to_center = 2.5f;
+	camera_third_person.look_at({ 4,3,2 }, { 0,0,0 }, { 0,0,1 });
+	camera_first_person.distance_to_center = planet_radius + character_height;
+	camera_first_person.look_at({ 4,3,2 }, { 0,0,0 }, { 5,5,5 });
+
+	scene.camera = &camera_third_person;
 
 	/* Création du timer */
 	timer.t_min = 0;
@@ -120,15 +131,15 @@ void display_scene()
 
 	update_and_draw(earth);
 
-	for (int i = 0; i < orbiters.size(); i++) {
+	for (int i = 0; i < orbiters.size(); i++)
 		update_and_draw(orbiters[i]);
-	}
 }
 
 
 void display_interface()
 {
 	ImGui::Checkbox("Frame", &user.gui.display_frame);
+	ImGui::Checkbox("Camera around center", &user.gui.camera_around_center);
 }
 
 
@@ -147,16 +158,31 @@ void mouse_move_callback(GLFWwindow* window, double xpos, double ypos)
 	glfw_state state = glfw_current_state(window);
 
 	auto& camera = scene.camera;
-	if(!user.cursor_on_gui){
+
+	if (user.cursor_on_gui) {
+		user.mouse_prev = p1;
+		return;
+	}
+
+	if(user.gui.camera_around_center){
 		if(state.mouse_click_left && !state.key_ctrl)
-			scene.camera.manipulator_rotate_trackball(p0, p1);
+			camera_third_person.manipulator_rotate_trackball(p0, p1);
 		if(state.mouse_click_left && state.key_ctrl)
-			camera.manipulator_translate_in_plane(p1-p0);
+			camera_third_person.manipulator_translate_in_plane(p1-p0);
 		if(state.mouse_click_right)
-			camera.manipulator_scale_distance_to_center( (p1-p0).y );
+			camera_third_person.manipulator_scale_distance_to_center( (p1-p0).y );
+	}
+	else {
+		if (state.mouse_click_left && !state.key_ctrl)
+			camera_first_person.manipulator_rotate_trackball(p0, p1);
+		if (state.mouse_click_left && state.key_ctrl)
+			camera_first_person.manipulator_translate_in_plane(p1 - p0);
+		if (state.mouse_click_right)
+			camera_first_person.manipulator_scale_distance_to_center((p1 - p0).y);
 	}
 
 	user.mouse_prev = p1;
+
 }
 
 void update_and_draw(orbiter* _orbiter) {

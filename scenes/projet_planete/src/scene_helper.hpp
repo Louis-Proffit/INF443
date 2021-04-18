@@ -4,7 +4,7 @@
 
 struct scene_environment
 {
-	vcl::camera_around_center camera;
+	vcl::camera_base *camera;
 	vcl::mat4 projection;
 	vcl::mat4 projection_inverse;
 	vcl::vec3 light;
@@ -12,6 +12,7 @@ struct scene_environment
 
 struct gui_parameters {
 	bool display_frame = false;
+	bool camera_around_center = true;
 	bool display_polygon = true;
 	bool display_keyposition = true;
 	bool display_trajectory = true;
