@@ -214,6 +214,9 @@
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\skybox.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -1348,6 +1351,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\skybox.hpp">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.hpp">

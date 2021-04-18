@@ -4,6 +4,7 @@
 #include "scene_helper.hpp"
 #include "orbiters.hpp"
 #include "sphere.hpp"
+#include "skybox.hpp"
 
 using namespace vcl;
 
@@ -23,6 +24,7 @@ camera_around_center camera_first_person;
 timer_interval timer;
 
 planet* earth;
+skybox _skybox;
 
 int number_of_planes = 0;
 int number_of_satelites = 0;
@@ -118,6 +120,9 @@ void initialize_data()
     /* Création de la planète */
 	earth = new planet();
 
+	/* Initialisation de l'arrière plan*/
+	_skybox.init_skybox(vec3(0, 0, 0), 10, "space");
+
 	/* Initialisation des orbiters */
 	for (int i = 0 ; i < number_of_planes ; i++) orbiters.push_back(new orbiter(orbiter_type::PLANE));
 	for (int i = 0 ; i < number_of_satelites; i++) orbiters.push_back(new orbiter(orbiter_type::SATELITE));
@@ -133,6 +138,8 @@ void display_scene()
 
 	for (int i = 0; i < orbiters.size(); i++)
 		update_and_draw(orbiters[i]);
+
+	_skybox.draw_skybox(scene);
 }
 
 
