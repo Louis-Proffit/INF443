@@ -12,11 +12,13 @@ public:
     mesh face_droite;
     mesh face_devant;
     mesh face_derriere;
+    mesh face_dessous;
     mesh_drawable dface_haut;
     mesh_drawable dface_gauche;
     mesh_drawable dface_droite;
     mesh_drawable dface_devant;
     mesh_drawable dface_derriere;
+    mesh_drawable dface_dessous;
 
     vec3 center = vec3(0, 0, 0);
     int radius = 1;
@@ -26,6 +28,15 @@ public:
     void init_skybox(vec3 const &_center = vec3(0, 0, 0), int const &_radius = 50, std::string const &text = "sundown");
 
     //fonction à appeler dans draw;
-
-    void draw_skybox();
+    template <typename SCENE>
+    void draw_skybox(SCENE const &scene)
+    {
+        if (ground)
+            draw(dface_dessous, scene);
+        draw(dface_devant, scene);
+        draw(dface_derriere, scene);
+        draw(dface_droite, scene);
+        draw(dface_gauche, scene);
+        draw(dface_haut, scene);
+    }
 };

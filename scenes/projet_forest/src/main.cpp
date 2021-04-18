@@ -182,14 +182,10 @@ void display_scene()
 	//				Draw terrain
 	//=================================================
 
-	draw(terrain_visual, scene);
+	//draw(terrain_visual, scene);
 	//draw_wireframe(terrain_visual, scene);
 
-	draw(cube.dface_devant, scene);
-	draw(cube.dface_derriere, scene);
-	draw(cube.dface_droite, scene);
-	draw(cube.dface_gauche, scene);
-	draw(cube.dface_haut, scene);
+	//cube.draw_skybox(scene);
 
 	//================================================
 	//				Draw tree

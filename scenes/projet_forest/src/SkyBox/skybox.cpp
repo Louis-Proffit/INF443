@@ -16,6 +16,7 @@ void skybox::init_skybox(vec3 const &_center, int const &_radius, std::string co
     image_raw droite;
     image_raw devant;
     image_raw derriere;
+    image_raw dessous;
     if (text == "desert")
     {
         haut = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/desert/top.png");
@@ -24,22 +25,53 @@ void skybox::init_skybox(vec3 const &_center, int const &_radius, std::string co
         devant = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/desert/front.png");
         derriere = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/desert/back.png");
     }
+    else if (text == "sundown")
+    {
+        haut = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/sundown/top.png");
+        gauche = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/sundown/left.png");
+        droite = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/sundown/right.png");
+        devant = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/sundown/front.png");
+        derriere = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/sundown/back.png");
+        dessous = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/sundown/bottom.png");
+        this->ground = true;
+    }
+    else if (text == "space")
+    {
+        haut = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/space/top.png");
+        gauche = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/space/left.png");
+        droite = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/space/right.png");
+        devant = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/space/front.png");
+        derriere = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/space/back.png");
+        dessous = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/space/bottom.png");
+        this->ground = true;
+    }
+
+    else if (text == "neige")
+    {
+        haut = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/neige/top.png");
+        gauche = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/neige/left.png");
+        droite = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/neige/right.png");
+        devant = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/neige/front.png");
+        derriere = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/neige/back.png");
+        dessous = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/neige/bottom.png");
+        this->ground = true;
+    }
+    else if (text == "fleuve")
+    {
+        haut = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/fleuve/top.png");
+        gauche = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/fleuve/left.png");
+        droite = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/fleuve/right.png");
+        devant = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/fleuve/front.png");
+        derriere = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/fleuve/back.png");
+        dessous = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/fleuve/bottom.png");
+        this->ground = true;
+    }
+
     else
     {
-        if (text == "sundown")
-        {
-            haut = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/sundown/top.png");
-            gauche = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/sundown/left.png");
-            droite = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/sundown/right.png");
-            devant = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/sundown/front.png");
-            derriere = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/sundown/back.png");
-        }
-
-        else
-        {
-            std::cout << "la texture n'existe pas" << std::endl;
-        }
+        std::cout << "la texture n'existe pas" << std::endl;
     }
+
     // front face;
     face_devant = mesh_primitive_grid(vec3(-radius, -radius, radius), vec3(-radius, -radius, -radius), vec3(-radius, radius, -radius), vec3(-radius, radius, radius), 2, 2);
     dface_devant = mesh_drawable(face_devant);
@@ -71,13 +103,10 @@ void skybox::init_skybox(vec3 const &_center, int const &_radius, std::string co
     dface_haut.shading.phong = {1, 0, 0, 0};
 
     if (this->ground)
-    { //
-        face_derriere = mesh_primitive_grid(vec3(radius, -radius, radius), vec3(radius, -radius, -radius), vec3(radius, radius, -radius), vec3(radius, radius, radius), 2, 2);
-        dface_derriere = mesh_drawable(face_derriere);
-        dface_derriere.texture = opengl_texture_to_gpu(derriere, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
+    { // sol
+        face_dessous = mesh_primitive_grid(vec3(radius, -radius, -radius), vec3(-radius, -radius, -radius), vec3(-radius, radius, -radius), vec3(radius, radius, -radius), 2, 2);
+        dface_dessous = mesh_drawable(face_dessous);
+        dface_dessous.texture = opengl_texture_to_gpu(dessous, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
+        dface_dessous.shading.phong = {1, 0, 0, 0};
     }
-}
-
-void skybox::draw_skybox()
-{
 }
