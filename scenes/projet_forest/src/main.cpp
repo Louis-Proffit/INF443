@@ -29,6 +29,8 @@ HillAlgorithmParameters params = HillAlgorithmParameters(100, 100, 40, 0, 5.0f, 
 std::vector<std::vector<float>> gen = generateRandomHeightData(params);
 
 HillAlgorithmParameters params2 = HillAlgorithmParameters();
+/*std::vector<std::vector<float>> genfile = generateFileHeightData("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/textures/heightmap_5.png", params2);*/
+
 std::vector<std::vector<float>> genfile = generateFileHeightData("../assets/textures/heightmap_5.png", params2);
 
 GLuint texture_rock = 0;
@@ -213,6 +215,7 @@ void initialize_data()
 
 	billboard_grass = mesh_drawable(mesh_primitive_quadrangle({-1, 0, 0}, {1, 0, 0}, {1, 0, 2}, {-1, 0, 2}));
 	billboard_grass.transform.scale = 0.3f;
+	/*billboard_grass.texture = opengl_texture_to_gpu(image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/textures/grass_texture.png"));*/
 	billboard_grass.texture = opengl_texture_to_gpu(image_load_png("../assets/textures/grass_texture.png"));
 }
 
@@ -248,7 +251,7 @@ void display_scene()
 	//				Draw tree
 	//=================================================
 
-	/*draw(tree_real, scene);*/
+	//draw(tree_real, scene);
 
 	//================================================
 	//				Draw Billboards
