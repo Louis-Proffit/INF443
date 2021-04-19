@@ -9,6 +9,7 @@ using namespace vcl;
 vec3 get_point_on_sphere(vec3 position);
 mesh create_isocaedre();
 mesh create_sphere();
+mesh get_island_mesh(vec3 island_center);
 
 
 planet::planet() {
@@ -17,9 +18,9 @@ planet::planet() {
     planet_mesh = create_sphere();
     planet_mesh.fill_empty_field();
     planet_visual = mesh_drawable(mesh_primitive_sphere(sphere_radius));
-    image_raw sea_texture = image_load_png("assets/sea_texture.png");
+    /*image_raw sea_texture = image_load_png("assets/sea_texture.png");
     GLuint const sea_texture_id = opengl_texture_to_gpu(sea_texture, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
-    planet_visual.texture = sea_texture_id;
+    planet_visual.texture = sea_texture_id;*/
 
     planet_visual.shading.color = color_sea_low;
     planet_visual.shading.phong = { 0.6 , 0.3, 0, 1 };
@@ -30,7 +31,6 @@ planet::planet() {
 
 void planet::set_islands() 
 {
-    mesh_drawable island_visual = mesh_drawable(mesh_primitive_cylinder(island_radius, { 0, 0, 0 }, { 0, 0, island_relief_coefficient }, 10, 20, true));
 
     int number_of_islands = 10;
 
@@ -54,12 +54,13 @@ void planet::set_islands()
         islands_centers[i] = new_center;
     }
 
+    mesh_drawable island_visual; 
 
     image_raw desert_texture = image_load_png("assets/desert_texture.png");
     GLuint const desert_texture_id = opengl_texture_to_gpu(desert_texture, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
-    island_visual.texture = desert_texture_id;
 
     for (int i = 0; i < number_of_islands; i++) {
+        island_visual = mesh_drawable(get_island_mesh(islands_centers[i]));
         island_visual.transform.rotate = rotation_between_vector(vec3(0, 0, 1), islands_centers[i]);
         island_visuals.push_back(island_visual);
     }
@@ -190,8 +191,68 @@ mesh create_isocaedre()
     return planet_mesh;
 }
 
-vec3 get_point_on_sphere(vec3 position) {
+vec3 get_point_on_sphere(vec3 position) 
+{
     float size = norm(position);
     return position / size * sphere_radius;
+}
+
+mesh get_island_mesh(vec3 island_center) 
+{
+    /*int N = 100;
+    float new_center_proportion = 0.7f;
+    vec3 new_center = vec3(0, 0, new_center_proportion * sphere_radius);
+    float surface_radius = 0.99 * sqrt(pow(island_radius, 2) + pow(sqrt(pow(sphere_radius, 2) - pow(island_radius, 2)) - new_center.z, 2));
+    mesh surface;
+
+    surface.position.resize((N + 1) * (N + 1));
+    surface.connectivity.resize(2 * N * N);
+
+    vec3 xyz;
+    for (int i = 0; i <= N; i++) {
+        for (int j = 0; j <= N; j++) {
+            xyz = vec3((float(i) / N - 0.5) * 2 * island_radius, (float(j) / N - 0.5) * 2 * island_radius, sphere_radius);
+            xyz.z = new_center.z + sqrt(pow(surface_radius, 2) - pow(norm(xyz.xy()), 2)) + 0.1 * noise_perlin(island_center.xy() + xyz.xy(), 16, 0.6f, 2) * (island_radius - norm(xyz.xy()));
+            surface.position[(N + 1) * i + j] = xyz;
+        }
+    }
+
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            surface.connectivity[2 * (i * N + j)] = uint3((N + 1) * i + j, (N + 1) * i + j + 1, (N + 1) * (i + 1) + j);
+            surface.connectivity[2 * (i * N + j) + 1] = uint3((N + 1) * (i + 1) + j, (N + 1) * i + j + 1, (N + 1) * (i + 1) + (j + 1));
+        }
+    }
+
+    surface.fill_empty_field();*/
+
+
+    int n = 3 + rand_interval() * 10;
+    float rand_proportion = 2 * island_radius * 3.14f / n * 0.4f;
+
+    mesh surface;
+
+    surface.position.resize(2 * n + 1);
+    surface.connectivity.resize(3 * n);
+
+    for (int i = 0; i < n; i++) {
+        surface.position[i] = vec3(island_radius * cos(2 * pi * float(i) / n) + rand_proportion * rand_interval(), island_radius * sin(2 * pi * float(i) / n) + rand_proportion  * rand_interval(), sphere_radius);
+        surface.position[i + n] = vec3(1.3 * island_radius * cos(2 * pi * float(i) / n), 1.3 * island_radius * sin(2 * pi * float(i) / n), sphere_radius / 2);
+    }
+    surface.position[2 * n] = vec3(0, 0, sphere_radius);
+
+    for (int i = 0; i < n - 1; i++) {
+        surface.connectivity[i] = uint3(i + 1, i, 2 * n);
+        surface.connectivity[i + n] = uint3(i, i + 1, n + i + 1);
+        surface.connectivity[i + 2 * n] = uint3(i, n + i + 1, n + i);
+    }
+    surface.connectivity[n - 1] = uint3(0, n - 1, 2 * n);
+    surface.connectivity[2 * n - 1] = uint3(n - 1, 0, n);
+    surface.connectivity[3 * n - 1] = uint3(n - 1, n, 2 * n - 1);
+
+    surface.fill_empty_field();
+
+
+    return surface;
 }
 

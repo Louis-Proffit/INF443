@@ -1,12 +1,4 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(504,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(505,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
-  main.cpp
   orbiters.cpp
-  scene_helper.cpp
-  sphere.cpp
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.cpp(25,53): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.cpp(97,27): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.cpp(124,27): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.cpp(73): warning C4715: 'get_default_color': not all control paths return a value
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.cpp(76): warning C4715: 'get_terrain_color': not all control paths return a value
   projet_planete.vcxproj -> C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\projet_planete.exe

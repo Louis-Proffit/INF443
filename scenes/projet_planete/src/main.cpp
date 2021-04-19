@@ -26,6 +26,7 @@ skybox _skybox;
 
 int number_of_planes = 0;
 int number_of_satelites = 0;
+int number_of_boats = 5;
 std::vector<orbiter*> orbiters;
 
 int main(int, char* argv[])
@@ -117,6 +118,7 @@ void initialize_data()
 	/* Initialisation des orbiters */
 	for (int i = 0 ; i < number_of_planes ; i++) orbiters.push_back(new orbiter(orbiter_type::PLANE));
 	for (int i = 0 ; i < number_of_satelites; i++) orbiters.push_back(new orbiter(orbiter_type::SATELITE));
+	for (int i = 0; i < number_of_boats; i++) orbiters.push_back(new orbiter(orbiter_type::BOAT));
 }
 
 

@@ -5,7 +5,8 @@
 
 enum class orbiter_type{
 	PLANE,
-	SATELITE
+	SATELITE,
+	BOAT
 };
 
 struct orbiter

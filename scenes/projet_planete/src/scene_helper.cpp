@@ -9,7 +9,7 @@ void display_islands(buffer<mesh_drawable>& islands, scene_environment const& sc
 		if (picking.active && picking.index == i)
 			islands[i].shading.color = vec3(1, 1, 0);
 		else
-			islands[i].shading.color = vec3(1, 1, 1); //get_default_color(i);
+			islands[i].shading.color = get_default_color(i);
 		draw(islands[i], scene);
 	}
 }
@@ -65,9 +65,9 @@ void picking_position(picking_structure& picking, buffer<vec3>& islands_centers,
 }
 
 vcl::vec3 get_default_color(int index) {
-	if (index == 0) return color_city_low;
-	if (index == 1) return color_desert_low;
-	if (index == 2) return color_field_low;
-	if (index == 3) return color_forest_low;
-	if (index == 4) return color_mountain_low;
+	if (index % 5 == 0) return color_city_low;
+	if (index % 5 == 1) return color_desert_low;
+	if (index % 5 == 2) return color_field_low;
+	if (index % 5 == 3) return color_forest_low;
+	if (index % 5 == 4) return color_mountain_low;
 }

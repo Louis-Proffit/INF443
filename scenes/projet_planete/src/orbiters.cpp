@@ -4,6 +4,7 @@
 using namespace vcl;
 
 hierarchy_mesh_drawable get_plane_mesh_drawable(vec3 rotation_axis, float rotation_angle);
+hierarchy_mesh_drawable get_boat_mesh_drawable(vec3 rotation_axis, float rotation_angle);
 hierarchy_mesh_drawable get_satelite_mesh_drawable(vec3 rotation_axis, float rotation_angle);
 
 hierarchy_mesh_drawable get_plane_mesh_drawable(vec3 rotation_axis, float rotation_angle)
@@ -87,6 +88,28 @@ hierarchy_mesh_drawable get_satelite_mesh_drawable(vec3 rotation_axis, float rot
 	return satelite_visual;
 }
 
+hierarchy_mesh_drawable get_boat_mesh_drawable(vec3 rotation_axis, float rotation_angle)
+{
+
+	hierarchy_mesh_drawable boat_visual;
+
+	mesh_drawable center = mesh_drawable();
+	mesh_drawable rotated_center = mesh_drawable();
+	mesh_drawable body = mesh_drawable(mesh_load_file_obj("assets/objects/boat.obj"));
+
+	body.shading.color = color_sea_high;
+
+	boat_visual.add(center, "center");
+	boat_visual.add(rotated_center, "root", "center");
+	boat_visual.add(body, "body", "root", vec3(0, 0, boat_altitude));
+
+	boat_visual["body"].transform.scale = boat_scale;
+	boat_visual["center"].transform.rotate = rotation(rotation_axis, rotation_angle);
+	boat_visual.update_local_to_global_coordinates();
+
+	return boat_visual;
+}
+
 orbiter::orbiter(orbiter_type _orbiter_type)
 {
 	rotation_axis = normalize(2 * vec3(rand_interval(), rand_interval(), rand_interval()) - vec3(1, 1, 1));
@@ -102,6 +125,11 @@ orbiter::orbiter(orbiter_type _orbiter_type)
 		trajectory_visual = trajectory_drawable(50);
 		orbiter_visual = get_satelite_mesh_drawable(rotation_axis, rotation_angle);
 		rotation_speed = satelite_rotation_speed;
+		break;
+	case orbiter_type::BOAT:
+		trajectory_visual = trajectory_drawable(1);
+		orbiter_visual = get_boat_mesh_drawable(rotation_axis, rotation_angle);
+		rotation_speed = boat_rotation_speed;
 		break;
 	}
 }

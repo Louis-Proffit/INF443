@@ -38,6 +38,11 @@ const float satelite_panel_width = 3.0f;
 const float satelite_scale = 0.01f;
 const float satelite_rotation_speed = 0.0001f;
 
+// boat graphics
+const float boat_altitude = 1.01f;
+const float boat_scale = 0.0003f;
+const float boat_rotation_speed = 0.0001f;
+
 // Planet graphics
 const int sphere_division_steps = 5;
 const float sphere_radius = 1.0f;
