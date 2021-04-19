@@ -29,7 +29,9 @@ void WaterFrameBuffers::bindFrameBuffer(GLuint frameBuffer, int width, int heigh
 
 GLuint WaterFrameBuffers::createFrameBuffer()
 {
-    GLuint frameBuffer = glGenFramebuffers();
+    GLuint frameBuffer = 0;
+    glGenFramebuffers(1, &frameBuffer);
+
     //generate name for frame buffer
     glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
     //create the framebuffer
@@ -40,10 +42,11 @@ GLuint WaterFrameBuffers::createFrameBuffer()
 
 GLuint WaterFrameBuffers::createTextureAttachment(int width, int height)
 {
-    GLuint texture = glGenTextures();
+    GLuint texture = 0;
+    glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height,
-                 0, GL_RGB, GL_UNSIGNED_BYTE, (ByteBuffer)null);
+                 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
@@ -53,10 +56,11 @@ GLuint WaterFrameBuffers::createTextureAttachment(int width, int height)
 
 GLuint createDepthTextureAttachment(int width, int height)
 {
-    GLuint texture = glGenTextures();
+    GLuint texture = 0;
+    glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, width, height,
-                 0, GL_DEPTH_COMPONENT, GL_FLOAT, (ByteBuffer)null);
+                 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT,
@@ -66,7 +70,8 @@ GLuint createDepthTextureAttachment(int width, int height)
 
 GLuint createDepthBufferAttachment(int width, int height)
 {
-    GLuint depthBuffer = glGenRenderbuffers();
+    GLuint depthBuffer = 0;
+    glGenRenderbuffers(1, &depthBuffer);
     glBindRenderbuffer(GL_RENDERBUFFER, depthBuffer);
     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, width,
                           height);

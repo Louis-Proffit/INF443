@@ -105,20 +105,23 @@ int main(int, char *argv[])
 	user.fps_record.start();
 	glEnable(GL_DEPTH_TEST);
 
+	// Water rendering
+	WaterFrameBuffers fbos;
+	fbos.initWaterFrameBuffers();
+
 	while (!glfwWindowShouldClose(window))
 	{
 		scene.light = scene.camera.position();
 		user.fps_record.update();
 
-		//waterPostProc.startRenderToFrameBuffer();
-
 		glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glClear(GL_DEPTH_BUFFER_BIT);
 
+		//fbos -> bindReflectionFrameBuffer();
+
 		display_scene();
 
-		//waterPostProc.stopRenderToFrameBuffer();
 		imgui_create_frame();
 		if (user.fps_record.event)
 		{
@@ -126,22 +129,24 @@ int main(int, char *argv[])
 			glfwSetWindowTitle(window, title.c_str());
 		}
 
-		ImGui::Begin("GUI", NULL, ImGuiWindowFlags_AlwaysAutoResize);
+		/*ImGui::Begin("GUI", NULL, ImGuiWindowFlags_AlwaysAutoResize);
 		user.cursor_on_gui = ImGui::IsAnyWindowFocused();
 
 		if (user.gui.display_frame)
 			draw(user.global_frame, scene);
 
-		//waterPostProc.renderColorbuffer(scene.camera, scene.projection);
 		display_interface();
 		//display_scene();
 		//display_frame();
 
-		ImGui::End();
+		ImGui::End();*/
 		imgui_render_frame(window);
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
+
+	// Water rendering
+	fbos.cleanUp();
 
 	imgui_cleanup();
 	glfwDestroyWindow(window);
@@ -259,7 +264,7 @@ void display_scene()
 	draw(terrain_visual, scene);
 	//draw_wireframe(terrain_visual, scene);
 
-	draw(waterd, scene);
+	//draw(waterd, scene);
 	//draw_wireframe(waterd, scene);
 	//================================================
 	//				Draw SkyBox
