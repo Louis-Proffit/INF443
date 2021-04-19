@@ -13,6 +13,9 @@
 
 #include "preprocess/post_processing.hpp"
 
+#include "water/water.hpp"
+#include "water/waterfbuffer.hpp"
+
 using namespace vcl;
 
 scene_environment scene;
@@ -22,6 +25,8 @@ skybox cube;
 
 PostProcessing waterPostProc;
 
+WaterFrameBuffers wato;
+
 buffer<vec3> key_positions;
 buffer<float> key_times;
 timer_interval timer;
@@ -29,13 +34,15 @@ HillAlgorithmParameters params = HillAlgorithmParameters(100, 100, 40, 0, 5.0f, 
 std::vector<std::vector<float>> gen = generateRandomHeightData(params);
 
 HillAlgorithmParameters params2 = HillAlgorithmParameters();
-/*std::vector<std::vector<float>> genfile = generateFileHeightData("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/textures/heightmap_5.png", params2);*/
+std::vector<std::vector<float>> genfile = generateFileHeightData("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/textures/heightmap_7.png", params2);
 
-std::vector<std::vector<float>> genfile = generateFileHeightData("../assets/textures/heightmap_5.png", params2);
+//std::vector<std::vector<float>> genfile = generateFileHeightData("../assets/textures/heightmap_5.png", params2);
 
 GLuint texture_rock = 0;
 GLuint texture_snow = 0;
 GLuint shader_heightmap = 0;
+GLuint shader_water;
+
 //================================================
 //			Variables Declaration
 //=================================================
@@ -70,6 +77,9 @@ mesh_drawable terrain_visual;
 mesh_drawable billboard_grass;
 perlin_noise_parameters parameters;
 mesh_drawable tree_real;
+
+mesh_drawable waterd;
+Water wat;
 
 int const width = 1280, height = 1024;
 
@@ -159,6 +169,8 @@ void initialize_data()
 
 	shader_heightmap = opengl_create_shader_program(openShader("heightmap_vert"), openShader("heightmap_frag"));
 
+	shader_water = opengl_create_shader_program(openShader("water_vert"), openShader("water_frag"));
+
 	// TEST NOUVEAUX SHADERS
 	GLuint const shader_post_processing = opengl_create_shader_program(openShader("post_processing_vertex"), openShader("post_processing_fragment"));
 
@@ -202,6 +214,12 @@ void initialize_data()
 	cube.init_skybox();
 
 	//================================================
+	//				Water Declaration
+	//=================================================
+	wat.init_water();
+	waterd = mesh_drawable(wat.grid, shader_water);
+
+	//================================================
 	//				Tree Declaration
 	//=================================================
 
@@ -241,11 +259,13 @@ void display_scene()
 	draw(terrain_visual, scene);
 	//draw_wireframe(terrain_visual, scene);
 
+	draw(waterd, scene);
+	//draw_wireframe(waterd, scene);
 	//================================================
 	//				Draw SkyBox
 	//=================================================
 
-	cube.draw_skybox(scene);
+	//cube.draw_skybox(scene);
 
 	//================================================
 	//				Draw tree
@@ -412,6 +432,16 @@ std::string openShader(std::string const &shader_name)
 	if (shader_name == "heightmap_vert")
 	{
 #include "../assets/heightmap/heightmap.vert.glsl"
+		return s;
+	}
+	if (shader_name == "water_vert")
+	{
+#include "../assets/water/water.vert.glsl"
+		return s;
+	}
+	if (shader_name == "water_frag")
+	{
+#include "../assets/water/water.frag.glsl"
 		return s;
 	}
 

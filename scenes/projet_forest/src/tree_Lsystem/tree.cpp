@@ -143,12 +143,12 @@ mesh init_tree()
 	klm->m_system.AddAxiom('F', "FF");
 	//tree = klm->GenerateModel("R", 7, "Tree2", vec3(0, 0, 0), .01f);*/
 
-    std::cout << "Generating Tree3..." << std::endl;
+    /*std::cout << "Generating Tree3..." << std::endl;
 	klm->m_system.ClearAxioms();
 	klm->rotationOffset = 0.3f;
 	klm->translationOffset = 0.4f;
 	klm->m_system.AddAxiom('R', "FFF[FXYZ[FxRxF[zFRzXFC]R[ZFZyFC]]yFRyF]");
-	tree = klm->GenerateModel("+TT+R", 5, "Brin", vec3(0, 0, 0), .1f);
+	tree = klm->GenerateModel("+TT+R", 5, "Brin", vec3(0, 0, 0), .1f);*/
 
     /*std::cout << "Generating Tree4..." << std::endl;
 	klm->m_system.ClearAxioms();
@@ -176,16 +176,17 @@ mesh init_tree()
 	klm->rotationOffset = 3.14f / 4;
 	klm->m_system.AddAxiom('H', "F[[[[[[xH]XH]zyxH]ZYXH]yXH]YxH]tFH");
 	klm->m_system.AddAxiom('F', "FF");
-	tree = klm->GenerateModel("H", 4, "Test", vec3(0, 0, 0), .01f);*/ // Attention ne pas faire avec plus que 4 sinon ca fait bug l'affichage
-
-	/*std::cout << "Generating RealTree2" << std::endl;
-	klm->m_system.ClearAxioms();
-	klm->translationOffset = .1f;
-	klm->scaleOffset = 1.5f;
-	klm->rotationOffset = 3.14f / 4;
-	klm->m_system.AddAxiom('H', "F[[[[xH]XH]yH]YH]tFH");
-	klm->m_system.AddAxiom('F', "FF");
 	tree = klm->GenerateModel("H", 4, "Test", vec3(0, 0, 0), .01f);*/
+    // Attention ne pas faire avec plus que 4 sinon ca fait bug l'affichage
+
+    std::cout << "Generating RealTree2" << std::endl;
+    klm->m_system.ClearAxioms();
+    klm->translationOffset = .1f;
+    klm->scaleOffset = 1.5f;
+    klm->rotationOffset = 3.14f / 4;
+    klm->m_system.AddAxiom('H', "F[[[[xH]XH]yH]YH]tFH");
+    klm->m_system.AddAxiom('F', "FF");
+    tree = klm->GenerateModel("H", 4, "Test", vec3(0, 0, 0), .01f);
 
     return tree;
 }
