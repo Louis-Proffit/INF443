@@ -21,8 +21,6 @@ user_interaction_parameters user;
 
 skybox cube;
 
-WaterFrameBuffers wato;
-
 buffer<vec3> key_positions;
 buffer<float> key_times;
 timer_interval timer;
@@ -32,7 +30,7 @@ std::vector<std::vector<float>> gen = generateRandomHeightData(params);
 HillAlgorithmParameters params2 = HillAlgorithmParameters();
 /*std::vector<std::vector<float>> genfile = generateFileHeightData("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/textures/heightmap_7.png", params2);*/
 
-std::vector<std::vector<float>> genfile = generateFileHeightData("../assets/textures/heightmap_7.png", params2);
+std::vector<std::vector<float>> genfile = generateFileHeightData("../assets/textures/heightmap_5.png", params2);
 
 GLuint texture_rock = 0;
 GLuint texture_snow = 0;
@@ -102,8 +100,8 @@ int main(int, char *argv[])
 	glEnable(GL_DEPTH_TEST);
 
 	// Water rendering
-	WaterFrameBuffers fbos;
-	fbos.initWaterFrameBuffers();
+	//WaterFrameBuffers fbos;
+	//fbos.initWaterFrameBuffers();
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -114,12 +112,12 @@ int main(int, char *argv[])
 		glClear(GL_COLOR_BUFFER_BIT);
 		glClear(GL_DEPTH_BUFFER_BIT);
 
-		fbos.bindReflectionFrameBuffer();
+		/*fbos.bindReflectionFrameBuffer();
 		display_scene();
-		fbos.unbindCurrentFrameBuffer();
+		fbos.unbindCurrentFrameBuffer();*/
 
 		display_scene();
-		draw(waterd, scene);
+		//draw(waterd, scene);
 
 		imgui_create_frame();
 
@@ -137,8 +135,8 @@ int main(int, char *argv[])
 
 		if (user.gui.display_frame)
 			draw(user.global_frame, scene);
-		GLuint texture = fbos.getReflectionTexture();
-		ImGui::Image((void *)texture, ImVec2(320, 280));
+		//GLuint texture = fbos.getReflectionTexture();
+		//ImGui::Image((void *)texture, ImVec2(320, 280));
 		display_interface();
 		ImGui::End();
 		imgui_render_frame(window);
@@ -147,7 +145,7 @@ int main(int, char *argv[])
 	}
 
 	// Water rendering
-	fbos.cleanUp();
+	//fbos.cleanUp();
 
 	imgui_cleanup();
 	glfwDestroyWindow(window);
@@ -212,7 +210,7 @@ void initialize_data()
 	//				Water Declaration
 	//=================================================
 	wat.init_water();
-	waterd = mesh_drawable(wat.grid);//, shader_water);
+	waterd = mesh_drawable(wat.grid); //, shader_water);
 
 	//================================================
 	//				Tree Declaration
@@ -266,7 +264,7 @@ void display_scene()
 	//				Draw tree
 	//=================================================
 
-	//draw(tree_real, scene);
+	draw(tree_real, scene);
 
 	//================================================
 	//				Draw Billboards

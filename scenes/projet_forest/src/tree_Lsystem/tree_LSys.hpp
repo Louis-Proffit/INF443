@@ -17,5 +17,7 @@ public:
     float translationOffset = 1.0f;
     mesh GenerateModel(std::string system, int iterations, std::string modelName, vec3 startingPoint, float radius);
 
+    mesh GenerateLeave(vec3 startingPoint, vec3 translationVector, float height);
+
 private:
 };
