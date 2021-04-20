@@ -9,7 +9,9 @@ using namespace vcl;
 vec3 get_point_on_sphere(vec3 position);
 mesh create_isocaedre();
 mesh create_sphere();
-mesh get_island_mesh(vec3 island_center);
+mesh_drawable get_island_topping(terrain_type _terrain_type);
+vec3 get_terrain_color(terrain_type _terrain_type);
+mesh get_island_mesh(terrain_type _terrain_type);
 
 
 planet::planet() {
@@ -18,10 +20,6 @@ planet::planet() {
     planet_mesh = create_sphere();
     planet_mesh.fill_empty_field();
     planet_visual = mesh_drawable(mesh_primitive_sphere(sphere_radius));
-    /*image_raw sea_texture = image_load_png("assets/sea_texture.png");
-    GLuint const sea_texture_id = opengl_texture_to_gpu(sea_texture, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
-    planet_visual.texture = sea_texture_id;*/
-
     planet_visual.shading.color = color_sea_low;
     planet_visual.shading.phong = { 0.6 , 0.3, 0, 1 };
 
@@ -35,6 +33,7 @@ void planet::set_islands()
     int number_of_islands = 10;
 
     islands_centers.resize(number_of_islands);
+    terrain_types.resize(number_of_islands);
 
     vec3 new_center;
     bool changed = true;
@@ -45,34 +44,101 @@ void planet::set_islands()
             changed = false;
             new_center = get_point_on_sphere(2 * vec3(rand_interval(), rand_interval(), rand_interval()) - vec3(1, 1, 1));
             for (int j = 0; j < i; j++) {
-                if (norm(new_center - islands_centers[j]) < 2 * island_radius) {
-                    changed = true;
-                    break;
-                }
+                if (norm(new_center - islands_centers[j]) < 3 * island_radius) changed = true;
             }
         }
         islands_centers[i] = new_center;
+        terrain_types[i] = static_cast<terrain_type>(int(rand_interval() * 5));
     }
-
-    mesh_drawable island_visual; 
-
-    image_raw desert_texture = image_load_png("assets/desert_texture.png");
-    GLuint const desert_texture_id = opengl_texture_to_gpu(desert_texture, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
 
     for (int i = 0; i < number_of_islands; i++) {
-        island_visual = mesh_drawable(get_island_mesh(islands_centers[i]));
-        island_visual.transform.rotate = rotation_between_vector(vec3(0, 0, 1), islands_centers[i]);
+        for (int j = 0; j < number_of_islands; j++) {
+            if (i == j) continue;
+            assert_vcl(norm(islands_centers[i] - islands_centers[j]) >= 2 * island_radius, "islands too close");
+        }
+    }
+
+    for (int i = 0; i < number_of_islands; i++) {
+        hierarchy_mesh_drawable island_visual;
+        mesh_drawable island = mesh_drawable(get_island_mesh(terrain_types[i]));
+        island.shading.color = get_terrain_color(terrain_types[i]);
+        island.shading.phong.specular = 0.0f;
+        island_visual.add(island, "island");
+        island_visual.add(get_island_topping(terrain_types[i]), "topping", "island");
+        island_visual["island"].transform.rotate = rotation_between_vector(vec3(0, 0, 1), normalize(islands_centers[i]));
+        island_visual["island"].element.shading.color = get_terrain_color(terrain_types[i]);
+
+        island_visual.update_local_to_global_coordinates();
+
         island_visuals.push_back(island_visual);
     }
+
+    std::cout << "island created" << std::endl;
 }
 
-vec3 get_terrain_color(terrain_type _terrain_type) {
+vec3 get_terrain_color(terrain_type _terrain_type) 
+{
     switch (_terrain_type) {
     case terrain_type::CITY : return color_city_low;
     case terrain_type::DESERT: return color_desert_low;
     case terrain_type::FIELD : return color_field_low;
     case terrain_type::FOREST : return color_forest_low;
     case terrain_type::MOUNTAIN : return color_mountain_low;
+    default : return vec3(1, 1, 1);
+    }
+}
+
+mesh_drawable get_island_topping(terrain_type _terrain_type) 
+{
+    mesh_drawable visual;
+    image_raw texture;
+    GLuint texture_id;
+    switch (_terrain_type) {
+    case terrain_type::CITY :
+        visual = mesh_drawable(mesh_load_file_obj("assets/objects/car/car.obj"));
+        visual.transform.scale = 0.0005;
+        visual.transform.translate = vec3(0, 0, sphere_radius);
+        visual.transform.rotate = rotation(vec3(1, 0, 0), pi / 2);
+        /*texture = image_load_png("assets/objects/car/car_texture.png");
+        texture_id = opengl_texture_to_gpu(texture, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
+        visual.texture = texture_id;*/
+        return visual;
+    case terrain_type::DESERT:
+        visual = mesh_drawable(mesh_load_file_obj("assets/objects/palm/palm.obj"));
+        visual.transform.scale = 0.05;
+        visual.transform.translate = vec3(0, 0, sphere_radius);
+        visual.transform.rotate = rotation(vec3(1, 0, 0), pi / 2);
+        /*texture = image_load_png("assets/objects/car/car_texture.obj");
+        texture_id = opengl_texture_to_gpu(texture, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
+        visual.texture = texture_id;*/
+        return visual;
+    case terrain_type::FIELD:
+        visual = mesh_drawable(mesh_load_file_obj("assets/objects/carrot/carrot.obj"));
+        visual.transform.scale = 0.1;
+        visual.transform.translate = vec3(0, 0, sphere_radius);
+        visual.transform.rotate = rotation(vec3(1, 0, 0), pi / 2);
+        /*texture = image_load_png("assets/objects/car/car_texture.obj");
+        texture_id = opengl_texture_to_gpu(texture, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
+        visual.texture = texture_id;*/
+        return visual;
+    case terrain_type::FOREST:
+        visual = mesh_drawable(mesh_load_file_obj("assets/objects/oak/oak.obj"));
+        visual.transform.scale = 0.05;
+        visual.transform.translate = vec3(0, 0, sphere_radius);
+        visual.transform.rotate = rotation(vec3(1, 0, 0), pi / 2);
+        /*texture = image_load_png("assets/objects/car/car_texture.obj");
+        texture_id = opengl_texture_to_gpu(texture, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
+        visual.texture = texture_id;*/
+        return visual;
+    case terrain_type::MOUNTAIN:
+        visual = mesh_drawable(mesh_load_file_obj("assets/objects/fir/fir.obj"));
+        visual.transform.scale = 0.05;
+        visual.transform.translate = vec3(0, 0, sphere_radius);
+        visual.transform.rotate = rotation(vec3(1, 0, 0), pi / 2);
+        /*texture = image_load_png("assets/objects/car/car_texture.obj");
+        texture_id = opengl_texture_to_gpu(texture, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
+        visual.texture = texture_id;*/
+        return visual;
     }
 }
 
@@ -197,37 +263,9 @@ vec3 get_point_on_sphere(vec3 position)
     return position / size * sphere_radius;
 }
 
-mesh get_island_mesh(vec3 island_center) 
+mesh get_island_mesh(terrain_type _terrain_type)
 {
-    /*int N = 100;
-    float new_center_proportion = 0.7f;
-    vec3 new_center = vec3(0, 0, new_center_proportion * sphere_radius);
-    float surface_radius = 0.99 * sqrt(pow(island_radius, 2) + pow(sqrt(pow(sphere_radius, 2) - pow(island_radius, 2)) - new_center.z, 2));
-    mesh surface;
-
-    surface.position.resize((N + 1) * (N + 1));
-    surface.connectivity.resize(2 * N * N);
-
-    vec3 xyz;
-    for (int i = 0; i <= N; i++) {
-        for (int j = 0; j <= N; j++) {
-            xyz = vec3((float(i) / N - 0.5) * 2 * island_radius, (float(j) / N - 0.5) * 2 * island_radius, sphere_radius);
-            xyz.z = new_center.z + sqrt(pow(surface_radius, 2) - pow(norm(xyz.xy()), 2)) + 0.1 * noise_perlin(island_center.xy() + xyz.xy(), 16, 0.6f, 2) * (island_radius - norm(xyz.xy()));
-            surface.position[(N + 1) * i + j] = xyz;
-        }
-    }
-
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            surface.connectivity[2 * (i * N + j)] = uint3((N + 1) * i + j, (N + 1) * i + j + 1, (N + 1) * (i + 1) + j);
-            surface.connectivity[2 * (i * N + j) + 1] = uint3((N + 1) * (i + 1) + j, (N + 1) * i + j + 1, (N + 1) * (i + 1) + (j + 1));
-        }
-    }
-
-    surface.fill_empty_field();*/
-
-
-    int n = 3 + rand_interval() * 10;
+    int n = 4 + rand_interval() * 10;
     float rand_proportion = 2 * island_radius * 3.14f / n * 0.4f;
 
     mesh surface;
@@ -251,8 +289,6 @@ mesh get_island_mesh(vec3 island_center)
     surface.connectivity[3 * n - 1] = uint3(n - 1, n, 2 * n - 1);
 
     surface.fill_empty_field();
-
-
     return surface;
 }
 

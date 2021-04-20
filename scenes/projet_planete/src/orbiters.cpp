@@ -95,7 +95,7 @@ hierarchy_mesh_drawable get_boat_mesh_drawable(vec3 rotation_axis, float rotatio
 
 	mesh_drawable center = mesh_drawable();
 	mesh_drawable rotated_center = mesh_drawable();
-	mesh_drawable body = mesh_drawable(mesh_load_file_obj("assets/objects/boat.obj"));
+	mesh_drawable body = mesh_drawable(mesh_load_file_obj("assets/objects/boat/boat.obj"));
 
 	body.shading.color = color_sea_high;
 

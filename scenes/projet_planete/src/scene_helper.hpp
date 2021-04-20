@@ -34,7 +34,7 @@ struct user_interaction_parameters {
 };
 
 
-void display_islands(vcl::buffer<vcl::mesh_drawable> & islands, scene_environment const& scene, picking_structure const& picking);
+void display_islands(vcl::buffer<vcl::hierarchy_mesh_drawable> & islands, scene_environment const& scene, picking_structure const& picking);
 
 void opengl_uniform(GLuint shader, scene_environment const& current_scene);
 

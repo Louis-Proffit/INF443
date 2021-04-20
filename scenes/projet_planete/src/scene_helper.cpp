@@ -2,14 +2,14 @@
 
 using namespace vcl;
 
-void display_islands(buffer<mesh_drawable>& islands, scene_environment const& scene, picking_structure const& picking)
+void display_islands(buffer<hierarchy_mesh_drawable>& islands, scene_environment const& scene, picking_structure const& picking)
 {
 	size_t const number_of_islands = islands.size();
 	for (size_t i = 0; i < number_of_islands; i++) {
 		if (picking.active && picking.index == i)
-			islands[i].shading.color = vec3(1, 1, 0);
+			islands[i]["island"].element.shading.color = vec3(1, 1, 0);
 		else
-			islands[i].shading.color = get_default_color(i);
+			islands[i]["island"].element.shading.color = get_default_color(i);
 		draw(islands[i], scene);
 	}
 }
