@@ -30,9 +30,9 @@ HillAlgorithmParameters params = HillAlgorithmParameters(100, 100, 40, 0, 5.0f, 
 std::vector<std::vector<float>> gen = generateRandomHeightData(params);
 
 HillAlgorithmParameters params2 = HillAlgorithmParameters();
-std::vector<std::vector<float>> genfile = generateFileHeightData("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/textures/heightmap_7.png", params2);
+/*std::vector<std::vector<float>> genfile = generateFileHeightData("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/textures/heightmap_7.png", params2);*/
 
-//std::vector<std::vector<float>> genfile = generateFileHeightData("../assets/textures/heightmap_5.png", params2);
+std::vector<std::vector<float>> genfile = generateFileHeightData("../assets/textures/heightmap_7.png", params2);
 
 GLuint texture_rock = 0;
 GLuint texture_snow = 0;
@@ -212,7 +212,7 @@ void initialize_data()
 	//				Water Declaration
 	//=================================================
 	wat.init_water();
-	waterd = mesh_drawable(wat.grid, shader_water);
+	waterd = mesh_drawable(wat.grid);//, shader_water);
 
 	//================================================
 	//				Tree Declaration
