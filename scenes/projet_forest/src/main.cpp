@@ -11,8 +11,6 @@
 #include "terrain/heightmap.hpp"
 #include "SkyBox/skybox.hpp"
 
-#include "preprocess/post_processing.hpp"
-
 #include "water/water.hpp"
 #include "water/waterfbuffer.hpp"
 
@@ -22,8 +20,6 @@ scene_environment scene;
 user_interaction_parameters user;
 
 skybox cube;
-
-PostProcessing waterPostProc;
 
 WaterFrameBuffers wato;
 
@@ -105,49 +101,57 @@ int main(int, char *argv[])
 	user.fps_record.start();
 	glEnable(GL_DEPTH_TEST);
 
+	// Water rendering
+	WaterFrameBuffers fbos;
+	fbos.initWaterFrameBuffers();
+
 	while (!glfwWindowShouldClose(window))
 	{
 		scene.light = scene.camera.position();
 		user.fps_record.update();
 
-		//waterPostProc.startRenderToFrameBuffer();
-
 		glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glClear(GL_DEPTH_BUFFER_BIT);
 
+		fbos.bindReflectionFrameBuffer();
 		display_scene();
+		fbos.unbindCurrentFrameBuffer();
 
-		//waterPostProc.stopRenderToFrameBuffer();
+		display_scene();
+		draw(waterd, scene);
+
 		imgui_create_frame();
+
+		// pour le nombre de fps de la page :  pas dans le rendu
 		if (user.fps_record.event)
 		{
 			std::string const title = "VCL Display - " + str(user.fps_record.fps) + " fps";
 			glfwSetWindowTitle(window, title.c_str());
 		}
 
+		// pour l'interface utilisateur en haut: pas dans le rendu
+
 		ImGui::Begin("GUI", NULL, ImGuiWindowFlags_AlwaysAutoResize);
 		user.cursor_on_gui = ImGui::IsAnyWindowFocused();
 
 		if (user.gui.display_frame)
 			draw(user.global_frame, scene);
-
-		//waterPostProc.renderColorbuffer(scene.camera, scene.projection);
+		GLuint texture = fbos.getReflectionTexture();
+		ImGui::Image((void *)texture, ImVec2(320, 280));
 		display_interface();
-		//display_scene();
-		//display_frame();
-
 		ImGui::End();
 		imgui_render_frame(window);
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
 
+	// Water rendering
+	fbos.cleanUp();
+
 	imgui_cleanup();
 	glfwDestroyWindow(window);
 	glfwTerminate();
-
-	PostProcessing::deleteRenderQuad();
 
 	return 0;
 }
@@ -170,15 +174,6 @@ void initialize_data()
 	shader_heightmap = opengl_create_shader_program(openShader("heightmap_vert"), openShader("heightmap_frag"));
 
 	shader_water = opengl_create_shader_program(openShader("water_vert"), openShader("water_frag"));
-
-	// TEST NOUVEAUX SHADERS
-	GLuint const shader_post_processing = opengl_create_shader_program(openShader("post_processing_vertex"), openShader("post_processing_fragment"));
-
-	PostProcessing::defaultShader = shader_post_processing;
-	PostProcessing::initialiseRenderQuad();
-
-	GLuint postProcShader = opengl_create_shader_program(openShader("planet_post_vertex"), openShader("planet_post_fragment"));
-	waterPostProc = PostProcessing(postProcShader, width, height);
 
 	//================================================
 	//				Initialize camera
@@ -259,7 +254,7 @@ void display_scene()
 	draw(terrain_visual, scene);
 	//draw_wireframe(terrain_visual, scene);
 
-	draw(waterd, scene);
+	//draw(waterd, scene);
 	//draw_wireframe(waterd, scene);
 	//================================================
 	//				Draw SkyBox

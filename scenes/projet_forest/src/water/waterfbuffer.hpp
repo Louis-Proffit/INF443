@@ -14,48 +14,53 @@ public:
     int REFRACTION_WIDTH = 1280;
     int REFRACTION_HEIGHT = 720;
 
-    GLuint reflectionFrameBuffer;
+    GLuint reflectionFrameBuffer = 0;
 
-    GLuint reflectionTexture;
+    GLuint reflectionTexture = 0;
 
-    GLuint reflectionDepthBuffer;
+    GLuint reflectionDepthBuffer = 0;
 
-    GLuint refractionFrameBuffer;
+    GLuint refractionFrameBuffer = 0;
 
-    GLuint refractionTexture;
+    GLuint refractionTexture = 0;
 
-    GLuint refractionDepthTexture;
+    GLuint refractionDepthTexture = 0;
 
-    WaterFrameBuffers()
+    void initWaterFrameBuffers()
     { //call when loading the game
         initialiseReflectionFrameBuffer();
         initialiseRefractionFrameBuffer();
+        opengl_check;
     }
 
-    /*void cleanUp()
+    void cleanUp()
     { //call when closing the game
-        glDeleteFramebuffers(reflectionFrameBuffer);
-        glDeleteTextures(reflectionTexture);
-        glDeleteRenderbuffers(reflectionDepthBuffer);
-        glDeleteFramebuffers(refractionFrameBuffer);
-        glDeleteTextures(refractionTexture);
-        glDeleteTextures(refractionDepthTexture);
-    }*/
+        glDeleteFramebuffers(1, &reflectionFrameBuffer);
+        glDeleteTextures(1, &reflectionTexture);
+        glDeleteRenderbuffers(1, &reflectionDepthBuffer);
+        glDeleteFramebuffers(1, &refractionFrameBuffer);
+        glDeleteTextures(1, &refractionTexture);
+        glDeleteTextures(1, &refractionDepthTexture);
+        opengl_check;
+    }
 
     void bindReflectionFrameBuffer()
     { //call before rendering to this FBO
         bindFrameBuffer(reflectionFrameBuffer, REFLECTION_WIDTH, REFLECTION_HEIGHT);
+        opengl_check;
     }
 
     void bindRefractionFrameBuffer()
     { //call before rendering to this FBO
         bindFrameBuffer(refractionFrameBuffer, REFRACTION_WIDTH, REFRACTION_HEIGHT);
+        opengl_check;
     }
 
-    void unbindCurrentFrameBuffer(int width, int height)
+    void unbindCurrentFrameBuffer()
     { //call to switch to default frame buffer
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        glViewport(0, 0, width, height);
+        glViewport(0, 0, 2560, 2048);
+        opengl_check;
     }
 
     GLuint getReflectionTexture()
