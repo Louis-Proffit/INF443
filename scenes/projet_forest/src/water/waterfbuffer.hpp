@@ -14,22 +14,23 @@ public:
     int REFRACTION_WIDTH = 1280;
     int REFRACTION_HEIGHT = 720;
 
-    GLuint reflectionFrameBuffer;
+    GLuint reflectionFrameBuffer = 0;
 
-    GLuint reflectionTexture;
+    GLuint reflectionTexture = 0;
 
-    GLuint reflectionDepthBuffer;
+    GLuint reflectionDepthBuffer = 0;
 
-    GLuint refractionFrameBuffer;
+    GLuint refractionFrameBuffer = 0;
 
-    GLuint refractionTexture;
+    GLuint refractionTexture = 0;
 
-    GLuint refractionDepthTexture;
+    GLuint refractionDepthTexture = 0;
 
     void initWaterFrameBuffers()
     { //call when loading the game
         initialiseReflectionFrameBuffer();
         initialiseRefractionFrameBuffer();
+        opengl_check;
     }
 
     void cleanUp()
@@ -40,22 +41,26 @@ public:
         glDeleteFramebuffers(1, &refractionFrameBuffer);
         glDeleteTextures(1, &refractionTexture);
         glDeleteTextures(1, &refractionDepthTexture);
+        opengl_check;
     }
 
     void bindReflectionFrameBuffer()
     { //call before rendering to this FBO
         bindFrameBuffer(reflectionFrameBuffer, REFLECTION_WIDTH, REFLECTION_HEIGHT);
+        opengl_check;
     }
 
     void bindRefractionFrameBuffer()
     { //call before rendering to this FBO
         bindFrameBuffer(refractionFrameBuffer, REFRACTION_WIDTH, REFRACTION_HEIGHT);
+        opengl_check;
     }
 
     void unbindCurrentFrameBuffer()
     { //call to switch to default frame buffer
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        glViewport(0, 0, 1280, 1024);
+        glViewport(0, 0, 2560, 2048);
+        opengl_check;
     }
 
     GLuint getReflectionTexture()
