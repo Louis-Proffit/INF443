@@ -21,6 +21,8 @@ user_interaction_parameters user;
 
 skybox cube;
 
+TreeGenerator tree;
+
 buffer<vec3> key_positions;
 buffer<float> key_times;
 timer_interval timer;
@@ -66,7 +68,6 @@ std::string openShader(std::string const &shader_name);
 //=================================================
 
 mesh terrain;
-mesh tree;
 mesh_drawable terrain_visual;
 mesh_drawable billboard_grass;
 perlin_noise_parameters parameters;
@@ -216,9 +217,7 @@ void initialize_data()
 	//				Tree Declaration
 	//=================================================
 
-	tree = init_tree();
-
-	tree_real = mesh_drawable(tree);
+	tree.initTree("fougere");
 
 	//================================================
 	//			BillBoards Declaration
@@ -236,7 +235,7 @@ void display_scene()
 	//				Draw terrain
 	//=================================================
 
-	glUseProgram(shader_heightmap);
+	/*glUseProgram(shader_heightmap);
 	glActiveTexture(GL_TEXTURE1);
 	opengl_check;
 	glBindTexture(GL_TEXTURE_2D, texture_rock);
@@ -249,7 +248,7 @@ void display_scene()
 	opengl_check;
 	opengl_uniform(shader_heightmap, "image_texture_snow", 2);
 	opengl_check;
-	draw(terrain_visual, scene);
+	draw(terrain_visual, scene);*/
 	//draw_wireframe(terrain_visual, scene);
 
 	//draw(waterd, scene);
@@ -264,7 +263,7 @@ void display_scene()
 	//				Draw tree
 	//=================================================
 
-	draw(tree_real, scene);
+	tree.draw_tree(scene);
 
 	//================================================
 	//				Draw Billboards
