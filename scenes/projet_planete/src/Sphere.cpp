@@ -1,5 +1,4 @@
 #include "sphere.hpp"
-#include "scene_helper.hpp"
 
 #include <list>
 #include <set>
@@ -36,16 +35,17 @@ void planet::set_islands()
     terrain_types.resize(number_of_islands);
 
     vec3 new_center;
-    bool changed = true;
+    bool correct;
     for (int i = 0; i < number_of_islands; i++){
-        new_center = get_point_on_sphere(2 * vec3(rand_interval(), rand_interval(), rand_interval()) - vec3(1, 1, 1));
-        changed = true;
-        while (changed) {
-            changed = false;
+        /*new_center = get_point_on_sphere(2 * vec3(rand_interval(), rand_interval(), rand_interval()) - vec3(1, 1, 1));*/
+        while (true) {
+            correct = true;
             new_center = get_point_on_sphere(2 * vec3(rand_interval(), rand_interval(), rand_interval()) - vec3(1, 1, 1));
             for (int j = 0; j < i; j++) {
-                if (norm(new_center - islands_centers[j]) < 2 * island_radius) changed = true;
+                if (norm(new_center - islands_centers[j]) < 2 * island_radius) correct = false;
             }
+            if (correct) break;
+            std::cout << "loop" << std::endl;
         }
         islands_centers[i] = new_center;
         terrain_types[i] = static_cast<terrain_type>(int(rand_interval() * 5));
@@ -61,22 +61,22 @@ void planet::set_islands()
     for (int i = 0; i < number_of_islands; i++) {
         hierarchy_mesh_drawable island_visual;
         mesh_drawable island = mesh_drawable(get_island_mesh(terrain_types[i]));
-        island.shading.color = get_terrain_color(terrain_types[i]);
+        island.shading.color = get_terrain_color(i);
         island.shading.phong.specular = 0.0f;
         island_visual.add(island, "island");
         island_visual.add(get_island_topping(terrain_types[i]), "topping", "island");
         island_visual["island"].transform.rotate = rotation_between_vector(vec3(0, 0, 1), normalize(islands_centers[i]));
-        island_visual["island"].element.shading.color = get_terrain_color(terrain_types[i]);
+        island_visual["island"].element.shading.color = get_terrain_color(i);
 
         island_visual.update_local_to_global_coordinates();
 
-        island_visuals.push_back(island_visual);
+        islands_visuals.push_back(island_visual);
     }
 }
 
-vec3 get_terrain_color(terrain_type _terrain_type) 
+vec3 planet::get_terrain_color(int i) 
 {
-    switch (_terrain_type) {
+    switch (terrain_types[i]) {
     case terrain_type::CITY : return color_city_low;
     case terrain_type::DESERT: return color_desert_low;
     case terrain_type::FIELD : return color_field_low;
@@ -92,32 +92,32 @@ mesh_drawable get_island_topping(terrain_type _terrain_type)
 
     switch (_terrain_type) {
     case terrain_type::CITY :
-        visual = mesh_drawable(mesh_load_file_obj("assets/objects/car/car.obj"));
-        visual.transform.scale = 0.05;
+        visual = mesh_drawable(mesh_load_file_obj("assets/objects/house/house.obj"));
+        visual.transform.scale = house_scale;
         visual.transform.translate = vec3(0, 0, sphere_radius);
         visual.transform.rotate = rotation(vec3(1, 0, 0), pi / 2);
         break;
     case terrain_type::DESERT:
         visual = mesh_drawable(mesh_load_file_obj("assets/objects/palm/palm.obj"));
-        visual.transform.scale = 0.02;
+        visual.transform.scale = palm_scale;
         visual.transform.translate = vec3(0, 0, sphere_radius);
         visual.transform.rotate = rotation(vec3(1, 0, 0), pi / 2);
         break;
     case terrain_type::FIELD:
         visual = mesh_drawable(mesh_load_file_obj("assets/objects/carrot/carrot.obj"));
-        visual.transform.scale = 0.02;
+        visual.transform.scale = carrot_scale;
         visual.transform.translate = vec3(0, 0, sphere_radius);
         visual.transform.rotate = rotation(vec3(1, 0, 0), pi / 2);
         break;
     case terrain_type::FOREST:
-        visual = mesh_drawable(mesh_load_file_obj("assets/objects/oak/tree.obj"));
-        visual.transform.scale = 0.02;
+        visual = mesh_drawable(mesh_load_file_obj("assets/objects/oak/oak.obj"));
+        visual.transform.scale = oak_scale;
         visual.transform.translate = vec3(0, 0, sphere_radius);
         visual.transform.rotate = rotation(vec3(1, 0, 0), pi / 2);
         break;
     case terrain_type::MOUNTAIN:
         visual = mesh_drawable(mesh_load_file_obj("assets/objects/fir/fir.obj"));
-        visual.transform.scale = 0.05;
+        visual.transform.scale = fir_scale;
         visual.transform.translate = vec3(0, 0, sphere_radius);
         visual.transform.rotate = rotation(vec3(1, 0, 0), pi / 2);
         break;

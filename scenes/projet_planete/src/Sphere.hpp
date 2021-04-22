@@ -18,9 +18,9 @@ struct planet
 	vcl::mesh planet_mesh;
 	vcl::buffer<vcl::vec3> islands_centers;
 	vcl::buffer<terrain_type> terrain_types;
-	vcl::buffer<vcl::hierarchy_mesh_drawable> island_visuals;
+	vcl::buffer<vcl::hierarchy_mesh_drawable> islands_visuals;
 	vcl::mesh_drawable planet_visual;
-	float island_radius;
+	vcl::vec3 get_terrain_color(int index);
 
 	planet();
 	void set_islands();

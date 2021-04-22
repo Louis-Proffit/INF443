@@ -2,6 +2,7 @@
 
 #include "vcl/vcl.hpp"
 #include "constants.hpp"
+#include "sphere.hpp"
 
 struct scene_environment
 {
@@ -34,10 +35,8 @@ struct user_interaction_parameters {
 };
 
 
-void display_islands(vcl::buffer<vcl::hierarchy_mesh_drawable> & islands, scene_environment const& scene, picking_structure const& picking);
+void display_islands(planet* _planet, scene_environment const& scene, picking_structure const& picking);
 
 void opengl_uniform(GLuint shader, scene_environment const& current_scene);
 
 void picking_position(picking_structure& picking, vcl::buffer<vcl::vec3>& islands_centers, vcl::glfw_state const& state, scene_environment const& scene, vcl::vec2 const& p);
-
-vcl::vec3 get_default_color(int index);

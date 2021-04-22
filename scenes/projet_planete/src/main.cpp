@@ -186,7 +186,7 @@ void update_and_draw(orbiter* _orbiter) {
 
 void update_and_draw(planet* _planet) {
 	draw(_planet->planet_visual, scene);
-	display_islands(_planet->island_visuals, scene, user.picking);
+	display_islands(_planet, scene, user.picking);
 }
 
 

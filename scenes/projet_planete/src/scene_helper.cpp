@@ -2,15 +2,15 @@
 
 using namespace vcl;
 
-void display_islands(buffer<hierarchy_mesh_drawable>& islands, scene_environment const& scene, picking_structure const& picking)
+void display_islands(planet* _planet, scene_environment const& scene, picking_structure const& picking)
 {
-	size_t const number_of_islands = islands.size();
+	size_t const number_of_islands = _planet->islands_centers.size();
 	for (size_t i = 0; i < number_of_islands; i++) {
 		if (picking.active && picking.index == i)
-			islands[i]["island"].element.shading.color = vec3(1, 1, 0);
+			_planet->islands_visuals[i]["island"].element.shading.color = vec3(1, 1, 0);
 		else
-			islands[i]["island"].element.shading.color = get_default_color(i);
-		draw(islands[i], scene);
+			_planet->islands_visuals[i]["island"].element.shading.color = _planet->get_terrain_color(i);
+		draw(_planet->islands_visuals[i], scene);
 	}
 }
 
@@ -62,12 +62,4 @@ void picking_position(picking_structure& picking, buffer<vec3>& islands_centers,
 	}
 	else
 		picking.active = false;
-}
-
-vcl::vec3 get_default_color(int index) {
-	if (index % 5 == 0) return color_city_low;
-	if (index % 5 == 1) return color_desert_low;
-	if (index % 5 == 2) return color_field_low;
-	if (index % 5 == 3) return color_forest_low;
-	if (index % 5 == 4) return color_mountain_low;
 }
