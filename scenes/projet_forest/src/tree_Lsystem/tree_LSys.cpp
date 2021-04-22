@@ -5,7 +5,7 @@
 
 using namespace vcl;
 
-mesh MeshGenerator::GenerateModel(std::string system, int iterations, std::string modelName, vec3 startingPoint, float radius)
+void TreeGenerator::GenerateModel(std::string system, int iterations, std::string modelName, vec3 startingPoint, float radius)
 {
     mesh result;
     system = m_system.ApplyAxioms(system, iterations);
@@ -42,6 +42,14 @@ mesh MeshGenerator::GenerateModel(std::string system, int iterations, std::strin
             break;
         case 'T':
             startingPoint += translationVector;
+            break;
+        case 'p':
+            std::cout << translationVector << std::endl;
+            translationVector = translationVector / scaleOffset;
+            std::cout << translationVector << std::endl;
+            break;
+        case 'P':
+            translationVector *= scaleOffset;
             break;
         case 's': //scale smaller
             radiusVector /= scaleOffset;
@@ -105,7 +113,7 @@ mesh MeshGenerator::GenerateModel(std::string system, int iterations, std::strin
                 if (norm(startingPoint - precPoint) != 0)
                 {
                     mesh cylindre;
-                    cylindre = mesh_primitive_cylinder(norm(radiusVector), precPoint, startingPoint, 10, 20, true);
+                    cylindre = mesh_primitive_cylinder(norm(radiusVector), precPoint, startingPoint, 3, 6, true);
                     cylindre.color.fill({0.345f, 0.435f, 0.176f});
                     result.push_back(cylindre);
                 }
@@ -117,18 +125,20 @@ mesh MeshGenerator::GenerateModel(std::string system, int iterations, std::strin
             precPoint = startingPoint;
             break;
         case 'H':
+            hasleaves = true;
             startingPoint += translationVector;
             pointCollections.push_back(std::make_pair(startingPoint, radiusVector));
             if (norm(startingPoint - precPoint) != 0)
             {
                 mesh cylindre;
-                cylindre = mesh_primitive_cylinder(norm(radiusVector), precPoint, startingPoint, 10, 20, true);
+                cylindre = mesh_primitive_cylinder(norm(radiusVector), precPoint, startingPoint, 3, 6, true);
                 cylindre.color.fill({0.345f, 0.435f, 0.176f});
                 result.push_back(cylindre);
             }
             //std::cout << startingPoint << std::endl;
             //std::cout << " " << std::endl;
-            feuille = mesh_primitive_sphere(0.01f, startingPoint, 40, 20);
+            //feuille = mesh_primitive_sphere(0.01f, startingPoint, 40, 20);
+            feuille = GenerateLeave(startingPoint, translationVector, 0.10f);
             feuille.color.fill({1.0f, 0, 0});
             result.push_back(feuille);
             break;
@@ -137,148 +147,123 @@ mesh MeshGenerator::GenerateModel(std::string system, int iterations, std::strin
         }
     }
 
-    /*int longueur = pointCollections.size();
-    for (int i = 0; i < longueur - 1; i++)
-    {
-        vec3 vertex_sommet;
-        vertex_sommet = pointCollections[i + 1].first;
-        vec3 radVec = pointCollections[i].second;
-        vec3 base = pointCollections[i].first;
-        //std::cout << closeOffIndeces.front() << std::endl;
-        std::cout << base << std::endl;
-    }*/
-    /*if (false) //i == closeOffIndeces.front())
-        {
-            closeOffIndeces.erase(closeOffIndeces.begin());
-            continue;
-        }
-        else
-        {
-            if (norm(vertex_sommet - base) == 0)
-            {
-                continue;
-            }
-            else
-            {
-                mesh cylindre;
-                cylindre = mesh_primitive_cylinder(norm(radVec), base, vertex_sommet, 10, 20, true);
-                cylindre.color.fill({0.345f, 0.435f, 0.176f});
-
-                result.push_back(cylindre);
-            }
-        }
-    }*/
-    /* int longueur = pointCollections.size();
-    result.position.resize(longueur * pointsPerLevel + longueur);
-    for (int i = 0; i < longueur; i++)
-    {
-        for (int n = 0; n < pointsPerLevel; n++)
-        {
-            vec3 vertex;
-            vertex = pointCollections[i].first;
-            vec3 radVec = pointCollections[i].second;
-            vec3 rotAxis = vertex;
-            if (i - 1 > 0)
-                rotAxis = rotAxis - pointCollections[i - 1].first;
-            if ((norm(vertex)) > 0)
-            {
-                if (norm(rotAxis) > 0)
-                    normalize(rotAxis);
-            }
-            else if (i + 1 < pointCollections.size())
-                rotAxis = pointCollections[i + 1].first - rotAxis;
-            else //Assume 0,1,0
-                rotAxis = vec3(0, 1, 0);
-            float theta = 2 * PI / pointsPerLevel * n;
-            radVec = radVec * cos(theta) + (cross(rotAxis, radVec)) * sin(theta) + rotAxis * (dot(rotAxis, radVec)) * (1 - cos(theta));
-            result.position[n + i * pointsPerLevel] = vertex + radVec;
-        }
-        result.position[longueur * pointsPerLevel + i] = pointCollections[i].first;
-    }
-
-    //Create the face geometry for the mesh
-    /* for (int i = 0; i < meshGeometry.size(); i++)
-    {
-        int currentSize = meshGeometry[i].size();
-        int nextRowSize = meshGeometry[(i + 1) % meshGeometry.size()].size();
-        bool closedOff = false;
-        for (int k = 0; k < currentSize; k++)
-        {
-            //Draw to the next layer of points, unless this is the first or last layer.
-            //In those situations the shape needs to close, so connect those to the center points.
-            if (i == 0)
-            {
-                m_model->AddTri(meshGeometry[i][k], meshGeometry[i][(k + 1) % currentSize], pointCollections[i].first);
-            }
-            if (i == meshGeometry.size() - 1)
-            {
-                m_model->AddTri(meshGeometry[i][k], meshGeometry[i][(k + 1) % currentSize], pointCollections[i].first);
-                continue; //There are no more points to draw up to
-            }
-            //Don't connect points to the next layer of the index is a close off point
-            if (closedOff || (closeOffIndeces.size() > 0 && i == closeOffIndeces.front()))
-            {
-                m_model->AddTri(meshGeometry[i][k], meshGeometry[i][(k + 1) % currentSize], pointCollections[i].first);
-                closedOff = true;
-                continue;
-            }
-            //Need to draw the face
-            // __
-            //|\ |
-            //|_\|
-            //Two triangles per face
-            //Draw the first triangle of the face
-            m_model->AddTri(meshGeometry[i][k], meshGeometry[i][(k + 1) % currentSize], meshGeometry[i + 1][k]);
-            m_model->AddTri(meshGeometry[i + 1][k], meshGeometry[i + 1][(k + 1) % currentSize], meshGeometry[i][(k + 1) % currentSize]);
-        }
-        if (closedOff)
-            closeOffIndeces.erase(closeOffIndeces.begin());
-    }
-    */
-    /* for (int i = 0; i < longueur; i++)
-    {
-        int currentSize = pointsPerLevel;
-        bool closedOff = false;
-        for (int k = 0; k < currentSize; k++)
-        {
-            const unsigned int idx = k + pointsPerLevel * i;
-            //Draw to the next layer of points, unless this is the first or last layer.
-            //In those situations the shape needs to close, so connect those to the center points.
-            int j = (k + 1) % currentSize;
-            if (i == 0)
-            {
-                const uint3 triangle_1 = {idx, j + pointsPerLevel * i, longueur * pointsPerLevel + i};
-                result.connectivity.push_back(triangle_1);
-            }
-            if (i == longueur - 1)
-            {
-                const uint3 triangle_1 = {idx, j + pointsPerLevel * i, longueur * pointsPerLevel + i};
-                result.connectivity.push_back(triangle_1);
-                continue; //There are no more points to draw up to
-            }
-            //Don't connect points to the next layer of the index is a close off point
-            if (closedOff || (closeOffIndeces.size() > 0 && i == closeOffIndeces.front()))
-            {
-                const uint3 triangle_1 = {idx, j + pointsPerLevel * i, longueur * pointsPerLevel + i};
-                result.connectivity.push_back(triangle_1);
-                closedOff = true;
-                continue;
-            }
-            //Need to draw the face
-            // __
-            //|\ |
-            //|_\|
-            //Two triangles per face
-            //Draw the first triangle of the face
-            const uint3 triangle_1 = {idx, j + pointsPerLevel * i, idx + pointsPerLevel};
-            const uint3 triangle_2 = {idx + pointsPerLevel, j + pointsPerLevel * (i + 1), j + pointsPerLevel * i};
-
-            result.connectivity.push_back(triangle_1);
-            result.connectivity.push_back(triangle_2);
-        }
-        if (closedOff)
-            closeOffIndeces.erase(closeOffIndeces.begin());
-    }*/
     result.fill_empty_field();
-    return result;
+    trunk = result;
+    dtrunk = mesh_drawable(trunk);
+    if (hasleaves)
+        dleaves = mesh_drawable(leaves);
+}
+
+mesh TreeGenerator::GenerateLeave(vec3 startingPoint, vec3 translationVector, float height)
+{
+    // mesh feuille1 = mesh_primitive_triangle(startingPoint, startingPoint + vec3(0.02f, 0, 0), startingPoint + vec3(0, 0, 0.04f));
+    //mesh feuille2 = mesh_primitive_triangle(startingPoint, startingPoint + vec3(0.02f, 0, 0), startingPoint + vec3(0, 0, 0.04f));
+    //mesh feuille3 = mesh_primitive_triangle(startingPoint, startingPoint + vec3(0.02f, 0, 0), startingPoint + vec3(0, 0, 0.04f));
+    int rotat = PI / 8;
+    rotation rotationX = rotation({1, 0, 0}, rotat);
+    rotation negRotationX = rotation({-1, 0, 0}, rotat);
+    rotation rotationY = rotation({0, 1, 0}, rotat);
+    rotation negRotationY = rotation({0, -1, 0}, rotat);
+    rotation rotationZ = rotation({0, 0, 1}, rotat);
+    rotation negRotationZ = rotation({0, 0, -1}, rotat);
+    mesh feuille1 = mesh_primitive_triangle(startingPoint - vec3(height / 4, 0, 0), startingPoint + vec3(height / 4, 0, 0), startingPoint + height * normalize(rotationX * negRotationY * translationVector));
+    mesh feuille2 = mesh_primitive_triangle(startingPoint - vec3(height / 4, 0, 0), startingPoint + vec3(0, height / 4, 0), startingPoint + height * normalize(rotationZ * rotationY * translationVector));
+    mesh feuille3 = mesh_primitive_triangle(startingPoint - vec3(0, height / 4, 0), startingPoint + vec3(height / 4, 0, 0), startingPoint + height * normalize(negRotationX * negRotationZ * translationVector));
+    feuille1.push_back(feuille2);
+    feuille1.push_back(feuille3);
+    return feuille1;
+}
+
+void TreeGenerator::initTree(std::string treename)
+{
+    if (treename == "Realtree_1")
+    {
+        std::cout << "Realtree_1" << std::endl;
+
+        m_system.ClearAxioms();
+        translationOffset = .1f;
+        scaleOffset = 1.5f;
+        rotationOffset = 3.14f / 4;
+        m_system.AddAxiom('H', "FF[[[[[[xH]XH]zyxH]ZYXH]yXH]YxH]H");
+        m_system.AddAxiom('F', "FF");
+        GenerateModel("H", 4, "Test", vec3(-2, -2, 0), .01f);
+    }
+
+    else if (treename == "Realtree_2")
+    {
+        std::cout << "Generating RealTree_2" << std::endl;
+        m_system.ClearAxioms();
+        translationOffset = .1f;
+        scaleOffset = 1.05f;
+        rotationOffset = 3.14f / 3;
+        m_system.AddAxiom('H', "F[[[[xH]XH]yH]YH]tFH");
+        m_system.AddAxiom('F', "FF");
+        GenerateModel("H", 4, "Test", vec3(-3, -3, 0), .01f);
+    }
+    else if (treename == "Realtree_3")
+    {
+        std::cout << "Generating RealTree3" << std::endl;
+        m_system.ClearAxioms();
+        translationOffset = .1f;
+        scaleOffset = 1.5f;
+        rotationOffset = 3.14f / 4;
+        m_system.AddAxiom('H', "F[[[[[[xH]XH]zyxH]ZYXH]yXH]YxH]tFH");
+        m_system.AddAxiom('F', "FF");
+        GenerateModel("H", 4, "Test", vec3(0, 0, 0), .01f);
+
+        // Attention ne pas faire avec plus que 4 sinon ca fait bug l'affichage
+    }
+
+    else if (treename == "brin")
+    {
+        std::cout << "Generating brin ..." << std::endl;
+        m_system.ClearAxioms();
+        rotationOffset = 0.3f;
+        translationOffset = 0.4f;
+        m_system.AddAxiom('R', "FFF[FXYZ[FxRxF[zFRzXFC]R[ZFZyFC]]yFRyF]");
+        GenerateModel("+TT+R", 5, "Brin", vec3(0, 0, 0), .1f);
+    }
+
+    else if (treename == "fougere")
+    {
+        m_system.ClearAxioms();
+        rotationOffset = 0.3926991f;
+        translationOffset = 0.1f;
+        m_system.AddAxiom('F', "F[Fx[[zFZXFZYF]X[ZFxzFyzF]][ZFzYFzXF]Y[zFyZFxZF]C+]");
+        GenerateModel("+TT+F", 3, "Fougere", vec3(0, 0, 0), 0.01f);
+    }
+
+    else if (treename == "coolTree")
+    {
+        std::cout << "Generating coolTree..." << std::endl;
+        m_system.ClearAxioms();
+        rotationOffset = 0.4485496f;
+        translationOffset = 0.1f;
+        scaleOffset = 1.0f;
+        m_system.AddAxiom('R', "F[ZxR][ZyR][ZzR][YxR][YyR][YzR][XxR][XyR][XzR][xR][yR][zR]FR");
+        m_system.AddAxiom('F', "FF");
+        GenerateModel("R", 4, "Tree2", vec3(0, 0, 0), .01f);
+    }
+    else if (treename == "wtf")
+    {
+        std::cout << "Generating wtf..." << std::endl;
+        m_system.ClearAxioms();
+        rotationOffset = 0.1f;
+        translationOffset = 0.1f;
+        scaleOffset = 1.0f;
+        m_system.AddAxiom('R', "F[[yyBBzB]XB]");
+        m_system.AddAxiom('B', "XXYYYYYYYYFRFzzFRRC");
+        GenerateModel("+TT+R", 7, "Tree4", vec3(0, 0, 0), .1f);
+    }
+
+    else if (treename == "buisson")
+    {
+        std::cout << "Generating buisson..." << std::endl;
+        m_system.ClearAxioms();
+        rotationOffset = .4f;
+        translationOffset = .2f;
+        scaleOffset = 1.0f;
+        m_system.AddAxiom('R', "YYTF[xFR]C[XFRFR]");
+        GenerateModel("+TT+R", 7, "Tree5", vec3(0, 0, 0), .02f);
+    }
 }
