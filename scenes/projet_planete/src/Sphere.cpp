@@ -44,7 +44,7 @@ void planet::set_islands()
             changed = false;
             new_center = get_point_on_sphere(2 * vec3(rand_interval(), rand_interval(), rand_interval()) - vec3(1, 1, 1));
             for (int j = 0; j < i; j++) {
-                if (norm(new_center - islands_centers[j]) < 3 * island_radius) changed = true;
+                if (norm(new_center - islands_centers[j]) < 2 * island_radius) changed = true;
             }
         }
         islands_centers[i] = new_center;
@@ -72,8 +72,6 @@ void planet::set_islands()
 
         island_visuals.push_back(island_visual);
     }
-
-    std::cout << "island created" << std::endl;
 }
 
 vec3 get_terrain_color(terrain_type _terrain_type) 
@@ -91,55 +89,45 @@ vec3 get_terrain_color(terrain_type _terrain_type)
 mesh_drawable get_island_topping(terrain_type _terrain_type) 
 {
     mesh_drawable visual;
-    image_raw texture;
-    GLuint texture_id;
+
     switch (_terrain_type) {
     case terrain_type::CITY :
         visual = mesh_drawable(mesh_load_file_obj("assets/objects/car/car.obj"));
-        visual.transform.scale = 0.0005;
+        visual.transform.scale = 0.05;
         visual.transform.translate = vec3(0, 0, sphere_radius);
         visual.transform.rotate = rotation(vec3(1, 0, 0), pi / 2);
-        /*texture = image_load_png("assets/objects/car/car_texture.png");
-        texture_id = opengl_texture_to_gpu(texture, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
-        visual.texture = texture_id;*/
-        return visual;
+        break;
     case terrain_type::DESERT:
         visual = mesh_drawable(mesh_load_file_obj("assets/objects/palm/palm.obj"));
-        visual.transform.scale = 0.05;
+        visual.transform.scale = 0.02;
         visual.transform.translate = vec3(0, 0, sphere_radius);
         visual.transform.rotate = rotation(vec3(1, 0, 0), pi / 2);
-        /*texture = image_load_png("assets/objects/car/car_texture.obj");
-        texture_id = opengl_texture_to_gpu(texture, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
-        visual.texture = texture_id;*/
-        return visual;
+        break;
     case terrain_type::FIELD:
         visual = mesh_drawable(mesh_load_file_obj("assets/objects/carrot/carrot.obj"));
-        visual.transform.scale = 0.1;
+        visual.transform.scale = 0.02;
         visual.transform.translate = vec3(0, 0, sphere_radius);
         visual.transform.rotate = rotation(vec3(1, 0, 0), pi / 2);
-        /*texture = image_load_png("assets/objects/car/car_texture.obj");
-        texture_id = opengl_texture_to_gpu(texture, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
-        visual.texture = texture_id;*/
-        return visual;
+        break;
     case terrain_type::FOREST:
-        visual = mesh_drawable(mesh_load_file_obj("assets/objects/oak/oak.obj"));
-        visual.transform.scale = 0.05;
+        visual = mesh_drawable(mesh_load_file_obj("assets/objects/oak/tree.obj"));
+        visual.transform.scale = 0.02;
         visual.transform.translate = vec3(0, 0, sphere_radius);
         visual.transform.rotate = rotation(vec3(1, 0, 0), pi / 2);
-        /*texture = image_load_png("assets/objects/car/car_texture.obj");
-        texture_id = opengl_texture_to_gpu(texture, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
-        visual.texture = texture_id;*/
-        return visual;
+        break;
     case terrain_type::MOUNTAIN:
         visual = mesh_drawable(mesh_load_file_obj("assets/objects/fir/fir.obj"));
         visual.transform.scale = 0.05;
         visual.transform.translate = vec3(0, 0, sphere_radius);
         visual.transform.rotate = rotation(vec3(1, 0, 0), pi / 2);
-        /*texture = image_load_png("assets/objects/car/car_texture.obj");
-        texture_id = opengl_texture_to_gpu(texture, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
-        visual.texture = texture_id;*/
-        return visual;
+        break;
     }
+
+    image_raw texture = image_load_png("assets/textures/lowpoly_palette.png");
+    GLuint texture_id = opengl_texture_to_gpu(texture, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
+    visual.texture = texture_id;
+
+    return visual;
 }
 
 mesh create_sphere() 
