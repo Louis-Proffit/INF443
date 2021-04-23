@@ -19,7 +19,7 @@ uniform sampler2D image_texture;
 
 uniform vec3 light = vec3(1.0, 1.0, 1.0);
 
-uniform vec3 color = vec3(1.0, 1.0, 1.0); // Unifor color of the object
+uniform vec3 color = vec3(0, 0.8, 0.8); // Unifor color of the object
 uniform float alpha = 1.0f; // alpha coefficient
 uniform float Ka = 0.4; // Ambient coefficient
 uniform float Kd = 0.8; // Diffuse coefficient
@@ -54,9 +54,11 @@ void main()
 	if(use_texture==false) {
 		color_image_texture=vec4(1.0,1.0,1.0,1.0);
 	}
-	vec3 color_object  = fragment.color * color * color_image_texture.rgb;
+	
+	vec3 distortion1 = color_image_texture.rgb*2.0-1.0;
+	vec3 color_object  = fragment.color * color*distortion1;
 	vec3 color_shading = (Ka + Kd * diffuse) * color_object + Ks * specular * vec3(1.0, 1.0, 1.0);
 	
-	FragColor = vec4(color,1.0);
+	FragColor = vec4(color_object,0.25f);
 }
 )";

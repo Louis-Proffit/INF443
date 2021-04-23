@@ -32,7 +32,7 @@ std::vector<std::vector<float>> gen = generateRandomHeightData(params);
 HillAlgorithmParameters params2 = HillAlgorithmParameters();
 /*std::vector<std::vector<float>> genfile = generateFileHeightData("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/textures/heightmap_7.png", params2);*/
 
-std::vector<std::vector<float>> genfile = generateFileHeightData("../assets/textures/heightmap_5.png", params2);
+std::vector<std::vector<float>> genfile = generateFileHeightData("../assets/textures/heightmap_7.png", params2);
 
 GLuint texture_rock = 0;
 GLuint texture_snow = 0;
@@ -109,16 +109,18 @@ int main(int, char *argv[])
 		scene.light = scene.camera.position();
 		user.fps_record.update();
 
+		fbos.bindRefractionFrameBuffer();
 		glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glClear(GL_DEPTH_BUFFER_BIT);
-
-		fbos.bindReflectionFrameBuffer();
 		display_scene();
 		fbos.unbindCurrentFrameBuffer();
 
+		glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_DEPTH_BUFFER_BIT);
 		display_scene();
-		//draw(waterd, scene);
+		draw(waterd, scene);
 
 		imgui_create_frame();
 
@@ -136,11 +138,12 @@ int main(int, char *argv[])
 
 		if (user.gui.display_frame)
 			draw(user.global_frame, scene);
-		GLuint texture = fbos.getReflectionTexture();
+		GLuint texture = fbos.getRefractionTexture();
 		ImGui::Image((void *)texture, ImVec2(320, 280));
 		display_interface();
 		ImGui::End();
 		imgui_render_frame(window);
+
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
@@ -211,7 +214,9 @@ void initialize_data()
 	//				Water Declaration
 	//=================================================
 	wat.init_water();
-	waterd = mesh_drawable(wat.grid); //, shader_water);
+	wat.grid.color.fill({0.02, 0.72, 0.8});
+	//waterd.texture = opengl_texture_to_gpu(image_load_png("../../assets/water/waterdudv.png"));  // ->> à mettre quand j'aurai reussi à appliquer la reflection et refraction texture
+	waterd = mesh_drawable(wat.grid, shader_water); //, shader_water);
 
 	//================================================
 	//				Tree Declaration
@@ -235,7 +240,7 @@ void display_scene()
 	//				Draw terrain
 	//=================================================
 
-	/*glUseProgram(shader_heightmap);
+	glUseProgram(shader_heightmap);
 	glActiveTexture(GL_TEXTURE1);
 	opengl_check;
 	glBindTexture(GL_TEXTURE_2D, texture_rock);
@@ -248,7 +253,7 @@ void display_scene()
 	opengl_check;
 	opengl_uniform(shader_heightmap, "image_texture_snow", 2);
 	opengl_check;
-	draw(terrain_visual, scene);*/
+	draw(terrain_visual, scene);
 	//draw_wireframe(terrain_visual, scene);
 
 	//draw(waterd, scene);
@@ -302,8 +307,8 @@ void display_scene()
 	//================================================
 	//					FIN
 	//=================================================
-	//glEnable(GL_BLEND);
-	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void display_interface()
