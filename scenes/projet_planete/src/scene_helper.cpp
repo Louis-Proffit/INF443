@@ -2,18 +2,6 @@
 
 using namespace vcl;
 
-void display_islands(planet* _planet, scene_environment const& scene, picking_structure const& picking)
-{
-	size_t const number_of_islands = _planet->islands_centers.size();
-	for (size_t i = 0; i < number_of_islands; i++) {
-		if (picking.active && picking.index == i)
-			_planet->islands_visuals[i]["island"].element.shading.color = vec3(1, 1, 0);
-		else
-			_planet->islands_visuals[i]["island"].element.shading.color = _planet->get_terrain_color(i);
-		draw(_planet->islands_visuals[i], scene);
-	}
-}
-
 void opengl_uniform(GLuint shader, scene_environment const& current_scene)
 {
 	opengl_uniform(shader, "projection", current_scene.projection);

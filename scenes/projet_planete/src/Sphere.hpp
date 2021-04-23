@@ -2,15 +2,14 @@
 
 #include "vcl/vcl.hpp"
 #include "constants.hpp"
+#include "scene_helper.hpp"
 
 enum class terrain_type {
-	DESERT,
 	MOUNTAIN,
-	FIELD,
+	DESERT,
 	CITY,
 	FOREST,
-	SEA,
-	EMPTY
+	FIELD
 };
 
 struct planet 
@@ -18,10 +17,10 @@ struct planet
 	vcl::mesh planet_mesh;
 	vcl::buffer<vcl::vec3> islands_centers;
 	vcl::buffer<terrain_type> terrain_types;
-	vcl::buffer<vcl::hierarchy_mesh_drawable> islands_visuals;
+	vcl::buffer<vcl::mesh_drawable> islands_visuals;
 	vcl::mesh_drawable planet_visual;
-	vcl::vec3 get_terrain_color(int index);
-
-	planet();
+	void update(perlin_noise_parameters& _paramaters);
+	void display(scene_environment const& scene, user_interaction_parameters const& user);
 	void set_islands();
+	planet();
 };

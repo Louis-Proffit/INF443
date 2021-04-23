@@ -48,13 +48,8 @@
 #define sphere_rotation_speed 0.0f
 
 // islands constants
-#define island_radius 0.2f
-#define island_relief_coefficient 1.01f
-#define carrot_scale 0.02f
-#define oak_scale 0.02f
-#define fir_scale 0.02f
-#define palm_scale 0.02f
-#define house_scale 0.017f
+#define island_radius 0.4f
+#define number_of_islands 10
 
 #define color_sea_low vec3(float(0) / 255, float(191) / 255, float(255) / 255);
 #define color_sea_high vec3(float(30) / 255, float(144) / 255, float(255) / 255);

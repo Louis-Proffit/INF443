@@ -20,13 +20,14 @@ void display_interface();
 user_interaction_parameters user;
 scene_environment scene;
 timer_interval timer;
+perlin_noise_parameters parameters{0.004, 7, 2.0, 2.0};
 
-planet* earth;
+planet* earth = 0;
 skybox _skybox;
 
 int number_of_planes = 0;
 int number_of_satelites = 0;
-int number_of_boats = 5;
+int number_of_boats = 0;
 std::vector<orbiter*> orbiters;
 
 int main(int, char* argv[])
@@ -109,7 +110,6 @@ void initialize_data()
 	timer.t_max = 10; 
 	timer.t = timer.t_min;
 
-    /* Création de la planète */
 	earth = new planet();
 
 	/* Initialisation de l'arrière plan*/
@@ -127,18 +127,27 @@ void display_scene()
 	timer.update();
 	float const time = timer.t;
 
-	update_and_draw(earth);
+	earth->display(scene, user);
+	/*_skybox.draw_skybox(scene);
 
 	for (int i = 0; i < orbiters.size(); i++)
-		update_and_draw(orbiters[i]);
+		update_and_draw(orbiters[i]);*/
 
-	_skybox.draw_skybox(scene);
 }
 
 
 void display_interface()
 {
+	bool update = false;
+
 	ImGui::Checkbox("Frame", &user.gui.display_frame);
+	ImGui::Checkbox("Wireframe", &user.draw_wireframe);
+	update |= ImGui::SliderFloat("Height", &parameters.height, -0.001, 0.001, "%3f", 3);
+	update |= ImGui::SliderInt("Octaves", &parameters.octaves, 1, 10);
+	update |= ImGui::SliderFloat("Persistency", &parameters.persistensy, 0.1, 2, "%3f", 3);
+	update |= ImGui::SliderFloat("FrequencyGain", &parameters.frequency_gain, 1, 5, "%3f", 3);
+
+	if (update) earth->update(parameters);
 }
 
 
@@ -182,11 +191,6 @@ void update_and_draw(orbiter* _orbiter) {
 	_orbiter->trajectory_visual.visual.color.x = 1.0f;
 	draw(_orbiter->orbiter_visual, scene);
 	draw(_orbiter->trajectory_visual, scene);
-}
-
-void update_and_draw(planet* _planet) {
-	draw(_planet->planet_visual, scene);
-	display_islands(_planet, scene, user.picking);
 }
 
 

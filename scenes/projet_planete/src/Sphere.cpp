@@ -8,19 +8,45 @@ using namespace vcl;
 vec3 get_point_on_sphere(vec3 position);
 mesh create_isocaedre();
 mesh create_sphere();
-mesh_drawable get_island_topping(terrain_type _terrain_type);
-vec3 get_terrain_color(terrain_type _terrain_type);
-mesh get_island_mesh(terrain_type _terrain_type);
+void curve_mesh(mesh *mesh, float radius);
 
+
+void planet::update(perlin_noise_parameters& parameters)
+{
+    float max_norm = 0;
+    float norm;
+    for (int i = 0; i < planet_mesh.position.size(); i++) {
+        planet_mesh.position[i] = get_point_on_sphere(planet_mesh.position[i]);
+        norm = (1 + parameters.height * noise_perlin(planet_mesh.position[i], parameters.octaves, parameters.persistensy, parameters.frequency_gain));
+        planet_mesh.position[i] *= norm;
+        if (norm > max_norm) max_norm = norm;
+    }
+    for (int i = 0; i < planet_mesh.position.size(); i++) planet_mesh.position[i] /= max_norm;
+    planet_visual.update_position(planet_mesh.position);
+}
+
+void planet::display(scene_environment const& scene, user_interaction_parameters const& user)
+{
+    draw(planet_visual, scene);
+    if (user.draw_wireframe) draw_wireframe(planet_visual, scene);
+    for (size_t i = 0; i < number_of_islands; i++) {
+        if (user.picking.active && user.picking.index == i)
+            islands_visuals[i].shading.color = vec3(1, 0, 0);
+        else
+            islands_visuals[i].shading.color = vec3(1, 1, 1);
+        draw(islands_visuals[i], scene);
+    }
+ 
+}
 
 planet::planet() {
 
     /* Configuration du visuel */
     planet_mesh = create_sphere();
     planet_mesh.fill_empty_field();
-    planet_visual = mesh_drawable(mesh_primitive_sphere(sphere_radius));
+    planet_visual = mesh_drawable(planet_mesh);
     planet_visual.shading.color = color_sea_low;
-    planet_visual.shading.phong = { 0.6 , 0.3, 0, 1 };
+    /*planet_visual.shading.phong = { 0.6 , 0.3, 0, 1 };*/
 
     set_islands();
 }
@@ -28,8 +54,6 @@ planet::planet() {
 
 void planet::set_islands() 
 {
-
-    int number_of_islands = 10;
 
     islands_centers.resize(number_of_islands);
     terrain_types.resize(number_of_islands);
@@ -48,7 +72,8 @@ void planet::set_islands()
             std::cout << "loop" << std::endl;
         }
         islands_centers[i] = new_center;
-        terrain_types[i] = static_cast<terrain_type>(int(rand_interval() * 5));
+        if (i < 5) terrain_types[i] = static_cast<terrain_type>(i);
+        else terrain_types[i] = static_cast<terrain_type>(int(rand_interval() * 5));
     }
 
     for (int i = 0; i < number_of_islands; i++) {
@@ -58,76 +83,39 @@ void planet::set_islands()
         }
     }
 
-    for (int i = 0; i < number_of_islands; i++) {
-        hierarchy_mesh_drawable island_visual;
-        mesh_drawable island = mesh_drawable(get_island_mesh(terrain_types[i]));
-        island.shading.color = get_terrain_color(i);
-        island.shading.phong.specular = 0.0f;
-        island_visual.add(island, "island");
-        island_visual.add(get_island_topping(terrain_types[i]), "topping", "island");
-        island_visual["island"].transform.rotate = rotation_between_vector(vec3(0, 0, 1), normalize(islands_centers[i]));
-        island_visual["island"].element.shading.color = get_terrain_color(i);
-
-        island_visual.update_local_to_global_coordinates();
-
-        islands_visuals.push_back(island_visual);
-    }
-}
-
-vec3 planet::get_terrain_color(int i) 
-{
-    switch (terrain_types[i]) {
-    case terrain_type::CITY : return color_city_low;
-    case terrain_type::DESERT: return color_desert_low;
-    case terrain_type::FIELD : return color_field_low;
-    case terrain_type::FOREST : return color_forest_low;
-    case terrain_type::MOUNTAIN : return color_mountain_low;
-    default : return vec3(1, 1, 1);
-    }
-}
-
-mesh_drawable get_island_topping(terrain_type _terrain_type) 
-{
-    mesh_drawable visual;
-
-    switch (_terrain_type) {
-    case terrain_type::CITY :
-        visual = mesh_drawable(mesh_load_file_obj("assets/objects/house/house.obj"));
-        visual.transform.scale = house_scale;
-        visual.transform.translate = vec3(0, 0, sphere_radius);
-        visual.transform.rotate = rotation(vec3(1, 0, 0), pi / 2);
-        break;
-    case terrain_type::DESERT:
-        visual = mesh_drawable(mesh_load_file_obj("assets/objects/palm/palm.obj"));
-        visual.transform.scale = palm_scale;
-        visual.transform.translate = vec3(0, 0, sphere_radius);
-        visual.transform.rotate = rotation(vec3(1, 0, 0), pi / 2);
-        break;
-    case terrain_type::FIELD:
-        visual = mesh_drawable(mesh_load_file_obj("assets/objects/carrot/carrot.obj"));
-        visual.transform.scale = carrot_scale;
-        visual.transform.translate = vec3(0, 0, sphere_radius);
-        visual.transform.rotate = rotation(vec3(1, 0, 0), pi / 2);
-        break;
-    case terrain_type::FOREST:
-        visual = mesh_drawable(mesh_load_file_obj("assets/objects/oak/oak.obj"));
-        visual.transform.scale = oak_scale;
-        visual.transform.translate = vec3(0, 0, sphere_radius);
-        visual.transform.rotate = rotation(vec3(1, 0, 0), pi / 2);
-        break;
-    case terrain_type::MOUNTAIN:
-        visual = mesh_drawable(mesh_load_file_obj("assets/objects/fir/fir.obj"));
-        visual.transform.scale = fir_scale;
-        visual.transform.translate = vec3(0, 0, sphere_radius);
-        visual.transform.rotate = rotation(vec3(1, 0, 0), pi / 2);
-        break;
-    }
-
     image_raw texture = image_load_png("assets/textures/lowpoly_palette.png");
     GLuint texture_id = opengl_texture_to_gpu(texture, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
-    visual.texture = texture_id;
 
-    return visual;
+    for (int i = 0; i < number_of_islands; i++) {
+        mesh_drawable island_visual;
+        mesh island_mesh;
+
+        switch (terrain_types[i]) {
+        case terrain_type::FOREST :
+            island_mesh = mesh_load_file_obj("assets/objects/oak/island_with_oak.obj");
+            break;
+        case terrain_type::CITY:
+            island_mesh = mesh_load_file_obj("assets/objects/house/island_with_house.obj");
+            break;
+        case terrain_type::DESERT:
+            island_mesh = mesh_load_file_obj("assets/objects/palm/island_with_palm.obj");
+            break;
+        case terrain_type::MOUNTAIN:
+            island_mesh = mesh_load_file_obj("assets/objects/mountain/island_with_mountain.obj");
+            break;
+        case terrain_type::FIELD:
+            island_mesh = mesh_load_file_obj("assets/objects/tractor/island_with_tractor.obj");
+            break;
+        }
+
+        curve_mesh(&island_mesh, 0.99 * sphere_radius);
+        island_mesh.fill_empty_field();
+        island_visual = mesh_drawable(island_mesh);
+        island_visual.texture = texture_id;
+
+        island_visual.transform = affine_rts(rotation_around_center(rotation_between_vector(vec3(0, 0, 1), normalize(islands_centers[i])), vec3(0, 0, 0)));
+        islands_visuals.push_back(island_visual);
+    }
 }
 
 mesh create_sphere() 
@@ -251,32 +239,22 @@ vec3 get_point_on_sphere(vec3 position)
     return position / size * sphere_radius;
 }
 
-mesh get_island_mesh(terrain_type _terrain_type)
+void curve_mesh(mesh* mesh, float radius) 
 {
-    int n = 4 + rand_interval() * 10;
-    float rand_proportion = 2 * island_radius * 3.14f / n * 0.4f;
+    float max_norm = 0;
+    int number_of_positions = mesh->position.size();
+    float _norm;
 
-    mesh surface;
-
-    surface.position.resize(2 * n + 1);
-    surface.connectivity.resize(3 * n);
-
-    for (int i = 0; i < n; i++) {
-        surface.position[i] = vec3(island_radius * cos(2 * pi * float(i) / n) + rand_proportion * rand_interval(), island_radius * sin(2 * pi * float(i) / n) + rand_proportion  * rand_interval(), sphere_radius);
-        surface.position[i + n] = vec3(1.3 * island_radius * cos(2 * pi * float(i) / n), 1.3 * island_radius * sin(2 * pi * float(i) / n), sphere_radius / 2);
+    for (int i = 0; i < number_of_positions; i++) {
+        _norm = norm(mesh->position[i].xy());
+        if (_norm > max_norm) max_norm = _norm;
     }
-    surface.position[2 * n] = vec3(0, 0, sphere_radius);
+    float new_norm = island_radius / max_norm;
 
-    for (int i = 0; i < n - 1; i++) {
-        surface.connectivity[i] = uint3(i + 1, i, 2 * n);
-        surface.connectivity[i + n] = uint3(i, i + 1, n + i + 1);
-        surface.connectivity[i + 2 * n] = uint3(i, n + i + 1, n + i);
+    for (int i = 0; i < number_of_positions; i++) {
+        mesh->position[i] *= new_norm;
     }
-    surface.connectivity[n - 1] = uint3(0, n - 1, 2 * n);
-    surface.connectivity[2 * n - 1] = uint3(n - 1, 0, n);
-    surface.connectivity[3 * n - 1] = uint3(n - 1, n, 2 * n - 1);
 
-    surface.fill_empty_field();
-    return surface;
+    for (int i = 0; i < number_of_positions; i++) mesh->position[i].z += sqrt(radius * radius - pow(mesh->position[i].x, 2) - pow(mesh->position[i].y, 2));
 }
 

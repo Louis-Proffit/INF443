@@ -2,7 +2,6 @@
 
 #include "vcl/vcl.hpp"
 #include "constants.hpp"
-#include "sphere.hpp"
 
 struct scene_environment
 {
@@ -25,17 +24,22 @@ struct gui_parameters {
 	int trajectory_storage = 100;
 };
 
+struct perlin_noise_parameters {
+	float height;
+	int octaves;
+	float persistensy;
+	float frequency_gain;
+};
+
 struct user_interaction_parameters {
 	vcl::vec2 mouse_prev;
 	vcl::timer_fps fps_record;
 	vcl::mesh_drawable global_frame;
 	gui_parameters gui;
 	bool cursor_on_gui;
+	bool draw_wireframe;
 	picking_structure picking;
 };
-
-
-void display_islands(planet* _planet, scene_environment const& scene, picking_structure const& picking);
 
 void opengl_uniform(GLuint shader, scene_environment const& current_scene);
 
