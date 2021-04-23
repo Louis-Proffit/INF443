@@ -46,21 +46,24 @@
 #define sphere_division_steps 5
 #define sphere_radius 1.0f
 #define sphere_rotation_speed 0.0f
+#define sea_movement_pulse 1.0f
+#define sea_movement_height 0.01f
 
 // islands constants
 #define island_radius 0.4f
-#define number_of_islands 10
+#define number_of_islands 20
 
-#define color_sea_low vec3(float(0) / 255, float(191) / 255, float(255) / 255);
-#define color_sea_high vec3(float(30) / 255, float(144) / 255, float(255) / 255);
-#define color_mountain_low vec3(float(20) / 255, float(20) / 255, float(20) / 255);
-#define color_mountain_high vec3(float(40) / 255, float(40) / 255, float(40) / 255);
-#define color_city_low vec3(float(150) / 255, float(150) / 255, float(150) / 255);
-#define color_city_high vec3(float(190) / 255, float(190) / 255, float(190) / 255);
-#define color_forest_low vec3(float(50) / 255, float(205) / 255, float(50) / 255);
-#define color_forest_high vec3(float(34) / 255, float(139) / 255, float(34) / 255);
-#define color_red vec3(float(255) / 255, float(0) / 255, float(0) / 255);
-#define color_desert_low vec3(float(204) / 255, float(204) / 255, float(0) / 255);
-#define color_desert_high vec3(float(255) / 255, float(255) / 255, float(0) / 255);
-#define color_field_low vec3(float(51) / 255, float(25) / 255, float(0) / 255);
-#define color_field_high vec3(float(102) / 255, float(51) / 255, float(0) / 255);
+#define color_sea_low vec3(float(0) / 255, float(191) / 255, float(255) / 255)
+#define color_sea_high vec3(float(30) / 255, float(144) / 255, float(255) / 255)
+
+#define color_mountain_low vec3(float(20) / 255, float(20) / 255, float(20) / 255)
+#define color_mountain_high vec3(float(40) / 255, float(40) / 255, float(40) / 255)
+#define color_city_low vec3(float(150) / 255, float(150) / 255, float(150) / 255)
+#define color_city_high vec3(float(190) / 255, float(190) / 255, float(190) / 255)
+#define color_forest_low vec3(float(50) / 255, float(205) / 255, float(50) / 255)
+#define color_forest_high vec3(float(34) / 255, float(139) / 255, float(34) / 255)
+#define color_red vec3(float(255) / 255, float(0) / 255, float(0) / 255)
+#define color_desert_low vec3(float(204) / 255, float(204) / 255, float(0) / 255)
+#define color_desert_high vec3(float(255) / 255, float(255) / 255, float(0) / 255)
+#define color_field_low vec3(float(51) / 255, float(25) / 255, float(0) / 255)
+#define color_field_high vec3(float(102) / 255, float(51) / 255, float(0) / 255)

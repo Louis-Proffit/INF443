@@ -51,3 +51,20 @@ void picking_position(picking_structure& picking, buffer<vec3>& islands_centers,
 	else
 		picking.active = false;
 }
+
+std::string openShader(std::string const& shader_name)
+{
+	if (shader_name == "planet_frag")
+	{
+#include "../build/assets/shaders/planet/planet.frag.glsl"
+		return s;
+	}
+	else if (shader_name == "planet_vert")
+	{
+#include "../build/assets/shaders/planet/planet.vert.glsl"
+		return s;
+	}
+
+	error_vcl("Shader not found");
+	return "Error";
+}

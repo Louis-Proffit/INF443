@@ -10,7 +10,6 @@ using namespace vcl;
 
 void mouse_move_callback(GLFWwindow* window, double xpos, double ypos);
 void window_size_callback(GLFWwindow* window, int width, int height);
-void update_and_draw(planet* _planet);
 void update_and_draw(orbiter* _orbiter);
 
 void initialize_data();
@@ -96,12 +95,14 @@ void initialize_data()
 	GLuint const texture_white = opengl_texture_to_gpu(image_raw{1,1,image_color_type::rgba,{255,255,255,255}});
 	mesh_drawable::default_shader = shader_mesh;
 	mesh_drawable::default_texture = texture_white;
+	mesh_float_drawable::default_texture = texture_white;
 	curve_drawable::default_shader = shader_uniform_color;
 	segments_drawable::default_shader = shader_uniform_color;
-	
+
 	/* Paramétrisation du user*/
 	user.global_frame = mesh_drawable(mesh_primitive_frame());
 	user.gui.display_frame = false;
+	rotation;
 	scene.camera.distance_to_center = 2.5f;
 	scene.camera.look_at({ 4,3,2 }, { 0,0,0 }, { 0,0,1 });
 
@@ -111,6 +112,11 @@ void initialize_data()
 	timer.t = timer.t_min;
 
 	earth = new planet();
+	glUseProgram(earth->planet_shader);
+	opengl_uniform(earth->planet_shader, "pulse", sea_movement_pulse, false);
+	opengl_uniform(earth->planet_shader, "height", sea_movement_height, false);
+	opengl_uniform(earth->planet_shader, "color", color_sea_low, false);
+	opengl_uniform(earth->planet_shader, "color_variant", color_sea_high, false);
 
 	/* Initialisation de l'arrière plan*/
 	_skybox.init_skybox(vec3(0, 0, 0), 10, "space");
@@ -127,11 +133,14 @@ void display_scene()
 	timer.update();
 	float const time = timer.t;
 
+	glUseProgram(earth->planet_shader);
+	opengl_uniform(earth->planet_shader, "time", time, false);
 	earth->display(scene, user);
-	/*_skybox.draw_skybox(scene);
+	
+	_skybox.draw_skybox(scene);
 
 	for (int i = 0; i < orbiters.size(); i++)
-		update_and_draw(orbiters[i]);*/
+		update_and_draw(orbiters[i]);
 
 }
 
@@ -186,7 +195,8 @@ void mouse_move_callback(GLFWwindow* window, double xpos, double ypos)
 
 }
 
-void update_and_draw(orbiter* _orbiter) {
+void update_and_draw(orbiter* _orbiter) 
+{
 	_orbiter->update(timer.t);
 	_orbiter->trajectory_visual.visual.color.x = 1.0f;
 	draw(_orbiter->orbiter_visual, scene);

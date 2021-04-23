@@ -44,9 +44,19 @@ planet::planet() {
     /* Configuration du visuel */
     planet_mesh = create_sphere();
     planet_mesh.fill_empty_field();
-    planet_visual = mesh_drawable(planet_mesh);
+
+    /* Noise */
+    noise.resize(planet_mesh.position.size());
+    for (int i = 0; i < planet_mesh.position.size(); i++) noise[i] = noise_perlin(planet_mesh.position[i], 7, 2.0, 2.0);
+
+    planet_shader = opengl_create_shader_program(openShader("planet_vert"), openShader("planet_frag"));
+    time_uniform = glGetUniformLocation(planet_shader, "time");
+    pulse_uniform = glGetUniformLocation(planet_shader, "pulse");
+    color_uniform = glGetUniformLocation(planet_shader, "color");
+    color_variant_uniform = glGetUniformLocation(planet_shader, "color_variant");
+
+    planet_visual = mesh_float_drawable(planet_mesh, noise, planet_shader);
     planet_visual.shading.color = color_sea_low;
-    /*planet_visual.shading.phong = { 0.6 , 0.3, 0, 1 };*/
 
     set_islands();
 }
@@ -66,7 +76,7 @@ void planet::set_islands()
             correct = true;
             new_center = get_point_on_sphere(2 * vec3(rand_interval(), rand_interval(), rand_interval()) - vec3(1, 1, 1));
             for (int j = 0; j < i; j++) {
-                if (norm(new_center - islands_centers[j]) < 2 * island_radius) correct = false;
+                if (norm(new_center - islands_centers[j]) < 0.6 * 2 * island_radius) correct = false;
             }
             if (correct) break;
             std::cout << "loop" << std::endl;
@@ -79,7 +89,7 @@ void planet::set_islands()
     for (int i = 0; i < number_of_islands; i++) {
         for (int j = 0; j < number_of_islands; j++) {
             if (i == j) continue;
-            assert_vcl(norm(islands_centers[i] - islands_centers[j]) >= 2 * island_radius, "islands too close");
+            assert_vcl(norm(islands_centers[i] - islands_centers[j]) >= 0.6 * 2 * island_radius, "islands too close");
         }
     }
 

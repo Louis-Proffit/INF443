@@ -44,3 +44,5 @@ struct user_interaction_parameters {
 void opengl_uniform(GLuint shader, scene_environment const& current_scene);
 
 void picking_position(picking_structure& picking, vcl::buffer<vcl::vec3>& islands_centers, vcl::glfw_state const& state, scene_environment const& scene, vcl::vec2 const& p);
+
+std::string openShader(std::string const& shader_name);

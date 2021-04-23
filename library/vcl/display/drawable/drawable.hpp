@@ -2,6 +2,7 @@
 
 #include "shading_parameters/shading_parameters.hpp"
 #include "mesh_drawable/mesh_drawable.hpp"
+#include "mesh_float_drawable/mesh_float_drawable.hpp"
 #include "mesh_wireframe_drawable/mesh_wireframe_drawable.hpp"
 #include "mesh_normal_drawable/mesh_normal_drawable.hpp"
 #include "curve_drawable/curve_drawable.hpp"

@@ -59,7 +59,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\build\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">projet_planete.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">projet_planete</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
@@ -368,6 +368,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\hierarchy_mesh_drawable\hierarchy_mesh_drawable_node\hierarchy_mesh_drawable_node.hpp" />
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_drawable\mesh_drawable.cpp" />
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_drawable\mesh_drawable.hpp" />
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_float_drawable\mesh_float_drawable.cpp" />
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_float_drawable\mesh_float_drawable.hpp" />
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_normal_drawable\mesh_normal_drawable.cpp" />
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_normal_drawable\mesh_normal_drawable.hpp" />
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_wireframe_drawable\mesh_wireframe_drawable.cpp" />
