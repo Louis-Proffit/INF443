@@ -37,7 +37,7 @@ GLuint WaterFrameBuffers::createFrameBuffer()
     //generate name for frame buffer
     glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
     //create the framebuffer
-    glDrawBuffer(GL_COLOR_ATTACHMENT0);
+    glDrawBuffer(GL_COLOR_ATTACHMENT1);
     opengl_check;
     //indicate that we will always render to color attachment 0
     return frameBuffer;
@@ -49,11 +49,11 @@ GLuint WaterFrameBuffers::createTextureAttachment(int width, int height)
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height,
-                 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+                 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
     opengl_check;
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+    glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1,
                          texture, 0);
     opengl_check;
     return texture;

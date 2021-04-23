@@ -59,7 +59,7 @@ public:
     void unbindCurrentFrameBuffer()
     { //call to switch to default frame buffer
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        glViewport(0, 0, 2560, 2048);
+        glViewport(0, 0, 2580, 2048);
         opengl_check;
     }
 
