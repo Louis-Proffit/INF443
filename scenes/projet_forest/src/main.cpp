@@ -101,8 +101,8 @@ int main(int, char *argv[])
 	glEnable(GL_DEPTH_TEST);
 
 	// Water rendering
-	//WaterFrameBuffers fbos;
-	//fbos.initWaterFrameBuffers();
+	WaterFrameBuffers fbos;
+	fbos.initWaterFrameBuffers();
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -113,9 +113,9 @@ int main(int, char *argv[])
 		glClear(GL_COLOR_BUFFER_BIT);
 		glClear(GL_DEPTH_BUFFER_BIT);
 
-		/*fbos.bindReflectionFrameBuffer();
+		fbos.bindReflectionFrameBuffer();
 		display_scene();
-		fbos.unbindCurrentFrameBuffer();*/
+		fbos.unbindCurrentFrameBuffer();
 
 		display_scene();
 		//draw(waterd, scene);
@@ -136,8 +136,8 @@ int main(int, char *argv[])
 
 		if (user.gui.display_frame)
 			draw(user.global_frame, scene);
-		//GLuint texture = fbos.getReflectionTexture();
-		//ImGui::Image((void *)texture, ImVec2(320, 280));
+		GLuint texture = fbos.getReflectionTexture();
+		ImGui::Image((void *)texture, ImVec2(320, 280));
 		display_interface();
 		ImGui::End();
 		imgui_render_frame(window);
@@ -146,7 +146,7 @@ int main(int, char *argv[])
 	}
 
 	// Water rendering
-	//fbos.cleanUp();
+	fbos.cleanUp();
 
 	imgui_cleanup();
 	glfwDestroyWindow(window);
@@ -217,7 +217,7 @@ void initialize_data()
 	//				Tree Declaration
 	//=================================================
 
-	tree.initTree("fougere");
+	tree.initTree("Classique");
 
 	//================================================
 	//			BillBoards Declaration
@@ -264,6 +264,7 @@ void display_scene()
 	//=================================================
 
 	tree.draw_tree(scene);
+	//draw_wireframe(tree.dtrunk, scene);
 
 	//================================================
 	//				Draw Billboards
@@ -301,8 +302,8 @@ void display_scene()
 	//================================================
 	//					FIN
 	//=================================================
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//glEnable(GL_BLEND);
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void display_interface()

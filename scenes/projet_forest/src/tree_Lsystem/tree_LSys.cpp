@@ -114,7 +114,7 @@ void TreeGenerator::GenerateModel(std::string system, int iterations, std::strin
                 {
                     mesh cylindre;
                     cylindre = mesh_primitive_cylinder(norm(radiusVector), precPoint, startingPoint, 3, 6, true);
-                    cylindre.color.fill({0.345f, 0.435f, 0.176f});
+                    cylindre.color.fill({0.451f, 0.251f, 0.071f});
                     result.push_back(cylindre);
                 }
             }
@@ -132,15 +132,15 @@ void TreeGenerator::GenerateModel(std::string system, int iterations, std::strin
             {
                 mesh cylindre;
                 cylindre = mesh_primitive_cylinder(norm(radiusVector), precPoint, startingPoint, 3, 6, true);
-                cylindre.color.fill({0.345f, 0.435f, 0.176f});
+                cylindre.color.fill({0.451f, 0.251f, 0.071f});
                 result.push_back(cylindre);
             }
             //std::cout << startingPoint << std::endl;
             //std::cout << " " << std::endl;
             //feuille = mesh_primitive_sphere(0.01f, startingPoint, 40, 20);
-            feuille = GenerateLeave(startingPoint, translationVector, 0.10f);
-            feuille.color.fill({1.0f, 0, 0});
-            result.push_back(feuille);
+            GenerateLeave(startingPoint, translationVector, 0.03f);
+            //feuille.color.fill({1.0f, 0, 0});
+            //result.push_back(feuille);
             break;
         default:
             break;
@@ -151,15 +151,18 @@ void TreeGenerator::GenerateModel(std::string system, int iterations, std::strin
     trunk = result;
     dtrunk = mesh_drawable(trunk);
     if (hasleaves)
+    {
+        leaves.fill_empty_field();
         dleaves = mesh_drawable(leaves);
+    }
 }
 
-mesh TreeGenerator::GenerateLeave(vec3 startingPoint, vec3 translationVector, float height)
+void TreeGenerator::GenerateLeave(vec3 startingPoint, vec3 translationVector, float height)
 {
     // mesh feuille1 = mesh_primitive_triangle(startingPoint, startingPoint + vec3(0.02f, 0, 0), startingPoint + vec3(0, 0, 0.04f));
     //mesh feuille2 = mesh_primitive_triangle(startingPoint, startingPoint + vec3(0.02f, 0, 0), startingPoint + vec3(0, 0, 0.04f));
     //mesh feuille3 = mesh_primitive_triangle(startingPoint, startingPoint + vec3(0.02f, 0, 0), startingPoint + vec3(0, 0, 0.04f));
-    int rotat = PI / 8;
+    /*int rotat = PI / 8;
     rotation rotationX = rotation({1, 0, 0}, rotat);
     rotation negRotationX = rotation({-1, 0, 0}, rotat);
     rotation rotationY = rotation({0, 1, 0}, rotat);
@@ -171,24 +174,70 @@ mesh TreeGenerator::GenerateLeave(vec3 startingPoint, vec3 translationVector, fl
     mesh feuille3 = mesh_primitive_triangle(startingPoint - vec3(0, height / 4, 0), startingPoint + vec3(height / 4, 0, 0), startingPoint + height * normalize(negRotationX * negRotationZ * translationVector));
     feuille1.push_back(feuille2);
     feuille1.push_back(feuille3);
-    return feuille1;
+    return feuille1;*/
+
+    affine_rts trans;
+    //trans.scale = height;
+    trans.translate = startingPoint;
+    // std::cout << rotation_between_vector(vec3(0, 0, 1), translationVector) << std::endl;
+    trans.rotate = rotation_between_vector(vec3(0, 0, 1), normalize(translationVector));
+    mesh feuille = mesh_primitive_quadrangle(trans * vec3(-height, -height, 0), trans * vec3(height, -height, 0), trans * vec3(height, height, 0), trans * vec3(-height, height, 0));
+    leaves.push_back(feuille);
 }
 
-void TreeGenerator::initTree(std::string treename)
+void TreeGenerator::initTree(std::string treename, bool blockleaves)
 {
     if (treename == "Realtree_1")
     {
-        std::cout << "Realtree_1" << std::endl;
+        std::cout << "Generating Realtree_1" << std::endl;
 
         m_system.ClearAxioms();
         translationOffset = .1f;
-        scaleOffset = 1.5f;
+        scaleOffset = 1.35f;
         rotationOffset = 3.14f / 4;
-        m_system.AddAxiom('H', "FF[[[[[[xH]XH]zyxH]ZYXH]yXH]YxH]H");
-        m_system.AddAxiom('F', "FF");
-        GenerateModel("H", 4, "Test", vec3(-2, -2, 0), .01f);
+        m_system.AddAxiom('H', "F[[[[[[xH]XH]zyxH]ZYXH]yXH]YxH]H");
+        m_system.AddAxiom('F', "FsF");
+        GenerateModel("H", 4, "Test", vec3(0, 0, 0), .05f);
+        dtrunk.transform.scale = 3.0f;
+        dleaves.transform.scale = 3.0f;
+        dtrunk.texture = opengl_texture_to_gpu(image_load_png("../../assets/textures/trunk.png"));
+        dleaves.texture = opengl_texture_to_gpu(image_load_png("../../assets/textures/leaf.png"));
     }
+    if (treename == "Classique")
+    {
+        std::cout << "Generating Classique" << std::endl;
 
+        m_system.ClearAxioms();
+        translationOffset = .1f;
+        scaleOffset = 1.8f;
+        rotationOffset = 3.14f / 4;
+        m_system.AddAxiom('H', "F[xsH][XsH][ysH][YsH]");
+        GenerateModel("FFH", 5, "Test", vec3(0, 0, 0), .03f);
+        dtrunk.transform.scale = 3.0f;
+        dleaves.transform.scale = 3.0f;
+        dtrunk.texture = opengl_texture_to_gpu(image_load_png("../../assets/textures/trunk.png"));
+        dleaves.texture = opengl_texture_to_gpu(image_load_png("../../assets/textures/leaf.png"));
+        if (blockleaves)
+            hasleaves = false;
+    }
+    if (treename == "Sapin")
+    {
+        std::cout << "Generating Sapin" << std::endl;
+
+        m_system.ClearAxioms();
+        translationOffset = .1f;
+        scaleOffset = 1.35f;
+        rotationOffset = 2 * 3.14f / 3;
+        m_system.AddAxiom('H', "F[xH][XH][yH][YH]H");
+        m_system.AddAxiom('F', "FF");
+        GenerateModel("H", 5, "Test", vec3(0, 0, 0), .01f);
+        dtrunk.transform.scale = 3.0f;
+        dleaves.transform.scale = 3.0f;
+        dtrunk.texture = opengl_texture_to_gpu(image_load_png("../../assets/textures/trunk.png"));
+        dleaves.texture = opengl_texture_to_gpu(image_load_png("../../assets/textures/leaf.png"));
+        if (blockleaves)
+            hasleaves = false;
+    }
     else if (treename == "Realtree_2")
     {
         std::cout << "Generating RealTree_2" << std::endl;
@@ -253,7 +302,7 @@ void TreeGenerator::initTree(std::string treename)
         scaleOffset = 1.0f;
         m_system.AddAxiom('R', "F[[yyBBzB]XB]");
         m_system.AddAxiom('B', "XXYYYYYYYYFRFzzFRRC");
-        GenerateModel("+TT+R", 7, "Tree4", vec3(0, 0, 0), .1f);
+        GenerateModel("+TT+R", 7, "Tree4", vec3(0, 0, 0), .01f);
     }
 
     else if (treename == "buisson")

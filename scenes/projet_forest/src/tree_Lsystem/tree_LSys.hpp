@@ -23,9 +23,9 @@ public:
 
     void GenerateModel(std::string system, int iterations, std::string modelName, vec3 startingPoint, float radius);
 
-    mesh GenerateLeave(vec3 startingPoint, vec3 translationVector, float height);
+    void GenerateLeave(vec3 startingPoint, vec3 translationVector, float height);
 
-    void initTree(std::string treename = "brin");
+    void initTree(std::string treename = "brin", bool blockleaves = false);
 
     template <typename SCENE>
     void draw_tree(SCENE const &scene)
