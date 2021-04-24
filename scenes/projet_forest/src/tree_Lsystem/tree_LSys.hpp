@@ -21,11 +21,11 @@ public:
     mesh_drawable dleaves;
     bool hasleaves = false;
 
-    void GenerateModel(std::string system, int iterations, std::string modelName, vec3 startingPoint, float radius);
+    void GenerateModel(std::string system, int iterations, std::string modelName, vec3 startingPoint, float radius, GLuint shader = shader_basic_w);
 
     void GenerateLeave(vec3 startingPoint, vec3 translationVector, float height);
 
-    void initTree(std::string treename = "brin", bool blockleaves = false);
+    void initTree(std::string treename = "brin", bool blockleaves = false, GLuint shader = shader_basic_w);
 
     template <typename SCENE>
     void draw_tree(SCENE const &scene)
@@ -35,4 +35,6 @@ public:
         if (hasleaves)
             draw(dleaves, scene);
     }
+
+    static GLuint shader_basic_w;
 };

@@ -7,8 +7,8 @@ in struct fragment_data
     vec3 normal;
     vec3 color;
     vec2 uv;
-
 	vec3 eye;
+	vec4 clipSpace;
 } fragment;
 
 layout(location=0) out vec4 FragColor;
@@ -16,6 +16,9 @@ layout(location=0) out vec4 FragColor;
 
 
 uniform sampler2D image_texture;
+
+uniform sampler2D reflection_texture;
+uniform sampler2D refraction_texture;
 
 uniform vec3 light = vec3(1.0, 1.0, 1.0);
 
@@ -45,12 +48,18 @@ void main()
 		specular = pow( max(dot(R,V),0.0), specular_exp );
 	}
 
-
+	vec2 ndc = (fragment.clipSpace.xy/fragment.clipSpace.w)/2.0 +0.5;
+	vec2 refractTexCoords = vec2(ndc.x,ndc.y);
+	vec2 reflectTexCoords = vec2(ndc.x,-ndc.y);
 	vec2 uv_image = vec2(fragment.uv.x, 1.0-fragment.uv.y);
 	if(texture_inverse_y) {
 		uv_image.y = 1.0-uv_image.y;
 	}
 	vec4 color_image_texture = texture(image_texture, uv_image);
+
+	vec4 reflectColour = texture(reflection_texture,reflectTexCoords);
+	vec4 refractColour = texture(refraction_texture,refractTexCoords);
+
 	if(use_texture==false) {
 		color_image_texture=vec4(1.0,1.0,1.0,1.0);
 	}
@@ -59,6 +68,6 @@ void main()
 	vec3 color_object  = fragment.color * color*distortion1;
 	vec3 color_shading = (Ka + Kd * diffuse) * color_object + Ks * specular * vec3(1.0, 1.0, 1.0);
 	
-	FragColor = vec4(color_object,0.25f);
+	FragColor = mix(reflectColour,refractColour,0.5);
 }
 )";

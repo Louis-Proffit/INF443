@@ -32,18 +32,19 @@ std::vector<std::vector<float>> gen = generateRandomHeightData(params);
 HillAlgorithmParameters params2 = HillAlgorithmParameters();
 /*std::vector<std::vector<float>> genfile = generateFileHeightData("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/textures/heightmap_7.png", params2);*/
 
-std::vector<std::vector<float>> genfile = generateFileHeightData("../assets/textures/heightmap_7.png", params2);
+std::vector<std::vector<float>> genfile = generateFileHeightData("../assets/textures/heightmap_10.png", params2);
 
 GLuint texture_rock = 0;
 GLuint texture_snow = 0;
 GLuint shader_heightmap = 0;
 GLuint shader_water;
+GLuint shader_basic_w;
 
 //================================================
 //			Variables Declaration
 //=================================================
 
-const unsigned int N = 100;
+//const unsigned int N = 100;
 /*const float LOD1 = 5.0f;
 const float LOD2 = 10.0f;
 const float LOD3 = 20.0f;*/
@@ -57,9 +58,9 @@ void window_size_callback(GLFWwindow *window, int width, int height);
 
 void initialize_data();
 void display_interface();
-void display_scene();
-std::vector<float> generate_rotations(int N);
-void create_grass(int nbQuad, int ku, int kv);
+void display_scene(vec4 clipPlane);
+//std::vector<float> generate_rotations(int N);
+//void create_grass(int nbQuad, int ku, int kv);
 
 std::string openShader(std::string const &shader_name);
 
@@ -69,7 +70,7 @@ std::string openShader(std::string const &shader_name);
 
 mesh terrain;
 mesh_drawable terrain_visual;
-mesh_drawable billboard_grass;
+//mesh_drawable billboard_grass;
 perlin_noise_parameters parameters;
 mesh_drawable tree_real;
 
@@ -78,7 +79,7 @@ Water wat;
 
 int const width = 1280, height = 1024;
 
-std::vector<float> rot = generate_rotations(N);
+//std::vector<float> rot = generate_rotations(N);
 
 int main(int, char *argv[])
 {
@@ -104,22 +105,51 @@ int main(int, char *argv[])
 	WaterFrameBuffers fbos;
 	fbos.initWaterFrameBuffers();
 
+	vec4 clipPlane = vec4(0, 0, 1, -wat.waterHeight);
 	while (!glfwWindowShouldClose(window))
 	{
 		scene.light = scene.camera.position();
 		user.fps_record.update();
 
+		glEnable(GL_CLIP_DISTANCE0);
 		fbos.bindRefractionFrameBuffer();
 		glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glClear(GL_DEPTH_BUFFER_BIT);
-		display_scene();
-		fbos.unbindCurrentFrameBuffer();
+		display_scene(-clipPlane);
 
+		fbos.bindReflectionFrameBuffer();
 		glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glClear(GL_DEPTH_BUFFER_BIT);
-		display_scene();
+		float pos = 2 * (scene.camera.position().z - wat.waterHeight);
+		vec3 eye = scene.camera.position();
+		scene.camera.look_at(eye - vec3(0, 0, pos), scene.camera.center_of_rotation, vec3(0, 0, 1));
+		display_scene(clipPlane);
+		scene.camera.look_at(eye, scene.camera.center_of_rotation, vec3(0, 0, 1));
+		fbos.unbindCurrentFrameBuffer();
+
+		//Rendu de la vraie fenetre
+		glDisable(GL_CLIP_DISTANCE0);
+		glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_DEPTH_BUFFER_BIT);
+		display_scene(clipPlane);
+
+		glUseProgram(shader_water);
+		glActiveTexture(GL_TEXTURE3);
+		opengl_check;
+		glBindTexture(GL_TEXTURE_2D, fbos.getReflectionTexture());
+		opengl_check;
+		opengl_uniform(shader_water, "reflection_texture", 3);
+		opengl_check;
+		glActiveTexture(GL_TEXTURE4);
+		opengl_check;
+		glBindTexture(GL_TEXTURE_2D, fbos.getRefractionTexture());
+		opengl_check;
+		opengl_uniform(shader_water, "refraction_texture", 4);
+		opengl_check;
+
 		draw(waterd, scene);
 
 		imgui_create_frame();
@@ -138,8 +168,10 @@ int main(int, char *argv[])
 
 		if (user.gui.display_frame)
 			draw(user.global_frame, scene);
-		GLuint texture = fbos.getRefractionTexture();
-		ImGui::Image((void *)texture, ImVec2(320, 280));
+		//GLuint texture1 = fbos.getRefractionTexture();
+		//GLuint texture2 = fbos.getReflectionTexture();
+		//ImGui::Image((void *)texture1, ImVec2(320, 280));
+		//ImGui::Image((void *)texture2, ImVec2(320, 280));
 		display_interface();
 		ImGui::End();
 		imgui_render_frame(window);
@@ -177,6 +209,8 @@ void initialize_data()
 
 	shader_water = opengl_create_shader_program(openShader("water_vert"), openShader("water_frag"));
 
+	shader_basic_w = opengl_create_shader_program(openShader("mesh_vertexw"), openShader("mesh_fragmentw"));
+
 	//================================================
 	//				Initialize camera
 	//=================================================
@@ -184,7 +218,8 @@ void initialize_data()
 	user.global_frame = mesh_drawable(mesh_primitive_frame());
 	user.gui.display_frame = false;
 	scene.camera.distance_to_center = 4.5f;
-	scene.camera.look_at({4, 3, 3}, {0, 0, 3}, {0, 1, 3});
+	scene.camera.look_at({4, 3, 3}, {0, 0, 0}, {0, 0, 1});
+	//scene.camera.position_camera = vec3(1, 1, 5);
 
 	//================================================
 	//				Terrain Declaration
@@ -208,7 +243,7 @@ void initialize_data()
 	//================================================
 	//				SkyBox Declaration
 	//=================================================
-	cube.init_skybox();
+	//cube.init_skybox();
 
 	//================================================
 	//				Water Declaration
@@ -223,18 +258,20 @@ void initialize_data()
 	//=================================================
 
 	tree.initTree("Classique");
+	tree.dtrunk.shader = shader_basic_w;
+	tree.dleaves.shader = shader_basic_w;
 
 	//================================================
 	//			BillBoards Declaration
 	//=================================================
 
-	billboard_grass = mesh_drawable(mesh_primitive_quadrangle({-1, 0, 0}, {1, 0, 0}, {1, 0, 2}, {-1, 0, 2}));
+	/*billboard_grass = mesh_drawable(mesh_primitive_quadrangle({-1, 0, 0}, {1, 0, 0}, {1, 0, 2}, {-1, 0, 2}));
 	billboard_grass.transform.scale = 0.3f;
-	/*billboard_grass.texture = opengl_texture_to_gpu(image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/textures/grass_texture.png"));*/
-	billboard_grass.texture = opengl_texture_to_gpu(image_load_png("../assets/textures/grass_texture.png"));
+	billboard_grass.texture = opengl_texture_to_gpu(image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/textures/grass_texture.png"));
+	billboard_grass.texture = opengl_texture_to_gpu(image_load_png("../assets/textures/grass_texture.png"));*/
 }
 
-void display_scene()
+void display_scene(vec4 clipPlane)
 {
 	//================================================
 	//				Draw terrain
@@ -251,7 +288,9 @@ void display_scene()
 	opengl_check;
 	glBindTexture(GL_TEXTURE_2D, texture_snow);
 	opengl_check;
-	opengl_uniform(shader_heightmap, "image_texture_snow", 2);
+	opengl_uniform(shader_heightmap, "image_texture_snow", 0);
+	opengl_check;
+	opengl_uniform(shader_heightmap, "plane", clipPlane);
 	opengl_check;
 	draw(terrain_visual, scene);
 	//draw_wireframe(terrain_visual, scene);
@@ -267,7 +306,10 @@ void display_scene()
 	//================================================
 	//				Draw tree
 	//=================================================
-
+	glUseProgram(shader_basic_w);
+	opengl_check;
+	opengl_uniform(shader_basic_w, "plane", clipPlane);
+	opengl_check;
 	tree.draw_tree(scene);
 	//draw_wireframe(tree.dtrunk, scene);
 
@@ -372,7 +414,7 @@ std::vector<float> generate_rotations(int N)
 	return res;
 }
 
-void create_grass(int nbQuad, int ku, int kv)
+/*void create_grass(int nbQuad, int ku, int kv)
 {
 	if (nbQuad == 3)
 	{
@@ -398,7 +440,7 @@ void create_grass(int nbQuad, int ku, int kv)
 		billboard_grass.transform.rotate = rotation();
 		draw(billboard_grass, scene);
 	}
-}
+}*/
 
 std::string openShader(std::string const &shader_name)
 {
@@ -440,6 +482,16 @@ std::string openShader(std::string const &shader_name)
 	if (shader_name == "water_frag")
 	{
 #include "../assets/water/water.frag.glsl"
+		return s;
+	}
+	if (shader_name == "mesh_vertexw")
+	{
+#include "../assets/shaders/mesh.vert.glsl"
+		return s;
+	}
+	if (shader_name == "mesh_fragmentw")
+	{
+#include "../assets/shaders/mesh.frag.glsl"
 		return s;
 	}
 

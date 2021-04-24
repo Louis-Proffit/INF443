@@ -5,7 +5,9 @@
 
 using namespace vcl;
 
-void TreeGenerator::GenerateModel(std::string system, int iterations, std::string modelName, vec3 startingPoint, float radius)
+GLuint TreeGenerator::shader_basic_w = 0;
+
+void TreeGenerator::GenerateModel(std::string system, int iterations, std::string modelName, vec3 startingPoint, float radius, GLuint shader)
 {
     mesh result;
     system = m_system.ApplyAxioms(system, iterations);
@@ -149,11 +151,11 @@ void TreeGenerator::GenerateModel(std::string system, int iterations, std::strin
 
     result.fill_empty_field();
     trunk = result;
-    dtrunk = mesh_drawable(trunk);
+    dtrunk = mesh_drawable(trunk, shader);
     if (hasleaves)
     {
         leaves.fill_empty_field();
-        dleaves = mesh_drawable(leaves);
+        dleaves = mesh_drawable(leaves, shader);
     }
 }
 
@@ -185,7 +187,7 @@ void TreeGenerator::GenerateLeave(vec3 startingPoint, vec3 translationVector, fl
     leaves.push_back(feuille);
 }
 
-void TreeGenerator::initTree(std::string treename, bool blockleaves)
+void TreeGenerator::initTree(std::string treename, bool blockleaves, GLuint shader)
 {
     if (treename == "Realtree_1")
     {
@@ -212,7 +214,7 @@ void TreeGenerator::initTree(std::string treename, bool blockleaves)
         scaleOffset = 1.8f;
         rotationOffset = 3.14f / 4;
         m_system.AddAxiom('H', "F[xsH][XsH][ysH][YsH]");
-        GenerateModel("FFH", 5, "Test", vec3(0, 0, 0), .03f);
+        GenerateModel("FFH", 5, "Test", vec3(1, 1, 0.5), .03f);
         dtrunk.transform.scale = 3.0f;
         dleaves.transform.scale = 3.0f;
         dtrunk.texture = opengl_texture_to_gpu(image_load_png("../../assets/textures/trunk.png"));

@@ -13,6 +13,7 @@ out struct fragment_data
     vec3 color;
     vec2 uv;
 	vec3 eye;
+	vec4 clipSpace;
 } fragment;
 
 uniform mat4 model;
@@ -26,7 +27,8 @@ void main()
 	fragment.color = color;
 	fragment.uv = uv;
 	fragment.eye = vec3(inverse(view)*vec4(0,0,0,1.0));
-
-	gl_Position = projection * view * model * vec4(position, 1.0);
+	fragment.clipSpace =projection * view * model * vec4(position, 1.0);
+	
+	gl_Position = fragment.clipSpace;
 }
 )";
