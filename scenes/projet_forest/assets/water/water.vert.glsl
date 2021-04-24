@@ -14,11 +14,18 @@ out struct fragment_data
     vec2 uv;
 	vec3 eye;
 	vec4 clipSpace;
+	vec2 textureCoords;
+	vec3 toCameraVector;
+	vec3 fromLightVector;
 } fragment;
 
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
+
+uniform vec3 cameraPosition;
+
+const float tiling = 1.0;
 
 void main()
 {
@@ -28,7 +35,11 @@ void main()
 	fragment.uv = uv;
 	fragment.eye = vec3(inverse(view)*vec4(0,0,0,1.0));
 	fragment.clipSpace =projection * view * model * vec4(position, 1.0);
-	
+	fragment.textureCoords = vec2(position.x/2.0+0.5,position.y/2.0+0.5)*tiling;
+	fragment.toCameraVector = cameraPosition-fragment.position;
+	fragment.fromLightVector = fragment.position - fragment.eye;
+
+
 	gl_Position = fragment.clipSpace;
 }
 )";

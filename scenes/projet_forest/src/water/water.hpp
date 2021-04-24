@@ -8,7 +8,7 @@ using namespace vcl;
 class Water
 {
 public:
-    float waterHeight = 0.5;
+    float waterHeight = 0;
     mesh grid;
 
     void init_water();

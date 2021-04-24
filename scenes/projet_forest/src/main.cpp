@@ -36,6 +36,8 @@ std::vector<std::vector<float>> genfile = generateFileHeightData("../assets/text
 
 GLuint texture_rock = 0;
 GLuint texture_snow = 0;
+GLuint dudvmap;
+GLuint normalMap;
 GLuint shader_heightmap = 0;
 GLuint shader_water;
 GLuint shader_basic_w;
@@ -101,6 +103,7 @@ int main(int, char *argv[])
 	user.fps_record.start();
 	glEnable(GL_DEPTH_TEST);
 
+	float movefactor = 0;
 	// Water rendering
 	WaterFrameBuffers fbos;
 	fbos.initWaterFrameBuffers();
@@ -111,6 +114,9 @@ int main(int, char *argv[])
 		scene.light = scene.camera.position();
 		user.fps_record.update();
 
+		movefactor += (0.3 / 58.0);
+		//movefactor = movefactor - floor(movefactor);
+		//std::cout << movefactor << std::endl;
 		glEnable(GL_CLIP_DISTANCE0);
 		fbos.bindRefractionFrameBuffer();
 		glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
@@ -148,6 +154,21 @@ int main(int, char *argv[])
 		glBindTexture(GL_TEXTURE_2D, fbos.getRefractionTexture());
 		opengl_check;
 		opengl_uniform(shader_water, "refraction_texture", 4);
+		opengl_check;
+		glActiveTexture(GL_TEXTURE5);
+		opengl_check;
+		glBindTexture(GL_TEXTURE_2D, dudvmap);
+		opengl_check;
+		opengl_uniform(shader_water, "dudvmap", 5);
+		opengl_check;
+		opengl_uniform(shader_water, "movefactor", movefactor);
+		opengl_check;
+		opengl_uniform(shader_water, "cameraPosition", scene.camera.position());
+		glActiveTexture(GL_TEXTURE6);
+		opengl_check;
+		glBindTexture(GL_TEXTURE_2D, normalMap);
+		opengl_check;
+		opengl_uniform(shader_water, "normalMap", 6);
 		opengl_check;
 
 		draw(waterd, scene);
@@ -229,6 +250,7 @@ void initialize_data()
 	std::cout << params2.rows << std::endl;
 	terrain_visual = mesh_drawable(terrain, shader_heightmap);
 	terrain_visual.texture = opengl_texture_to_gpu(image_load_png("../assets/textures/texture_grass.png"), GL_REPEAT /**GL_TEXTURE_WRAP_S*/, GL_REPEAT /**GL_TEXTURE_WRAP_T*/);
+	terrain_visual.transform.translate = vec3(0, 0, -0.5);
 
 	texture_rock = opengl_texture_to_gpu(image_load_png("../assets/textures/rock2.png"), GL_REPEAT /**GL_TEXTURE_WRAP_S*/, GL_REPEAT /**GL_TEXTURE_WRAP_T*/);
 	texture_snow = opengl_texture_to_gpu(image_load_png("../assets/textures/snow.png"), GL_REPEAT /**GL_TEXTURE_WRAP_S*/, GL_REPEAT /**GL_TEXTURE_WRAP_T*/);
@@ -243,15 +265,16 @@ void initialize_data()
 	//================================================
 	//				SkyBox Declaration
 	//=================================================
-	//cube.init_skybox();
+	cube.init_skybox();
 
 	//================================================
 	//				Water Declaration
 	//=================================================
 	wat.init_water();
 	wat.grid.color.fill({0.02, 0.72, 0.8});
-	//waterd.texture = opengl_texture_to_gpu(image_load_png("../../assets/water/waterdudv.png"));  // ->> à mettre quand j'aurai reussi à appliquer la reflection et refraction texture
-	waterd = mesh_drawable(wat.grid, shader_water); //, shader_water);
+	dudvmap = opengl_texture_to_gpu(image_load_png("../../assets/water/waterdudv.png"), GL_REPEAT /**GL_TEXTURE_WRAP_S*/, GL_REPEAT /**GL_TEXTURE_WRAP_T*/); // ->> à mettre quand j'aurai reussi à appliquer la reflection et refraction texture
+	normalMap = opengl_texture_to_gpu(image_load_png("../../assets/water/waternormal.png"), GL_REPEAT /**GL_TEXTURE_WRAP_S*/, GL_REPEAT /**GL_TEXTURE_WRAP_T*/);
+	waterd = mesh_drawable(wat.grid, shader_water);
 
 	//================================================
 	//				Tree Declaration
@@ -301,7 +324,7 @@ void display_scene(vec4 clipPlane)
 	//				Draw SkyBox
 	//=================================================
 
-	//cube.draw_skybox(scene);
+	cube.draw_skybox(scene);
 
 	//================================================
 	//				Draw tree
