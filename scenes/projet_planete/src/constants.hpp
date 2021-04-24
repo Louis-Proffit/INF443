@@ -43,18 +43,21 @@
 #define boat_rotation_speed 0.0001f
 
 // Planet graphics
-#define sphere_division_steps 5
+#define sphere_division_steps 2
 #define sphere_radius 1.0f
 #define sphere_rotation_speed 0.0f
-#define sea_movement_pulse 1.0f
-#define sea_movement_height 0.01f
+#define sea_movement_pulse_vertical 1.0f
+#define sea_movement_pulse_horizontal 1.5f
+#define sea_movement_height_vertical 0.01f
+#define sea_movement_height_horizontal 0.2f
+#define sun_position vec3(3.0f, 1.0f, 1.0f)
 
 // islands constants
 #define island_radius 0.4f
 #define number_of_islands 20
 
-#define color_sea_low vec3(float(0) / 255, float(191) / 255, float(255) / 255)
-#define color_sea_high vec3(float(30) / 255, float(144) / 255, float(255) / 255)
+#define color_sea_low vec3(float(0) / 255, float(0) / 255, float(205) / 255)
+#define color_sea_high vec3(float(0) / 255, float(191) / 255, float(255) / 255)
 
 #define color_mountain_low vec3(float(20) / 255, float(20) / 255, float(20) / 255)
 #define color_mountain_high vec3(float(40) / 255, float(40) / 255, float(40) / 255)

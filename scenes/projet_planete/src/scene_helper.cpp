@@ -52,7 +52,7 @@ void picking_position(picking_structure& picking, buffer<vec3>& islands_centers,
 		picking.active = false;
 }
 
-std::string openShader(std::string const& shader_name)
+std::string open_shader(std::string const& shader_name)
 {
 	if (shader_name == "planet_frag")
 	{

@@ -54,7 +54,7 @@ void main()
 	}
 	vec3 color_object  = fragment.color * color * color_image_texture.rgb;
 	vec3 color_shading = (Ka + Kd * diffuse) * color_object + Ks * specular * vec3(1.0, 1.0, 1.0);
-	
+
 	FragColor = vec4(color_shading, alpha * color_image_texture.a);
 }
 )";

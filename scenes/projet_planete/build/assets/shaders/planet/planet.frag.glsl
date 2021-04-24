@@ -17,8 +17,7 @@ uniform sampler2D image_texture;
 
 uniform vec3 light = vec3(1.0, 1.0, 1.0);
 
-uniform vec3 color;
-uniform vec3 color_variant;
+uniform vec3 color = vec3(1.0, 1.0, 1.0);
 
 uniform float alpha = 1.0f; // alpha coefficient
 uniform float Ka = 0.4; // Ambient coefficient
@@ -28,7 +27,6 @@ uniform float specular_exp = 64.0; // Specular exponent
 
 uniform bool use_texture = true;
 uniform bool texture_inverse_y = false;
-
 
 void main()
 {
@@ -55,7 +53,7 @@ void main()
 	if(use_texture==false) {
 		color_image_texture=vec4(1.0,1.0,1.0,1.0);
 	}
-	vec3 color_object  = fragment.color * (fragment.height_proportion * color + (1 - fragment.height_proportion) * color_variant) * color_image_texture.rgb;
+	vec3 color_object  = fragment.color * color * color_image_texture.rgb;
 	vec3 color_shading = (Ka + Kd * diffuse) * color_object + Ks * specular * vec3(1.0, 1.0, 1.0);
 	
 	FragColor = vec4(color_shading, alpha * color_image_texture.a);

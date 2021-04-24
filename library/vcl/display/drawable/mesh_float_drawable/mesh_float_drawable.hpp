@@ -12,7 +12,7 @@ namespace vcl
 	{
 		mesh_float_drawable();
 		// Send mesh data to GPU and store IDs into vbo. Set also shader and texture.
-		explicit mesh_float_drawable(mesh const& data_to_send, buffer<float> float_buffer, GLuint shader, GLuint texture=default_texture, GLuint draw_type=GL_DYNAMIC_DRAW);
+		explicit mesh_float_drawable(mesh const& data_to_send, buffer<float> float_buffer, buffer<vec3> vec_buffer, GLuint shader, GLuint texture=default_texture, GLuint draw_type=GL_DYNAMIC_DRAW);
 
 		// Stores VBO ID in GPU_elements_id
 		std::map<std::string, GLuint> vbo;
@@ -36,6 +36,7 @@ namespace vcl
 		mesh_float_drawable& update_color(buffer<vec3> const& new_color);
 		mesh_float_drawable& update_uv(buffer<vec2> const& new_uv);
 		mesh_float_drawable& update_float(buffer<float> const& new_float);
+		mesh_float_drawable& update_vec(buffer<vec3> const& new_vec);
 	};
 
 	template <typename SCENE>

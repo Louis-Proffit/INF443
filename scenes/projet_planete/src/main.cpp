@@ -102,7 +102,6 @@ void initialize_data()
 	/* Paramétrisation du user*/
 	user.global_frame = mesh_drawable(mesh_primitive_frame());
 	user.gui.display_frame = false;
-	rotation;
 	scene.camera.distance_to_center = 2.5f;
 	scene.camera.look_at({ 4,3,2 }, { 0,0,0 }, { 0,0,1 });
 
@@ -113,10 +112,10 @@ void initialize_data()
 
 	earth = new planet();
 	glUseProgram(earth->planet_shader);
-	opengl_uniform(earth->planet_shader, "pulse", sea_movement_pulse, false);
-	opengl_uniform(earth->planet_shader, "height", sea_movement_height, false);
-	opengl_uniform(earth->planet_shader, "color", color_sea_low, false);
-	opengl_uniform(earth->planet_shader, "color_variant", color_sea_high, false);
+	opengl_uniform(earth->planet_shader, "pulse_vertical", sea_movement_pulse_vertical, false);
+	opengl_uniform(earth->planet_shader, "pulse_horizontal", sea_movement_pulse_horizontal, false);
+	opengl_uniform(earth->planet_shader, "height_vertical", sea_movement_height_vertical, false);
+	opengl_uniform(earth->planet_shader, "height_horizontal", sea_movement_height_horizontal, false);
 
 	/* Initialisation de l'arrière plan*/
 	_skybox.init_skybox(vec3(0, 0, 0), 10, "space");
@@ -156,7 +155,7 @@ void display_interface()
 	update |= ImGui::SliderFloat("Persistency", &parameters.persistensy, 0.1, 2, "%3f", 3);
 	update |= ImGui::SliderFloat("FrequencyGain", &parameters.frequency_gain, 1, 5, "%3f", 3);
 
-	if (update) earth->update(parameters);
+	/*if (update) earth->update(parameters);*/
 }
 
 
