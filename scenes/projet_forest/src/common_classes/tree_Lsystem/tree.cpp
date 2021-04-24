@@ -1,5 +1,5 @@
-#include "tree_Lsystem/tree.hpp"
-#include "tree_Lsystem/tree_LSys.hpp"
+#include "tree.hpp"
+#include "tree_LSys.hpp"
 
 using namespace vcl;
 
@@ -121,4 +121,3 @@ mesh create_champignons()
 
     return champ;
 }
-

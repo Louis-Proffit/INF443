@@ -1,4 +1,4 @@
-#include "tree_Lsystem/LSystem.hpp"
+#include "LSystem.hpp"
 
 typedef std::map<char, std::string>::iterator iter;
 

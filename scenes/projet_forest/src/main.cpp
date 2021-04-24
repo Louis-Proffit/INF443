@@ -1,38 +1,35 @@
 #include "vcl/vcl.hpp"
 #include <iostream>
 
-#include "terrain/terrain.hpp"
-#include "tree_Lsystem/tree.hpp"
+#include "common_classes/terrain/terrain.hpp"
+#include "common_classes/tree_Lsystem/tree.hpp"
 
-#include "animation/interpolation.hpp"
 #include "scene_helper.hpp"
-#include "tree_Lsystem/tree_LSys.hpp"
-#include "tree_Lsystem/LSystem.hpp"
-#include "terrain/heightmap.hpp"
-#include "SkyBox/skybox.hpp"
+#include "common_classes/tree_Lsystem/tree_LSys.hpp"
+#include "common_classes/tree_Lsystem/LSystem.hpp"
+#include "common_classes/terrain/heightmap.hpp"
+#include "common_classes/SkyBox/skybox.hpp"
 
-#include "water/water.hpp"
-#include "water/waterfbuffer.hpp"
+#include "common_classes/water/water.hpp"
+#include "common_classes/water/waterfbuffer.hpp"
 
 using namespace vcl;
 
 scene_environment scene;
 user_interaction_parameters user;
 
-skybox cube;
-
-TreeGenerator tree;
-
 buffer<vec3> key_positions;
-buffer<float> key_times;
-timer_interval timer;
+
 HillAlgorithmParameters params = HillAlgorithmParameters(100, 100, 40, 0, 5.0f, 0.1f, 5.0f);
 std::vector<std::vector<float>> gen = generateRandomHeightData(params);
 
 HillAlgorithmParameters params2 = HillAlgorithmParameters();
-/*std::vector<std::vector<float>> genfile = generateFileHeightData("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/textures/heightmap_7.png", params2);*/
 
-std::vector<std::vector<float>> genfile = generateFileHeightData("../assets/textures/heightmap_10.png", params2);
+std::vector<std::vector<float>> genfile = generateFileHeightData("../../assets/textures/heightmap_10.png", params2);
+
+//================================================
+//			Shader Declaration
+//=================================================
 
 GLuint texture_rock = 0;
 GLuint texture_snow = 0;
@@ -43,45 +40,33 @@ GLuint shader_water;
 GLuint shader_basic_w;
 
 //================================================
-//			Variables Declaration
-//=================================================
-
-//const unsigned int N = 100;
-/*const float LOD1 = 5.0f;
-const float LOD2 = 10.0f;
-const float LOD3 = 20.0f;*/
-
-//================================================
 //			Functions declaration
 //=================================================
-
-void mouse_move_callback(GLFWwindow *window, double xpos, double ypos);
-void window_size_callback(GLFWwindow *window, int width, int height);
 
 void initialize_data();
 void display_interface();
 void display_scene(vec4 clipPlane);
-//std::vector<float> generate_rotations(int N);
-//void create_grass(int nbQuad, int ku, int kv);
 
-std::string openShader(std::string const &shader_name);
+void mouse_move_callback(GLFWwindow *window, double xpos, double ypos);
+void window_size_callback(GLFWwindow *, int width, int height);
 
 //================================================
-//				Mesh Declaration
+//				Objects Declaration
 //=================================================
 
 mesh terrain;
 mesh_drawable terrain_visual;
-//mesh_drawable billboard_grass;
 perlin_noise_parameters parameters;
 mesh_drawable tree_real;
 
 mesh_drawable waterd;
 Water wat;
 
-int const width = 1280, height = 1024;
+skybox cube;
 
-//std::vector<float> rot = generate_rotations(N);
+TreeGenerator tree;
+
+int const width = 1280, height = 1024;
 
 int main(int, char *argv[])
 {
@@ -215,9 +200,10 @@ void initialize_data()
 {
 
 	//================================================
-	//			Initialize default shader
+	//			Initialize all shader
 	//=================================================
 
+	//Default Shaders
 	GLuint const shader_mesh = opengl_create_shader_program(opengl_shader_preset("mesh_vertex"), opengl_shader_preset("mesh_fragment"));
 	GLuint const shader_uniform_color = opengl_create_shader_program(opengl_shader_preset("single_color_vertex"), opengl_shader_preset("single_color_fragment"));
 	GLuint const texture_white = opengl_texture_to_gpu(image_raw{1, 1, image_color_type::rgba, {255, 255, 255, 255}});
@@ -226,8 +212,8 @@ void initialize_data()
 	curve_drawable::default_shader = shader_uniform_color;
 	segments_drawable::default_shader = shader_uniform_color;
 
+	//Custom Shaders
 	shader_heightmap = opengl_create_shader_program(openShader("heightmap_vert"), openShader("heightmap_frag"));
-
 	shader_water = opengl_create_shader_program(openShader("water_vert"), openShader("water_frag"));
 
 	shader_basic_w = opengl_create_shader_program(openShader("mesh_vertexw"), openShader("mesh_fragmentw"));
@@ -240,20 +226,19 @@ void initialize_data()
 	user.gui.display_frame = false;
 	scene.camera.distance_to_center = 4.5f;
 	scene.camera.look_at({4, 3, 3}, {0, 0, 0}, {0, 0, 1});
-	//scene.camera.position_camera = vec3(1, 1, 5);
 
 	//================================================
 	//				Terrain Declaration
 	//=================================================
 
 	terrain = createFromHeightData(genfile, params2);
-	std::cout << params2.rows << std::endl;
+
 	terrain_visual = mesh_drawable(terrain, shader_heightmap);
-	terrain_visual.texture = opengl_texture_to_gpu(image_load_png("../assets/textures/texture_grass.png"), GL_REPEAT /**GL_TEXTURE_WRAP_S*/, GL_REPEAT /**GL_TEXTURE_WRAP_T*/);
+	terrain_visual.texture = opengl_texture_to_gpu(image_load_png("../../assets/textures/texture_grass.png"), GL_REPEAT /**GL_TEXTURE_WRAP_S*/, GL_REPEAT /**GL_TEXTURE_WRAP_T*/);
 	terrain_visual.transform.translate = vec3(0, 0, -0.5);
 
-	texture_rock = opengl_texture_to_gpu(image_load_png("../assets/textures/rock2.png"), GL_REPEAT /**GL_TEXTURE_WRAP_S*/, GL_REPEAT /**GL_TEXTURE_WRAP_T*/);
-	texture_snow = opengl_texture_to_gpu(image_load_png("../assets/textures/snow.png"), GL_REPEAT /**GL_TEXTURE_WRAP_S*/, GL_REPEAT /**GL_TEXTURE_WRAP_T*/);
+	texture_rock = opengl_texture_to_gpu(image_load_png("../../assets/textures/rock2.png"), GL_REPEAT /**GL_TEXTURE_WRAP_S*/, GL_REPEAT /**GL_TEXTURE_WRAP_T*/);
+	texture_snow = opengl_texture_to_gpu(image_load_png("../../assets/textures/snow.png"), GL_REPEAT /**GL_TEXTURE_WRAP_S*/, GL_REPEAT /**GL_TEXTURE_WRAP_T*/);
 
 	//update_terrain(terrain, terrain_visual, parameters);
 	/*image_raw const sol = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/textures/texture_heightmap_4.png");
@@ -270,11 +255,7 @@ void initialize_data()
 	//================================================
 	//				Water Declaration
 	//=================================================
-	wat.init_water();
-	wat.grid.color.fill({0.02, 0.72, 0.8});
-	dudvmap = opengl_texture_to_gpu(image_load_png("../../assets/water/waterdudv.png"), GL_REPEAT /**GL_TEXTURE_WRAP_S*/, GL_REPEAT /**GL_TEXTURE_WRAP_T*/); // ->> à mettre quand j'aurai reussi à appliquer la reflection et refraction texture
-	normalMap = opengl_texture_to_gpu(image_load_png("../../assets/water/waternormal.png"), GL_REPEAT /**GL_TEXTURE_WRAP_S*/, GL_REPEAT /**GL_TEXTURE_WRAP_T*/);
-	waterd = mesh_drawable(wat.grid, shader_water);
+	wat.init_water(shader_water);
 
 	//================================================
 	//				Tree Declaration
@@ -291,7 +272,7 @@ void initialize_data()
 	/*billboard_grass = mesh_drawable(mesh_primitive_quadrangle({-1, 0, 0}, {1, 0, 0}, {1, 0, 2}, {-1, 0, 2}));
 	billboard_grass.transform.scale = 0.3f;
 	billboard_grass.texture = opengl_texture_to_gpu(image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/textures/grass_texture.png"));
-	billboard_grass.texture = opengl_texture_to_gpu(image_load_png("../assets/textures/grass_texture.png"));*/
+	billboard_grass.texture = opengl_texture_to_gpu(image_load_png("../../assets/textures/grass_texture.png"));*/
 }
 
 void display_scene(vec4 clipPlane)
@@ -337,39 +318,6 @@ void display_scene(vec4 clipPlane)
 	//draw_wireframe(tree.dtrunk, scene);
 
 	//================================================
-	//				Draw Billboards
-	//=================================================
-	/*glDepthMask(false);
-	for (unsigned int ku = 0; ku < N; ++ku)
-	{
-		for (unsigned int kv = 0; kv < N; ++kv)
-		{
-			// Compute local parametric coordinates (u,v) \in [0,1]
-			const float u = ku / (N - 1.0f);
-			const float v = kv / (N - 1.0f);
-			vec3 p = evaluate_terrain(u, v);
-			p.z += parameters.terrain_height * noise_perlin({p.x / 20 + 0.5f, p.y / 20 + 0.5f}, parameters.octave, parameters.persistency, parameters.frequency_gain);
-			vec3 distance_with_camera = p - scene.camera.position();
-			billboard_grass.transform.translate = p;
-			float dist_length = norm(distance_with_camera);
-
-			if (dist_length < LOD1)
-			{
-				create_grass(3, ku, kv);
-			}
-			if (dist_length >= LOD1 && dist_length < LOD2)
-			{
-				create_grass(2, ku, kv);
-			}
-			if (dist_length >= LOD2 && dist_length < LOD3)
-			{
-				create_grass(1, ku, kv);
-			}
-		}
-	}
-	glDepthMask(true);*/
-
-	//================================================
 	//					FIN
 	//=================================================
 	glEnable(GL_BLEND);
@@ -393,17 +341,6 @@ void display_interface()
 	ImGui::Checkbox("Wireframe", &user.gui.display_wireframe);
 }
 
-void window_size_callback(GLFWwindow *, int width, int height)
-{
-	glViewport(0, 0, width, height);
-	float const aspect = width / static_cast<float>(height);
-	float const fov = 50.0f * pi / 180.0f;
-	float const z_min = 0.1f;
-	float const z_max = 1000.0f;
-	scene.projection = projection_perspective(fov, aspect, z_min, z_max);
-	scene.projection_inverse = projection_perspective_inverse(fov, aspect, z_min, z_max);
-}
-
 void mouse_move_callback(GLFWwindow *window, double xpos, double ypos)
 {
 	vec2 const p1 = glfw_get_mouse_cursor(window, xpos, ypos);
@@ -424,100 +361,13 @@ void mouse_move_callback(GLFWwindow *window, double xpos, double ypos)
 	user.mouse_prev = p1;
 }
 
-std::vector<float> generate_rotations(int N)
+void window_size_callback(GLFWwindow *, int width, int height)
 {
-	std::vector<float> res;
-	for (int i = 0; i < N; i++)
-	{
-		float u = rand_interval() * 3.14f;
-		float v = rand_interval() * 3.14f;
-		res.push_back(u);
-		res.push_back(v);
-	}
-	return res;
-}
-
-/*void create_grass(int nbQuad, int ku, int kv)
-{
-	if (nbQuad == 3)
-	{
-		billboard_grass.transform.scale = 0.1f + rot[ku * kv % (2 * N)] * 0.3f / 3.14f;
-		billboard_grass.transform.rotate = rotation();
-		draw(billboard_grass, scene);
-		billboard_grass.transform.rotate = rotation(vec3{0, 0, 1}, rot[kv]);
-		draw(billboard_grass, scene);
-		billboard_grass.transform.rotate = rotation(vec3{0, 0, 1}, rot[kv + ku]);
-		draw(billboard_grass, scene);
-	}
-	if (nbQuad == 2)
-	{
-		billboard_grass.transform.scale = 0.1f + rot[ku * kv % (2 * N)] * 0.3f / 3.14f;
-		billboard_grass.transform.rotate = rotation();
-		draw(billboard_grass, scene);
-		billboard_grass.transform.rotate = rotation(vec3{0, 0, 1}, rot[kv]);
-		draw(billboard_grass, scene);
-	}
-	if (nbQuad == 1)
-	{
-		billboard_grass.transform.scale = 0.1f + rot[ku * kv % (2 * N)] * 0.3f / 3.14f;
-		billboard_grass.transform.rotate = rotation();
-		draw(billboard_grass, scene);
-	}
-}*/
-
-std::string openShader(std::string const &shader_name)
-{
-	if (shader_name == "post_processing_vertex")
-	{
-#include "../assets/post_processing/post_processing.vert.glsl"
-		return s;
-	}
-	if (shader_name == "post_processing_fragment")
-	{
-#include "../assets/post_processing/post_processing.frag.glsl"
-		return s;
-	}
-	if (shader_name == "planet_post_vertex")
-	{
-#include "../assets/planet_post/planet.vert.glsl"
-		return s;
-	}
-	if (shader_name == "planet_post_fragment")
-	{
-#include "../assets/planet_post/planet.frag.glsl"
-		return s;
-	}
-	if (shader_name == "heightmap_frag")
-	{
-#include "../assets/heightmap/heightmap.frag.glsl"
-		return s;
-	}
-	if (shader_name == "heightmap_vert")
-	{
-#include "../assets/heightmap/heightmap.vert.glsl"
-		return s;
-	}
-	if (shader_name == "water_vert")
-	{
-#include "../assets/water/water.vert.glsl"
-		return s;
-	}
-	if (shader_name == "water_frag")
-	{
-#include "../assets/water/water.frag.glsl"
-		return s;
-	}
-	if (shader_name == "mesh_vertexw")
-	{
-#include "../assets/shaders/mesh.vert.glsl"
-		return s;
-	}
-	if (shader_name == "mesh_fragmentw")
-	{
-#include "../assets/shaders/mesh.frag.glsl"
-		return s;
-	}
-
-	error_vcl("Shader not found");
-	return "Error";
+	glViewport(0, 0, width, height);
+	float const aspect = width / static_cast<float>(height);
+	float const fov = 50.0f * pi / 180.0f;
+	float const z_min = 0.1f;
+	float const z_max = 1000.0f;
+	scene.projection = projection_perspective(fov, aspect, z_min, z_max);
+	scene.projection_inverse = projection_perspective_inverse(fov, aspect, z_min, z_max);
 }

@@ -41,3 +41,5 @@ void display_keypositions(vcl::mesh_drawable &sphere, vcl::buffer<vcl::vec3> con
 void opengl_uniform(GLuint shader, scene_environment const &current_scene);
 
 void picking_position(picking_structure &picking, vcl::buffer<vcl::vec3> &key_positions, vcl::glfw_state const &state, scene_environment const &scene, vcl::vec2 const &p);
+
+std::string openShader(std::string const &shader_name);
