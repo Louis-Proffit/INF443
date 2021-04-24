@@ -33,8 +33,6 @@ std::vector<std::vector<float>> genfile = generateFileHeightData("../../assets/t
 
 GLuint texture_rock = 0;
 GLuint texture_snow = 0;
-GLuint dudvmap;
-GLuint normalMap;
 GLuint shader_heightmap = 0;
 GLuint shader_water;
 GLuint shader_basic_w;
@@ -59,7 +57,6 @@ mesh_drawable terrain_visual;
 perlin_noise_parameters parameters;
 mesh_drawable tree_real;
 
-mesh_drawable waterd;
 Water wat;
 
 skybox cube;
@@ -127,36 +124,9 @@ int main(int, char *argv[])
 		glClear(GL_DEPTH_BUFFER_BIT);
 		display_scene(clipPlane);
 
-		glUseProgram(shader_water);
-		glActiveTexture(GL_TEXTURE3);
-		opengl_check;
-		glBindTexture(GL_TEXTURE_2D, fbos.getReflectionTexture());
-		opengl_check;
-		opengl_uniform(shader_water, "reflection_texture", 3);
-		opengl_check;
-		glActiveTexture(GL_TEXTURE4);
-		opengl_check;
-		glBindTexture(GL_TEXTURE_2D, fbos.getRefractionTexture());
-		opengl_check;
-		opengl_uniform(shader_water, "refraction_texture", 4);
-		opengl_check;
-		glActiveTexture(GL_TEXTURE5);
-		opengl_check;
-		glBindTexture(GL_TEXTURE_2D, dudvmap);
-		opengl_check;
-		opengl_uniform(shader_water, "dudvmap", 5);
-		opengl_check;
-		opengl_uniform(shader_water, "movefactor", movefactor);
-		opengl_check;
-		opengl_uniform(shader_water, "cameraPosition", scene.camera.position());
-		glActiveTexture(GL_TEXTURE6);
-		opengl_check;
-		glBindTexture(GL_TEXTURE_2D, normalMap);
-		opengl_check;
-		opengl_uniform(shader_water, "normalMap", 6);
-		opengl_check;
+		wat.set_Uniforms(fbos.getReflectionTexture(), fbos.getRefractionTexture(), scene.camera.position(), movefactor);
 
-		draw(waterd, scene);
+		wat.draw_water(scene);
 
 		imgui_create_frame();
 

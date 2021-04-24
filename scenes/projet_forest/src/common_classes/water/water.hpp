@@ -11,9 +11,17 @@ public:
     float waterHeight = 0;
     mesh grid;
     mesh_drawable waterd;
-    GLuint dudvmap = opengl_texture_to_gpu(image_load_png("../../assets/water/waterdudv.png"), GL_REPEAT, GL_REPEAT);
-    GLuint normalMap = opengl_texture_to_gpu(image_load_png("../../assets/water/waternormal.png"), GL_REPEAT, GL_REPEAT);
-    GLuint shader;
+    GLuint dudvmap = 0;
+    GLuint normalMap = 0;
+    GLuint shader = 0;
 
     void init_water(GLuint shad);
+
+    void set_Uniforms(GLuint reflectiontexture, GLuint refractiontexture, vec3 campos, float movefactor);
+
+    template <typename SCENE>
+    void draw_water(SCENE const &scene)
+    {
+        draw(waterd, scene);
+    }
 };
