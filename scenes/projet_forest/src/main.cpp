@@ -13,6 +13,8 @@
 #include "common_classes/water/water.hpp"
 #include "common_classes/water/waterfbuffer.hpp"
 
+#include "common_classes/Particles/particles.hpp"
+
 using namespace vcl;
 
 scene_environment scene;
@@ -44,6 +46,7 @@ GLuint shader_basic_w;
 void initialize_data();
 void display_interface();
 void display_scene(vec4 clipPlane);
+void display_reflec_refrac(vec4 clipPlane);
 
 void mouse_move_callback(GLFWwindow *window, double xpos, double ypos);
 void window_size_callback(GLFWwindow *, int width, int height);
@@ -58,6 +61,9 @@ perlin_noise_parameters parameters;
 mesh_drawable tree_real;
 
 Water wat;
+WaterFrameBuffers fbos;
+
+ParticleS part;
 
 skybox cube;
 
@@ -67,6 +73,10 @@ int const width = 1280, height = 1024;
 
 int main(int, char *argv[])
 {
+	//================================================
+	//				Loop Initialisation
+	//=================================================
+
 	std::cout << "Run " << argv[0] << std::endl;
 
 	GLFWwindow *window = create_window(width, height);
@@ -85,48 +95,35 @@ int main(int, char *argv[])
 	user.fps_record.start();
 	glEnable(GL_DEPTH_TEST);
 
-	float movefactor = 0;
-	// Water rendering
-	WaterFrameBuffers fbos;
-	fbos.initWaterFrameBuffers();
+	part.initVaoVbo();
+
+	//fbos.initWaterFrameBuffers();
 
 	vec4 clipPlane = vec4(0, 0, 1, -wat.waterHeight);
 	while (!glfwWindowShouldClose(window))
 	{
 		scene.light = scene.camera.position();
 		user.fps_record.update();
+		//================================================
+		//				Water Rendering
+		//=================================================
+		// Dont't forget to uncomment "wat.draw_water(scene) !!"
 
-		movefactor += (0.3 / 58.0);
-		//movefactor = movefactor - floor(movefactor);
-		//std::cout << movefactor << std::endl;
-		glEnable(GL_CLIP_DISTANCE0);
-		fbos.bindRefractionFrameBuffer();
-		glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-		glClear(GL_DEPTH_BUFFER_BIT);
-		display_scene(-clipPlane);
+		//display_reflec_refrac(clipPlane);
 
-		fbos.bindReflectionFrameBuffer();
-		glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-		glClear(GL_DEPTH_BUFFER_BIT);
-		float pos = 2 * (scene.camera.position().z - wat.waterHeight);
-		vec3 eye = scene.camera.position();
-		scene.camera.look_at(eye - vec3(0, 0, pos), scene.camera.center_of_rotation, vec3(0, 0, 1));
-		display_scene(clipPlane);
-		scene.camera.look_at(eye, scene.camera.center_of_rotation, vec3(0, 0, 1));
-		fbos.unbindCurrentFrameBuffer();
-
-		//Rendu de la vraie fenetre
-		glDisable(GL_CLIP_DISTANCE0);
-		glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-		glClear(GL_DEPTH_BUFFER_BIT);
+		//================================================
+		//				Real rendering
+		//=================================================
+		part.updateParticles(scene.camera.position());
+		std::cout << part.g_particule_position_size_data[3] << std::endl;
+		//part.updateShadVbos(scene);
 		display_scene(clipPlane);
 
-		wat.set_Uniforms(fbos.getReflectionTexture(), fbos.getRefractionTexture(), scene.camera.position(), movefactor);
+		//wat.set_Uniforms(fbos.getReflectionTexture(), fbos.getRefractionTexture(), scene.camera.position(), fbos.movefactor);
 
-		wat.draw_water(scene);
+		// à dessiner en dernier !!
+
+		//wat.draw_water(scene);
 
 		imgui_create_frame();
 
@@ -144,10 +141,6 @@ int main(int, char *argv[])
 
 		if (user.gui.display_frame)
 			draw(user.global_frame, scene);
-		//GLuint texture1 = fbos.getRefractionTexture();
-		//GLuint texture2 = fbos.getReflectionTexture();
-		//ImGui::Image((void *)texture1, ImVec2(320, 280));
-		//ImGui::Image((void *)texture2, ImVec2(320, 280));
 		display_interface();
 		ImGui::End();
 		imgui_render_frame(window);
@@ -157,8 +150,8 @@ int main(int, char *argv[])
 	}
 
 	// Water rendering
-	fbos.cleanUp();
-
+	//fbos.cleanUp();
+	part.cleanUp();
 	imgui_cleanup();
 	glfwDestroyWindow(window);
 	glfwTerminate();
@@ -220,7 +213,7 @@ void initialize_data()
 	//================================================
 	//				SkyBox Declaration
 	//=================================================
-	cube.init_skybox();
+	//cube.init_skybox();
 
 	//================================================
 	//				Water Declaration
@@ -234,19 +227,17 @@ void initialize_data()
 	tree.initTree("Classique");
 	tree.dtrunk.shader = shader_basic_w;
 	tree.dleaves.shader = shader_basic_w;
-
-	//================================================
-	//			BillBoards Declaration
-	//=================================================
-
-	/*billboard_grass = mesh_drawable(mesh_primitive_quadrangle({-1, 0, 0}, {1, 0, 0}, {1, 0, 2}, {-1, 0, 2}));
-	billboard_grass.transform.scale = 0.3f;
-	billboard_grass.texture = opengl_texture_to_gpu(image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/textures/grass_texture.png"));
-	billboard_grass.texture = opengl_texture_to_gpu(image_load_png("../../assets/textures/grass_texture.png"));*/
 }
 
 void display_scene(vec4 clipPlane)
 {
+	//================================================
+	//				Proper display
+	//=================================================
+	glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_DEPTH_BUFFER_BIT);
+
 	//================================================
 	//				Draw terrain
 	//=================================================
@@ -275,7 +266,7 @@ void display_scene(vec4 clipPlane)
 	//				Draw SkyBox
 	//=================================================
 
-	cube.draw_skybox(scene);
+	//cube.draw_skybox(scene);
 
 	//================================================
 	//				Draw tree
@@ -294,6 +285,26 @@ void display_scene(vec4 clipPlane)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
+void display_reflec_refrac(vec4 clipPlane)
+{
+	// Water Refraction rendering
+	fbos.movefactor += (0.3 / 58.0);
+	glEnable(GL_CLIP_DISTANCE0);
+	fbos.bindRefractionFrameBuffer();
+	display_scene(-clipPlane);
+
+	// Water Reflection rendering
+
+	fbos.bindReflectionFrameBuffer();
+	float pos = 2 * (scene.camera.position().z - wat.waterHeight);
+	vec3 eye = scene.camera.position();
+	scene.camera.look_at(eye - vec3(0, 0, pos), scene.camera.center_of_rotation, vec3(0, 0, 1));
+	display_scene(clipPlane);
+	scene.camera.look_at(eye, scene.camera.center_of_rotation, vec3(0, 0, 1));
+	fbos.unbindCurrentFrameBuffer();
+	glDisable(GL_CLIP_DISTANCE0);
+}
+
 void display_interface()
 {
 	ImGui::Checkbox("Frame", &user.gui.display_frame);
@@ -306,7 +317,7 @@ void display_interface()
 	update |= ImGui::SliderFloat("Height", &parameters.terrain_height, 0.1f, 1.5f);
 
 	if (update) // if any slider has been changed - then update the terrain
-		update_terrain(terrain, terrain_visual, parameters);
+		update_terrain(genfile, terrain, terrain_visual, parameters);
 
 	ImGui::Checkbox("Wireframe", &user.gui.display_wireframe);
 }

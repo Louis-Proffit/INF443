@@ -16,4 +16,4 @@ struct perlin_noise_parameters
 
 // Recompute the vertices of the terrain everytime a parameter is modified
 //  and update the mesh_drawable accordingly
-void update_terrain(vcl::mesh &terrain, vcl::mesh_drawable &terrain_visual, perlin_noise_parameters const &parameters);
+void update_terrain(std::vector<std::vector<float>> &heightData, vcl::mesh &terrain, vcl::mesh_drawable &terrain_visual, perlin_noise_parameters const &parameters);

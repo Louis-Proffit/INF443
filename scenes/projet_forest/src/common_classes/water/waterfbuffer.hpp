@@ -26,6 +26,8 @@ public:
 
     GLuint refractionDepthTexture = 0;
 
+    float movefactor = 0;
+
     void initWaterFrameBuffers()
     { //call when loading the game
         initialiseReflectionFrameBuffer();

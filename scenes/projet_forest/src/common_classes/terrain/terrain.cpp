@@ -100,7 +100,7 @@ std::vector<vcl::vec3> generate_positions_on_terrain(int N)
     return res;
 }
 
-void update_terrain(mesh &terrain, mesh_drawable &terrain_visual, perlin_noise_parameters const &parameters)
+void update_terrain(std::vector<std::vector<float>> &heightData, mesh &terrain, mesh_drawable &terrain_visual, perlin_noise_parameters const &parameters)
 {
     // Number of samples in each direction (assuming a square grid)
     int const N = std::sqrt(terrain.position.size());
@@ -121,7 +121,7 @@ void update_terrain(mesh &terrain, mesh_drawable &terrain_visual, perlin_noise_p
             float const noise = noise_perlin({u, v}, parameters.octave, parameters.persistency, parameters.frequency_gain);
 
             // use the noise as height value
-            terrain.position[idx].z = parameters.terrain_height * (noise) + evaluate_terrain(u, v).z;
+            terrain.position[idx].z = (noise) + heightData[u][v];
 
             // use also the noise as color value
             terrain.color[idx] = 0.3f * vec3(0, 0.5f, 0) + 0.7f * noise * vec3(1, 1, 1);

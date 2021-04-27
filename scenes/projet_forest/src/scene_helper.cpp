@@ -109,6 +109,16 @@ std::string openShader(std::string const &shader_name)
 #include "../../assets/shaders/mesh.frag.glsl"
 		return s;
 	}
+	if (shader_name == "partic_vert")
+	{
+#include "../../assets/particles/partic.vert.glsl"
+		return s;
+	}
+	if (shader_name == "partic_frag")
+	{
+#include "../../assets/particles/partic.frag.glsl"
+		return s;
+	}
 
 	error_vcl("Shader not found");
 	return "Error";
