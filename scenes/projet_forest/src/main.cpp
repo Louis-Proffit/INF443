@@ -115,7 +115,7 @@ int main(int, char *argv[])
 		//				Real rendering
 		//=================================================
 		part.updateParticles(scene.camera.position());
-		std::cout << part.g_particule_position_size_data[3] << std::endl;
+		//std::cout << part.g_particule_position_size_data[3] << std::endl;
 		//part.updateShadVbos(scene);
 		display_scene(clipPlane);
 
