@@ -97,9 +97,10 @@ int main(int, char *argv[])
 
 	part.initVaoVbo();
 
-	//fbos.initWaterFrameBuffers();
+	fbos.initWaterFrameBuffers();
 
 	vec4 clipPlane = vec4(0, 0, 1, -wat.waterHeight);
+
 	while (!glfwWindowShouldClose(window))
 	{
 		scene.light = scene.camera.position();
@@ -109,21 +110,25 @@ int main(int, char *argv[])
 		//=================================================
 		// Dont't forget to uncomment "wat.draw_water(scene) !!"
 
-		//display_reflec_refrac(clipPlane);
+		display_reflec_refrac(clipPlane);
 
 		//================================================
 		//				Real rendering
 		//=================================================
 		part.updateParticles(scene.camera.position());
-		//std::cout << part.g_particule_position_size_data[3] << std::endl;
-		//part.updateShadVbos(scene);
+
+		part.updateShadVbos(scene);
+		opengl_check;
+
+		//attention a bien uncomment le gl clear buffer si eau
+
 		display_scene(clipPlane);
 
-		//wat.set_Uniforms(fbos.getReflectionTexture(), fbos.getRefractionTexture(), scene.camera.position(), fbos.movefactor);
+		wat.set_Uniforms(fbos.getReflectionTexture(), fbos.getRefractionTexture(), scene.camera.position(), fbos.movefactor);
 
 		// à dessiner en dernier !!
 
-		//wat.draw_water(scene);
+		wat.draw_water(scene);
 
 		imgui_create_frame();
 
@@ -150,7 +155,7 @@ int main(int, char *argv[])
 	}
 
 	// Water rendering
-	//fbos.cleanUp();
+	fbos.cleanUp();
 	part.cleanUp();
 	imgui_cleanup();
 	glfwDestroyWindow(window);
@@ -232,13 +237,6 @@ void initialize_data()
 void display_scene(vec4 clipPlane)
 {
 	//================================================
-	//				Proper display
-	//=================================================
-	glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
-	glClear(GL_DEPTH_BUFFER_BIT);
-
-	//================================================
 	//				Draw terrain
 	//=================================================
 
@@ -291,6 +289,11 @@ void display_reflec_refrac(vec4 clipPlane)
 	fbos.movefactor += (0.3 / 58.0);
 	glEnable(GL_CLIP_DISTANCE0);
 	fbos.bindRefractionFrameBuffer();
+
+	glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_DEPTH_BUFFER_BIT);
+
 	display_scene(-clipPlane);
 
 	// Water Reflection rendering
@@ -299,6 +302,11 @@ void display_reflec_refrac(vec4 clipPlane)
 	float pos = 2 * (scene.camera.position().z - wat.waterHeight);
 	vec3 eye = scene.camera.position();
 	scene.camera.look_at(eye - vec3(0, 0, pos), scene.camera.center_of_rotation, vec3(0, 0, 1));
+
+	glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_DEPTH_BUFFER_BIT);
+
 	display_scene(clipPlane);
 	scene.camera.look_at(eye, scene.camera.center_of_rotation, vec3(0, 0, 1));
 	fbos.unbindCurrentFrameBuffer();

@@ -5,22 +5,22 @@
 
 namespace vcl
 {
-	std::string opengl_info_display()
-	{
+    std::string opengl_info_display()
+    {
         using vcl::str;
 
-		std::string s;
-		s += "[VENDOR]      : " + str((char*)(glGetString(GL_VENDOR))) + "\n";
-		s += "[RENDERDER]   : " + str((char*)(glGetString(GL_RENDERER))) + "\n";
-		s += "[VERSION]     : " + str((char*)(glGetString(GL_VERSION))) + "\n";
-		s += "[GLSL VERSION]: " + str((char*)(glGetString(GL_SHADING_LANGUAGE_VERSION))) + "\n";
+        std::string s;
+        s += "[VENDOR]      : " + str((char *)(glGetString(GL_VENDOR))) + "\n";
+        s += "[RENDERDER]   : " + str((char *)(glGetString(GL_RENDERER))) + "\n";
+        s += "[VERSION]     : " + str((char *)(glGetString(GL_VERSION))) + "\n";
+        s += "[GLSL VERSION]: " + str((char *)(glGetString(GL_SHADING_LANGUAGE_VERSION))) + "\n";
 
         return s;
-	}
+    }
 
-	static std::string opengl_error_to_string(GLenum error)
+    static std::string opengl_error_to_string(GLenum error)
     {
-        switch(error)
+        switch (error)
         {
         case GL_NO_ERROR:
             return "GL_NO_ERROR";
@@ -42,18 +42,22 @@ namespace vcl
             return "UNKNOWN";
         }
     }
-	void check_opengl_error(const std::string& file, const std::string& function, int line)
-	{
+    void check_opengl_error(const std::string &file, const std::string &function, int line)
+    {
         GLenum error = glGetError();
-        if( error !=GL_NO_ERROR )
+        if (error != GL_NO_ERROR)
         {
             std::string msg = "OpenGL ERROR detected\n"
-                    "\tFile "+file+"\n"
-                    "\tFunction "+function+"\n"
-                    "\tLine "+str(line)+"\n"
-                    "\tOpenGL Error: "+opengl_error_to_string(error);
+                              "\tFile " +
+                              file + "\n"
+                                     "\tFunction " +
+                              function + "\n"
+                                         "\tLine " +
+                              str(line) + "\n"
+                                          "\tOpenGL Error: " +
+                              opengl_error_to_string(error);
 
             error_vcl(msg);
         }
-	}
+    }
 }
