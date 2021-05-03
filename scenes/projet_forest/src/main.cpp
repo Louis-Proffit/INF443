@@ -27,7 +27,7 @@ std::vector<std::vector<float>> gen = generateRandomHeightData(params);
 
 HillAlgorithmParameters params2 = HillAlgorithmParameters();
 
-std::vector<std::vector<float>> genfile = generateFileHeightData("../../assets/textures/heightmap_10.png", params2);
+std::vector<std::vector<float>> genfile = generateFileHeightData("../../assets/textures/heightmap_12.png", params2);
 
 //================================================
 //			Shader Declaration
@@ -110,25 +110,27 @@ int main(int, char *argv[])
 		//=================================================
 		// Dont't forget to uncomment "wat.draw_water(scene) !!"
 
-		display_reflec_refrac(clipPlane);
+		//display_reflec_refrac(clipPlane);
 
 		//================================================
 		//				Real rendering
 		//=================================================
-		part.updateParticles(scene.camera.position());
+		//part.updateParticles(scene.camera.position());
 
-		part.updateShadVbos(scene);
+		//part.updateShadVbos(scene);
 		opengl_check;
 
 		//attention a bien uncomment le gl clear buffer si eau
-
+		glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_DEPTH_BUFFER_BIT);
 		display_scene(clipPlane);
 
-		wat.set_Uniforms(fbos.getReflectionTexture(), fbos.getRefractionTexture(), scene.camera.position(), fbos.movefactor);
+		//wat.set_Uniforms(fbos.getReflectionTexture(), fbos.getRefractionTexture(), scene.camera.position(), fbos.movefactor);
 
 		// à dessiner en dernier !!
 
-		wat.draw_water(scene);
+		//wat.draw_water(scene);
 
 		imgui_create_frame();
 
@@ -273,7 +275,7 @@ void display_scene(vec4 clipPlane)
 	opengl_check;
 	opengl_uniform(shader_basic_w, "plane", clipPlane);
 	opengl_check;
-	tree.draw_tree(scene);
+	//tree.draw_tree(scene);
 	//draw_wireframe(tree.dtrunk, scene);
 
 	//================================================

@@ -163,3 +163,8 @@ void ParticleS::cleanUp()
     glDeleteProgram(shad);
     glDeleteVertexArrays(1, &VertexArrayID);
 }
+
+void ParticleS::setTexture(GLuint text_)
+{
+    text = text_;
+}

@@ -50,7 +50,11 @@ public:
     GLuint particles_position_buffer;
     GLuint particles_color_buffer;
 
+    GLuint text;
+
     int ParticlesCount;
+
+    void setTexture(GLuint text_);
 
     int FindUnusedParticle();
     void SortParticles();
