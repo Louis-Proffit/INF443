@@ -51,6 +51,7 @@ public:
     GLuint particles_color_buffer;
 
     GLuint text;
+    GLuint textID;
 
     int ParticlesCount;
 
@@ -85,6 +86,14 @@ public:
 
         // Use our shader
         glUseProgram(shad);
+
+        // Coder le fait de mettre de la neige avec differents flocons facile
+        glActiveTexture(GL_TEXTURE1);
+        opengl_check;
+        glBindTexture(GL_TEXTURE_2D, text);
+        opengl_check;
+        opengl_uniform(shad, "myTexture", 1);
+        opengl_check;
 
         opengl_uniform(shad, scene);
         opengl_check;

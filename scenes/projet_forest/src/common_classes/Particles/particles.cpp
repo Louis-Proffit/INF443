@@ -36,6 +36,8 @@ void ParticleS::SortParticles()
 
 void ParticleS::initVaoVbo()
 {
+    setTexture(opengl_texture_to_gpu(image_load_png("../../assets/particles/snowflake_3.png"), GL_REPEAT /**GL_TEXTURE_WRAP_S*/, GL_REPEAT /**GL_TEXTURE_WRAP_T*/));
+
     glGenVertexArrays(1, &VertexArrayID);
     glBindVertexArray(VertexArrayID);
 

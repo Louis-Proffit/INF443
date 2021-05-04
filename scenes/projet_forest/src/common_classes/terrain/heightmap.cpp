@@ -69,8 +69,8 @@ mesh createFromHeightData(const std::vector<std::vector<float>> &heightData, con
             vec3 p;
             const float u = ku / (rows - 1.0f);
             const float v = kv / (columns - 1.0f);
-            float const x = 10 * (u - 0.5f);
-            float const y = 10 * columns / rows * (v - 0.5f);
+            float const x = 20 * (u - 0.5f);
+            float const y = 20 * columns / rows * (v - 0.5f);
             if ((ku > 0) && (ku < rows - 1) && (kv > 0) && (kv < columns - 1))
             {
                 p = vec3(x, y,
