@@ -15,6 +15,8 @@
 
 #include "common_classes/Particles/particles.hpp"
 
+#include "common_classes/town/town.hpp"
+
 using namespace vcl;
 
 scene_environment scene;
@@ -27,7 +29,7 @@ std::vector<std::vector<float>> gen = generateRandomHeightData(params);
 
 HillAlgorithmParameters params2 = HillAlgorithmParameters();
 
-std::vector<std::vector<float>> genfile = generateFileHeightData("../../assets/textures/heightmap_10.png", params2);
+std::vector<std::vector<float>> genfile = generateFileHeightData("../../assets/textures/heightmap_5.png", params2);
 
 //================================================
 //			Shader Declaration
@@ -68,6 +70,8 @@ ParticleS part;
 skybox cube;
 
 TreeGenerator tree;
+
+town ville;
 
 int const width = 1280, height = 1024;
 
@@ -115,15 +119,15 @@ int main(int, char *argv[])
 		//================================================
 		//				Real rendering
 		//=================================================
-		part.updateParticles(scene.camera.position());
+		//part.updateParticles(scene.camera.position());
 
-		part.updateShadVbos(scene);
+		//part.updateShadVbos(scene);
 		opengl_check;
 
 		//attention a bien uncomment le gl clear buffer si part
-		/*glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
+		glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
-		glClear(GL_DEPTH_BUFFER_BIT);*/
+		glClear(GL_DEPTH_BUFFER_BIT);
 		display_scene(clipPlane);
 
 		//wat.set_Uniforms(fbos.getReflectionTexture(), fbos.getRefractionTexture(), scene.camera.position(), fbos.movefactor);
@@ -234,6 +238,11 @@ void initialize_data()
 	tree.initTree("Classique");
 	tree.dtrunk.shader = shader_basic_w;
 	tree.dleaves.shader = shader_basic_w;
+
+	//================================================
+	//				Tree Declaration
+	//=================================================
+	ville.init_town();
 }
 
 void display_scene(vec4 clipPlane)
@@ -242,7 +251,7 @@ void display_scene(vec4 clipPlane)
 	//				Draw terrain
 	//=================================================
 
-	glUseProgram(shader_heightmap);
+	/*glUseProgram(shader_heightmap);
 	glActiveTexture(GL_TEXTURE1);
 	opengl_check;
 	glBindTexture(GL_TEXTURE_2D, texture_rock);
@@ -257,7 +266,7 @@ void display_scene(vec4 clipPlane)
 	opengl_check;
 	opengl_uniform(shader_heightmap, "plane", clipPlane);
 	opengl_check;
-	draw(terrain_visual, scene);
+	draw(terrain_visual, scene);*/
 	//draw_wireframe(terrain_visual, scene);
 
 	//draw(waterd, scene);
@@ -269,13 +278,19 @@ void display_scene(vec4 clipPlane)
 	//cube.draw_skybox(scene);
 
 	//================================================
+	//				Draw Town
+	//=================================================
+
+	ville.draw_town(scene);
+
+	//================================================
 	//				Draw tree
 	//=================================================
 	glUseProgram(shader_basic_w);
 	opengl_check;
 	opengl_uniform(shader_basic_w, "plane", clipPlane);
 	opengl_check;
-	//tree.draw_tree(scene);
+	tree.draw_tree(scene);
 	//draw_wireframe(tree.dtrunk, scene);
 
 	//================================================
