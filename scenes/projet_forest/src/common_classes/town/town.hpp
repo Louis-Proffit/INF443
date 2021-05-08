@@ -32,6 +32,8 @@ public:
 
     void init_town(string tow = "town1_low");
 
+    vec3 radom_divider();
+
     template <typename SCENE>
     void draw_town(SCENE const &scene)
     {
