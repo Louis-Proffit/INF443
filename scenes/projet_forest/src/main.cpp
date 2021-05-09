@@ -290,7 +290,7 @@ void display_scene(vec4 clipPlane)
 	opengl_check;
 	opengl_uniform(shader_basic_w, "plane", clipPlane);
 	opengl_check;
-	tree.draw_tree(scene);
+	//tree.draw_tree(scene);
 	//draw_wireframe(tree.dtrunk, scene);
 
 	//================================================

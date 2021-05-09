@@ -28,6 +28,12 @@ public:
 
     void compute_pate(int nb);
 
+    mesh create_pate(vector<vec3> coords);
+
+    mesh compute_batiment(vector<vec3> coords);
+
+    mesh compute_garden(vector<vec3> coords);
+
     void merge_pat(vector<vector<vec3>> &base, vector<vector<vec3>> to_add);
 
     void init_town(string tow = "town1_low");
@@ -38,5 +44,6 @@ public:
     void draw_town(SCENE const &scene)
     {
         draw(d_bat, scene);
+        //draw_wireframe(d_bat, scene);
     }
 };

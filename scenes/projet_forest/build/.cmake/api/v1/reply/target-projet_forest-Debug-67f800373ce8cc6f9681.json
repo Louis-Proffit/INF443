@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "projet_planete"
+			"path" : "projet_forest"
 		}
 	],
 	"backtrace" : 1,
@@ -97,7 +97,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : " -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk   -g -O2 -std=c++14 -Wall -Wextra -Wno-sign-compare -Wno-type-limits"
+					"fragment" : "-g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk -mmacosx-version-min=11.2   -g -O2 -std=c++14 -Wall -Wextra -Wno-sign-compare -Wno-type-limits"
 				}
 			],
 			"defines" : 
@@ -111,7 +111,7 @@
 			[
 				{
 					"backtrace" : 9,
-					"path" : "/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_planete/src"
+					"path" : "/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/src"
 				},
 				{
 					"backtrace" : 10,
@@ -200,18 +200,29 @@
 				440,
 				442,
 				444,
-				447,
+				446,
 				448,
 				450,
-				452
+				452,
+				454,
+				456,
+				458,
+				460,
+				462,
+				464,
+				465
 			]
 		}
 	],
-	"id" : "projet_planete::@6890427a1f51a3e7e1df",
+	"id" : "projet_forest::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
 		[
+			{
+				"fragment" : "-g",
+				"role" : "flags"
+			},
 			{
 				"fragment" : "",
 				"role" : "flags"
@@ -233,8 +244,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "projet_planete",
-	"nameOnDisk" : "projet_planete",
+	"name" : "projet_forest",
+	"nameOnDisk" : "projet_forest",
 	"paths" : 
 	{
 		"build" : ".",
@@ -622,10 +633,16 @@
 				441,
 				443,
 				445,
-				446,
+				447,
 				449,
 				451,
-				453
+				453,
+				455,
+				457,
+				459,
+				461,
+				463,
+				466
 			]
 		},
 		{
@@ -702,10 +719,17 @@
 				440,
 				442,
 				444,
-				447,
+				446,
 				448,
 				450,
-				452
+				452,
+				454,
+				456,
+				458,
+				460,
+				462,
+				464,
+				465
 			]
 		}
 	],
@@ -3003,17 +3027,111 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/Sphere.cpp",
+			"path" : "src/common_classes/Particles/particles.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "src/Sphere.hpp",
+			"path" : "src/common_classes/Particles/particles.hpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "src/constants.hpp",
+			"compileGroupIndex" : 0,
+			"path" : "src/common_classes/SkyBox/skybox.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/common_classes/SkyBox/skybox.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/common_classes/terrain/heightmap.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/common_classes/terrain/heightmap.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/common_classes/terrain/terrain.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/common_classes/terrain/terrain.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/common_classes/town/town.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/common_classes/town/town.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/common_classes/tree_Lsystem/LSystem.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/common_classes/tree_Lsystem/LSystem.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/common_classes/tree_Lsystem/tree.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/common_classes/tree_Lsystem/tree.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/common_classes/tree_Lsystem/tree_LSys.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/common_classes/tree_Lsystem/tree_LSys.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/common_classes/water/water.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/common_classes/water/water.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/common_classes/water/waterfbuffer.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/common_classes/water/waterfbuffer.hpp",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -3025,34 +3143,12 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/orbiters.cpp",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"path" : "src/orbiters.hpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
 			"path" : "src/scene_helper.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
 			"path" : "src/scene_helper.hpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "src/skybox.cpp",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"path" : "src/skybox.hpp",
 			"sourceGroupIndex" : 0
 		}
 	],

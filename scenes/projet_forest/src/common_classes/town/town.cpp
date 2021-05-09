@@ -10,11 +10,12 @@ using namespace std;
 void town::init_town(string tow)
 {
     init_pate();
-    compute_pate(7);
+    compute_pate(4);
     std::cout << patepos.size() << std::endl;
     for (size_t i = 0; i < patepos.size(); i++)
     {
-        batiments.push_back(mesh_primitive_quadrangle(patepos[i][0], patepos[i][3], patepos[i][2], patepos[i][1]));
+        //batiments.push_back(mesh_primitive_quadrangle(patepos[i][0], patepos[i][3], patepos[i][2], patepos[i][1]));
+        batiments.push_back(create_pate(patepos[i]));
         /*std::cout << patepos[i][0] << std::endl;
         std::cout << patepos[i][1] << std::endl;
         std::cout << patepos[i][2] << std::endl;
@@ -57,6 +58,8 @@ On note pour les types:
 Vec3(0,0,0) -> division normale -> on renvoit la division en 4
 Vec3(1,0,0) -> création d'un parc -> on arrete à jamais les divisons
 Vec3(2,0,0) -> division en cercle pour cette etape
+
+Avoir 1 en coordonnée y signifie qu'on peut pas avoir de cercle à l'interieur
 */
 vector<vector<vec3>> town::subdivise(vector<vec3> pate)
 {
@@ -91,7 +94,7 @@ vector<vector<vec3>> town::subdivise(vector<vec3> pate)
         current_cube.push_back(nvxs1);
         current_cube.push_back(nvxs2);
         current_cube.push_back(nvxs3);
-        current_cube.push_back(random_divider());
+        current_cube.push_back(random_divider() + vec3(0, pate[4].y, 0));
         res.push_back(current_cube);
 
         current_cube.clear();
@@ -105,7 +108,7 @@ vector<vector<vec3>> town::subdivise(vector<vec3> pate)
         current_cube.push_back(nvxs1);
         current_cube.push_back(nvxs2);
         current_cube.push_back(nvxs3);
-        current_cube.push_back(random_divider());
+        current_cube.push_back(random_divider() + vec3(0, pate[4].y, 0));
         res.push_back(current_cube);
 
         current_cube.clear();
@@ -119,7 +122,7 @@ vector<vector<vec3>> town::subdivise(vector<vec3> pate)
         current_cube.push_back(nvxs1);
         current_cube.push_back(nvxs2);
         current_cube.push_back(nvxs3);
-        current_cube.push_back(random_divider());
+        current_cube.push_back(random_divider() + vec3(0, pate[4].y, 0));
         res.push_back(current_cube);
 
         current_cube.clear();
@@ -133,12 +136,13 @@ vector<vector<vec3>> town::subdivise(vector<vec3> pate)
         current_cube.push_back(nvxs1);
         current_cube.push_back(nvxs2);
         current_cube.push_back(nvxs3);
-        current_cube.push_back(random_divider());
+        current_cube.push_back(random_divider() + vec3(0, pate[4].y, 0));
         res.push_back(current_cube);
 
         current_cube.clear();
     }
-    else if (pate[4].x == 1)
+
+    if (pate[4].x == 1)
     {
         res.push_back(pate);
     }
@@ -160,12 +164,12 @@ vector<vector<vec3>> town::subdivise(vector<vec3> pate)
         vec3 nvxs0 = center + cos(3 * PI / 4 - decal) * xloc + sin(3 * PI / 4 - decal) * yloc;
         vec3 nvxs1 = center + yloc;
         vec3 nvxs2 = center + cos(PI / 4 + decal) * xloc + sin(PI / 4 + decal) * yloc;
-        vec3 nvxs3 = center + decalh * nvxs1;
+        vec3 nvxs3 = center + decalh * yloc;
         current_cube.push_back(nvxs0);
         current_cube.push_back(nvxs1);
         current_cube.push_back(nvxs2);
         current_cube.push_back(nvxs3);
-        current_cube.push_back(vec3(0, 0, 0));
+        current_cube.push_back(vec3(0, 1, 0));
         res.push_back(current_cube);
 
         current_cube.clear();
@@ -173,12 +177,12 @@ vector<vector<vec3>> town::subdivise(vector<vec3> pate)
         nvxs0 = center + cos(PI / 4 - decal) * xloc + sin(PI / 4 - decal) * yloc;
         nvxs1 = center + xloc;
         nvxs2 = center + cos(-PI / 4 + decal) * xloc + sin(-PI / 4 + decal) * yloc;
-        nvxs3 = center + decalh * nvxs1;
+        nvxs3 = center + decalh * xloc;
         current_cube.push_back(nvxs0);
         current_cube.push_back(nvxs1);
         current_cube.push_back(nvxs2);
         current_cube.push_back(nvxs3);
-        current_cube.push_back(vec3(0, 0, 0));
+        current_cube.push_back(vec3(0, 1, 0));
         res.push_back(current_cube);
 
         current_cube.clear();
@@ -186,12 +190,12 @@ vector<vector<vec3>> town::subdivise(vector<vec3> pate)
         nvxs0 = center + cos(-PI / 4 - decal) * xloc + sin(-PI / 4 - decal) * yloc;
         nvxs1 = center - yloc;
         nvxs2 = center + cos(-3 * PI / 4 + decal) * xloc + sin(-3 * PI / 4 + decal) * yloc;
-        nvxs3 = center + decalh * nvxs1;
+        nvxs3 = center - decalh * yloc;
         current_cube.push_back(nvxs0);
         current_cube.push_back(nvxs1);
         current_cube.push_back(nvxs2);
         current_cube.push_back(nvxs3);
-        current_cube.push_back(vec3(0, 0, 0));
+        current_cube.push_back(vec3(0, 1, 0));
         res.push_back(current_cube);
 
         current_cube.clear();
@@ -199,12 +203,12 @@ vector<vector<vec3>> town::subdivise(vector<vec3> pate)
         nvxs0 = center + cos(-3 * PI / 4 - decal) * xloc + sin(-3 * PI / 4 - decal) * yloc;
         nvxs1 = center - xloc;
         nvxs2 = center + cos(3 * PI / 4 + decal) * xloc + sin(3 * PI / 4 + decal) * yloc;
-        nvxs3 = center + decalh * nvxs1;
+        nvxs3 = center - decalh * xloc;
         current_cube.push_back(nvxs0);
         current_cube.push_back(nvxs1);
         current_cube.push_back(nvxs2);
         current_cube.push_back(nvxs3);
-        current_cube.push_back(vec3(0, 0, 0));
+        current_cube.push_back(vec3(0, 1, 0));
         res.push_back(current_cube);
 
         current_cube.clear();
@@ -236,4 +240,68 @@ void town::compute_pate(int nb)
         current.clear();
     }
     patepos = base;
+}
+
+mesh town::compute_batiment(vector<vec3> coords)
+{
+    float prob = ((rand() / (float)RAND_MAX));
+    // formule pour avoir haut dans[a,b] haut = (b-a)*rand+a
+    float haut = (0.7f) * ((rand() / (float)RAND_MAX)) + 0.5;
+    mesh bat;
+    vec3 som0 = coords[0];
+    vec3 som1 = coords[1];
+    vec3 som2 = coords[2];
+    vec3 som3 = coords[3];
+    vec3 up = vec3(0, 0, haut);
+    if (prob < 0.7f)
+    {
+        bat.push_back(mesh_primitive_cubic_grid(som0, som3, som2, som1, som0 + up, som3 + up, som2 + up, som1 + up, 4, 4, 4));
+        vec3 nvxs0 = (3 * som0 + som2) / 4;
+        vec3 nvxs1 = (3 * som1 + som3) / 4;
+        vec3 nvxs2 = (som0 + 3 * som2) / 4;
+        vec3 nvxs3 = (som1 + 3 * som3) / 4;
+        bat.push_back(mesh_primitive_cubic_grid(nvxs0 + up, nvxs3 + up, nvxs2 + up, nvxs1 + up, nvxs0 + up + up, nvxs3 + up + up, nvxs2 + up + up, nvxs1 + up + up, 4, 4, 4));
+        nvxs0 = (3 * som0 + 2 * som2) / 5;
+        nvxs1 = (3 * som1 + 2 * som3) / 5;
+        nvxs2 = (2 * som0 + 3 * som2) / 5;
+        nvxs3 = (2 * som1 + 3 * som3) / 5;
+        bat.push_back(mesh_primitive_cubic_grid(nvxs0 + up + up, nvxs3 + up + up, nvxs2 + up + up, nvxs1 + up + up, nvxs0 + up + up + up, nvxs3 + up + up + up, nvxs2 + up + up + up, nvxs1 + up + up + up, 4, 4, 4));
+        for (auto i = 0; i < bat.color.size(); i++)
+        {
+            bat.color[i] = vec3(0.8f, 0.8f, 0.8f);
+        }
+    }
+    else if (prob < 0.9f)
+    {
+        bat.push_back(mesh_primitive_cubic_grid(som0, som3, som2, som1, som0 + 2 * up, som3 + 2 * up, som2 + 2 * up, som1 + 2 * up, 4, 4, 4));
+    }
+    else
+    {
+        vec3 center = (som0 + som1 + som2 + som3) / 4;
+        mesh cylindre = mesh_primitive_cylinder(3 * norm((som0 + som1) / 2 - center) / 4, center, center + 2.5f * up, 20, 10);
+        mesh cone = mesh_primitive_cone(3 * norm((som0 + som1) / 2 - center) / 4, 0.4 * haut, center + 2.5f * up);
+        bat.push_back(cylindre);
+        bat.push_back(cone);
+    }
+    return bat;
+}
+
+mesh town::compute_garden(vector<vec3> coords)
+{
+    // Pour compute les arbres, generer un vecteur de positions d'arbres et de hauteur, qui sera ensuite executé au moment du draw
+    mesh sol = mesh_primitive_quadrangle(coords[0], coords[3], coords[2], coords[1]);
+    sol.color.fill(vec3(0, 1.0f, 0));
+    return sol;
+}
+
+mesh town::create_pate(vector<vec3> coords)
+{
+    if (coords[4].x == 0)
+    {
+        return compute_batiment(coords);
+    }
+    else if (coords[4].x == 1)
+    {
+        return compute_garden(coords);
+    }
 }
