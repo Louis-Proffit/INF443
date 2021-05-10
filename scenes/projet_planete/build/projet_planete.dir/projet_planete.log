@@ -5,16 +5,17 @@ C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\
   scene_helper.cpp
   sphere.cpp
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(22,54): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(153,84): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(155,87): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(161,84): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(163,87): warning C4305: 'argument': truncation from 'double' to 'float'
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.cpp(97,54): warning C4305: 'argument': truncation from 'double' to 'float'
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.cpp(126,27): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.cpp(153,27): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.cpp(177,23): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.cpp(188,33): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.cpp(189,33): warning C4056: overflow in floating-point constant arithmetic
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.cpp(196,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.cpp(197,23): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.cpp(206,23): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.cpp(217,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.cpp(190,11): warning C4101: 'distance': unreferenced local variable
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.cpp(189,11): warning C4189: 'min_distance': local variable is initialized but not referenced
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.cpp(188,11): warning C4189: 'max_distance': local variable is initialized but not referenced
   projet_planete.vcxproj -> C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\projet_planete.exe

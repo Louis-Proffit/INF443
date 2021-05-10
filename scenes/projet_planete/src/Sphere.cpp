@@ -190,7 +190,7 @@ void planet::create_sphere()
     float distance;
 
     // Colors
-    buffer<float> distances_to_sun_position = buffer<float>(number_of_positions);
+    /*buffer<float> distances_to_sun_position = buffer<float>(number_of_positions);
     buffer<float> distances_to_sun_triangles = buffer<float>(number_of_triangles);
 
     for (int i = 0; i < number_of_positions; i++) distances_to_sun_position[i] = norm(_mesh.position[i] - sun_position);
@@ -199,7 +199,7 @@ void planet::create_sphere()
         distances_to_sun_triangles[i] = distance;
         if (distance < min_distance) min_distance = distance;
         else if (distance > max_distance) max_distance = distance;
-    }
+    }*/
 
     // Parralels
     buffer<vec3> parrallels_position = buffer<vec3>(number_of_positions);
@@ -213,7 +213,7 @@ void planet::create_sphere()
         parrallels_position[index_3] = _mesh.position[index_1] - _mesh.position[index_3];
     }
 
-    float t;
+    // float t;
     for (int i = 0; i < number_of_triangles; i++) {
         index_1 = _mesh.connectivity[i].x;
         index_2 = _mesh.connectivity[i].y;
@@ -225,8 +225,8 @@ void planet::create_sphere()
         planet_mesh.position[3 * i + 1] = _mesh.position[index_2];
         planet_mesh.position[3 * i + 2] = _mesh.position[index_3];
 
-        t = (distances_to_sun_triangles[i] - min_distance) / (max_distance - min_distance);
-        planet_mesh.color[3 * i + 0] = t * color_sea_low + (1 - t) * color_sea_high;
+        //t = (distances_to_sun_triangles[i] - min_distance) / (max_distance - min_distance);
+        planet_mesh.color[3 * i + 0] = color_sea_high; //t* color_sea_low + (1 - t) * color_sea_high;
         planet_mesh.color[3 * i + 1] = planet_mesh.color[3 * i];
         planet_mesh.color[3 * i + 2] = planet_mesh.color[3 * i];
 

@@ -1,11 +1,56 @@
 #include "orbiters.hpp"
-#include "constants.hpp"
 
 using namespace vcl;
 
 hierarchy_mesh_drawable get_plane_mesh_drawable(vec3 rotation_axis, float rotation_angle);
 hierarchy_mesh_drawable get_boat_mesh_drawable(vec3 rotation_axis, float rotation_angle);
 hierarchy_mesh_drawable get_satelite_mesh_drawable(vec3 rotation_axis, float rotation_angle);
+hierarchy_mesh_drawable get_sun_mesh_drawable(vec3 rotation_axis, float rotation_angle);
+
+void orbiter::display(scene_environment const& scene, user_interaction_parameters const& user)
+{
+	draw(orbiter_visual, scene);
+	draw(trajectory_visual, scene);
+	if (user.draw_wireframe) draw_wireframe(orbiter_visual, scene);
+}
+
+void orbiter::update(float time)
+{
+	rotation_angle = 2 * pi * time * rotation_speed;
+	orbiter_visual["root"].transform.rotate = rotation(vec3(0, 1, 0), rotation_angle);
+	orbiter_visual.update_local_to_global_coordinates();
+
+	trajectory_visual.add(orbiter_visual["body"].global_transform.translate, time);
+}
+
+orbiter::orbiter(orbiter_type _orbiter_type)
+{
+	rotation_axis = normalize(2 * vec3(rand_interval(), rand_interval(), rand_interval()) - vec3(1, 1, 1));
+	rotation_angle = 2 * pi * rand_interval();
+	current_rotate = 0;
+	switch (_orbiter_type) {
+	case orbiter_type::PLANE:
+		trajectory_visual = trajectory_drawable(10);
+		orbiter_visual = get_plane_mesh_drawable(rotation_axis, rotation_angle);
+		rotation_speed = plane_rotation_speed;
+		break;
+	case orbiter_type::SATELITE:
+		trajectory_visual = trajectory_drawable(50);
+		orbiter_visual = get_satelite_mesh_drawable(rotation_axis, rotation_angle);
+		rotation_speed = satelite_rotation_speed;
+		break;
+	case orbiter_type::BOAT:
+		trajectory_visual = trajectory_drawable(10);
+		orbiter_visual = get_boat_mesh_drawable(rotation_axis, rotation_angle);
+		rotation_speed = boat_rotation_speed;
+		break;
+	case orbiter_type::SUN:
+		trajectory_visual = trajectory_drawable(1);
+		orbiter_visual = get_sun_mesh_drawable(rotation_axis, rotation_angle);
+		rotation_speed = sun_rotation_speed;
+		break;
+	}
+}
 
 hierarchy_mesh_drawable get_plane_mesh_drawable(vec3 rotation_axis, float rotation_angle)
 {
@@ -110,36 +155,24 @@ hierarchy_mesh_drawable get_boat_mesh_drawable(vec3 rotation_axis, float rotatio
 	return boat_visual;
 }
 
-orbiter::orbiter(orbiter_type _orbiter_type)
+hierarchy_mesh_drawable get_sun_mesh_drawable(vec3 rotation_axis, float rotation_angle)
 {
-	rotation_axis = normalize(2 * vec3(rand_interval(), rand_interval(), rand_interval()) - vec3(1, 1, 1));
-	rotation_angle = 2 * pi * rand_interval();
-	current_rotate = 0;
-	switch (_orbiter_type) {
-	case orbiter_type::PLANE:
-		trajectory_visual = trajectory_drawable(10);
-		orbiter_visual = get_plane_mesh_drawable(rotation_axis, rotation_angle);
-		rotation_speed = plane_rotation_speed;
-		break;
-	case orbiter_type::SATELITE:
-		trajectory_visual = trajectory_drawable(50);
-		orbiter_visual = get_satelite_mesh_drawable(rotation_axis, rotation_angle);
-		rotation_speed = satelite_rotation_speed;
-		break;
-	case orbiter_type::BOAT:
-		trajectory_visual = trajectory_drawable(1);
-		orbiter_visual = get_boat_mesh_drawable(rotation_axis, rotation_angle);
-		rotation_speed = boat_rotation_speed;
-		break;
-	}
-}
 
-void orbiter::update(float time) 
-{
-	rotation_angle += 2 * pi * rotation_speed;
-	orbiter_visual["root"].transform.rotate = rotation(vec3(0, 1, 0), rotation_angle);
-	orbiter_visual.update_local_to_global_coordinates();
+	hierarchy_mesh_drawable sun_visual;
 
-	trajectory_visual.add(orbiter_visual["body"].global_transform.translate, time);
+	mesh_drawable center = mesh_drawable();
+	mesh_drawable rotated_center = mesh_drawable();
+	mesh_drawable body = mesh_drawable(mesh_primitive_sphere(sun_radius));
+
+	body.shading.color = vec3(1.0, 1.0, 0.0);
+
+	sun_visual.add(center, "center");
+	sun_visual.add(rotated_center, "root", "center");
+	sun_visual.add(body, "body", "root", vec3(0, 0, sun_altitude));
+
+	sun_visual["center"].transform.rotate = rotation(rotation_axis, rotation_angle);
+	sun_visual.update_local_to_global_coordinates();
+
+	return sun_visual;
 }
 

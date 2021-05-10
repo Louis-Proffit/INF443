@@ -18,15 +18,17 @@ void display_interface();
 
 user_interaction_parameters user;
 scene_environment scene;
-timer_interval timer;
+timer_basic timer;
 perlin_noise_parameters parameters{0.004, 7, 2.0, 2.0};
 
 planet* earth = 0;
+orbiter* sun = 0;
 skybox _skybox;
 
 int number_of_planes = 0;
 int number_of_satelites = 0;
 int number_of_boats = 0;
+int number_of_suns = 2;
 std::vector<orbiter*> orbiters;
 
 int main(int, char* argv[])
@@ -51,7 +53,7 @@ int main(int, char* argv[])
 	glEnable(GL_DEPTH_TEST);
 	while (!glfwWindowShouldClose(window))
 	{
-		scene.light = scene.camera.position();
+		scene.light = sun->orbiter_visual["body"].global_transform.translate;
 
 		user.fps_record.update();
 		
@@ -105,11 +107,7 @@ void initialize_data()
 	scene.camera.distance_to_center = 2.5f;
 	scene.camera.look_at({ 4,3,2 }, { 0,0,0 }, { 0,0,1 });
 
-	/* Création du timer */
-	timer.t_min = 0;
-	timer.t_max = 10; 
-	timer.t = timer.t_min;
-
+	/* Initialisation de la planète */
 	earth = new planet();
 	glUseProgram(earth->planet_shader);
 	opengl_uniform(earth->planet_shader, "pulse_vertical", sea_movement_pulse_vertical, false);
@@ -118,12 +116,13 @@ void initialize_data()
 	opengl_uniform(earth->planet_shader, "height_horizontal", sea_movement_height_horizontal, false);
 
 	/* Initialisation de l'arrière plan*/
-	_skybox.init_skybox(vec3(0, 0, 0), 10, "space");
+	_skybox.init_skybox(vec3(0, 0, 0), 10.0, "space");
 
 	/* Initialisation des orbiters */
 	for (int i = 0 ; i < number_of_planes ; i++) orbiters.push_back(new orbiter(orbiter_type::PLANE));
 	for (int i = 0 ; i < number_of_satelites; i++) orbiters.push_back(new orbiter(orbiter_type::SATELITE));
 	for (int i = 0; i < number_of_boats; i++) orbiters.push_back(new orbiter(orbiter_type::BOAT));
+	sun = new orbiter(orbiter_type::SUN);
 }
 
 
@@ -132,15 +131,24 @@ void display_scene()
 	timer.update();
 	float const time = timer.t;
 
+	/* Earth */
 	glUseProgram(earth->planet_shader);
 	opengl_uniform(earth->planet_shader, "time", time, false);
 	earth->display(scene, user);
 	
+
+	/* Skybox */
 	_skybox.draw_skybox(scene);
 
-	for (int i = 0; i < orbiters.size(); i++)
-		update_and_draw(orbiters[i]);
+	/* Orbiters */
+	for (int i = 0; i < orbiters.size(); i++) {
+		orbiters[i]->update(time);
+		orbiters[i]->display(scene, user);
+	}
 
+	/* suns */
+	sun->update(time);
+	sun->display(scene, user);
 }
 
 
@@ -192,14 +200,6 @@ void mouse_move_callback(GLFWwindow* window, double xpos, double ypos)
 
 	user.mouse_prev = p1;
 
-}
-
-void update_and_draw(orbiter* _orbiter) 
-{
-	_orbiter->update(timer.t);
-	_orbiter->trajectory_visual.visual.color.x = 1.0f;
-	draw(_orbiter->orbiter_visual, scene);
-	draw(_orbiter->trajectory_visual, scene);
 }
 
 

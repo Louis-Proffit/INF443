@@ -1,12 +1,14 @@
 #pragma once
 
 #include "vcl/vcl.hpp"
-/*#include "constants.hpp"*/
+#include "constants.hpp"
+#include "scene_helper.hpp"
 
 enum class orbiter_type{
 	PLANE,
 	SATELITE,
-	BOAT
+	BOAT,
+	SUN
 };
 
 struct orbiter
@@ -21,4 +23,5 @@ struct orbiter
 	orbiter(orbiter_type _orbiter_type);
 	
 	void update(float time);
+	void display(scene_environment const& scene, user_interaction_parameters const& user);
 };
