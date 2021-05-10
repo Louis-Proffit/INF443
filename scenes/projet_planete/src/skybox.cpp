@@ -6,7 +6,7 @@
 
 using namespace vcl;
 
-void skybox::init_skybox(vec3 const &_center, float const &_radius, std::string const &text)
+void skybox::init_skybox(vec3 const &_center, float const &_radius, std::string const &text, GLuint shader)
 {
     this->center = _center;
     this->radius = _radius;
@@ -73,38 +73,38 @@ void skybox::init_skybox(vec3 const &_center, float const &_radius, std::string 
 
     // front face
     face_devant = mesh_primitive_grid(vec3(-radius, -radius, radius), vec3(-radius, -radius, -radius), vec3(-radius, radius, -radius), vec3(-radius, radius, radius), 2, 2);
-    dface_devant = mesh_drawable(face_devant);
+    dface_devant = mesh_drawable(face_devant, shader);
     dface_devant.texture = opengl_texture_to_gpu(devant, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
     dface_devant.shading.phong = { 1, 0, 0, 1 };
 
     //back face
     face_derriere = mesh_primitive_grid(vec3(radius, radius, radius), vec3(radius, radius, -radius), vec3(radius, -radius, -radius), vec3(radius, -radius, radius), 2, 2);
-    dface_derriere = mesh_drawable(face_derriere);
+    dface_derriere = mesh_drawable(face_derriere, shader);
     dface_derriere.texture = opengl_texture_to_gpu(derriere, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
     dface_derriere.shading.phong = { 1, 0, 0, 1 };
 
     //face droite
     face_droite = mesh_primitive_grid(vec3(-radius, radius, radius), vec3(-radius, radius, -radius), vec3(radius, radius, -radius), vec3(radius, radius, radius), 2, 2);
-    dface_droite = mesh_drawable(face_droite);
+    dface_droite = mesh_drawable(face_droite, shader);
     dface_droite.texture = opengl_texture_to_gpu(droite, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
     dface_droite.shading.phong = { 1, 0, 0, 1 };
 
     //face gauche
     face_gauche = mesh_primitive_grid(vec3(radius, -radius, radius), vec3(radius, -radius, -radius), vec3(-radius, -radius, -radius), vec3(-radius, -radius, radius), 2, 2);
-    dface_gauche = mesh_drawable(face_gauche);
+    dface_gauche = mesh_drawable(face_gauche, shader);
     dface_gauche.texture = opengl_texture_to_gpu(gauche, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
     dface_gauche.shading.phong = { 1, 0, 0, 1 };
 
     //dessus
     face_haut = mesh_primitive_grid(vec3(radius, -radius, radius), vec3(-radius, -radius, radius), vec3(-radius, radius, radius), vec3(radius, radius, radius), 2, 2);
-    dface_haut = mesh_drawable(face_haut);
+    dface_haut = mesh_drawable(face_haut, shader);
     dface_haut.texture = opengl_texture_to_gpu(haut, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
     dface_haut.shading.phong = { 1, 0, 0, 1 };
 
     if (this->ground)
     { // sol
         face_dessous = mesh_primitive_grid(vec3(radius, radius, -radius), vec3(-radius, radius, -radius), vec3(-radius, -radius, -radius), vec3(radius, -radius, -radius), 2, 2);
-        dface_dessous = mesh_drawable(face_dessous);
+        dface_dessous = mesh_drawable(face_dessous, shader);
         dface_dessous.texture = opengl_texture_to_gpu(dessous, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
         dface_dessous.shading.phong = { 1, 0, 0, 1 };
     }

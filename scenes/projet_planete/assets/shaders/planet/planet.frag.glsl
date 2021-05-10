@@ -3,11 +3,11 @@ std::string s = R"(
 
 in struct fragment_data
 {
-    vec3 position;
-    vec3 normal;
-    vec3 color;
-    vec2 uv;
-
+    	vec3 position;
+    	vec3 normal;
+    	vec3 color;
+    	vec2 uv;
+	float height_proportion;
 	vec3 eye;
 } fragment;
 
@@ -17,15 +17,16 @@ uniform sampler2D image_texture;
 
 uniform vec3 light = vec3(1.0, 1.0, 1.0);
 
-uniform vec3 color = vec3(1.0, 1.0, 1.0); // Unifor color of the object
+uniform vec3 color = vec3(1.0, 1.0, 1.0);
+
 uniform float alpha = 1.0f; // alpha coefficient
 uniform float Ka = 0.4; // Ambient coefficient
 uniform float Kd = 0.8; // Diffuse coefficient
 uniform float Ks = 0.4f;// Specular coefficient
 uniform float specular_exp = 64.0; // Specular exponent
+
 uniform bool use_texture = true;
 uniform bool texture_inverse_y = false;
-
 
 void main()
 {

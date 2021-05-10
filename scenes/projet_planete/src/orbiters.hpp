@@ -23,5 +23,5 @@ struct orbiter
 	orbiter(orbiter_type _orbiter_type);
 	
 	void update(float time);
-	void display(scene_environment const& scene, user_interaction_parameters const& user);
+	void display();
 };

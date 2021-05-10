@@ -1,4 +1,81 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(504,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(505,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(504,5): warning MSB8004: Le répertoire Intermediate ne se termine pas par une barre oblique finale. Cette instance de build ajoutera une barre oblique, comme requis, pour permettre l'évaluation correcte du répertoire Intermediate.
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(505,5): warning MSB8004: Le répertoire Output ne se termine pas par une barre oblique finale. Cette instance de build ajoutera une barre oblique, comme requis, pour permettre l'évaluation correcte du répertoire Output.
+  Building Custom Rule C:/Users/Louis Proffit/OneDrive/Git/INF443/scenes/projet_planete_2/CMakeLists.txt
+  basic_types.cpp
+  error.cpp
+  rand.cpp
+  string.cpp
+  test_buffer.cpp
+  test_buffer_stack.cpp
+  test_grid.cpp
+  test_grid_stack_2D.cpp
+  offset_grid.cpp
+  curve_drawable.cpp
+  hierarchy_mesh_drawable.cpp
+  hierarchy_mesh_drawable_node.cpp
+  mesh_drawable.cpp
+  mesh_float_drawable.cpp
+  mesh_normal_drawable.cpp
+  mesh_wireframe_drawable.cpp
+  segments_drawable.cpp
+  shading_parameters.cpp
+  trajectory_drawable.cpp
+  image.cpp
+  debug.cpp
+  opengl_helper.cpp
+  shaders.cpp
+  texture.cpp
+  uniform.cpp
+  window.cpp
+  files.cpp
+  camera_around_center.cpp
+  camera_base.cpp
+  camera_head.cpp
+  camera_spherical_coordinates.cpp
+  common_functions.cpp
+  glfw_interaction.cpp
+  gui.cpp
+  timer_basic.cpp
+  timer_event_periodic.cpp
+  timer_fps.cpp
+  timer_interval.cpp
+  velocity_tracker.cpp
+  affine_rt.cpp
+  affine_rts.cpp
+  frame.cpp
+  interpolation.cpp
+  mat4.cpp
+  test_matrix_stack.cpp
+  projection.cpp
+  quaternion.cpp
+  rotation.cpp
+  test_rotation.cpp
+  test_vec_mat.cpp
+  vec_mat.cpp
+  shaders_preset.cpp
+  curve.cpp
+  intersection.cpp
+  obj.cpp
+  mesh_primitive.cpp
+  mesh.cpp
+  noise.cpp
+  glad.cpp
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_glfw.cpp
+  imgui_impl_opengl3.cpp
+  imgui_widgets.cpp
+  lodepng.cpp
+  simplexnoise1234.cpp
+  main.cpp
   orbiters.cpp
+  scene_helper.cpp
+  sphere.cpp
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete_2\src\sphere.cpp(17,27): warning C4100: 'time' : paramètre formel non référencé
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete_2\src\sphere.cpp(40,27): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete_2\src\sphere.cpp(67,27): warning C4018: '<' : incompatibilité signed/unsigned
+  special_types.cpp
+  special_types.cpp
+  LINK : C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete_2\projet_planete_2.exe introuvable ou non généré par la dernière édition de liens incrémentielle ; édition de liens complète en cours
   projet_planete_2.vcxproj -> C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete_2\projet_planete_2.exe

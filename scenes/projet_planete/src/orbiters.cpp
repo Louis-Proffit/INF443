@@ -7,12 +7,12 @@ hierarchy_mesh_drawable get_boat_mesh_drawable(vec3 rotation_axis, float rotatio
 hierarchy_mesh_drawable get_satelite_mesh_drawable(vec3 rotation_axis, float rotation_angle);
 hierarchy_mesh_drawable get_sun_mesh_drawable(vec3 rotation_axis, float rotation_angle);
 
-void orbiter::display(scene_environment const& scene, user_interaction_parameters const& user)
+/*void orbiter::display(scene_environment const& scene, user_interaction_parameters const& user)
 {
 	draw(orbiter_visual, scene);
 	draw(trajectory_visual, scene);
 	if (user.draw_wireframe) draw_wireframe(orbiter_visual, scene);
-}
+}*/
 
 void orbiter::update(float time)
 {

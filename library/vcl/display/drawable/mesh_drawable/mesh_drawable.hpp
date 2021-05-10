@@ -56,7 +56,6 @@ namespace vcl
 		glUseProgram(drawable.shader); opengl_check;
 
 		// Send uniforms for this shader
-		opengl_uniform(drawable.shader, scene);
 		opengl_uniform(drawable.shader, drawable.shading);
 		opengl_uniform(drawable.shader, "model", drawable.transform.matrix());
 

@@ -43,6 +43,9 @@
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_drawable\mesh_drawable.cpp">
       <Filter>vcl\display\drawable\mesh_drawable</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_float_drawable\mesh_float_drawable.cpp">
+      <Filter>vcl\display\drawable\mesh_float_drawable</Filter>
+    </ClCompile>
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_normal_drawable\mesh_normal_drawable.cpp">
       <Filter>vcl\display\drawable\mesh_normal_drawable</Filter>
     </ClCompile>
@@ -311,6 +314,9 @@
     </ClInclude>
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_drawable\mesh_drawable.hpp">
       <Filter>vcl\display\drawable\mesh_drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_float_drawable\mesh_float_drawable.hpp">
+      <Filter>vcl\display\drawable\mesh_float_drawable</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_normal_drawable\mesh_normal_drawable.hpp">
       <Filter>vcl\display\drawable\mesh_normal_drawable</Filter>
@@ -1597,6 +1603,9 @@
     </Filter>
     <Filter Include="vcl\display\drawable\mesh_drawable">
       <UniqueIdentifier>{E9875D6A-33F3-367E-A17E-BEECB8F3234B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\display\drawable\mesh_float_drawable">
+      <UniqueIdentifier>{82638747-922A-314D-9DF0-7A5FBCE0226B}</UniqueIdentifier>
     </Filter>
     <Filter Include="vcl\display\drawable\mesh_normal_drawable">
       <UniqueIdentifier>{5877A059-89DC-3993-A00B-7F1D0D62E247}</UniqueIdentifier>

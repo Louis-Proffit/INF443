@@ -1,21 +1,35 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(504,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(505,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(504,5): warning MSB8004: Le répertoire Intermediate ne se termine pas par une barre oblique finale. Cette instance de build ajoutera une barre oblique, comme requis, pour permettre l'évaluation correcte du répertoire Intermediate.
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(505,5): warning MSB8004: Le répertoire Output ne se termine pas par une barre oblique finale. Cette instance de build ajoutera une barre oblique, comme requis, pour permettre l'évaluation correcte du répertoire Output.
+  planet.cpp
   main.cpp
-  orbiters.cpp
-  scene_helper.cpp
-  sphere.cpp
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(22,54): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(161,84): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(163,87): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.cpp(97,54): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.cpp(126,27): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.cpp(153,27): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.cpp(177,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.cpp(188,33): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.cpp(189,33): warning C4056: overflow in floating-point constant arithmetic
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.cpp(206,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.cpp(217,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.cpp(190,11): warning C4101: 'distance': unreferenced local variable
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.cpp(189,11): warning C4189: 'min_distance': local variable is initialized but not referenced
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\sphere.cpp(188,11): warning C4189: 'max_distance': local variable is initialized but not referenced
+  skybox.cpp
+..\src\planet.cpp(185,54): warning C4305: 'argument' : troncation de 'double' à 'float'
+..\src\planet.cpp(218,27): warning C4018: '<' : incompatibilité signed/unsigned
+..\src\planet.cpp(245,27): warning C4018: '<' : incompatibilité signed/unsigned
+..\src\planet.cpp(269,23): warning C4018: '<' : incompatibilité signed/unsigned
+..\src\planet.cpp(280,33): warning C4305: 'initialisation' : troncation de 'double' à 'float'
+..\src\planet.cpp(281,33): warning C4056: dépassement d'une opération arithmétique de constante en virgule flottante
+..\src\planet.cpp(286,23): warning C4018: '<' : incompatibilité signed/unsigned
+..\src\planet.cpp(297,23): warning C4018: '<' : incompatibilité signed/unsigned
+..\src\planet.cpp(282,11): warning C4101: 'distance' : variable locale non référencée
+..\src\planet.cpp(281,11): warning C4189: 'min_distance' : variable locale initialisée mais non référencée
+..\src\planet.cpp(280,11): warning C4189: 'max_distance' : variable locale initialisée mais non référencée
+C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_drawable/mesh_drawable.hpp(51,56): warning C4100: 'scene' : paramètre formel non référencé (compilation du fichier source C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp)
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(51): message : voir la référence à l'instanciation de la fonction modèle 'void vcl::draw<scene_visual*>(const vcl::mesh_drawable &,const SCENE &)' en cours de compilation
+          with
+          [
+              SCENE=scene_visual *
+          ]
+C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_float_drawable/mesh_float_drawable.hpp(53,62): warning C4100: 'scene' : paramètre formel non référencé (compilation du fichier source ..\src\planet.cpp)
+..\src\planet.cpp(49): message : voir la référence à l'instanciation de la fonction modèle 'void vcl::draw<planet*>(const vcl::mesh_float_drawable &,const SCENE &)' en cours de compilation
+          with
+          [
+              SCENE=planet *
+          ]
+C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_drawable/mesh_drawable.hpp(51,56): warning C4100: 'scene' : paramètre formel non référencé (compilation du fichier source ..\src\planet.cpp)
+..\src\planet.cpp(62): message : voir la référence à l'instanciation de la fonction modèle 'void vcl::draw<planet*>(const vcl::mesh_drawable &,const SCENE &)' en cours de compilation
+          with
+          [
+              SCENE=planet *
+          ]
   projet_planete.vcxproj -> C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\projet_planete.exe

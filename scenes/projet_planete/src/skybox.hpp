@@ -25,11 +25,11 @@ public:
     bool ground = false;
 
     // fonction à appeler dans init data
-    void init_skybox(vec3 const &_center = vec3(0, 0, 0), float const &_radius = 50, std::string const &text = "sundown");
+    void init_skybox(vec3 const &_center = vec3(0, 0, 0), float const &_radius = 50, std::string const &text = "sundown", GLuint shader = mesh_drawable::default_shader);
 
     //fonction à appeler dans draw;
     template <typename SCENE>
-    void draw_skybox(SCENE const &scene)
+    void display_skybox(SCENE const &scene)
     {
         if (ground)
             draw(dface_dessous, scene);

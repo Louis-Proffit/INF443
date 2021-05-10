@@ -2,54 +2,32 @@
 
 using namespace vcl;
 
-void opengl_uniform(GLuint shader, scene_environment const& current_scene)
+user_parameters::user_parameters()
 {
-	opengl_uniform(shader, "projection", current_scene.projection);
-	opengl_uniform(shader, "view", current_scene.camera.matrix_view());
-	opengl_uniform(shader, "light", current_scene.light, false);
 }
 
-void picking_position(picking_structure& picking, buffer<vec3>& islands_centers, glfw_state const& state, scene_environment const& scene, vec2 const& p)
+user_parameters::~user_parameters()
 {
-	if(state.key_shift)
-	{
-		if (!state.mouse_click_left)
-		{
+}
 
-			vec3 const ray_direction = camera_ray_direction(scene.camera.matrix_frame(), scene.projection_inverse, p);
-			vec3 const ray_origin = scene.camera.position();
+scene_visual::scene_visual(user_parameters* user)
+{
+	user_reference = user;
+}
 
-			intersection_structure intersection = intersection_ray_sphere(ray_origin, ray_direction, { 0, 0, 0 }, sphere_radius);
+scene_visual::~scene_visual()
+{
+}
 
-			if (intersection.valid == true) {
-				picking.active = false;
-				for (int i = 0; i < islands_centers.size(); i++) {
-					if (norm(intersection.position - islands_centers[i]) < island_radius) {
-						picking = { true, i };
-						break;
-					}
-				}
-			}
-
-			/*picking.active = true;
-			vec3 intersection_with_sphere = scene.camera.position() / sphere_radius;
-			for (int i = 0; i < islands_centers.size(); i++) {
-				if (norm(islands_centers[i] - intersection_with_sphere) < island_radius) {
-					picking = { true, i};
-					std::cout << "picking " << i << std::endl;
-					break;
-				}
-			}*/
-		}
-
-		if (state.mouse_click_left && picking.active)
-		{
-			// Action lors du clic
-			std::cout << "clic sur la surface" << std::endl;
-		}
-	}
-	else
-		picking.active = false;
+void scene_visual::handle_window_size_callback(GLFWwindow* window, int width, int height)
+{
+	glViewport(0, 0, width, height);
+	float const aspect = width / static_cast<float>(height);
+	float const fov = 50.0f * pi / 180.0f;
+	float const z_min = 0.1f;
+	float const z_max = 100.0f;
+	projection = projection_perspective(fov, aspect, z_min, z_max);
+	projection_inverse = projection_perspective_inverse(fov, aspect, z_min, z_max);
 }
 
 std::string open_shader(std::string const& shader_name)
@@ -62,6 +40,16 @@ std::string open_shader(std::string const& shader_name)
 	else if (shader_name == "planet_vert")
 	{
 #include "../build/assets/shaders/planet/planet.vert.glsl"
+		return s;
+	}
+	else if (shader_name == "normal_frag")
+	{
+#include "../build/assets/shaders/normal/normal.frag.glsl"
+		return s;
+	}
+	else if (shader_name == "normal_vert")
+	{
+#include "../build/assets/shaders/normal/normal.vert.glsl"
 		return s;
 	}
 
