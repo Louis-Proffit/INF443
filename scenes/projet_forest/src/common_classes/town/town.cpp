@@ -44,7 +44,7 @@ vec3 random_divider()
     {
         return vec3(1, 0, 0);
     }
-    else if (al < 0.06f)
+    else if (al < 0.07f)
     {
         return vec3(2, 0, 0);
     }
@@ -85,10 +85,12 @@ vector<vector<vec3>> town::subdivise(vector<vec3> pate)
     som0 // nvxs1
     nvxs3 // nvxs2
     */
+        float decalagey = (0.3f) * rand() / (float)RAND_MAX + 0.35f;
+        float decalagex = (0.3f) * rand() / (float)RAND_MAX + 0.35f;
         vec3 nvxs0 = som0;
-        vec3 nvxs1 = som0 + 0.48 * (som1 - som0);
-        vec3 nvxs2 = nvxs1 + 0.48 * (som3 - som0);
-        vec3 nvxs3 = som0 + 0.48 * (som3 - som0);
+        vec3 nvxs1 = som0 + (decalagey - 0.02f) * (som1 - som0);
+        vec3 nvxs2 = nvxs1 + (decalagex - 0.02f) * (som3 - som0);
+        vec3 nvxs3 = som0 + (decalagex - 0.02f) * (som3 - som0);
 
         current_cube.push_back(nvxs0);
         current_cube.push_back(nvxs1);
@@ -99,10 +101,10 @@ vector<vector<vec3>> town::subdivise(vector<vec3> pate)
 
         current_cube.clear();
 
-        nvxs0 = som1 + 0.48 * (som0 - som1);
+        nvxs0 = som1 + (1 - 0.02f - decalagey) * (som0 - som1);
         nvxs1 = som1;
-        nvxs2 = som1 + 0.48 * (som2 - som1);
-        nvxs3 = nvxs2 + 0.48 * (som3 - som2);
+        nvxs2 = som1 + (decalagex - 0.02f) * (som2 - som1);
+        nvxs3 = nvxs2 + (1 - 0.02f - decalagey) * (som3 - som2);
 
         current_cube.push_back(nvxs0);
         current_cube.push_back(nvxs1);
@@ -113,10 +115,10 @@ vector<vector<vec3>> town::subdivise(vector<vec3> pate)
 
         current_cube.clear();
 
-        nvxs1 = som2 + 0.48 * (som1 - som2);
-        nvxs0 = nvxs1 + 0.48 * (som3 - som2);
+        nvxs1 = som2 + (1 - 0.02f - decalagex) * (som1 - som2);
+        nvxs0 = nvxs1 + (1 - decalagey - 0.02f) * (som3 - som2);
         nvxs2 = som2;
-        nvxs3 = som2 + 0.48 * (som3 - som2);
+        nvxs3 = som2 + (1 - decalagey - 0.02f) * (som3 - som2);
 
         current_cube.push_back(nvxs0);
         current_cube.push_back(nvxs1);
@@ -127,9 +129,9 @@ vector<vector<vec3>> town::subdivise(vector<vec3> pate)
 
         current_cube.clear();
 
-        nvxs0 = som3 + 0.48 * (som0 - som3);
-        nvxs1 = nvxs0 + 0.48 * (som1 - som0);
-        nvxs2 = som3 + 0.48 * (som2 - som3);
+        nvxs0 = som3 + (1 - decalagex - 0.02f) * (som0 - som3);
+        nvxs1 = nvxs0 + (decalagey - 0.02f) * (som1 - som0);
+        nvxs2 = som3 + (decalagey - 0.02f) * (som2 - som3);
         nvxs3 = som3;
 
         current_cube.push_back(nvxs0);
@@ -246,43 +248,53 @@ mesh town::compute_batiment(vector<vec3> coords)
 {
     float prob = ((rand() / (float)RAND_MAX));
     // formule pour avoir haut dans[a,b] haut = (b-a)*rand+a
-    float haut = (0.7f) * ((rand() / (float)RAND_MAX)) + 0.5;
+    float haut = (0.7f) * rand() / (float)RAND_MAX + 0.5;
+    float scale = (0.15f) * rand() / (float)RAND_MAX + 0.85;
+    float rotate = (0.1f) * rand() / (float)RAND_MAX - 0.05;
     mesh bat;
-    vec3 som0 = coords[0];
-    vec3 som1 = coords[1];
-    vec3 som2 = coords[2];
-    vec3 som3 = coords[3];
+    vec3 som00 = coords[0];
+    vec3 som01 = coords[1];
+    vec3 som02 = coords[2];
+    vec3 som03 = coords[3];
+    vec3 som0 = (scale * som00 + (1 - scale) * som02);
+    vec3 som1 = (scale * som01 + (1 - scale) * som03);
+    vec3 som2 = (scale * som02 + (1 - scale) * som00);
+    vec3 som3 = (scale * som03 + (1 - scale) * som01);
     vec3 up = vec3(0, 0, haut);
     if (prob < 0.7f)
     {
-        bat.push_back(mesh_primitive_cubic_grid(som0, som3, som2, som1, som0 + up, som3 + up, som2 + up, som1 + up, 4, 4, 4));
-        vec3 nvxs0 = (3 * som0 + som2) / 4;
-        vec3 nvxs1 = (3 * som1 + som3) / 4;
-        vec3 nvxs2 = (som0 + 3 * som2) / 4;
-        vec3 nvxs3 = (som1 + 3 * som3) / 4;
-        bat.push_back(mesh_primitive_cubic_grid(nvxs0 + up, nvxs3 + up, nvxs2 + up, nvxs1 + up, nvxs0 + up + up, nvxs3 + up + up, nvxs2 + up + up, nvxs1 + up + up, 4, 4, 4));
-        nvxs0 = (3 * som0 + 2 * som2) / 5;
-        nvxs1 = (3 * som1 + 2 * som3) / 5;
-        nvxs2 = (2 * som0 + 3 * som2) / 5;
-        nvxs3 = (2 * som1 + 3 * som3) / 5;
-        bat.push_back(mesh_primitive_cubic_grid(nvxs0 + up + up, nvxs3 + up + up, nvxs2 + up + up, nvxs1 + up + up, nvxs0 + up + up + up, nvxs3 + up + up + up, nvxs2 + up + up + up, nvxs1 + up + up + up, 4, 4, 4));
+        vec3 nvxs0 = (rotate * som0 + (1 - rotate) * som1);
+        vec3 nvxs1 = (rotate * som1 + (1 - rotate) * som2);
+        vec3 nvxs2 = (rotate * som2 + (1 - rotate) * som3);
+        vec3 nvxs3 = (rotate * som3 + (1 - rotate) * som0);
+        bat.push_back(mesh_primitive_cubic_grid(nvxs0, nvxs3, nvxs2, nvxs1, nvxs0 + up, nvxs3 + up, nvxs2 + up, nvxs1 + up, 4, 4, 4));
+        vec3 nvvxs0 = (3 * nvxs0 + nvxs2) / 4;
+        vec3 nvvxs1 = (3 * nvxs1 + nvxs3) / 4;
+        vec3 nvvxs2 = (nvxs0 + 3 * nvxs2) / 4;
+        vec3 nvvxs3 = (nvxs1 + 3 * nvxs3) / 4;
+        bat.push_back(mesh_primitive_cubic_grid(nvvxs0 + up, nvvxs3 + up, nvvxs2 + up, nvvxs1 + up, nvvxs0 + up + up, nvvxs3 + up + up, nvvxs2 + up + up, nvvxs1 + up + up, 4, 4, 4));
+        nvvxs0 = (3 * nvxs0 + 2 * nvxs2) / 5;
+        nvvxs1 = (3 * nvxs1 + 2 * nvxs3) / 5;
+        nvvxs2 = (2 * nvxs0 + 3 * nvxs2) / 5;
+        nvvxs3 = (2 * nvxs1 + 3 * nvxs3) / 5;
+        bat.push_back(mesh_primitive_cubic_grid(nvvxs0 + up + up, nvvxs3 + up + up, nvvxs2 + up + up, nvvxs1 + up + up, nvvxs0 + up + up + up, nvvxs3 + up + up + up, nvvxs2 + up + up + up, nvvxs1 + up + up + up, 2, 2, 2));
         for (auto i = 0; i < bat.color.size(); i++)
         {
             bat.color[i] = vec3(0.8f, 0.8f, 0.8f);
         }
     }
-    else if (prob < 0.9f)
+    else if (prob < 1.0f)
     {
         bat.push_back(mesh_primitive_cubic_grid(som0, som3, som2, som1, som0 + 2 * up, som3 + 2 * up, som2 + 2 * up, som1 + 2 * up, 4, 4, 4));
     }
-    else
+    /*else
     {
         vec3 center = (som0 + som1 + som2 + som3) / 4;
         mesh cylindre = mesh_primitive_cylinder(3 * norm((som0 + som1) / 2 - center) / 4, center, center + 2.5f * up, 20, 10);
         mesh cone = mesh_primitive_cone(3 * norm((som0 + som1) / 2 - center) / 4, 0.4 * haut, center + 2.5f * up);
         bat.push_back(cylindre);
         bat.push_back(cone);
-    }
+    }*/
     return bat;
 }
 

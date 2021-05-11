@@ -38,7 +38,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "projet_forest::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-projet_forest-Debug-67f800373ce8cc6f9681.json",
+					"jsonFile" : "target-projet_forest-Debug-5bdcd07a8df8211cf432.json",
 					"name" : "projet_forest",
 					"projectIndex" : 0
 				}
@@ -48,8 +48,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/build",
-		"source" : "/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest"
+		"build" : "/Users/paultheron/Desktop/Projet/INF443/scenes/projet_forest/build",
+		"source" : "/Users/paultheron/Desktop/Projet/INF443/scenes/projet_forest"
 	},
 	"version" : 
 	{
