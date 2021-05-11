@@ -7,7 +7,7 @@
 using namespace vcl;
 using namespace std;
 
-void town::init_town(string tow)
+void town::init_town()
 {
     init_pate();
     compute_pate(4);
@@ -251,6 +251,7 @@ mesh town::compute_batiment(vector<vec3> coords)
     float haut = (0.7f) * rand() / (float)RAND_MAX + 0.5;
     float scale = (0.15f) * rand() / (float)RAND_MAX + 0.85;
     float rotate = (0.1f) * rand() / (float)RAND_MAX - 0.05;
+    float coloral = rand() / (float)RAND_MAX;
     mesh bat;
     vec3 som00 = coords[0];
     vec3 som01 = coords[1];
@@ -278,14 +279,29 @@ mesh town::compute_batiment(vector<vec3> coords)
         nvvxs2 = (2 * nvxs0 + 3 * nvxs2) / 5;
         nvvxs3 = (2 * nvxs1 + 3 * nvxs3) / 5;
         bat.push_back(mesh_primitive_cubic_grid(nvvxs0 + up + up, nvvxs3 + up + up, nvvxs2 + up + up, nvvxs1 + up + up, nvvxs0 + up + up + up, nvvxs3 + up + up + up, nvvxs2 + up + up + up, nvvxs1 + up + up + up, 2, 2, 2));
-        for (auto i = 0; i < bat.color.size(); i++)
+        if (coloral < 0.5f)
         {
-            bat.color[i] = vec3(0.8f, 0.8f, 0.8f);
+            for (auto i = 0; i < bat.color.size(); i++)
+            {
+                bat.color[i] = vec3(245, 245, 220) / 255.0f; // couleur
+            }
+        }
+        else
+        {
+            for (auto i = 0; i < bat.color.size(); i++)
+            {
+                bat.color[i] = vec3(206, 206, 206) / 255.0f; // couleur grise
+            }
         }
     }
     else if (prob < 1.0f)
     {
         bat.push_back(mesh_primitive_cubic_grid(som0, som3, som2, som1, som0 + 2 * up, som3 + 2 * up, som2 + 2 * up, som1 + 2 * up, 4, 4, 4));
+        for (auto i = 0; i < bat.color.size(); i++)
+        {
+            bat.color[i] = vec3(250, 240, 197) / 255.0f;
+        }
+        bat.push_back(compute_windows_on_cube(som0, som3, som2, som1, som0 + 2 * up, som3 + 2 * up, som2 + 2 * up, som1 + 2 * up));
     }
     /*else
     {
@@ -316,4 +332,58 @@ mesh town::create_pate(vector<vec3> coords)
     {
         return compute_garden(coords);
     }
+    else
+        return compute_batiment(coords);
+}
+
+mesh town::compute_windows_on_cube(vec3 const &p000, vec3 const &p100, vec3 const &p110, vec3 const &p010, vec3 const &p001, vec3 const &p101, vec3 const &p111, vec3 const &p011)
+{
+    mesh res;
+    res.push_back(compute_windows_on_quadrangle(p001, p101, p100, p000));
+    res.push_back(compute_windows_on_quadrangle(p101, p111, p110, p100));
+    res.push_back(compute_windows_on_quadrangle(p111, p101, p010, p110));
+    res.push_back(compute_windows_on_quadrangle(p011, p001, p000, p010));
+    return res;
+}
+
+mesh town::compute_windows_on_quadrangle(vec3 const &p00, vec3 const &p10, vec3 const &p11, vec3 const &p01)
+{
+    float height = 0.1f;
+    float length = 0.05f;
+    float decalhoriz = length / 2;
+    float decalvert = height / 2;
+    vec3 xloc = (p10 - p00);
+    vec3 yloc = (p01 - p00);
+    /*std::cout << norm(p10 - p00) << std::endl;
+    std::cout << norm(p01 - p00) << std::endl;
+    std::cout << " " << std::endl;*/
+    vec3 current_hor = p00 + decalhoriz * xloc;
+    vec3 current_vert = p00 + decalvert * yloc;
+    bool ispossiblelong = (norm(p10 - current_hor) > (4 * length));
+    bool ispossiblehaut = (norm(p01 - current_vert) > (4 * height));
+    mesh res;
+    float imax = floor(norm(p10 - P00) / (length + decalhoriz));
+    float jmax = floor(norm(p01 - P00) / (height + decalvert));
+
+    while (ispossiblehaut)
+    {
+        while (ispossiblelong)
+        {
+            vec3 currentp00 = current_hor + current_vert - p00;
+            std::cout << currentp00 << std::endl;
+            std::cout << currentp00 + length * xloc << std::endl;
+            std::cout << currentp00 + length * xloc + height * yloc << std::endl;
+            std::cout << currentp00 + height * yloc << std::endl;
+            std::cout << " " << std::endl;
+            mesh fenetre = mesh_primitive_quadrangle(currentp00, currentp00 + length * xloc, currentp00 + length * xloc + height * yloc, currentp00 + height * yloc);
+            res.push_back(fenetre);
+            current_hor += (length + decalhoriz) * xloc;
+            ispossiblelong = (norm(p10 - current_hor) > (length));
+        }
+        current_hor = p00 + decalhoriz * xloc;
+        ispossiblelong = (norm(p10 - current_hor) > (length)); //init du début
+        current_vert += (height + decalvert) * yloc;
+        ispossiblehaut = (norm(p01 - current_vert) > (height));
+    }
+    return res;
 }

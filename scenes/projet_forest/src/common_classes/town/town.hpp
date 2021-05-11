@@ -36,13 +36,22 @@ public:
 
     void merge_pat(vector<vector<vec3>> &base, vector<vector<vec3>> to_add);
 
-    void init_town(string tow = "town1_low");
+    void init_town();
+
+    mesh compute_windows_on_cube(vec3 const &p000, vec3 const &p100, vec3 const &p110, vec3 const &p010, vec3 const &p001, vec3 const &p101, vec3 const &p111, vec3 const &p011);
+
+    mesh compute_windows_on_quadrangle(vec3 const &p00, vec3 const &p10, vec3 const &p11, vec3 const &p01);
 
     vec3 radom_divider();
 
     template <typename SCENE>
     void draw_town(SCENE const &scene)
     {
+        vec3 light = scene.camera.position();
+        glUseProgram(d_bat.shader);
+        opengl_uniform(d_bat.shader, "projection", scene.projection);
+        opengl_uniform(d_bat.shader, "view", scene.camera.matrix_view());
+        opengl_uniform(d_bat.shader, "light", light);
         draw(d_bat, scene);
         //draw_wireframe(d_bat, scene);
     }
