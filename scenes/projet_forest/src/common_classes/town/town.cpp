@@ -264,35 +264,37 @@ mesh town::compute_batiment(vector<vec3> coords)
     vec3 up = vec3(0, 0, haut);
     if (prob < 0.7f)
     {
+        mesh batim;
+        mesh fenetr;
         vec3 nvxs0 = (rotate * som0 + (1 - rotate) * som1);
         vec3 nvxs1 = (rotate * som1 + (1 - rotate) * som2);
         vec3 nvxs2 = (rotate * som2 + (1 - rotate) * som3);
         vec3 nvxs3 = (rotate * som3 + (1 - rotate) * som0);
-        bat.push_back(mesh_primitive_cubic_grid(nvxs0, nvxs3, nvxs2, nvxs1, nvxs0 + up, nvxs3 + up, nvxs2 + up, nvxs1 + up, 4, 4, 4));
+        batim.push_back(mesh_primitive_cubic_grid(nvxs0, nvxs3, nvxs2, nvxs1, nvxs0 + up, nvxs3 + up, nvxs2 + up, nvxs1 + up, 4, 4, 4));
+
+        fenetr.push_back(compute_windows_on_cube(nvxs0, nvxs3, nvxs2, nvxs1, nvxs0 + up, nvxs3 + up, nvxs2 + up, nvxs1 + up));
         vec3 nvvxs0 = (3 * nvxs0 + nvxs2) / 4;
         vec3 nvvxs1 = (3 * nvxs1 + nvxs3) / 4;
         vec3 nvvxs2 = (nvxs0 + 3 * nvxs2) / 4;
         vec3 nvvxs3 = (nvxs1 + 3 * nvxs3) / 4;
-        bat.push_back(mesh_primitive_cubic_grid(nvvxs0 + up, nvvxs3 + up, nvvxs2 + up, nvvxs1 + up, nvvxs0 + up + up, nvvxs3 + up + up, nvvxs2 + up + up, nvvxs1 + up + up, 4, 4, 4));
+        batim.push_back(mesh_primitive_cubic_grid(nvvxs0 + up, nvvxs3 + up, nvvxs2 + up, nvvxs1 + up, nvvxs0 + up + up, nvvxs3 + up + up, nvvxs2 + up + up, nvvxs1 + up + up, 4, 4, 4));
+        fenetr.push_back(compute_windows_on_cube(nvvxs0 + up, nvvxs3 + up, nvvxs2 + up, nvvxs1 + up, nvvxs0 + up + up, nvvxs3 + up + up, nvvxs2 + up + up, nvvxs1 + up + up));
         nvvxs0 = (3 * nvxs0 + 2 * nvxs2) / 5;
         nvvxs1 = (3 * nvxs1 + 2 * nvxs3) / 5;
         nvvxs2 = (2 * nvxs0 + 3 * nvxs2) / 5;
         nvvxs3 = (2 * nvxs1 + 3 * nvxs3) / 5;
-        bat.push_back(mesh_primitive_cubic_grid(nvvxs0 + up + up, nvvxs3 + up + up, nvvxs2 + up + up, nvvxs1 + up + up, nvvxs0 + up + up + up, nvvxs3 + up + up + up, nvvxs2 + up + up + up, nvvxs1 + up + up + up, 2, 2, 2));
+        batim.push_back(mesh_primitive_cubic_grid(nvvxs0 + up + up, nvvxs3 + up + up, nvvxs2 + up + up, nvvxs1 + up + up, nvvxs0 + up + up + up, nvvxs3 + up + up + up, nvvxs2 + up + up + up, nvvxs1 + up + up + up, 2, 2, 2));
+        fenetr.push_back(compute_windows_on_cube(nvvxs0 + up + up, nvvxs3 + up + up, nvvxs2 + up + up, nvvxs1 + up + up, nvvxs0 + up + up + up, nvvxs3 + up + up + up, nvvxs2 + up + up + up, nvvxs1 + up + up + up));
         if (coloral < 0.5f)
         {
-            for (auto i = 0; i < bat.color.size(); i++)
-            {
-                bat.color[i] = vec3(245, 245, 220) / 255.0f; // couleur
-            }
+            batim.color.fill(vec3(245, 245, 220) / 255.0f);
         }
         else
         {
-            for (auto i = 0; i < bat.color.size(); i++)
-            {
-                bat.color[i] = vec3(206, 206, 206) / 255.0f; // couleur grise
-            }
+            batim.color.fill(vec3(206, 206, 206) / 255.0f); // couleur grise
         }
+        bat.push_back(batim);
+        bat.push_back(fenetr);
     }
     else if (prob < 1.0f)
     {
@@ -339,51 +341,58 @@ mesh town::create_pate(vector<vec3> coords)
 mesh town::compute_windows_on_cube(vec3 const &p000, vec3 const &p100, vec3 const &p110, vec3 const &p010, vec3 const &p001, vec3 const &p101, vec3 const &p111, vec3 const &p011)
 {
     mesh res;
-    res.push_back(compute_windows_on_quadrangle(p001, p101, p100, p000));
-    res.push_back(compute_windows_on_quadrangle(p101, p111, p110, p100));
-    res.push_back(compute_windows_on_quadrangle(p111, p101, p010, p110));
-    res.push_back(compute_windows_on_quadrangle(p011, p001, p000, p010));
+    res.push_back(compute_windows_on_quadrangle(p000, p001, p101, p100));
+    res.push_back(compute_windows_on_quadrangle(p100, p101, p111, p110));
+    res.push_back(compute_windows_on_quadrangle(p110, p111, p101, p010));
+    res.push_back(compute_windows_on_quadrangle(p010, p011, p001, p000));
     return res;
 }
 
 mesh town::compute_windows_on_quadrangle(vec3 const &p00, vec3 const &p10, vec3 const &p11, vec3 const &p01)
 {
-    float height = 0.1f;
-    float length = 0.05f;
-    float decalhoriz = length / 2;
-    float decalvert = height / 2;
-    vec3 xloc = (p10 - p00);
-    vec3 yloc = (p01 - p00);
-    /*std::cout << norm(p10 - p00) << std::endl;
-    std::cout << norm(p01 - p00) << std::endl;
-    std::cout << " " << std::endl;*/
-    vec3 current_hor = p00 + decalhoriz * xloc;
-    vec3 current_vert = p00 + decalvert * yloc;
-    bool ispossiblelong = (norm(p10 - current_hor) > (4 * length));
-    bool ispossiblehaut = (norm(p01 - current_vert) > (4 * height));
+    float height = 0.05f;
+    float length = 0.1f;
+    float decalhoriz = 0.7f * length;
+    float decalvert = 0.7f * height;
+    vec3 xloc = normalize(p10 - p00);
+    vec3 yloc = normalize(p01 - p00);
+    //std::cout << norm(p10 - p00) << std::endl;
+    //std::cout << norm(p01 - p00) << std::endl;
+    //std::cout << " " << std::endl;
+    vec3 decalnormal = cross(yloc, xloc);
+    vec3 current_hor = p00 + 0.01f * decalnormal;
+    vec3 current_vert = p00 + 0.01f * decalnormal;
+    //bool ispossiblelong = (norm(p10 - current_hor) > (4 * length));
+    //bool ispossiblehaut = (norm(p01 - current_vert) > (4 * height));
     mesh res;
-    float imax = floor(norm(p10 - P00) / (length + decalhoriz));
-    float jmax = floor(norm(p01 - P00) / (height + decalvert));
-
-    while (ispossiblehaut)
+    float imax = floor(norm(p10 - p00) / (length + decalhoriz));
+    float jmax = floor(norm(p01 - p00) / (height + decalvert));
+    /*std::cout << imax << std::endl;
+    std::cout << jmax << std::endl;
+    std::cout << " " << std::endl;*/
+    for (auto j = 0; j < jmax; j++)
     {
-        while (ispossiblelong)
+        current_vert = current_vert + decalvert * yloc;
+        for (auto i = 0; i < imax; i++)
         {
+            current_hor += decalhoriz * xloc;
             vec3 currentp00 = current_hor + current_vert - p00;
-            std::cout << currentp00 << std::endl;
-            std::cout << currentp00 + length * xloc << std::endl;
-            std::cout << currentp00 + length * xloc + height * yloc << std::endl;
-            std::cout << currentp00 + height * yloc << std::endl;
-            std::cout << " " << std::endl;
             mesh fenetre = mesh_primitive_quadrangle(currentp00, currentp00 + length * xloc, currentp00 + length * xloc + height * yloc, currentp00 + height * yloc);
+            float randf = rand() / (float)RAND_MAX;
+            if (randf < 0.8f)
+            {
+                fenetre.color.fill(vec3(240, 255, 255) / 255.0f);
+            }
+            else
+            {
+                fenetre.color.fill(vec3(239, 239, 239) / 255.0f);
+            }
             res.push_back(fenetre);
-            current_hor += (length + decalhoriz) * xloc;
-            ispossiblelong = (norm(p10 - current_hor) > (length));
+            current_hor += length * xloc;
         }
-        current_hor = p00 + decalhoriz * xloc;
-        ispossiblelong = (norm(p10 - current_hor) > (length)); //init du début
-        current_vert += (height + decalvert) * yloc;
-        ispossiblehaut = (norm(p01 - current_vert) > (height));
+        current_hor = p00;
+        current_vert = current_vert + height * yloc;
+        //std::cout << current_vert << std::endl;
     }
     return res;
 }
