@@ -10,7 +10,7 @@ using namespace std;
 void town::init_town()
 {
     init_pate();
-    compute_pate(4);
+    compute_pate(5);
     std::cout << patepos.size() << std::endl;
     for (size_t i = 0; i < patepos.size(); i++)
     {
@@ -24,15 +24,16 @@ void town::init_town()
     }
 
     d_bat = mesh_drawable(batiments);
+    d_roads = mesh_drawable(roads);
 }
 
 void town::init_pate()
 {
     vector<vec3> initial;
-    initial.push_back(vec3(-10.0f, -10.0f, 0));
-    initial.push_back(vec3(-10.0f, 10.0f, 0));
-    initial.push_back(vec3(10.0f, 10.0f, 0));
-    initial.push_back(vec3(10.0f, -10.0f, 0));
+    initial.push_back(vec3(-20.0f, -20.0f, 0));
+    initial.push_back(vec3(-20.0f, 20.0f, 0));
+    initial.push_back(vec3(20.0f, 20.0f, 0));
+    initial.push_back(vec3(20.0f, -20.0f, 0));
     initial.push_back(vec3(0, 0, 0));
     patepos.push_back(initial);
 }
@@ -67,6 +68,7 @@ vector<vector<vec3>> town::subdivise(vector<vec3> pate)
     if (pate[4].x == 0)
     {
         vector<vec3> current_cube;
+
         /*
     Avec des data dans cet ordre 
     som0 // som1
@@ -99,6 +101,8 @@ vector<vector<vec3>> town::subdivise(vector<vec3> pate)
         current_cube.push_back(random_divider() + vec3(0, pate[4].y, 0));
         res.push_back(current_cube);
 
+        roads.push_back(compute_road_partial(nvxs1, nvxs2, som1 + (decalagex - 0.02f) * (som2 - som1) + (1 - 0.02f - decalagey) * (som3 - som2), som1 + (1 - 0.02f - decalagey) * (som0 - som1), false));
+
         current_cube.clear();
 
         nvxs0 = som1 + (1 - 0.02f - decalagey) * (som0 - som1);
@@ -114,6 +118,7 @@ vector<vector<vec3>> town::subdivise(vector<vec3> pate)
         res.push_back(current_cube);
 
         current_cube.clear();
+        roads.push_back(compute_road_partial(nvxs3, som2 + (1 - 0.02f - decalagex) * (som1 - som2) + (1 - decalagey - 0.02f) * (som3 - som2), som2 + (1 - 0.02f - decalagex) * (som1 - som2), nvxs2, false));
 
         nvxs1 = som2 + (1 - 0.02f - decalagex) * (som1 - som2);
         nvxs0 = nvxs1 + (1 - decalagey - 0.02f) * (som3 - som2);
@@ -126,6 +131,8 @@ vector<vector<vec3>> town::subdivise(vector<vec3> pate)
         current_cube.push_back(nvxs3);
         current_cube.push_back(random_divider() + vec3(0, pate[4].y, 0));
         res.push_back(current_cube);
+
+        roads.push_back(compute_road_partial(som3 + (1 - decalagex - 0.02f) * (som0 - som3) + (decalagey - 0.02f) * (som1 - som0), som3 + (decalagey - 0.02f) * (som2 - som3), nvxs3, nvxs0, false));
 
         current_cube.clear();
 
@@ -140,8 +147,11 @@ vector<vector<vec3>> town::subdivise(vector<vec3> pate)
         current_cube.push_back(nvxs3);
         current_cube.push_back(random_divider() + vec3(0, pate[4].y, 0));
         res.push_back(current_cube);
+        roads.push_back(compute_road_partial(som0 + (decalagex - 0.02f) * (som3 - som0), nvxs0, nvxs1, som0 + (decalagey - 0.02f) * (som1 - som0) + (decalagex - 0.02f) * (som3 - som0), false));
 
         current_cube.clear();
+
+        roads.push_back(compute_road_partial(som1 + (decalagex - 0.02f) * (som2 - som1) + (1 - 0.02f - decalagey) * (som3 - som2), som0 + (decalagey - 0.02f) * (som1 - som0) + (decalagex - 0.02f) * (som3 - som0), som3 + (1 - decalagex - 0.02f) * (som0 - som3) + (decalagey - 0.02f) * (som1 - som0), som2 + (1 - 0.02f - decalagex) * (som1 - som2) + (1 - decalagey - 0.02f) * (som3 - som2), true));
     }
 
     if (pate[4].x == 1)
@@ -395,4 +405,74 @@ mesh town::compute_windows_on_quadrangle(vec3 const &p00, vec3 const &p10, vec3 
         //std::cout << current_vert << std::endl;
     }
     return res;
+}
+
+mesh town::compute_road_partial(vec3 const &p00, vec3 const &p10, vec3 const &p11, vec3 const &p01, bool const &isspecial)
+{
+    mesh roa = mesh_primitive_quadrangle(p00, p10, p11, p01);
+    roa.color.fill(vec3(0, 0, 0));
+    mesh circul;
+
+    if (!isspecial)
+    {
+        if (norm(p10 - p00) > norm(p01 - p00))
+        {
+            float normal = norm(p10 - p00);
+            float length = 0.06f * norm(p01 - p00);
+            float height = 0.02f * normal;
+            float decalvert = 0.2f * height;
+            float jmax = floor(normal / (height + decalvert));
+            vec3 xloc = normalize(p10 - p00);
+            vec3 yloc = normalize(p01 - p00);
+            vec3 decalnormal = cross(xloc, yloc);
+            vec3 current_hor = p00 + 0.497f * (p01 - p00) + 0.005f * decalnormal;
+            vec3 current_vert = p00 + 0.005f * decalnormal;
+
+            for (auto j = 0; j < jmax; j++)
+            {
+                current_vert += decalvert * xloc;
+                vec3 currentp00 = current_hor + current_vert - p00;
+                circul.push_back(mesh_primitive_quadrangle(currentp00, currentp00 + height * xloc, currentp00 + length * yloc + height * xloc, currentp00 + length * yloc));
+                current_vert += height * xloc;
+            }
+        }
+        else
+        {
+            float normal = norm(p01 - p00);
+            float length = 0.06f * norm(p10 - p00);
+            float height = 0.02f * normal;
+            float decalvert = 0.2f * height;
+            float jmax = floor(normal / (height + decalvert));
+            vec3 xloc = normalize(p01 - p00);
+            vec3 yloc = normalize(p10 - p00);
+            vec3 decalnormal = cross(yloc, xloc);
+            vec3 current_hor = p00 + 0.497f * (p10 - p00) + 0.005f * decalnormal;
+            vec3 current_vert = p00 + 0.005f * decalnormal;
+
+            for (auto j = 0; j < jmax; j++)
+            {
+                current_vert += decalvert * xloc;
+                vec3 currentp00 = current_hor + current_vert - p00;
+                circul.push_back(mesh_primitive_quadrangle(currentp00, currentp00 + height * xloc, currentp00 + length * yloc + height * xloc, currentp00 + length * yloc));
+                current_vert += height * xloc;
+            }
+        }
+        circul.color.fill(vec3(1.0, 1.0, 1.0));
+        roa.push_back(circul);
+    }
+    else
+    {
+        vec3 xloc = normalize(p01 - p00);
+        vec3 yloc = normalize(p10 - p00);
+        float epaisseur = 0.05f * norm(p01 - p00);
+        vec3 decalnormal = cross(yloc, xloc);
+        vec3 p00s = 0.005f * decalnormal;
+        circul.push_back(mesh_primitive_quadrangle(p00 + p00s, p00 + p00s + epaisseur * yloc, p01 + p00s + epaisseur * yloc, p01 + p00s));
+        circul.push_back(mesh_primitive_quadrangle(p00 + p00s, p10 + p00s, p10 + p00s + epaisseur * xloc, p00 + p00s + epaisseur * xloc));
+        circul.push_back(mesh_primitive_quadrangle(p10 + p00s - epaisseur * yloc, p10 + p00s, p11 + p00s, p11 + p00s - epaisseur * yloc));
+        circul.push_back(mesh_primitive_quadrangle(p11 + p00s - epaisseur * xloc, p11 + p00s, p01 + p00s, p01 + p00s - epaisseur * xloc));
+        circul.color.fill(vec3(1.0, 1.0, 1.0));
+        roa.push_back(circul);
+    }
+    return roa;
 }
