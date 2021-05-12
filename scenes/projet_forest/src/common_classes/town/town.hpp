@@ -40,6 +40,8 @@ public:
 
     void init_town();
 
+    void init_pate_water();
+
     mesh compute_windows_on_cube(vec3 const &p000, vec3 const &p100, vec3 const &p110, vec3 const &p010, vec3 const &p001, vec3 const &p101, vec3 const &p111, vec3 const &p011);
 
     mesh compute_windows_on_quadrangle(vec3 const &p00, vec3 const &p10, vec3 const &p11, vec3 const &p01);
@@ -47,6 +49,9 @@ public:
     mesh compute_road_partial(vec3 const &p00, vec3 const &p10, vec3 const &p11, vec3 const &p01, bool const &isspecial);
 
     vec3 radom_divider();
+
+    // Parametres: equation cartesienne de droite ax+by+c =0
+    vector<vec3> getIntersection(float a, float b, float c);
 
     template <typename SCENE>
     void draw_town(SCENE const &scene)

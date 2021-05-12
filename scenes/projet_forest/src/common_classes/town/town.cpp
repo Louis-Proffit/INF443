@@ -10,6 +10,7 @@ using namespace std;
 void town::init_town()
 {
     init_pate();
+    init_pate_water();
     compute_pate(5);
     std::cout << patepos.size() << std::endl;
     for (size_t i = 0; i < patepos.size(); i++)
@@ -38,6 +39,75 @@ void town::init_pate()
     patepos.push_back(initial);
 }
 
+void town::init_pate_water()
+{
+    float xA = (20.0f) * rand() / (float)RAND_MAX - 10.0f;
+    float yA = (20.0f) * rand() / (float)RAND_MAX - 10.0f;
+    float xB = (20.0f) * rand() / (float)RAND_MAX - 10.0f;
+    float yB = (20.0f) * rand() / (float)RAND_MAX - 10.0f;
+    vec3 pA = vec3(xA, yA, 0);
+    vec3 pB = vec3(xB, yB, 0);
+    vec3 dir = normalize(pB - pA);
+    vec3 normal = vec3(dir.y, -dir.x, 0); // Already normalized
+    float largeur = 1.0f;
+    vec3 pAs = pA + largeur * normal;
+    //vec3 pBs = pB + largeur * normal;
+    float as = dir.y;
+    float bs = -dir.x;
+    float cs = -as * pAs.x - bs * pAs.y;
+    vector<vec3> points1 = getIntersection(as, bs, cs);
+    pAs = pA - 2 * largeur * normal;
+    cs = -as * pAs.x - bs * pAs.y;
+    vector<vec3> points2 = getIntersection(as, bs, cs);
+
+    std::cout << points1[0] << std::endl;
+    std::cout << points1[1] << std::endl;
+    std::cout << points1[2] << std::endl;
+    std::cout << points1[3] << std::endl;
+    std::cout << " " << std::endl;
+    std::cout << points2[0] << std::endl;
+    std::cout << points2[1] << std::endl;
+    std::cout << points2[2] << std::endl;
+    std::cout << points2[3] << std::endl;
+    std::cout << " " << std::endl;
+    vector<vec3> sommets;
+    for (size_t i = 0; i < 4; i++)
+    {
+        vec3 current = points1[i];
+        if ((-20.0f <= current.x <= 20.0f) && (-20.0f <= current.y <= 20.0f))
+        {
+            sommets.push_back(current);
+        }
+    }
+    for (size_t i = 0; i < 4; i++)
+    {
+        vec3 current = points2[i];
+        if ((-20.0f <= current.x <= 20.0f) && (-20.0f <= current.y <= 20.0f))
+        {
+            sommets.push_back(current);
+        }
+    }
+    std::cout << sommets[0] << std::endl;
+    std::cout << sommets[1] << std::endl;
+    std::cout << sommets[2] << std::endl;
+    std::cout << sommets[3] << std::endl;
+    std::cout << " " << std::endl;
+}
+
+vector<vec3> town::getIntersection(float a, float b, float c)
+{
+    vector<vec3> points;
+    // Intersection avec la droite d'eq x=-20;
+    points.push_back(vec3(-20, (20 * a - c) / b, 0));
+    // y = -20
+    points.push_back(vec3((20 * b - c) / a, -20, 0));
+    // x=20
+    points.push_back(vec3(20, (-20 * a - c) / b, 0));
+    //y=20
+    points.push_back(vec3((-20 * b - c) / a, 20, 0));
+
+    return points;
+}
 vec3 random_divider()
 {
     float al = (rand() / (float)RAND_MAX);
