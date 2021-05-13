@@ -2,7 +2,12 @@
 #include <iostream>
 
 #include "scene_helper.hpp"
-#include "planet.hpp"
+#include "scenes//town.hpp"
+#include "scenes//mountain.hpp"
+#include "scenes//desert.hpp"
+#include "scenes//forest.hpp"
+#include "scenes//field.hpp"
+#include "scenes//planet.hpp"
 
 using namespace vcl;
 
@@ -12,19 +17,16 @@ void handle_mouse_update_callback(GLFWwindow* window, double mouse_x_pos, double
 
 user_parameters user;
 scene_visual* scene = 0;
+GLFWwindow* window = create_window(window_width, window_height);
 
 int main(int, char* argv[])
 {
 	std::cout << "Run " << argv[0] << std::endl;
 
-	int const width = 1280, height = 1024;
-	GLFWwindow* window = create_window(width, height);
-	imgui_init(window);
-
-	
 	std::cout<<"Initialize data ..."<<std::endl;
+	imgui_init(window);
 	initialize();
-	scene->handle_window_size_callback(window, width, height);
+	handle_window_update_callback(window, window_width, window_height);
 	glfwSetCursorPosCallback(window, handle_mouse_update_callback);
 	glfwSetWindowSizeCallback(window, handle_window_update_callback);
 
@@ -66,35 +68,68 @@ int main(int, char* argv[])
 	return 0;
 }
 
-
+void swap_function(scene_type scene_type) 
+{
+	switch (scene_type) {
+	case scene_type::CITY:
+		std::cout << "Swap towards city" << std::endl;
+		delete scene;
+		scene = new city(&user, swap_function);
+		break;
+	case scene_type::DESERT:
+		std::cout << "Swap towards desert" << std::endl;
+		delete scene;
+		scene = new desert(&user, swap_function);
+		break;
+	case scene_type::FIELD:
+		std::cout << "Swap towards field" << std::endl;
+		delete scene;
+		scene = new field(&user, swap_function);
+		break;
+	case scene_type::FOREST:
+		std::cout << "Swap towards forest" << std::endl;
+		delete scene;
+		scene = new forest(&user, swap_function);
+		break;
+	case scene_type::MOUNTAIN:
+		std::cout << "Swap towards mountain" << std::endl;
+		delete scene;
+		scene = new mountain(&user, swap_function);
+		break;
+	}
+	handle_window_update_callback(window, window_width, window_height);
+}
 
 void initialize()
 {
 	/*GLuint const shader_mesh = opengl_create_shader_program(opengl_shader_preset("mesh_vertex"), opengl_shader_preset("mesh_fragment"));
 	GLuint const shader_uniform_color = opengl_create_shader_program(opengl_shader_preset("single_color_vertex"), opengl_shader_preset("single_color_fragment"));
-	mesh_drawable::default_shader = shader_mesh;
 	curve_drawable::default_shader = shader_uniform_color;
 	segments_drawable::default_shader = shader_uniform_color;*/
+	scene_visual::init();
+	mesh_drawable::default_shader = scene_visual::open_shader("normal");
+
 	GLuint const texture_white = opengl_texture_to_gpu(image_raw{ 1,1,image_color_type::rgba,{255,255,255,255} });
 	mesh_drawable::default_texture = texture_white;
 	mesh_float_drawable::default_texture = texture_white;
 
 	// Paramétrisation de l'utilisateur
-	user.global_frame = mesh_drawable(mesh_primitive_frame());
+	user.global_frame = mesh_drawable(mesh_primitive_frame(), scene_visual::open_shader("normal"));
 	user.display_frame = false;
 
 	// Initialisation de la planète
-	scene = new planet(&user);
+	scene = new planet(&user, swap_function);
 }
 
 
 void handle_window_update_callback(GLFWwindow* window, int width, int height) 
 {
-	scene->handle_window_size_callback(window, width, height);
+	scene->handle_window_size_callback(width, height);
 }
 void handle_mouse_update_callback(GLFWwindow* window, double mouse_x_pos, double mouse_y_pos) 
 {
-	scene->update_visual(window, mouse_x_pos, mouse_y_pos);
+	user.state = glfw_current_state(window);
+	scene->update_visual(glfw_get_mouse_cursor(window, mouse_x_pos, mouse_y_pos));
 }
 
 

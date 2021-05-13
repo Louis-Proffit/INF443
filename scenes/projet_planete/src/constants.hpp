@@ -2,6 +2,14 @@
 
 #include "vcl/vcl.hpp"
 
+// Math
+#define PI 3.14159265359f
+
+// Window constants
+
+#define window_width 1280
+#define window_height 1024
+
 // Scene constants
 #define plane_altitude 1.1f
 #define plane_body_length 1.0f

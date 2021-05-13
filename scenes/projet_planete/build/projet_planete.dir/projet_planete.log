@@ -1,35 +1,17 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(504,5): warning MSB8004: Le répertoire Intermediate ne se termine pas par une barre oblique finale. Cette instance de build ajoutera une barre oblique, comme requis, pour permettre l'évaluation correcte du répertoire Intermediate.
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(505,5): warning MSB8004: Le répertoire Output ne se termine pas par une barre oblique finale. Cette instance de build ajoutera une barre oblique, comme requis, pour permettre l'évaluation correcte du répertoire Output.
-  planet.cpp
-  main.cpp
-  skybox.cpp
-..\src\planet.cpp(185,54): warning C4305: 'argument' : troncation de 'double' à 'float'
-..\src\planet.cpp(218,27): warning C4018: '<' : incompatibilité signed/unsigned
-..\src\planet.cpp(245,27): warning C4018: '<' : incompatibilité signed/unsigned
-..\src\planet.cpp(269,23): warning C4018: '<' : incompatibilité signed/unsigned
-..\src\planet.cpp(280,33): warning C4305: 'initialisation' : troncation de 'double' à 'float'
-..\src\planet.cpp(281,33): warning C4056: dépassement d'une opération arithmétique de constante en virgule flottante
-..\src\planet.cpp(286,23): warning C4018: '<' : incompatibilité signed/unsigned
-..\src\planet.cpp(297,23): warning C4018: '<' : incompatibilité signed/unsigned
-..\src\planet.cpp(282,11): warning C4101: 'distance' : variable locale non référencée
-..\src\planet.cpp(281,11): warning C4189: 'min_distance' : variable locale initialisée mais non référencée
-..\src\planet.cpp(280,11): warning C4189: 'max_distance' : variable locale initialisée mais non référencée
-C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_drawable/mesh_drawable.hpp(51,56): warning C4100: 'scene' : paramètre formel non référencé (compilation du fichier source C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp)
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(51): message : voir la référence à l'instanciation de la fonction modèle 'void vcl::draw<scene_visual*>(const vcl::mesh_drawable &,const SCENE &)' en cours de compilation
+  desert.cpp
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\desert.cpp(38,28): warning C4458: la déclaration de 'normal_shader' masque le membre de classe
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(57,16): message : voir la déclaration de 'scene_visual::normal_shader'
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\desert.cpp(39,25): warning C4458: la déclaration de 'sun_shader' masque le membre de classe
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(58,16): message : voir la déclaration de 'scene_visual::sun_shader'
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\desert.cpp(94,28): warning C4458: la déclaration de 'normal_shader' masque le membre de classe
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(57,16): message : voir la déclaration de 'scene_visual::normal_shader'
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\desert.cpp(94,12): warning C4189: 'normal_shader' : variable locale initialisée mais non référencée
+C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_drawable/mesh_drawable.hpp(51,56): warning C4100: 'scene' : paramètre formel non référencé
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\desert.cpp(52): message : voir la référence à l'instanciation de la fonction modèle 'void vcl::draw<desert*>(const vcl::mesh_drawable &,const SCENE &)' en cours de compilation
           with
           [
-              SCENE=scene_visual *
+              SCENE=desert *
           ]
-C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_float_drawable/mesh_float_drawable.hpp(53,62): warning C4100: 'scene' : paramètre formel non référencé (compilation du fichier source ..\src\planet.cpp)
-..\src\planet.cpp(49): message : voir la référence à l'instanciation de la fonction modèle 'void vcl::draw<planet*>(const vcl::mesh_float_drawable &,const SCENE &)' en cours de compilation
-          with
-          [
-              SCENE=planet *
-          ]
-C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_drawable/mesh_drawable.hpp(51,56): warning C4100: 'scene' : paramètre formel non référencé (compilation du fichier source ..\src\planet.cpp)
-..\src\planet.cpp(62): message : voir la référence à l'instanciation de la fonction modèle 'void vcl::draw<planet*>(const vcl::mesh_drawable &,const SCENE &)' en cours de compilation
-          with
-          [
-              SCENE=planet *
-          ]
-  projet_planete.vcxproj -> C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\projet_planete.exe
+  projet_planete.vcxproj -> C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\build\projet_planete.exe

@@ -1,7 +1,18 @@
 #pragma once
 
+#include <functional>
 #include "vcl/vcl.hpp"
 #include "constants.hpp"
+
+
+enum class scene_type {
+	MOUNTAIN,
+	DESERT,
+	CITY,
+	FOREST,
+	FIELD,
+	PLANET
+};
 
 class user_parameters {
 public:
@@ -28,14 +39,24 @@ public:
 	vcl::mat4 projection_inverse;
 	vcl::vec3 light;
 	user_parameters* user_reference;
+	std::function<void(scene_type)> swap_function;
 
-	scene_visual(user_parameters* _user);
+	scene_visual(user_parameters* _user, std::function<void(scene_type)> swap_function);
 	~scene_visual();
 
 	virtual void display_visual() = 0;
-	virtual void update_visual(GLFWwindow* window, double mouse_x_pos, double mouse_y_pos) = 0;
+	virtual void update_visual(vcl::vec2 new_mouse_position) = 0;
 	virtual void display_interface() = 0;
-	void handle_window_size_callback(GLFWwindow* window, int width, int height);
+	void handle_window_size_callback(int width, int height);
+
+	static void init();
+	static GLuint open_shader(std::string const& shader_name);
+
+private:
+	static GLuint planet_shader;
+	static GLuint normal_shader;
+	static GLuint sun_shader;
 };
 
-std::string open_shader(std::string const& shader_name);
+
+
