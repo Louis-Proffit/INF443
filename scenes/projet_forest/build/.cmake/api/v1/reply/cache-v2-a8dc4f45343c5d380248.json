@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/build"
+			"value" : "/Users/paultheron/Desktop/Projet/INF443/scenes/projet_forest/build"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -462,10 +462,6 @@
 			"properties" : 
 			[
 				{
-					"name" : "ADVANCED",
-					"value" : "1"
-				},
-				{
 					"name" : "HELPSTRING",
 					"value" : "No help, variable specified on the command line."
 				}
@@ -543,7 +539,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest"
+			"value" : "/Users/paultheron/Desktop/Projet/INF443/scenes/projet_forest"
 		},
 		{
 			"name" : "CMAKE_INSTALL_NAME_TOOL",
@@ -1619,7 +1615,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/build"
+			"value" : "/Users/paultheron/Desktop/Projet/INF443/scenes/projet_forest/build"
 		},
 		{
 			"name" : "projet_forest_SOURCE_DIR",
@@ -1631,7 +1627,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest"
+			"value" : "/Users/paultheron/Desktop/Projet/INF443/scenes/projet_forest"
 		}
 	],
 	"kind" : "cache",
