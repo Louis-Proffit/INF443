@@ -2,6 +2,7 @@
 
 #include "vcl/vcl.hpp"
 #include <iostream>
+#include "tree_LSys.hpp"
 
 using namespace vcl;
 using namespace std;
@@ -14,6 +15,7 @@ public:
     mesh ground;
     mesh batiments;
     mesh roads;
+
     mesh_drawable d_ground;
     mesh_drawable d_bat;
     mesh_drawable d_roads;

@@ -9,9 +9,9 @@ using namespace std;
 
 void town::init_town()
 {
-    init_pate();
+    //init_pate();
     init_pate_water();
-    compute_pate(5);
+    compute_pate(4);
     std::cout << patepos.size() << std::endl;
     for (size_t i = 0; i < patepos.size(); i++)
     {
@@ -41,15 +41,15 @@ void town::init_pate()
 
 void town::init_pate_water()
 {
-    float xA = (20.0f) * rand() / (float)RAND_MAX - 10.0f;
-    float yA = (20.0f) * rand() / (float)RAND_MAX - 10.0f;
-    float xB = (20.0f) * rand() / (float)RAND_MAX - 10.0f;
-    float yB = (20.0f) * rand() / (float)RAND_MAX - 10.0f;
+    float xA = (40.0f) * rand() / (float)RAND_MAX - 20.0f;
+    float yA = (40.0f) * rand() / (float)RAND_MAX - 20.0f;
+    float xB = (40.0f) * rand() / (float)RAND_MAX - 20.0f;
+    float yB = (40.0f) * rand() / (float)RAND_MAX - 20.0f;
     vec3 pA = vec3(xA, yA, 0);
     vec3 pB = vec3(xB, yB, 0);
     vec3 dir = normalize(pB - pA);
     vec3 normal = vec3(dir.y, -dir.x, 0); // Already normalized
-    float largeur = 1.0f;
+    float largeur = 0.8f;
     vec3 pAs = pA + largeur * normal;
     //vec3 pBs = pB + largeur * normal;
     float as = dir.y;
@@ -60,7 +60,7 @@ void town::init_pate_water()
     cs = -as * pAs.x - bs * pAs.y;
     vector<vec3> points2 = getIntersection(as, bs, cs);
 
-    std::cout << points1[0] << std::endl;
+    /*std::cout << points1[0] << std::endl;
     std::cout << points1[1] << std::endl;
     std::cout << points1[2] << std::endl;
     std::cout << points1[3] << std::endl;
@@ -69,29 +69,144 @@ void town::init_pate_water()
     std::cout << points2[1] << std::endl;
     std::cout << points2[2] << std::endl;
     std::cout << points2[3] << std::endl;
-    std::cout << " " << std::endl;
+    std::cout << " " << std::endl;*/
     vector<vec3> sommets;
     for (size_t i = 0; i < 4; i++)
     {
         vec3 current = points1[i];
-        if ((-20.0f <= current.x <= 20.0f) && (-20.0f <= current.y <= 20.0f))
+        if ((-20.0f <= current.x) && (current.x <= 20.0f) && (-20.0f <= current.y) && (current.y <= 20.0f))
         {
-            sommets.push_back(current);
+            sommets.push_back(points1[i]);
         }
     }
     for (size_t i = 0; i < 4; i++)
     {
         vec3 current = points2[i];
-        if ((-20.0f <= current.x <= 20.0f) && (-20.0f <= current.y <= 20.0f))
+        if ((-20.0f <= current.x) && (current.x <= 20.0f) && (-20.0f <= current.y) && (current.y <= 20.0f))
         {
-            sommets.push_back(current);
+            sommets.push_back(points2[i]);
         }
     }
+    vec3 up = vec3(0, 0, 5);
+    mesh mer = mesh_primitive_quadrangle(sommets[0] + up, sommets[2] + up, sommets[3] + up, sommets[1] + up);
+    mer.color.fill(vec3(0, 0, 1));
+    mer.color[0] = vec3(1, 0, 0);
+    mer.color[1] = vec3(0, 1, 0);
+    batiments.push_back(mer);
     std::cout << sommets[0] << std::endl;
     std::cout << sommets[1] << std::endl;
     std::cout << sommets[2] << std::endl;
     std::cout << sommets[3] << std::endl;
     std::cout << " " << std::endl;
+
+    // filtrage pour avoir 2 quadrangles séparés par le fleuve.
+
+    if (((sommets[0].x == sommets[2].x) or (sommets[0].y == sommets[2].y)) && ((sommets[1].x == sommets[3].x) or (sommets[1].y == sommets[3].y)))
+    {
+        vector<vec3> initial;
+        if ((sommets[0].x == -20.0f) && (sommets[1].x == 20.0f))
+        {
+            if (sommets[0].y < sommets[2].y)
+            {
+                initial.push_back(vec3(-20.0f, -20.0f, 0));
+                initial.push_back(sommets[0]);
+                initial.push_back(sommets[1]);
+                initial.push_back(vec3(20.0f, -20.0f, 0));
+                initial.push_back(vec3(0, 0, 0));
+                //mesh pat = mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up);
+                patepos.push_back(initial);
+                initial.clear();
+
+                initial.push_back(sommets[2]);
+                initial.push_back(vec3(-20.0f, 20.0f, 0));
+                initial.push_back(vec3(20.0f, 20.0f, 0));
+                initial.push_back(sommets[3]);
+                initial.push_back(vec3(0, 0, 0));
+                //pat.push_back(mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up));
+
+                //pat.color.fill(vec3(1, 0.5f, 1));
+                //batiments.push_back(pat);
+                patepos.push_back(initial);
+            }
+            else
+            {
+                initial.push_back(vec3(-20.0f, -20.0f, 0));
+                initial.push_back(sommets[2]);
+                initial.push_back(sommets[3]);
+                initial.push_back(vec3(20.0f, -20.0f, 0));
+                initial.push_back(vec3(0, 0, 0));
+                //mesh pat = mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up);
+                patepos.push_back(initial);
+                initial.clear();
+
+                initial.push_back(sommets[0]);
+                initial.push_back(vec3(-20.0f, 20.0f, 0));
+                initial.push_back(vec3(20.0f, 20.0f, 0));
+                initial.push_back(sommets[1]);
+                initial.push_back(vec3(0, 0, 0));
+                //pat.push_back(mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up));
+                patepos.push_back(initial);
+                //pat.color.fill(vec3(1, 0.5f, 1));
+                //batiments.push_back(pat);
+            }
+        }
+        else if ((sommets[0].y == -20.0f) && (sommets[1].y == 20.0f))
+        {
+            if (sommets[0].x < sommets[2].x)
+            {
+                initial.push_back(vec3(-20.0f, -20.0f, 0));
+                initial.push_back(sommets[0]);
+                initial.push_back(sommets[1]);
+                initial.push_back(vec3(20.0f, -20.0f, 0));
+                initial.push_back(vec3(0, 0, 0));
+                mesh pat = mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up);
+                //patepos.push_back(initial);
+                initial.clear();
+
+                initial.push_back(sommets[2]);
+                initial.push_back(vec3(-20.0f, 20.0f, 0));
+                initial.push_back(vec3(20.0f, 20.0f, 0));
+                initial.push_back(sommets[3]);
+                initial.push_back(vec3(0, 0, 0));
+                pat.push_back(mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up));
+
+                pat.color.fill(vec3(1, 0.5f, 1));
+                batiments.push_back(pat);
+                //patepos.push_back(initial);
+                init_pate();
+            }
+            else
+            {
+                initial.push_back(vec3(-20.0f, -20.0f, 0));
+                initial.push_back(sommets[2]);
+                initial.push_back(sommets[3]);
+                initial.push_back(vec3(20.0f, -20.0f, 0));
+                initial.push_back(vec3(0, 0, 0));
+                mesh pat = mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up);
+                //patepos.push_back(initial);
+                initial.clear();
+
+                initial.push_back(sommets[0]);
+                initial.push_back(vec3(-20.0f, 20.0f, 0));
+                initial.push_back(vec3(20.0f, 20.0f, 0));
+                initial.push_back(sommets[1]);
+                initial.push_back(vec3(0, 0, 0));
+                pat.push_back(mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up));
+                //patepos.push_back(initial);
+                pat.color.fill(vec3(1, 0.5f, 1));
+                batiments.push_back(pat);
+                init_pate();
+            }
+        }
+        else
+        {
+            init_pate();
+        }
+    }
+    else
+    {
+        init_pate();
+    }
 }
 
 vector<vec3> town::getIntersection(float a, float b, float c)
