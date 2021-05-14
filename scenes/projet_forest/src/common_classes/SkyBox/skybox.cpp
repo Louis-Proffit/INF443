@@ -38,16 +38,16 @@ void skybox::init_skybox(vec3 const &_center, int const &_radius, std::string co
         devant = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/sundown/front.png");
         derriere = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/sundown/back.png");
         dessous = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/sundown/bottom.png");*/
-        haut = image_load_png("assets/skyboxes/sundown/top.png");
-        gauche = image_load_png("assets/skyboxes/sundown/left.png");
-        droite = image_load_png("assets/skyboxes/sundown/right.png");
-        devant = image_load_png("assets/skyboxes/sundown/front.png");
-        derriere = image_load_png("assets/skyboxes/sundown/back.png");
-        dessous = image_load_png("assets/skyboxes/sundown/bottom.png");
+        haut = image_load_png("../../assets/skyboxes/sundown/top.png");
+        gauche = image_load_png("../../assets/skyboxes/sundown/left.png");
+        droite = image_load_png("../../assets/skyboxes/sundown/right.png");
+        devant = image_load_png("../../assets/skyboxes/sundown/front.png");
+        derriere = image_load_png("../../assets/skyboxes/sundown/back.png");
+        dessous = image_load_png("../../assets/skyboxes/sundown/bottom.png");
         this->ground = true;
     }
     else if (text == "space")
-    {   /*haut = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/space/top.png");
+    { /*haut = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/space/top.png");
         gauche = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/space/left.png");
         droite = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/space/right.png");
         devant = image_load_png("/Users/paultheron/Desktop/Projet2/INF443/scenes/projet_forest/assets/skyboxes/space/front.png");
@@ -110,13 +110,13 @@ void skybox::init_skybox(vec3 const &_center, int const &_radius, std::string co
     face_derriere = mesh_primitive_grid(vec3(radius, radius, radius), vec3(radius, radius, -radius), vec3(radius, -radius, -radius), vec3(radius, -radius, radius), 2, 2);
     dface_derriere = mesh_drawable(face_derriere);
     dface_derriere.texture = opengl_texture_to_gpu(derriere, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
-   /* dface_derriere.shading.phong = {1, 0, 0, 0};*/
+    /* dface_derriere.shading.phong = {1, 0, 0, 0};*/
 
     //face droite
     face_droite = mesh_primitive_grid(vec3(-radius, radius, radius), vec3(-radius, radius, -radius), vec3(radius, radius, -radius), vec3(radius, radius, radius), 2, 2);
     dface_droite = mesh_drawable(face_droite);
     dface_droite.texture = opengl_texture_to_gpu(droite, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
-   /* dface_droite.shading.phong = {1, 0, 0, 0};*/
+    /* dface_droite.shading.phong = {1, 0, 0, 0};*/
 
     //face gauche
     face_gauche = mesh_primitive_grid(vec3(radius, -radius, radius), vec3(radius, -radius, -radius), vec3(-radius, -radius, -radius), vec3(-radius, -radius, radius), 2, 2);

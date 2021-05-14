@@ -10,13 +10,13 @@ using namespace std;
 void town::init_town()
 {
     init_pate();
-    init_pate_water();
+    //init_pate_water();
     compute_pate(5);
     std::cout << patepos.size() << std::endl;
     for (size_t i = 0; i < patepos.size(); i++)
     {
         //batiments.push_back(mesh_primitive_quadrangle(patepos[i][0], patepos[i][3], patepos[i][2], patepos[i][1]));
-        batiments.push_back(create_pate(patepos[i]));
+        create_city(patepos[i]);
         /*std::cout << patepos[i][0] << std::endl;
         std::cout << patepos[i][1] << std::endl;
         std::cout << patepos[i][2] << std::endl;
@@ -24,8 +24,15 @@ void town::init_town()
         std::cout << " " << std::endl;*/
     }
 
+    tree1.initTree("Classique");
+    tree2.initTree("Sapin");
+
+    box.init_skybox();
+
     d_bat = mesh_drawable(batiments);
     d_roads = mesh_drawable(roads);
+    d_parcs = mesh_drawable(parcs);
+    d_parcs.texture = opengl_texture_to_gpu(image_load_png("../../assets/textures/texture_grass.png"), GL_REPEAT, GL_REPEAT);
 }
 
 void town::init_pate()
@@ -41,15 +48,15 @@ void town::init_pate()
 
 void town::init_pate_water()
 {
-    float xA = (20.0f) * rand() / (float)RAND_MAX - 10.0f;
-    float yA = (20.0f) * rand() / (float)RAND_MAX - 10.0f;
-    float xB = (20.0f) * rand() / (float)RAND_MAX - 10.0f;
-    float yB = (20.0f) * rand() / (float)RAND_MAX - 10.0f;
+    float xA = (40.0f) * rand() / (float)RAND_MAX - 20.0f;
+    float yA = (40.0f) * rand() / (float)RAND_MAX - 20.0f;
+    float xB = (40.0f) * rand() / (float)RAND_MAX - 20.0f;
+    float yB = (40.0f) * rand() / (float)RAND_MAX - 20.0f;
     vec3 pA = vec3(xA, yA, 0);
     vec3 pB = vec3(xB, yB, 0);
     vec3 dir = normalize(pB - pA);
     vec3 normal = vec3(dir.y, -dir.x, 0); // Already normalized
-    float largeur = 1.0f;
+    float largeur = 0.8f;
     vec3 pAs = pA + largeur * normal;
     //vec3 pBs = pB + largeur * normal;
     float as = dir.y;
@@ -60,7 +67,7 @@ void town::init_pate_water()
     cs = -as * pAs.x - bs * pAs.y;
     vector<vec3> points2 = getIntersection(as, bs, cs);
 
-    std::cout << points1[0] << std::endl;
+    /*std::cout << points1[0] << std::endl;
     std::cout << points1[1] << std::endl;
     std::cout << points1[2] << std::endl;
     std::cout << points1[3] << std::endl;
@@ -69,29 +76,144 @@ void town::init_pate_water()
     std::cout << points2[1] << std::endl;
     std::cout << points2[2] << std::endl;
     std::cout << points2[3] << std::endl;
-    std::cout << " " << std::endl;
+    std::cout << " " << std::endl;*/
     vector<vec3> sommets;
     for (size_t i = 0; i < 4; i++)
     {
         vec3 current = points1[i];
-        if ((-20.0f <= current.x <= 20.0f) && (-20.0f <= current.y <= 20.0f))
+        if ((-20.0f <= current.x) && (current.x <= 20.0f) && (-20.0f <= current.y) && (current.y <= 20.0f))
         {
-            sommets.push_back(current);
+            sommets.push_back(points1[i]);
         }
     }
     for (size_t i = 0; i < 4; i++)
     {
         vec3 current = points2[i];
-        if ((-20.0f <= current.x <= 20.0f) && (-20.0f <= current.y <= 20.0f))
+        if ((-20.0f <= current.x) && (current.x <= 20.0f) && (-20.0f <= current.y) && (current.y <= 20.0f))
         {
-            sommets.push_back(current);
+            sommets.push_back(points2[i]);
         }
     }
+    vec3 up = vec3(0, 0, 5);
+    mesh mer = mesh_primitive_quadrangle(sommets[0] + up, sommets[2] + up, sommets[3] + up, sommets[1] + up);
+    mer.color.fill(vec3(0, 0, 1));
+    mer.color[0] = vec3(1, 0, 0);
+    mer.color[1] = vec3(0, 1, 0);
+    //batiments.push_back(mer);
     std::cout << sommets[0] << std::endl;
     std::cout << sommets[1] << std::endl;
     std::cout << sommets[2] << std::endl;
     std::cout << sommets[3] << std::endl;
     std::cout << " " << std::endl;
+
+    // filtrage pour avoir 2 quadrangles séparés par le fleuve.
+
+    if (((sommets[0].x == sommets[2].x) or (sommets[0].y == sommets[2].y)) && ((sommets[1].x == sommets[3].x) or (sommets[1].y == sommets[3].y)))
+    {
+        vector<vec3> initial;
+        if ((sommets[0].x == -20.0f) && (sommets[1].x == 20.0f))
+        {
+            if (sommets[0].y < sommets[2].y)
+            {
+                initial.push_back(vec3(-20.0f, -20.0f, 0));
+                initial.push_back(sommets[0]);
+                initial.push_back(sommets[1]);
+                initial.push_back(vec3(20.0f, -20.0f, 0));
+                initial.push_back(vec3(3, 0, 0));
+                //mesh pat = mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up);
+                patepos.push_back(initial);
+                initial.clear();
+
+                initial.push_back(sommets[2]);
+                initial.push_back(vec3(-20.0f, 20.0f, 0));
+                initial.push_back(vec3(20.0f, 20.0f, 0));
+                initial.push_back(sommets[3]);
+                initial.push_back(vec3(3, 0, 0));
+                //pat.push_back(mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up));
+
+                //pat.color.fill(vec3(1, 0.5f, 1));
+                //batiments.push_back(pat);
+                patepos.push_back(initial);
+            }
+            else
+            {
+                initial.push_back(vec3(-20.0f, -20.0f, 0));
+                initial.push_back(sommets[2]);
+                initial.push_back(sommets[3]);
+                initial.push_back(vec3(20.0f, -20.0f, 0));
+                initial.push_back(vec3(3, 0, 0));
+                //mesh pat = mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up);
+                patepos.push_back(initial);
+                initial.clear();
+
+                initial.push_back(sommets[0]);
+                initial.push_back(vec3(-20.0f, 20.0f, 0));
+                initial.push_back(vec3(20.0f, 20.0f, 0));
+                initial.push_back(sommets[1]);
+                initial.push_back(vec3(3, 0, 0));
+                //pat.push_back(mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up));
+                patepos.push_back(initial);
+                //pat.color.fill(vec3(1, 0.5f, 1));
+                //batiments.push_back(pat);
+            }
+        }
+        else if ((sommets[0].y == -20.0f) && (sommets[1].y == 20.0f))
+        {
+            if (sommets[0].x < sommets[2].x)
+            {
+                initial.push_back(vec3(-20.0f, -20.0f, 0));
+                initial.push_back(sommets[0]);
+                initial.push_back(sommets[1]);
+                initial.push_back(vec3(20.0f, -20.0f, 0));
+                initial.push_back(vec3(3, 0, 0));
+                //mesh pat = mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up);
+                patepos.push_back(initial);
+                initial.clear();
+
+                initial.push_back(sommets[2]);
+                initial.push_back(vec3(-20.0f, 20.0f, 0));
+                initial.push_back(vec3(20.0f, 20.0f, 0));
+                initial.push_back(sommets[3]);
+                initial.push_back(vec3(3, 0, 0));
+                //pat.push_back(mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up));
+
+                //pat.color.fill(vec3(1, 0.5f, 1));
+                //batiments.push_back(pat);
+                patepos.push_back(initial);
+                //init_pate();
+            }
+            else
+            {
+                initial.push_back(vec3(-20.0f, -20.0f, 0));
+                initial.push_back(sommets[2]);
+                initial.push_back(sommets[3]);
+                initial.push_back(vec3(20.0f, -20.0f, 0));
+                initial.push_back(vec3(3, 0, 0));
+                //                mesh pat = mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up);
+                patepos.push_back(initial);
+                initial.clear();
+
+                initial.push_back(sommets[0]);
+                initial.push_back(vec3(-20.0f, 20.0f, 0));
+                initial.push_back(vec3(20.0f, 20.0f, 0));
+                initial.push_back(sommets[1]);
+                initial.push_back(vec3(3, 0, 0));
+                //pat.push_back(mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up));
+                patepos.push_back(initial);
+                //pat.color.fill(vec3(1, 0.5f, 1));
+                //batiments.push_back(pat);
+                //init_pate();
+            }
+        }
+        else
+        {
+            init_pate();
+        }
+    }
+    else
+    {
+        init_pate();
+    }
 }
 
 vector<vec3> town::getIntersection(float a, float b, float c)
@@ -129,6 +251,7 @@ On note pour les types:
 Vec3(0,0,0) -> division normale -> on renvoit la division en 4
 Vec3(1,0,0) -> création d'un parc -> on arrete à jamais les divisons
 Vec3(2,0,0) -> division en cercle pour cette etape
+Vec3(3,0,0) -> divise un rectangle en 2
 
 Avoir 1 en coordonnée y signifie qu'on peut pas avoir de cercle à l'interieur
 */
@@ -223,8 +346,7 @@ vector<vector<vec3>> town::subdivise(vector<vec3> pate)
 
         roads.push_back(compute_road_partial(som1 + (decalagex - 0.02f) * (som2 - som1) + (1 - 0.02f - decalagey) * (som3 - som2), som0 + (decalagey - 0.02f) * (som1 - som0) + (decalagex - 0.02f) * (som3 - som0), som3 + (1 - decalagex - 0.02f) * (som0 - som3) + (decalagey - 0.02f) * (som1 - som0), som2 + (1 - 0.02f - decalagex) * (som1 - som2) + (1 - decalagey - 0.02f) * (som3 - som2), true));
     }
-
-    if (pate[4].x == 1)
+    else if (pate[4].x == 1)
     {
         res.push_back(pate);
     }
@@ -294,6 +416,79 @@ vector<vector<vec3>> town::subdivise(vector<vec3> pate)
         res.push_back(current_cube);
 
         current_cube.clear();
+    }
+    else if (pate[4].x == 3)
+    {
+        vector<vec3> current_cube;
+        vec3 som0 = pate[0];
+        vec3 som1 = pate[1];
+        vec3 som2 = pate[2];
+        vec3 som3 = pate[3];
+        float decalage = (0.3f) * rand() / (float)RAND_MAX + 0.35f;
+        if ((norm(som1 - som0) < norm(som3 - som0)))
+        {
+            vec3 nvxs0 = som0;
+            vec3 nvxs1 = som1;
+            vec3 nvxs2 = som1 + (decalage - 0.01f) * (som2 - som1);
+            vec3 nvxs3 = som0 + (decalage - 0.01f) * (som3 - som0);
+
+            current_cube.push_back(nvxs0);
+            current_cube.push_back(nvxs1);
+            current_cube.push_back(nvxs2);
+            current_cube.push_back(nvxs3);
+            current_cube.push_back(random_divider() + vec3(0, pate[4].y, 0));
+            res.push_back(current_cube);
+
+            current_cube.clear();
+
+            nvxs0 = som3 + (1 - decalage - 0.01f) * (som0 - som3);
+            nvxs1 = som2 + (1 - decalage - 0.01f) * (som1 - som2);
+            nvxs2 = som2;
+            nvxs3 = som3;
+
+            current_cube.push_back(nvxs0);
+            current_cube.push_back(nvxs1);
+            current_cube.push_back(nvxs2);
+            current_cube.push_back(nvxs3);
+            current_cube.push_back(random_divider() + vec3(0, pate[4].y, 0));
+            res.push_back(current_cube);
+
+            roads.push_back(compute_road_partial(som0 + (decalage - 0.01f) * (som3 - som0), som3 + (1 - decalage - 0.01f) * (som0 - som3), som2 + (1 - decalage - 0.01f) * (som1 - som2), som1 + (decalage - 0.01f) * (som2 - som1), false));
+
+            current_cube.clear();
+        }
+        else
+        {
+            vec3 nvxs0 = som0;
+            vec3 nvxs1 = som0 + (decalage - 0.01f) * (som1 - som0);
+            vec3 nvxs2 = som3 + (decalage - 0.01f) * (som3 - som2);
+            vec3 nvxs3 = som3;
+
+            current_cube.push_back(nvxs0);
+            current_cube.push_back(nvxs1);
+            current_cube.push_back(nvxs2);
+            current_cube.push_back(nvxs3);
+            current_cube.push_back(random_divider() + vec3(0, pate[4].y, 0));
+            res.push_back(current_cube);
+
+            current_cube.clear();
+
+            nvxs0 = som1 + (1 - decalage - 0.01f) * (som0 - som1);
+            nvxs1 = som1;
+            nvxs2 = som2;
+            nvxs3 = som2 + (1 - decalage - 0.01f) * (som3 - som2);
+
+            current_cube.push_back(nvxs0);
+            current_cube.push_back(nvxs1);
+            current_cube.push_back(nvxs2);
+            current_cube.push_back(nvxs3);
+            current_cube.push_back(random_divider() + vec3(0, pate[4].y, 0));
+            res.push_back(current_cube);
+
+            roads.push_back(compute_road_partial(som0 + (decalage - 0.01f) * (som1 - som0), som3 + (decalage - 0.01f) * (som3 - som2), som2 + (1 - decalage - 0.01f) * (som3 - som2), som1 + (1 - decalage - 0.01f) * (som0 - som1), false));
+
+            current_cube.clear();
+        }
     }
 
     return res;
@@ -398,24 +593,83 @@ mesh town::compute_batiment(vector<vec3> coords)
 
 mesh town::compute_garden(vector<vec3> coords)
 {
+    int Nu = 15;
+    int Nv = 15;
     // Pour compute les arbres, generer un vecteur de positions d'arbres et de hauteur, qui sera ensuite executé au moment du draw
-    mesh sol = mesh_primitive_quadrangle(coords[0], coords[3], coords[2], coords[1]);
-    sol.color.fill(vec3(0, 1.0f, 0));
+    mesh sol = mesh_primitive_grid(coords[0], coords[3], coords[2], coords[1], Nu, Nv);
+    sol.uv.clear();
+    for (size_t ku = 0; ku < size_t(Nu); ++ku)
+    {
+        for (size_t kv = 0; kv < size_t(Nv); ++kv)
+        {
+            sol.uv.push_back(vec2(ku, kv));
+        }
+    }
+    vec3 p00 = coords[0];
+    vec3 p10 = coords[3];
+    vec3 p11 = coords[2];
+    vec3 p01 = coords[1];
+    float aire = norm(p10 - p00) * norm(p01 - p00);
+    int N = 0;
+    if (aire < 1)
+        N = 1;
+    else if (aire < 4)
+        N = 3;
+    else if (aire < 20)
+        N = 6;
+    else if (aire < 50)
+        N = 10;
+    else if (aire < 90)
+        N = 16;
+    else
+        N = 60;
+    vector<vec3> res;
+    for (int i = 0; i < N; i++)
+    {
+        float u = rand() / (float)RAND_MAX;
+        float v = rand() / (float)RAND_MAX;
+        float w = rand() / (float)RAND_MAX;
+        float z = rand() / (float)RAND_MAX;
+        vec3 p = (u * p00 + w * p01 + v * p11 + z * p10) / (u + v + w + z);
+
+        bool enlv = false;
+        for (vec3 q : res)
+        {
+            if (((q.x - p.x) * (q.x - p.x) + (q.y - p.y) * (q.y - p.y)) < 0.15) // Passer environ à 0.20 pour eviter les collisions entre les tree
+            {
+                enlv = true;
+            }
+        }
+        if (!enlv)
+        {
+            res.push_back(p);
+            //std::cout << p << std::endl;
+        }
+    }
+    vector<vec3> topush;
+    for (int i = 0; i < res.size(); i++)
+    {
+        topush.push_back(res[i]);
+        topush.push_back(vec3(0, 0, 0));
+        treePositions.push_back(topush);
+        topush.clear();
+    }
+    //std::cout << " " << std::endl;
     return sol;
 }
 
-mesh town::create_pate(vector<vec3> coords)
+void town::create_city(vector<vec3> coords)
 {
     if (coords[4].x == 0)
     {
-        return compute_batiment(coords);
+        batiments.push_back(compute_batiment(coords));
     }
     else if (coords[4].x == 1)
     {
-        return compute_garden(coords);
+        parcs.push_back(compute_garden(coords));
     }
     else
-        return compute_batiment(coords);
+        batiments.push_back(compute_batiment(coords));
 }
 
 mesh town::compute_windows_on_cube(vec3 const &p000, vec3 const &p100, vec3 const &p110, vec3 const &p010, vec3 const &p001, vec3 const &p101, vec3 const &p111, vec3 const &p011)
@@ -492,7 +746,7 @@ mesh town::compute_road_partial(vec3 const &p00, vec3 const &p10, vec3 const &p1
             float height = 0.02f * normal;
             float decalvert = 0.2f * height;
             float jmax = floor(normal / (height + decalvert));
-            vec3 xloc = normalize(p10 - p00);
+            vec3 xloc = normalize((p10 + p11) / 2 - (p01 + p00) / 2);
             vec3 yloc = normalize(p01 - p00);
             vec3 decalnormal = cross(xloc, yloc);
             vec3 current_hor = p00 + 0.497f * (p01 - p00) + 0.005f * decalnormal;
@@ -513,7 +767,7 @@ mesh town::compute_road_partial(vec3 const &p00, vec3 const &p10, vec3 const &p1
             float height = 0.02f * normal;
             float decalvert = 0.2f * height;
             float jmax = floor(normal / (height + decalvert));
-            vec3 xloc = normalize(p01 - p00);
+            vec3 xloc = normalize((p01 + p11) / 2 - (p10 + p00) / 2);
             vec3 yloc = normalize(p10 - p00);
             vec3 decalnormal = cross(yloc, xloc);
             vec3 current_hor = p00 + 0.497f * (p10 - p00) + 0.005f * decalnormal;

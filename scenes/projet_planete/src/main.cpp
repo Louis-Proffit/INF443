@@ -12,19 +12,20 @@
 using namespace vcl;
 
 void initialize();
+
 void handle_window_update_callback(GLFWwindow* window, int width, int height);
 void handle_mouse_update_callback(GLFWwindow* window, double mouse_x_pos, double mouse_y_pos);
 void handle_kb_update_callback(GLFWwindow* window, int i, int j, int k, int l);
 
 user_parameters user;
-scene_visual* scene = 0;
-GLFWwindow* window = create_window(window_width, window_height);
+scene_visual *scene = 0;
+GLFWwindow *window = create_window(window_width, window_height);
 
-int main(int, char* argv[])
+int main(int, char *argv[])
 {
 	std::cout << "Run " << argv[0] << std::endl;
 
-	std::cout<<"Initialize data ..."<<std::endl;
+	std::cout << "Initialize data ..." << std::endl;
 	imgui_init(window);
 	initialize();
 	handle_window_update_callback(window, window_width, window_height);
@@ -32,27 +33,29 @@ int main(int, char* argv[])
 	glfwSetKeyCallback(window, handle_kb_update_callback);
 	glfwSetWindowSizeCallback(window, handle_window_update_callback);
 
-	std::cout<<"Start animation loop ..."<<std::endl;
+	std::cout << "Start animation loop ..." << std::endl;
 	user.fps_record.start();
 	glEnable(GL_DEPTH_TEST);
 	while (!glfwWindowShouldClose(window))
 	{
 		user.fps_record.update();
-		
+
 		glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glClear(GL_DEPTH_BUFFER_BIT);
 		imgui_create_frame();
 
-		if(user.fps_record.event) {
-			std::string const title = "VCL Display - "+str(user.fps_record.fps)+" fps";
+		if (user.fps_record.event)
+		{
+			std::string const title = "VCL Display - " + str(user.fps_record.fps) + " fps";
 			glfwSetWindowTitle(window, title.c_str());
 		}
 
-		ImGui::Begin("GUI",NULL,ImGuiWindowFlags_AlwaysAutoResize);
+		ImGui::Begin("GUI", NULL, ImGuiWindowFlags_AlwaysAutoResize);
 		user.cursor_on_gui = ImGui::IsAnyWindowFocused();
 
-		if(user.display_frame) draw(user.global_frame, scene);
+		if (user.display_frame)
+			draw(user.global_frame, scene);
 
 		scene->display_interface();
 		scene->display_visual();
@@ -71,9 +74,10 @@ int main(int, char* argv[])
 	return 0;
 }
 
-void swap_function(scene_type scene_type) 
+void swap_function(scene_type scene_type)
 {
-	switch (scene_type) {
+	switch (scene_type)
+	{
 	case scene_type::CITY:
 		std::cout << "Swap towards city" << std::endl;
 		delete scene;
@@ -112,11 +116,11 @@ void initialize()
 	scene_visual::init();
 	mesh_drawable::default_shader = scene_visual::open_shader("normal");
 
-	GLuint const texture_white = opengl_texture_to_gpu(image_raw{ 1,1,image_color_type::rgba,{255,255,255,255} });
+	GLuint const texture_white = opengl_texture_to_gpu(image_raw{1, 1, image_color_type::rgba, {255, 255, 255, 255}});
 	mesh_drawable::default_texture = texture_white;
 	mesh_float_drawable::default_texture = texture_white;
 
-	// Paramétrisation de l'utilisateur
+	// Paramï¿½trisation de l'utilisateur
 	user.global_frame = mesh_drawable(mesh_primitive_frame(), scene_visual::open_shader("normal"));
 	user.display_frame = false;
 
@@ -124,12 +128,10 @@ void initialize()
 	scene = new desert(&user, swap_function);
 }
 
-
-void handle_window_update_callback(GLFWwindow* window, int width, int height) 
+void handle_window_update_callback(GLFWwindow *window, int width, int height)
 {
 	scene->handle_window_size_callback(width, height);
 }
-
 void handle_mouse_update_callback(GLFWwindow* window, double mouse_x_pos, double mouse_y_pos) 
 {
 	user.state = glfw_current_state(window);
@@ -141,5 +143,3 @@ void handle_kb_update_callback(GLFWwindow* window, int i, int j, int k, int l)
 {
 	user.state = glfw_current_state(window);
 }
-
-
