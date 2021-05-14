@@ -2,7 +2,8 @@
 
 #include "vcl/vcl.hpp"
 #include <iostream>
-#include "tree_LSys.hpp"
+#include "../tree_Lsystem/tree_LSys.hpp"
+#include "../SkyBox/skybox.hpp"
 
 using namespace vcl;
 using namespace std;
@@ -12,13 +13,25 @@ class town
 public:
     // Vector de vector (avec 4 positions dans le deuxieme, pour avoir les positions d'un batiment dans le sens trigo)
     vector<vector<vec3>> patepos;
+
+    vector<vector<vec3>> treePositions; // contientle vec3 position et un vec3 pour le type d'arbre
+
+    TreeGenerator tree1;
+    TreeGenerator tree2;
+    //TreeGenerator tree3;
+    //TreeGenerator tree4;
+
     mesh ground;
     mesh batiments;
     mesh roads;
+    mesh parcs;
+
+    skybox box;
 
     mesh_drawable d_ground;
     mesh_drawable d_bat;
     mesh_drawable d_roads;
+    mesh_drawable d_parcs;
 
     // à verifier sur l'image
     vec3 pixGround = vec3(22, 22, 22) / 255.0f;
@@ -32,7 +45,7 @@ public:
 
     void compute_pate(int nb);
 
-    mesh create_pate(vector<vec3> coords);
+    void create_city(vector<vec3> coords);
 
     mesh compute_batiment(vector<vec3> coords);
 
@@ -72,5 +85,19 @@ public:
         opengl_uniform(d_roads.shader, "light", light);
         draw(d_roads, scene);
         //draw_wireframe(d_roads, scene);
+
+        glUseProgram(d_parcs.shader);
+        opengl_uniform(d_parcs.shader, "projection", scene.projection);
+        opengl_uniform(d_parcs.shader, "view", scene.camera.matrix_view());
+        opengl_uniform(d_parcs.shader, "light", light);
+        draw(d_parcs, scene);
+        //draw_wireframe(d_parcs, scene);
+
+        for (auto p : treePositions)
+        {
+            tree1.translate(p[0]);
+            tree1.draw_tree(scene);
+        }
+        box.draw_skybox(scene);
     }
 };

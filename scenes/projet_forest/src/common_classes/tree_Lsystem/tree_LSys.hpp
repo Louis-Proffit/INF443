@@ -25,15 +25,29 @@ public:
 
     void GenerateLeave(vec3 startingPoint, vec3 translationVector, float height);
 
+    void translate(vec3 _translation);
+
     void initTree(std::string treename = "brin", bool blockleaves = false, GLuint shader = shader_basic_w);
 
     template <typename SCENE>
     void draw_tree(SCENE const &scene)
     {
+        vec3 light = scene.camera.position();
+        glUseProgram(dtrunk.shader);
+        opengl_uniform(dtrunk.shader, "projection", scene.projection);
+        opengl_uniform(dtrunk.shader, "view", scene.camera.matrix_view());
+        opengl_uniform(dtrunk.shader, "light", light);
+
         draw(dtrunk, scene);
 
         if (hasleaves)
+        {
+            glUseProgram(dleaves.shader);
+            opengl_uniform(dleaves.shader, "projection", scene.projection);
+            opengl_uniform(dleaves.shader, "view", scene.camera.matrix_view());
+            opengl_uniform(dleaves.shader, "light", light);
             draw(dleaves, scene);
+        }
     }
 
     static GLuint shader_basic_w;
