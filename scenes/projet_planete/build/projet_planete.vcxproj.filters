@@ -94,6 +94,9 @@
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\camera\camera_head\camera_head.cpp">
       <Filter>vcl\interaction\camera\camera_head</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\camera\camera_minecraft\camera_minecraft.cpp">
+      <Filter>vcl\interaction\camera\camera_minecraft</Filter>
+    </ClCompile>
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\camera\camera_spherical_coordinates\camera_spherical_coordinates.cpp">
       <Filter>vcl\interaction\camera\camera_spherical_coordinates</Filter>
     </ClCompile>
@@ -392,6 +395,9 @@
     </ClInclude>
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\camera\camera_head\camera_head.hpp">
       <Filter>vcl\interaction\camera\camera_head</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\camera\camera_minecraft\camera_minecraft.hpp">
+      <Filter>vcl\interaction\camera\camera_minecraft</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\camera\camera_spherical_coordinates\camera_spherical_coordinates.hpp">
       <Filter>vcl\interaction\camera\camera_spherical_coordinates</Filter>
@@ -1708,6 +1714,9 @@
     </Filter>
     <Filter Include="vcl\interaction\camera\camera_head">
       <UniqueIdentifier>{9B61434D-8F6A-373E-A82A-BA0A48DD364A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vcl\interaction\camera\camera_minecraft">
+      <UniqueIdentifier>{B0B40D22-CCAD-3D43-8365-1412E00B6FE8}</UniqueIdentifier>
     </Filter>
     <Filter Include="vcl\interaction\camera\camera_spherical_coordinates">
       <UniqueIdentifier>{FD435EA4-341B-3888-99D9-3B36236269F2}</UniqueIdentifier>

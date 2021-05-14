@@ -12,6 +12,10 @@ namespace vcl
 		bool mouse_release_right;
 		bool key_ctrl;
 		bool key_shift;
+		bool key_up;
+		bool key_down;
+		bool key_left;
+		bool key_right;
 	};
 
 	glfw_state glfw_current_state(GLFWwindow* window);

@@ -10,7 +10,7 @@ public:
 	vcl::mesh mesh;
 	vcl::mesh_drawable visual;
 
-	vcl::camera_head camera;
+	vcl::camera_minecraft camera;
 
 	vcl::mesh_drawable sun_visual;
 	skybox skybox;
@@ -21,7 +21,7 @@ public:
 
 	// Redefine the virtuals
 	void display_visual();
-	void update_visual(vcl::vec2 new_mouse_position);
+	void update_visual();
 	void display_interface();
 
 private:

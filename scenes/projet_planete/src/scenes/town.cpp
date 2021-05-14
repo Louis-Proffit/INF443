@@ -29,9 +29,10 @@ void city::display_visual()
     }
 }
 
-void city::update_visual(vcl::vec2 new_mouse_position)
+void city::update_visual()
 {
     // Rien a update
+    vec2 const& p1 = user_reference->mouse_curr;
 }
 
 void city::display_interface()

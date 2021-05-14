@@ -1,4 +1,4 @@
-std::string s = R"(
+std::string sun_frag = R"(
 #version 330 core
 
 in struct fragment_data

@@ -80,9 +80,10 @@ void planet::display_visual()
     draw(sun_visual, this);
 }
 
-void planet::update_visual(vec2 p1)
+void planet::update_visual()
 {
     vec2 const& p0 = user_reference->mouse_prev;
+    vec2 const& p1 = user_reference->mouse_curr;
 
     if (!user_reference->cursor_on_gui && !user_reference->state.key_shift) {
         if (user_reference->state.mouse_click_left && !user_reference->state.key_ctrl)

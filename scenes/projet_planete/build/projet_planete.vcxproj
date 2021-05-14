@@ -77,8 +77,8 @@
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\build</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">projet_planete.dir</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\build\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">projet_planete.dir\RelWithDebInfo\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">projet_planete</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
@@ -405,6 +405,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\camera\camera_base\camera_base.hpp" />
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\camera\camera_head\camera_head.cpp" />
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\camera\camera_head\camera_head.hpp" />
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\camera\camera_minecraft\camera_minecraft.cpp" />
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\camera\camera_minecraft\camera_minecraft.hpp" />
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\camera\camera_spherical_coordinates\camera_spherical_coordinates.cpp" />
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\camera\camera_spherical_coordinates\camera_spherical_coordinates.hpp" />
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\interaction\camera\common_functions\common_functions.cpp" />

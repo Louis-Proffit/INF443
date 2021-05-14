@@ -5,3 +5,4 @@
 #include "camera_around_center/camera_around_center.hpp"
 #include "camera_spherical_coordinates/camera_spherical_coordinates.hpp"
 #include "camera_head/camera_head.hpp"
+#include "camera_minecraft/camera_minecraft.hpp"

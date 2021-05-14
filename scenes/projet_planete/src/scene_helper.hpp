@@ -21,6 +21,7 @@ public:
 	~user_parameters();
 
 	vcl::vec2 mouse_prev;
+	vcl::vec2 mouse_curr;
 	vcl::timer_fps fps_record;
 	vcl::mesh_drawable global_frame;
 	vcl::glfw_state state;
@@ -45,7 +46,7 @@ public:
 	~scene_visual();
 
 	virtual void display_visual() = 0;
-	virtual void update_visual(vcl::vec2 new_mouse_position) = 0;
+	virtual void update_visual() = 0;
 	virtual void display_interface() = 0;
 	void handle_window_size_callback(int width, int height);
 

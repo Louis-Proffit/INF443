@@ -68,6 +68,9 @@
 #define island_radius 0.4f
 #define number_of_islands 8
 
+// Player constants
+#define player_speed 0.01f
+
 #define color_sea_low vec3(float(0) / 255, float(100) / 255, float(205) / 255)
 #define color_sea_high vec3(float(0) / 255, float(191) / 255, float(255) / 255)
 

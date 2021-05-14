@@ -58,19 +58,23 @@ void desert::display_visual()
     draw(sun_visual, this);
 }
 
-void desert::update_visual(vec2 p1)
+void desert::update_visual()
 {
     vec2 const& p0 = user_reference->mouse_prev;
+    vec2 const& p1 = user_reference->mouse_curr;
 
-    camera.manipulator_rotate_roll_pitch_yaw(0, 2 * PI * (p1.y - p0.y), 2 * PI * (p1.x - p0.x));
+    vec2 dp(0, 0);
 
     if (!user_reference->cursor_on_gui && !user_reference->state.key_shift) {
-        if (user_reference->state.mouse_click_left && !user_reference->state.key_ctrl)
-            camera.manipulator_rotate_trackball(p0, p1);            
-        if (user_reference->state.mouse_click_left && user_reference->state.key_ctrl)
-            camera.manipulator_translate_in_plane(p1 - p0);
-        /*if (user_reference->state.mouse_click_right)
-            camera.manipulator_scale_distance_to_center((p1 - p0).y);*/
+        if (user_reference->state.mouse_click_left && !user_reference->state.key_ctrl) {
+            camera.manipulator_rotate_2_axis(p1.y - p0.y, p1.x - p0.x);
+        }
+        if (user_reference->state.key_up) dp.y += 1;
+        if (user_reference->state.key_down) dp.y -= 1;
+        if (user_reference->state.key_left) dp.x -= 1;
+        if (user_reference->state.key_right) dp.x += 1;
+        dp *= player_speed;
+        camera.manipulator_translate_in_plane(dp);
     }
 
     user_reference->mouse_prev = p1;

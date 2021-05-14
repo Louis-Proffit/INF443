@@ -11,10 +11,12 @@ namespace vcl
 		state.mouse_click_right = (glfwGetMouseButton(window,GLFW_MOUSE_BUTTON_RIGHT)==GLFW_PRESS);
 		state.key_ctrl          = (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) || glfwGetKey(window, GLFW_KEY_RIGHT_CONTROL));
 		state.key_shift         = (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) || glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT));
+		state.key_up			= (glfwGetKey(window, GLFW_KEY_UP));
+		state.key_down			= (glfwGetKey(window, GLFW_KEY_DOWN));
+		state.key_left			= (glfwGetKey(window, GLFW_KEY_LEFT));
+		state.key_right			= (glfwGetKey(window, GLFW_KEY_RIGHT));
 		return state;
 	}
-
-
 
 	vec2 glfw_get_mouse_cursor(GLFWwindow* window, double xpos, double ypos)
 	{

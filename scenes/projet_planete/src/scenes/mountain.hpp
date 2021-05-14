@@ -21,7 +21,7 @@ public:
 
 	// Redefine the virtuals
 	void display_visual();
-	void update_visual(vcl::vec2 new_mouse_position);
+	void update_visual();
 	void display_interface();
 
 private:
