@@ -18,6 +18,7 @@ namespace vcl
 		rotation orientation() const;
 
 		void manipulator_rotate_2_axis(float rotate_dz, float rotate_dorthogonal);
-		void manipulator_translate_in_plane(vec2 const& tr);
+		void manipulator_set_translation(vcl::vec2 const& tr);
+		void manipulator_set_altitude(float altitude);
 	};
 }

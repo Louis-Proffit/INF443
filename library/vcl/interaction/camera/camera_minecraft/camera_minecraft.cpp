@@ -30,9 +30,14 @@ namespace vcl
 
 		orientation_camera = rotation({ 0, 0, 1 }, rotation_z) * rotation({ 1, 0, 0 }, rotation_orthogonal);
 	}
-	void camera_minecraft::manipulator_translate_in_plane(vec2 const& tr)
+	void camera_minecraft::manipulator_set_translation(vcl::vec2 const& tr)
 	{
 		position_camera += translation_in_plane(tr, rotation({ 0, 0, 1 }, rotation_z));
+	}
+
+	void camera_minecraft::manipulator_set_altitude(float altitude) 
+	{
+		position_camera.z = altitude;
 	}
 
 

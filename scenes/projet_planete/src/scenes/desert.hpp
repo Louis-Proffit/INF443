@@ -4,16 +4,10 @@
 #include <iostream>
 #include "scene_helper.hpp"
 #include "skybox.hpp"
+#include "heightmap.hpp"
 
 class desert : public scene_visual{
 public:
-	vcl::mesh mesh;
-	vcl::mesh_drawable visual;
-
-	vcl::camera_minecraft camera;
-
-	vcl::mesh_drawable sun_visual;
-	skybox skybox;
 
 	// Constructor and destructors;
 	desert(user_parameters* user, std::function<void(scene_type)> swap_function);
@@ -25,7 +19,19 @@ public:
 	void display_interface();
 
 private:
+	float horizontal_scale;
+	bool height_updated;
+
+	vcl::camera_minecraft	camera;
+	vcl::mesh_drawable		sun_visual;
+	vcl::mesh				mesh;
+	vcl::mesh_drawable		visual;
+	heightmap_parameters	parameters;
+	skybox					skybox;
+
+	std::vector<std::vector<float> > height_data;
 	void set_terrain();
 	void set_skybox();
 	void set_sun();
+	float get_altitude(vcl::vec2 const& position_in_plane);
 };

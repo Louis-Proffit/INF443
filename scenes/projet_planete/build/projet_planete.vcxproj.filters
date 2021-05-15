@@ -211,6 +211,9 @@
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\simplexnoise\simplexnoise1234.cpp">
       <Filter>third_party\src\simplexnoise</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\heightmap.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -239,6 +242,9 @@
       <Filter>src\scenes</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\skybox.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\terrain.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1374,6 +1380,9 @@
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\constants.hpp">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\heightmap.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\orbiters.hpp">
       <Filter>src</Filter>
     </ClInclude>
@@ -1399,6 +1408,9 @@
       <Filter>src\scenes</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\skybox.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\terrain.hpp">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

@@ -14,8 +14,8 @@ desert::desert(user_parameters* user, std::function<void(scene_type)> _swap_func
     set_sun();
 
     // Configuration de la caméra
-    camera.position_camera = vec3(0.5, 0.5, 0.1);
-    /*camera.orientation_camera = rotation(vec3(0, 0, 1), PI / 4);*/
+    camera.position_camera = vec3(0, 0, 0);
+    camera.manipulator_set_altitude(get_altitude(camera.position_camera.xy()));
 
     // Configuration de la lumière
     light = vec3(1.0f, 1.0f, 1.0f);
@@ -65,19 +65,32 @@ void desert::update_visual()
 
     vec2 dp(0, 0);
 
-    if (!user_reference->cursor_on_gui && !user_reference->state.key_shift) {
+    if (!user_reference->cursor_on_gui) {
         if (user_reference->state.mouse_click_left && !user_reference->state.key_ctrl) {
             camera.manipulator_rotate_2_axis(p1.y - p0.y, p1.x - p0.x);
         }
-        if (user_reference->state.key_up) dp.y += 1;
-        if (user_reference->state.key_down) dp.y -= 1;
-        if (user_reference->state.key_left) dp.x -= 1;
-        if (user_reference->state.key_right) dp.x += 1;
-        dp *= player_speed;
-        camera.manipulator_translate_in_plane(dp);
     }
 
+    if (user_reference->state.key_up) dp.y += 1;
+    if (user_reference->state.key_down) dp.y -= 1;
+    if (user_reference->state.key_left) dp.x -= 1;
+    if (user_reference->state.key_right) dp.x += 1;
+    dp *= player_speed / user_reference->fps_record.fps;
+
+    camera.manipulator_set_translation(dp);
+    float new_z = get_altitude(camera.position_camera.xy());
+    camera.manipulator_set_altitude(new_z);
+
     user_reference->mouse_prev = p1;
+
+    if (height_updated)
+    {
+        for (int i = 0; i < parameters.rows; i++) {
+            for (int j = 0; j < parameters.columns; j++) mesh.position[parameters.columns * i + j].z = height_data[i][j] * horizontal_scale;
+        }
+        visual.update_position(mesh.position);
+        height_updated = false;
+    }
 }
 
 
@@ -85,19 +98,20 @@ void desert::display_interface()
 {
     ImGui::Checkbox("Frame", &user_reference->display_frame);
     ImGui::Checkbox("Wireframe", &user_reference->draw_wireframe);
+    height_updated = ImGui::SliderFloat("Horizontal scale", &horizontal_scale, 0, 1.0f, "%.3f", 2);
 }
 
 void desert::set_terrain()
 {
-    mesh = mesh_primitive_grid();
-    for (int i = 0 ; i < 10; i++) {
-        for (int j = 0 ; j < 10; j++) {
-            mesh.position[i * 10 + j].z = exp(-float(i) / 10 - float(j) / 10);
-        }
-    }
-    GLuint normal_shader = open_shader("normal");
-
+    parameters = heightmap_parameters{ 0, 0, -5, -5, 5, 5 };
+    horizontal_scale = 0.2f;
+    height_data = generateFileHeightData("assets/heightmaps/desert.png", horizontal_scale);
+    mesh = createFromHeightData(height_data, parameters);
     visual = mesh_drawable(mesh, open_shader("normal"));
+
+    image_raw texture = image_load_png("assets/textures/sand_texture.png");
+    GLuint texture_id = opengl_texture_to_gpu(texture, GL_REPEAT, GL_REPEAT);
+    visual.texture = texture_id;
 }
 
 void desert::set_skybox() {
@@ -108,4 +122,31 @@ void desert::set_sun()
 {
     sun_visual = mesh_drawable(mesh_primitive_sphere(sun_radius), open_shader("sun"));
     sun_visual.shading.color = vec3(1.0, 1.0, 0.0);
+}
+
+float desert::get_altitude(vec2 const& new_position_in_plane) 
+{
+    float i_float = parameters.rows * (new_position_in_plane.x - parameters.min_x) / (parameters.max_x - parameters.min_x);
+    float j_float = parameters.columns * (new_position_in_plane.y - parameters.min_y) / (parameters.max_y - parameters.min_y);
+    int i = int(i_float);
+    int j = int(j_float);
+    float z_1, z_2, z_3, z_4, z_5, dx, dy;
+    dx = i_float - int(i_float);
+    dy = j_float - int(j_float);
+    if (dx > dy) {
+        z_1 = mesh.position[i * parameters.columns + j].z;
+        z_2 = mesh.position[(i + 1) * parameters.columns + j].z;
+        z_3 = mesh.position[(i + 1) * parameters.columns + j + 1].z;
+        z_4 = z_1 + dx * (z_2 - z_1);
+        z_5 = z_1 + (z_3 - z_1) * dx;
+        return player_height + z_4 + (z_5 - z_4) * dy / dx;
+    }
+    else {
+        z_1 = mesh.position[i * parameters.columns + j].z;
+        z_2 = mesh.position[i * parameters.columns + j + 1].z;
+        z_3 = mesh.position[(i + 1) * parameters.columns + j + 1].z;
+        z_4 = z_2 + dx * (z_3 - z_2);
+        z_5 = z_1 + (z_3 - z_1) * dx;
+        return player_height + z_4 + (z_5 - z_4) * (1 - dy) / (1 - dx);
+    }
 }

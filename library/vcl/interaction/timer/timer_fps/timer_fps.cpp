@@ -11,14 +11,10 @@ namespace vcl
     float timer_fps::update()
     {
         float const elapsed_time = t_periodic;
-        ++counter;
 
         float const dt = timer_event_periodic::update();
-        if (event)
-        {
-            fps = counter/elapsed_time;
-            counter = 0;
-        }
+
+        fps = 1.0f / dt;
 
         return dt;
     }

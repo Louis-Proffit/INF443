@@ -50,7 +50,6 @@ int main(int, char *argv[])
 			std::string const title = "VCL Display - " + str(user.fps_record.fps) + " fps";
 			glfwSetWindowTitle(window, title.c_str());
 		}
-
 		ImGui::Begin("GUI", NULL, ImGuiWindowFlags_AlwaysAutoResize);
 		user.cursor_on_gui = ImGui::IsAnyWindowFocused();
 
@@ -125,7 +124,7 @@ void initialize()
 	user.display_frame = false;
 
 	// Initialisation de la planète
-	scene = new desert(&user, swap_function);
+	scene = new planet(&user, swap_function);
 }
 
 void handle_window_update_callback(GLFWwindow *window, int width, int height)
