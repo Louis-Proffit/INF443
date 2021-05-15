@@ -34,6 +34,13 @@ public:
 	float player_speed = 0.3f;
 };
 
+struct perlin_noise_parameters {
+	int octaves;
+	float height;
+	float persistency;
+	float frequency_gain;
+};
+
 class scene_visual
 {
 public:

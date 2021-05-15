@@ -95,7 +95,7 @@ void swap_function(scene_type scene_type)
 	case scene_type::FIELD:
 		std::cout << "Swap to field" << std::endl;
 		delete scene;
-		scene = new field(&user, swap_function);
+		scene = new countryside(&user, swap_function);
 		break;
 	case scene_type::FOREST:
 		std::cout << "Swap to forest" << std::endl;
@@ -129,7 +129,7 @@ void initialize()
 	user.display_frame = false;
 
 	// Initialisation de la planète
-	scene = new desert(&user, swap_function);
+	scene = new countryside(&user, swap_function);
 }
 
 void handle_window_update_callback(GLFWwindow *window, int width, int height)

@@ -47,14 +47,13 @@ void desert::display_visual()
     else             opengl_uniform(sun_shader, "view", camera_c.matrix_view());;
     opengl_uniform(sun_shader, "light", light);
 
-
     draw(visual, this);
-
     if (user_reference->draw_wireframe) draw_wireframe(visual, this);
-
+    /*draw(sun_visual, this);
+    if (user_reference->draw_wireframe) draw_wireframe(sun_visual, this);*/
     skybox.display_skybox(this);
 
-    draw(sun_visual, this);
+    
 }
 
 void desert::update_visual()
@@ -145,10 +144,10 @@ void desert::set_sun()
     sun_mesh = mesh_primitive_sphere(sun_radius);
     sun_mesh.flip_connectivity();
     sun_visual = mesh_drawable(sun_mesh, open_shader("sun"));
-    sun_visual.shading.phong.ambient = 100.0f;
+    /*sun_visual.shading.phong.ambient = 100.0f;
     sun_visual.shading.phong.diffuse = 100.0f;
     sun_visual.shading.phong.specular = 100.0f;
-    sun_visual.shading.phong.specular_exponent = 0.01f;
+    sun_visual.shading.phong.specular_exponent = 0.01f;*/
     sun_visual.shading.color = vec3(1.0, 1.0, 0.0);
 }
 

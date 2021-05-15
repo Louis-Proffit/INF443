@@ -122,19 +122,19 @@ void planet::update_visual()
 
         if (user_reference->state.mouse_click_left && picking.active) // Action lors du clic
             switch (terrain_types[picking.index]) {
-            case terrain_type::CITY:
+            case scene_type::CITY:
                 swap_function(scene_type::CITY);
                 break;
-            case terrain_type::DESERT:
+            case scene_type::DESERT:
                 swap_function(scene_type::DESERT);
                 break;
-            case terrain_type::FIELD:
+            case scene_type::FIELD:
                 swap_function(scene_type::FIELD);
                 break;
-            case terrain_type::FOREST:
+            case scene_type::FOREST:
                 swap_function(scene_type::FOREST);
                 break;
-            case terrain_type::MOUNTAIN:
+            case scene_type::MOUNTAIN:
                 swap_function(scene_type::MOUNTAIN);
                 break;
             }
@@ -178,8 +178,8 @@ void planet::set_islands()
             std::cout << "loop" << std::endl;
         }
         islands_centers[i] = new_center;
-        if (i < 5) terrain_types[i] = static_cast<terrain_type>(i);
-        else terrain_types[i] = static_cast<terrain_type>(int(rand_interval() * 5));
+        if (i < 5) terrain_types[i] = static_cast<scene_type>(i);
+        else terrain_types[i] = static_cast<scene_type>(int(rand_interval() * 5));
     }
 
     for (int i = 0; i < number_of_islands; i++) {
@@ -197,19 +197,19 @@ void planet::set_islands()
         mesh island_mesh;
 
         switch (terrain_types[i]) {
-        case terrain_type::FOREST :
+        case scene_type::FOREST :
             island_mesh = mesh_load_file_obj("assets/objects/oak/island_with_oak.obj");
             break;
-        case terrain_type::CITY:
+        case scene_type::CITY:
             island_mesh = mesh_load_file_obj("assets/objects/house/island_with_house.obj");
             break;
-        case terrain_type::DESERT:
+        case scene_type::DESERT:
             island_mesh = mesh_load_file_obj("assets/objects/palm/island_with_palm.obj");
             break;
-        case terrain_type::MOUNTAIN:
+        case scene_type::MOUNTAIN:
             island_mesh = mesh_load_file_obj("assets/objects/mountain/island_with_mountain.obj");
             break;
-        case terrain_type::FIELD:
+        case scene_type::FIELD:
             island_mesh = mesh_load_file_obj("assets/objects/tractor/island_with_tractor.obj");
             break;
         }

@@ -10,14 +10,6 @@ struct picking_structure {
 	int index;
 };
 
-enum class terrain_type {
-	MOUNTAIN,
-	DESERT,
-	CITY,
-	FOREST,
-	FIELD
-};
-
 class planet : public scene_visual
 {
 public:
@@ -25,7 +17,7 @@ public:
 	vcl::buffer<float> noise;
 	vcl::buffer<vcl::vec3> parrallels;
 	vcl::buffer<vcl::vec3> islands_centers;
-	vcl::buffer<terrain_type> terrain_types;
+	vcl::buffer<scene_type> terrain_types;
 	vcl::buffer<vcl::mesh_drawable> islands_visuals;
 	vcl::mesh_float_drawable planet_visual;
 
