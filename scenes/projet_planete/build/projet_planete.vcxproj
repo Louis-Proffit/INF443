@@ -77,8 +77,8 @@
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\build</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">projet_planete.dir</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\build\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">projet_planete.dir\RelWithDebInfo\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">projet_planete</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
@@ -789,8 +789,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\mountain.hpp" />
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.cpp" />
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.hpp" />
-    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\town.cpp" />
-    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\town.hpp" />
+    <ClCompile Include="..\src\scenes\city.cpp" />
+    <ClInclude Include="..\src\scenes\city.hpp" />
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\skybox.cpp" />
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\skybox.hpp" />
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\terrain.cpp" />

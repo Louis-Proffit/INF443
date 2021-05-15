@@ -22,12 +22,15 @@ private:
 	float horizontal_scale;
 	bool height_updated;
 
-	vcl::camera_minecraft	camera;
-	vcl::mesh_drawable		sun_visual;
-	vcl::mesh				mesh;
-	vcl::mesh_drawable		visual;
-	heightmap_parameters	parameters;
-	skybox					skybox;
+	vcl::camera_minecraft		camera_m;
+	vcl::camera_around_center	camera_c;
+	bool						m_activated;
+	vcl::mesh					sun_mesh;
+	vcl::mesh					mesh;
+	vcl::mesh_drawable			visual;
+	vcl::mesh_drawable			sun_visual;
+	heightmap_parameters		parameters;
+	skybox						skybox;
 
 	std::vector<std::vector<float> > height_data;
 	void set_terrain();
