@@ -13,9 +13,9 @@ using namespace vcl;
 
 void initialize();
 
-void handle_window_update_callback(GLFWwindow* window, int width, int height);
-void handle_mouse_update_callback(GLFWwindow* window, double mouse_x_pos, double mouse_y_pos);
-void handle_kb_update_callback(GLFWwindow* window, int i, int j, int k, int l);
+void handle_window_update_callback(GLFWwindow *window, int width, int height);
+void handle_mouse_update_callback(GLFWwindow *window, double mouse_x_pos, double mouse_y_pos);
+void handle_kb_update_callback(GLFWwindow *window, int i, int j, int k, int l);
 
 user_parameters user;
 scene_visual *scene = 0;
@@ -75,8 +75,9 @@ int main(int, char *argv[])
 
 void swap_function(scene_type scene_type)
 {
-	switch (scene_type){
-	
+	switch (scene_type)
+	{
+
 	case scene_type::PLANET:
 		std::cout << "Swap to planet" << std::endl;
 		delete scene;
@@ -136,14 +137,14 @@ void handle_window_update_callback(GLFWwindow *window, int width, int height)
 {
 	scene->handle_window_size_callback(width, height);
 }
-void handle_mouse_update_callback(GLFWwindow* window, double mouse_x_pos, double mouse_y_pos) 
+void handle_mouse_update_callback(GLFWwindow *window, double mouse_x_pos, double mouse_y_pos)
 {
 	user.state = glfw_current_state(window);
 	user.mouse_curr = glfw_get_mouse_cursor(window, mouse_x_pos, mouse_y_pos);
 	scene->update_visual();
 }
 
-void handle_kb_update_callback(GLFWwindow* window, int i, int j, int k, int l)
+void handle_kb_update_callback(GLFWwindow *window, int i, int j, int k, int l)
 {
 	user.state = glfw_current_state(window);
 	user.sneak = user.state.key_shift;
