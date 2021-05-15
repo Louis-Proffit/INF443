@@ -29,7 +29,7 @@ std::vector<std::vector<float>> gen = generateRandomHeightData(params);
 
 HillAlgorithmParameters params2 = HillAlgorithmParameters();
 
-std::vector<std::vector<float>> genfile = generateFileHeightData("../../assets/textures/heightmap_5.png", params2);
+std::vector<std::vector<float>> genfile = generateFileHeightData("../../assets/textures/heightmap_14.png", params2);
 
 //================================================
 //			Shader Declaration
@@ -251,7 +251,7 @@ void display_scene(vec4 clipPlane)
 	//				Draw terrain
 	//=================================================
 
-	/*glUseProgram(shader_heightmap);
+	glUseProgram(shader_heightmap);
 	glActiveTexture(GL_TEXTURE1);
 	opengl_check;
 	glBindTexture(GL_TEXTURE_2D, texture_rock);
@@ -266,7 +266,10 @@ void display_scene(vec4 clipPlane)
 	opengl_check;
 	opengl_uniform(shader_heightmap, "plane", clipPlane);
 	opengl_check;
-	draw(terrain_visual, scene);*/
+	opengl_uniform(shader_heightmap, "projection", scene.projection);
+	opengl_uniform(shader_heightmap, "view", scene.camera.matrix_view());
+	opengl_uniform(shader_heightmap, "light", scene.camera.position());
+	draw(terrain_visual, scene);
 	//draw_wireframe(terrain_visual, scene);
 
 	//draw(waterd, scene);
@@ -281,7 +284,7 @@ void display_scene(vec4 clipPlane)
 	//				Draw Town
 	//=================================================
 
-	ville.draw_town(scene);
+	//ville.draw_town(scene);
 
 	//================================================
 	//				Draw tree
