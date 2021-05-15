@@ -1,77 +1,121 @@
-﻿  main.cpp
+﻿  city.cpp
+  main.cpp
   orbiters.cpp
   scene_helper.cpp
   desert.cpp
   field.cpp
   forest.cpp
   mountain.cpp
-  planet.cpp
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.cpp(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.cpp(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.cpp(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.cpp(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.cpp(6,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.cpp(7,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+..\src\scenes\city.cpp(26,18): warning C4458: declaration of 'light' hides class member
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(43,12): message : see declaration of 'scene_visual::light' (compiling source file ..\src\scenes\city.cpp)
+..\src\scenes\city.cpp(28,28): warning C4458: declaration of 'normal_shader' hides class member
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(60,16): message : see declaration of 'scene_visual::normal_shader' (compiling source file ..\src\scenes\city.cpp)
+..\src\scenes\city.cpp(57,104): warning C4305: 'argument': truncation from 'double' to 'float'
+..\src\scenes\city.cpp(115,28): warning C4458: declaration of 'normal_shader' hides class member
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(60,16): message : see declaration of 'scene_visual::normal_shader' (compiling source file ..\src\scenes\city.cpp)
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\desert.cpp(35,28): warning C4458: declaration of 'normal_shader' hides class member
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(60,16): message : see declaration of 'scene_visual::normal_shader' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\desert.cpp)
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\desert.cpp(36,25): warning C4458: declaration of 'sun_shader' hides class member
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(61,16): message : see declaration of 'scene_visual::sun_shader' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\desert.cpp)
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\desert.cpp(123,102): warning C4305: 'argument': truncation from 'double' to 'float'
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\forest.cpp(33,28): warning C4458: declaration of 'normal_shader' hides class member
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(58,16): message : see declaration of 'scene_visual::normal_shader' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\forest.cpp)
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(60,16): message : see declaration of 'scene_visual::normal_shader' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\forest.cpp)
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\forest.cpp(34,25): warning C4458: declaration of 'sun_shader' hides class member
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(59,16): message : see declaration of 'scene_visual::sun_shader' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\forest.cpp)
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(61,16): message : see declaration of 'scene_visual::sun_shader' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\forest.cpp)
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\forest.cpp(58,17): warning C4189: 'p0': local variable is initialized but not referenced
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\desert.cpp(38,28): warning C4458: declaration of 'normal_shader' hides class member
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(58,16): message : see declaration of 'scene_visual::normal_shader' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\desert.cpp)
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\desert.cpp(39,25): warning C4458: declaration of 'sun_shader' hides class member
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(59,16): message : see declaration of 'scene_visual::sun_shader' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\desert.cpp)
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\mountain.cpp(33,28): warning C4458: declaration of 'normal_shader' hides class member
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(58,16): message : see declaration of 'scene_visual::normal_shader' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\mountain.cpp)
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\mountain.cpp(34,25): warning C4458: declaration of 'sun_shader' hides class member
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(59,16): message : see declaration of 'scene_visual::sun_shader' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\mountain.cpp)
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\mountain.cpp(58,17): warning C4189: 'p0': local variable is initialized but not referenced
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(82,3): warning C5205: delete of an abstract class 'scene_visual' that has a non-virtual destructor results in undefined behavior
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(35): message : see declaration of 'scene_visual'
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(37): message : see declaration of 'scene_visual'
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(87,3): warning C5205: delete of an abstract class 'scene_visual' that has a non-virtual destructor results in undefined behavior
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(35): message : see declaration of 'scene_visual'
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(37): message : see declaration of 'scene_visual'
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(92,3): warning C5205: delete of an abstract class 'scene_visual' that has a non-virtual destructor results in undefined behavior
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(35): message : see declaration of 'scene_visual'
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(37): message : see declaration of 'scene_visual'
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(97,3): warning C5205: delete of an abstract class 'scene_visual' that has a non-virtual destructor results in undefined behavior
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(35): message : see declaration of 'scene_visual'
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(37): message : see declaration of 'scene_visual'
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(102,3): warning C5205: delete of an abstract class 'scene_visual' that has a non-virtual destructor results in undefined behavior
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(35): message : see declaration of 'scene_visual'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(130,48): warning C4459: declaration of 'window' hides global declaration
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(37): message : see declaration of 'scene_visual'
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(107,3): warning C5205: delete of an abstract class 'scene_visual' that has a non-virtual destructor results in undefined behavior
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(37): message : see declaration of 'scene_visual'
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(135,48): warning C4459: declaration of 'window' hides global declaration
+..\src\scenes\city.cpp(776,88): warning C4100: 'p11': unreferenced formal parameter
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(22,13): message : see declaration of 'window'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(130,48): warning C4100: 'window': unreferenced formal parameter
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(134,47): warning C4459: declaration of 'window' hides global declaration
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(135,48): warning C4100: 'window': unreferenced formal parameter
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(139,47): warning C4459: declaration of 'window' hides global declaration
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(22,13): message : see declaration of 'window'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(141,44): warning C4459: declaration of 'window' hides global declaration
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(146,44): warning C4459: declaration of 'window' hides global declaration
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(22,13): message : see declaration of 'window'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(141,77): warning C4100: 'l': unreferenced formal parameter
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(141,70): warning C4100: 'k': unreferenced formal parameter
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(141,63): warning C4100: 'j': unreferenced formal parameter
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(141,56): warning C4100: 'i': unreferenced formal parameter
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(146,77): warning C4100: 'l': unreferenced formal parameter
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(146,70): warning C4100: 'k': unreferenced formal parameter
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(146,63): warning C4100: 'j': unreferenced formal parameter
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(146,56): warning C4100: 'i': unreferenced formal parameter
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\field.cpp(33,28): warning C4458: declaration of 'normal_shader' hides class member
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(60,16): message : see declaration of 'scene_visual::normal_shader' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\field.cpp)
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\field.cpp(34,25): warning C4458: declaration of 'sun_shader' hides class member
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(61,16): message : see declaration of 'scene_visual::sun_shader' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\field.cpp)
+..\src\scenes\city.cpp(895,38): warning C4100: 'new_position_in_plane': unreferenced formal parameter
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\field.cpp(58,17): warning C4189: 'p0': local variable is initialized but not referenced
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\mountain.cpp(33,28): warning C4458: declaration of 'normal_shader' hides class member
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(60,16): message : see declaration of 'scene_visual::normal_shader' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\mountain.cpp)
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\mountain.cpp(34,25): warning C4458: declaration of 'sun_shader' hides class member
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(61,16): message : see declaration of 'scene_visual::sun_shader' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\mountain.cpp)
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\mountain.cpp(58,17): warning C4189: 'p0': local variable is initialized but not referenced
 C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_drawable/mesh_drawable.hpp(51,56): warning C4100: 'scene': unreferenced formal parameter (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\forest.cpp)
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\forest.cpp(47): message : see reference to function template instantiation 'void vcl::draw<forest*>(const vcl::mesh_drawable &,const SCENE &)' being compiled
           with
           [
               SCENE=forest *
           ]
+C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_drawable/mesh_drawable.hpp(51,56): warning C4100: 'scene': unreferenced formal parameter (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\desert.cpp)
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\desert.cpp(51): message : see reference to function template instantiation 'void vcl::draw<desert*>(const vcl::mesh_drawable &,const SCENE &)' being compiled
+          with
+          [
+              SCENE=desert *
+          ]
+C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_drawable/mesh_drawable.hpp(51,56): warning C4100: 'scene': unreferenced formal parameter (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\mountain.cpp)
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\mountain.cpp(47): message : see reference to function template instantiation 'void vcl::draw<mountain*>(const vcl::mesh_drawable &,const SCENE &)' being compiled
+          with
+          [
+              SCENE=mountain *
+          ]
+C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_drawable/mesh_drawable.hpp(51,56): warning C4100: 'scene': unreferenced formal parameter (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp)
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(57): message : see reference to function template instantiation 'void vcl::draw<scene_visual*>(const vcl::mesh_drawable &,const SCENE &)' being compiled
+          with
+          [
+              SCENE=scene_visual *
+          ]
+C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_drawable/mesh_drawable.hpp(51,56): warning C4100: 'scene': unreferenced formal parameter (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\field.cpp)
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\field.cpp(47): message : see reference to function template instantiation 'void vcl::draw<field*>(const vcl::mesh_drawable &,const SCENE &)' being compiled
+          with
+          [
+              SCENE=field *
+          ]
+C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_drawable/mesh_drawable.hpp(51,56): warning C4100: 'scene': unreferenced formal parameter (compiling source file ..\src\scenes\city.cpp)
+..\src\scenes\city.cpp(35): message : see reference to function template instantiation 'void vcl::draw<city*>(const vcl::mesh_drawable &,const SCENE &)' being compiled
+          with
+          [
+              SCENE=city *
+          ]
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.cpp(61): warning C4715: 'scene_visual::open_shader': not all control paths return a value
+  planet.cpp
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.cpp(10,28): warning C4458: declaration of 'planet_shader' hides class member
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(57,16): message : see declaration of 'scene_visual::planet_shader' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.cpp)
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(59,16): message : see declaration of 'scene_visual::planet_shader' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.cpp)
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.cpp(11,28): warning C4458: declaration of 'normal_shader' hides class member
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(58,16): message : see declaration of 'scene_visual::normal_shader' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.cpp)
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(60,16): message : see declaration of 'scene_visual::normal_shader' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.cpp)
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.cpp(12,25): warning C4458: declaration of 'sun_shader' hides class member
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(59,16): message : see declaration of 'scene_visual::sun_shader' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.cpp)
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(61,16): message : see declaration of 'scene_visual::sun_shader' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.cpp)
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.cpp(11,12): warning C4189: 'normal_shader': local variable is initialized but not referenced
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.cpp(12,12): warning C4189: 'sun_shader': local variable is initialized but not referenced
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.cpp(46,28): warning C4458: declaration of 'planet_shader' hides class member
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(57,16): message : see declaration of 'scene_visual::planet_shader' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.cpp)
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(59,16): message : see declaration of 'scene_visual::planet_shader' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.cpp)
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.cpp(47,28): warning C4458: declaration of 'normal_shader' hides class member
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(58,16): message : see declaration of 'scene_visual::normal_shader' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.cpp)
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(60,16): message : see declaration of 'scene_visual::normal_shader' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.cpp)
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.cpp(48,25): warning C4458: declaration of 'sun_shader' hides class member
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(59,16): message : see declaration of 'scene_visual::sun_shader' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.cpp)
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\field.cpp(33,28): warning C4458: declaration of 'normal_shader' hides class member
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(58,16): message : see declaration of 'scene_visual::normal_shader' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\field.cpp)
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\field.cpp(34,25): warning C4458: declaration of 'sun_shader' hides class member
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(59,16): message : see declaration of 'scene_visual::sun_shader' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\field.cpp)
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\field.cpp(58,17): warning C4189: 'p0': local variable is initialized but not referenced
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(61,16): message : see declaration of 'scene_visual::sun_shader' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.cpp)
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.cpp(217,54): warning C4305: 'argument': truncation from 'double' to 'float'
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.cpp(257,27): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.cpp(284,27): warning C4018: '<': signed/unsigned mismatch
@@ -83,32 +127,6 @@ C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\plan
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.cpp(321,11): warning C4101: 'distance': unreferenced local variable
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.cpp(320,11): warning C4189: 'min_distance': local variable is initialized but not referenced
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.cpp(319,11): warning C4189: 'max_distance': local variable is initialized but not referenced
-C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_drawable/mesh_drawable.hpp(51,56): warning C4100: 'scene': unreferenced formal parameter (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\desert.cpp)
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\desert.cpp(52): message : see reference to function template instantiation 'void vcl::draw<desert*>(const vcl::mesh_drawable &,const SCENE &)' being compiled
-          with
-          [
-              SCENE=desert *
-          ]
-C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_drawable/mesh_drawable.hpp(51,56): warning C4100: 'scene': unreferenced formal parameter (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\mountain.cpp)
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\mountain.cpp(47): message : see reference to function template instantiation 'void vcl::draw<mountain*>(const vcl::mesh_drawable &,const SCENE &)' being compiled
-          with
-          [
-              SCENE=mountain *
-          ]
-C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_drawable/mesh_drawable.hpp(51,56): warning C4100: 'scene': unreferenced formal parameter (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\field.cpp)
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\field.cpp(47): message : see reference to function template instantiation 'void vcl::draw<field*>(const vcl::mesh_drawable &,const SCENE &)' being compiled
-          with
-          [
-              SCENE=field *
-          ]
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.cpp(61): warning C4715: 'scene_visual::open_shader': not all control paths return a value
-C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_drawable/mesh_drawable.hpp(51,56): warning C4100: 'scene': unreferenced formal parameter (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp)
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(57): message : see reference to function template instantiation 'void vcl::draw<scene_visual*>(const vcl::mesh_drawable &,const SCENE &)' being compiled
-          with
-          [
-              SCENE=scene_visual *
-          ]
-  town.cpp
 C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_float_drawable/mesh_float_drawable.hpp(53,62): warning C4100: 'scene': unreferenced formal parameter (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.cpp)
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.cpp(67): message : see reference to function template instantiation 'void vcl::draw<planet*>(const vcl::mesh_float_drawable &,const SCENE &)' being compiled
           with
@@ -121,24 +139,4 @@ C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\plan
           [
               SCENE=planet *
           ]
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\town.cpp(35,17): warning C4189: 'p1': local variable is initialized but not referenced
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\town.cpp(124,49): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\town.cpp(125,50): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\town.cpp(126,49): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\town.cpp(137,44): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\town.cpp(139,44): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\town.cpp(140,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\town.cpp(151,44): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\town.cpp(152,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\town.cpp(154,44): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\town.cpp(165,44): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\town.cpp(166,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\town.cpp(167,44): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_drawable/mesh_drawable.hpp(51,56): warning C4100: 'scene': unreferenced formal parameter (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\town.cpp)
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\town.cpp(23): message : see reference to function template instantiation 'void vcl::draw<city*>(const vcl::mesh_drawable &,const SCENE &)' being compiled
-          with
-          [
-              SCENE=city *
-          ]
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\town.cpp(342): warning C4715: 'city::create_pate': not all control paths return a value
   projet_planete.vcxproj -> C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\build\RelWithDebInfo\projet_planete.exe

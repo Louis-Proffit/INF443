@@ -19,7 +19,7 @@ void skybox::init_skybox(vec3 const &_center, float const &_radius, std::string 
     if (text == "desert")
     {
         haut = image_load_png("assets/skyboxes/desert/top.png");
-        gauche = image_load_png("ssets/skyboxes/desert/left.png");
+        gauche = image_load_png("assets/skyboxes/desert/left.png");
         droite = image_load_png("assets/skyboxes/desert/right.png");
         devant = image_load_png("assets/skyboxes/desert/front.png");
         derriere = image_load_png("assets/skyboxes/desert/back.png");

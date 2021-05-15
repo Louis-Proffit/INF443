@@ -14,17 +14,14 @@ desert::desert(user_parameters* user, std::function<void(scene_type)> _swap_func
     set_sun();
 
     // Configuration de la caméra
-    camera.position_camera = vec3(0, 0, 0);
-    camera.manipulator_set_altitude(get_altitude(camera.position_camera.xy()));
+    camera_m.position_camera = vec3(0, 0, 0);
+    camera_m.manipulator_set_altitude(get_altitude(camera_m.position_camera.xy()));
+    camera_c.distance_to_center = 2.5f;
+    camera_c.look_at({ 4,3,2 }, { 0,0,0 }, { 0,0,1 });
+    m_activated = true;
 
     // Configuration de la lumière
     light = vec3(1.0f, 1.0f, 1.0f);
-
-    // Configuration du swap
-    swap_function = _swap_function;
-
-    // Configuration de l'utilisateur
-    user_reference = user;
 }
 
 desert::~desert() {}
@@ -33,19 +30,21 @@ void desert::display_visual()
 {
     user_reference->timer.update();
     float const time = user_reference->timer.t;
-    light = camera.position();
+    light = camera_m.position();
 
     GLuint normal_shader = open_shader("normal");
     GLuint sun_shader = open_shader("sun");
 
     glUseProgram(normal_shader);
     opengl_uniform(normal_shader, "projection", projection);
-    opengl_uniform(normal_shader, "view", camera.matrix_view());
+    if (m_activated) opengl_uniform(normal_shader, "view", camera_m.matrix_view());
+    else             opengl_uniform(normal_shader, "view", camera_c.matrix_view());
     opengl_uniform(normal_shader, "light", light);
 
     glUseProgram(sun_shader);
     opengl_uniform(sun_shader, "projection", projection);
-    opengl_uniform(sun_shader, "view", camera.matrix_view());
+    if (m_activated) opengl_uniform(sun_shader, "view", camera_m.matrix_view());
+    else             opengl_uniform(sun_shader, "view", camera_c.matrix_view());;
     opengl_uniform(sun_shader, "light", light);
 
 
@@ -62,25 +61,40 @@ void desert::update_visual()
 {
     vec2 const& p0 = user_reference->mouse_prev;
     vec2 const& p1 = user_reference->mouse_curr;
+    if (m_activated) {
+        vec2 dp(0, 0);
 
-    vec2 dp(0, 0);
+        if (!user_reference->cursor_on_gui) {
+            if (user_reference->state.mouse_click_left && !user_reference->state.key_ctrl) {
+                camera_m.manipulator_rotate_2_axis(p1.y - p0.y, p1.x - p0.x);
+            }
+        }
 
-    if (!user_reference->cursor_on_gui) {
-        if (user_reference->state.mouse_click_left && !user_reference->state.key_ctrl) {
-            camera.manipulator_rotate_2_axis(p1.y - p0.y, p1.x - p0.x);
+        if (user_reference->state.key_up) dp.y += 1;
+        if (user_reference->state.key_down) dp.y -= 1;
+        if (user_reference->state.key_left) dp.x -= 1;
+        if (user_reference->state.key_right) dp.x += 1;
+
+        int fps = user_reference->fps_record.fps;
+        if (fps <= 0) dp *= 0;
+        else dp = dp *= user_reference->player_speed / fps;
+
+        camera_m.manipulator_set_translation(dp);
+        float new_z = get_altitude(camera_m.position_camera.xy());
+        camera_m.manipulator_set_altitude(new_z);
+    }
+    else {
+        if (!user_reference->cursor_on_gui)
+        {
+            if (user_reference->state.mouse_click_left && !user_reference->state.key_ctrl)
+                camera_c.manipulator_rotate_trackball(p0, p1);
+            if (user_reference->state.mouse_click_left && user_reference->state.key_ctrl)
+                camera_c.manipulator_translate_in_plane(p1 - p0);
+            if (user_reference->state.mouse_click_right)
+                camera_c.manipulator_scale_distance_to_center((p1 - p0).y);
         }
     }
-
-    if (user_reference->state.key_up) dp.y += 1;
-    if (user_reference->state.key_down) dp.y -= 1;
-    if (user_reference->state.key_left) dp.x -= 1;
-    if (user_reference->state.key_right) dp.x += 1;
-    dp *= player_speed / user_reference->fps_record.fps;
-
-    camera.manipulator_set_translation(dp);
-    float new_z = get_altitude(camera.position_camera.xy());
-    camera.manipulator_set_altitude(new_z);
-
+    
     user_reference->mouse_prev = p1;
 
     if (height_updated)
@@ -93,12 +107,20 @@ void desert::update_visual()
     }
 }
 
-
 void desert::display_interface()
 {
+    if (ImGui::Button("Retour maison")) {
+        swap_function(scene_type::PLANET);
+        std::cout << "swapped" << std::endl;
+        return;
+    }
+    if (m_activated) m_activated = !ImGui::Button("Camera aerienne");
+    else m_activated = ImGui::Button("Camera fpv");
+
     ImGui::Checkbox("Frame", &user_reference->display_frame);
     ImGui::Checkbox("Wireframe", &user_reference->draw_wireframe);
-    height_updated = ImGui::SliderFloat("Horizontal scale", &horizontal_scale, 0, 1.0f, "%.3f", 2);
+    height_updated = ImGui::SliderFloat("Echelle horizontale", &horizontal_scale, 0, 2.0f, "%.3f", 2);
+    ImGui::SliderFloat("Vitesse de déplacement", &user_reference->player_speed, 0.1, 2.0f, "%.3f", 2);
 }
 
 void desert::set_terrain()
@@ -115,7 +137,7 @@ void desert::set_terrain()
 }
 
 void desert::set_skybox() {
-    skybox.init_skybox(vec3(0, 0, 0), 10, "sundown", open_shader("normal"));
+    skybox.init_skybox(vec3(0, 0, 0), 10, "desert", open_shader("normal"));
 }
 
 void desert::set_sun()
@@ -139,6 +161,7 @@ float desert::get_altitude(vec2 const& new_position_in_plane)
         z_3 = mesh.position[(i + 1) * parameters.columns + j + 1].z;
         z_4 = z_1 + dx * (z_2 - z_1);
         z_5 = z_1 + (z_3 - z_1) * dx;
+        if (user_reference -> sneak) return player_height / 2 + z_4 + (z_5 - z_4) * dy / dx;
         return player_height + z_4 + (z_5 - z_4) * dy / dx;
     }
     else {
@@ -147,6 +170,7 @@ float desert::get_altitude(vec2 const& new_position_in_plane)
         z_3 = mesh.position[(i + 1) * parameters.columns + j + 1].z;
         z_4 = z_2 + dx * (z_3 - z_2);
         z_5 = z_1 + (z_3 - z_1) * dx;
+        if (user_reference->sneak) return player_height / 2 + z_4 + (z_5 - z_4) * (1 - dy) / (1 - dx);
         return player_height + z_4 + (z_5 - z_4) * (1 - dy) / (1 - dx);
     }
 }

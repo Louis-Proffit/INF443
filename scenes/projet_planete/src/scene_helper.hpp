@@ -27,9 +27,11 @@ public:
 	vcl::glfw_state state;
 	vcl::timer_basic timer;
 
-	bool cursor_on_gui;
-	bool draw_wireframe;
-	bool display_frame;
+	bool cursor_on_gui = false;
+	bool draw_wireframe = false;
+	bool display_frame = false;
+	bool sneak = false;
+	float player_speed = 0.3f;
 };
 
 class scene_visual

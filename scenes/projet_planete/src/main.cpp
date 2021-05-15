@@ -2,12 +2,12 @@
 #include <iostream>
 
 #include "scene_helper.hpp"
-#include "scenes//town.hpp"
-#include "scenes//mountain.hpp"
-#include "scenes//desert.hpp"
-#include "scenes//forest.hpp"
-#include "scenes//field.hpp"
-#include "scenes//planet.hpp"
+#include "scenes/city.hpp"
+#include "scenes/mountain.hpp"
+#include "scenes/desert.hpp"
+#include "scenes/forest.hpp"
+#include "scenes/field.hpp"
+#include "scenes/planet.hpp"
 
 using namespace vcl;
 
@@ -75,30 +75,35 @@ int main(int, char *argv[])
 
 void swap_function(scene_type scene_type)
 {
-	switch (scene_type)
-	{
+	switch (scene_type){
+	
+	case scene_type::PLANET:
+		std::cout << "Swap to planet" << std::endl;
+		delete scene;
+		scene = new planet(&user, swap_function);
+		break;
 	case scene_type::CITY:
-		std::cout << "Swap towards city" << std::endl;
+		std::cout << "Swap to city" << std::endl;
 		delete scene;
 		scene = new city(&user, swap_function);
 		break;
 	case scene_type::DESERT:
-		std::cout << "Swap towards desert" << std::endl;
+		std::cout << "Swap to desert" << std::endl;
 		delete scene;
 		scene = new desert(&user, swap_function);
 		break;
 	case scene_type::FIELD:
-		std::cout << "Swap towards field" << std::endl;
+		std::cout << "Swap to field" << std::endl;
 		delete scene;
 		scene = new field(&user, swap_function);
 		break;
 	case scene_type::FOREST:
-		std::cout << "Swap towards forest" << std::endl;
+		std::cout << "Swap to forest" << std::endl;
 		delete scene;
 		scene = new forest(&user, swap_function);
 		break;
 	case scene_type::MOUNTAIN:
-		std::cout << "Swap towards mountain" << std::endl;
+		std::cout << "Swap to mountain" << std::endl;
 		delete scene;
 		scene = new mountain(&user, swap_function);
 		break;
@@ -141,4 +146,5 @@ void handle_mouse_update_callback(GLFWwindow* window, double mouse_x_pos, double
 void handle_kb_update_callback(GLFWwindow* window, int i, int j, int k, int l)
 {
 	user.state = glfw_current_state(window);
+	user.sneak = user.state.key_shift;
 }
