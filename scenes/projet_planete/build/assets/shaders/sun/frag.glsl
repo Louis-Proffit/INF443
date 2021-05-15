@@ -20,7 +20,7 @@ uniform vec3 light = vec3(1.0, 1.0, 1.0);
 uniform vec3 color = vec3(1.0, 1.0, 1.0);
 
 uniform float alpha = 1.0f; // alpha coefficient
-uniform float Ka = 0.4; // Ambient coefficient
+uniform float Ka = 0.8; // Ambient coefficient
 uniform float Kd = 0.8; // Diffuse coefficient
 uniform float Ks = 0.4f;// Specular coefficient
 uniform float specular_exp = 64.0; // Specular exponent

@@ -3,7 +3,6 @@
 #include <random>
 #include <iostream>
 #include <cmath>
-#define PI 3.14159265359f
 
 using namespace vcl;
 using namespace std;
@@ -11,15 +10,36 @@ using namespace std;
 city::city(user_parameters* _user, std::function<void(scene_type)> swap_function) : scene_visual(_user, swap_function)
 {
     // Configuration de la ville
-    init_city();
+    init_pate();
+    init_ground();
+    compute_pate(5);
+    for (size_t i = 0; i < patepos.size(); i++) create_city(patepos[i]);
+
+    batiments.fill_empty_field();
+    roads.fill_empty_field();
+    parcs.fill_empty_field();
+    ground.fill_empty_field();
+
+    // Configure meshes
+    GLuint normal_shader = scene_visual::open_shader("normal");
+    d_bat = mesh_drawable(batiments, normal_shader);
+    d_roads = mesh_drawable(roads, normal_shader);
+    d_parcs = mesh_drawable(parcs, normal_shader);
+    d_ground = mesh_drawable(ground, normal_shader);
+    
+    // Configure textures and colors
+    d_ground.texture = opengl_texture_to_gpu(image_load_png("assets/textures/texture_grass.png"), GL_REPEAT, GL_REPEAT);
+    box.init_skybox({ 0, 0, 0 }, skybox_radius, "fleuve", normal_shader);
 
     // Configuration de la caméra
     camera_m.position_camera = vec3(0, 0, 0);
-    camera_m.manipulator_set_altitude(3);//get_altitude(camera_m.position_camera.xy()));
+    camera_m.manipulator_set_altitude(get_altitude(camera_m.position_camera.xy()));
     camera_c.distance_to_center = 2.5f;
     camera_c.look_at({ 4,3,2 }, { 0,0,0 }, { 0,0,1 });
     m_activated = true;
 }
+
+city::~city() {}
 
 void city::display_visual()
 {
@@ -38,6 +58,9 @@ void city::display_visual()
     if (user_reference->draw_wireframe) draw_wireframe(d_roads, this);
     draw(d_parcs, this);
     if (user_reference->draw_wireframe) draw_wireframe(d_parcs, this);
+    draw(d_ground, this);
+    if (user_reference->draw_wireframe) draw_wireframe(d_ground, this);
+
 
     box.display_skybox(this);
 }
@@ -54,7 +77,7 @@ void city::display_interface()
 
     ImGui::Checkbox("Frame", &user_reference->display_frame);
     ImGui::Checkbox("Wireframe", &user_reference->draw_wireframe);
-    ImGui::SliderFloat("Vitesse de déplacement", &user_reference->player_speed, 0.1, 2.0f, "%.3f", 2);
+    if (m_activated) ImGui::SliderFloat("Vitesse de déplacement", &user_reference->player_speed, 0.1, 2.0f, "%.3f", 2);
 }
 
 void city::update_visual()
@@ -98,56 +121,46 @@ void city::update_visual()
     user_reference->mouse_prev = p1;
 }
 
-void city::init_city()
-{
-    init_pate();
-    //init_pate_water();
-    compute_pate(5);
-    std::cout << patepos.size() << std::endl;
-    for (size_t i = 0; i < patepos.size(); i++)
-    {
-        //batiments.push_back(mesh_primitive_quadrangle(patepos[i][0], patepos[i][3], patepos[i][2], patepos[i][1]));
-        create_city(patepos[i]);
-    }
-
-    box.init_skybox();
-
-    GLuint normal_shader = scene_visual::open_shader("normal");
-
-    batiments.fill_empty_field();
-    roads.fill_empty_field();
-    parcs.fill_empty_field();
-
-    d_bat = mesh_drawable(batiments, normal_shader);
-    d_roads = mesh_drawable(roads, normal_shader);
-    d_parcs = mesh_drawable(parcs, normal_shader);
-    d_parcs.texture = opengl_texture_to_gpu(image_load_png("assets/textures/texture_grass.png"), GL_REPEAT, GL_REPEAT);
-}
-
 void city::init_pate()
 {
     vector<vec3> initial;
-    initial.push_back(vec3(-20.0f, -20.0f, 0));
-    initial.push_back(vec3(-20.0f, 20.0f, 0));
-    initial.push_back(vec3(20.0f, 20.0f, 0));
-    initial.push_back(vec3(20.0f, -20.0f, 0));
+    initial.push_back(vec3(x_min, y_min, 0));
+    initial.push_back(vec3(x_min, y_max, 0));
+    initial.push_back(vec3(x_max, y_max, 0));
+    initial.push_back(vec3(x_max, y_min, 0));
     initial.push_back(vec3(0, 0, 0));
     patepos.push_back(initial);
 }
 
+void city::init_ground() 
+{
+    ground.position.resize(4);
+    ground.connectivity.resize(2);
+    ground.uv.resize(4);
+    ground.position[0] = vec3(x_min, y_min, -eps);
+    ground.position[1] = vec3(x_max, y_min, -eps);
+    ground.position[2] = vec3(x_max, y_max, -eps);
+    ground.position[3] = vec3(x_min, y_max, -eps);
+    ground.connectivity[0] = uint3(0, 1, 2);
+    ground.connectivity[1] = uint3(0, 2, 3);
+    ground.uv[0] = vec2(0, 0);
+    ground.uv[1] = vec2((x_max - x_min) / texture_unit_length, 0);
+    ground.uv[2] = vec2((x_max - x_min) / texture_unit_length, (y_max - y_min) / texture_unit_length);
+    ground.uv[3] = vec2(0, (y_max - y_min) / texture_unit_length);
+}
+
 void city::init_pate_water()
 {
-    float xA = (40.0f) * rand() / (float)RAND_MAX - 20.0f;
-    float yA = (40.0f) * rand() / (float)RAND_MAX - 20.0f;
-    float xB = (40.0f) * rand() / (float)RAND_MAX - 20.0f;
-    float yB = (40.0f) * rand() / (float)RAND_MAX - 20.0f;
+    float xA = (x_max - x_min) * rand() / (float)RAND_MAX + x_min;
+    float yA = (y_max - y_min) * rand() / (float)RAND_MAX + y_min;
+    float xB = (x_max - x_min) * rand() / (float)RAND_MAX + x_min;
+    float yB = (y_max - y_min) * rand() / (float)RAND_MAX + y_min;
     vec3 pA = vec3(xA, yA, 0);
     vec3 pB = vec3(xB, yB, 0);
     vec3 dir = normalize(pB - pA);
     vec3 normal = vec3(dir.y, -dir.x, 0); // Already normalized
     float largeur = 0.8f;
     vec3 pAs = pA + largeur * normal;
-    //vec3 pBs = pB + largeur * normal;
     float as = dir.y;
     float bs = -dir.x;
     float cs = -as * pAs.x - bs * pAs.y;
@@ -170,7 +183,7 @@ void city::init_pate_water()
     for (size_t i = 0; i < 4; i++)
     {
         vec3 current = points1[i];
-        if ((-20.0f <= current.x) && (current.x <= 20.0f) && (-20.0f <= current.y) && (current.y <= 20.0f))
+        if ((x_min <= current.x) && (current.x <= x_max) && (y_min <= current.y) && (current.y <= y_max))
         {
             sommets.push_back(points1[i]);
         }
@@ -178,7 +191,7 @@ void city::init_pate_water()
     for (size_t i = 0; i < 4; i++)
     {
         vec3 current = points2[i];
-        if ((-20.0f <= current.x) && (current.x <= 20.0f) && (-20.0f <= current.y) && (current.y <= 20.0f))
+        if ((x_min <= current.x) && (current.x <= x_max) && (y_min <= current.y) && (current.y <= y_max))
         {
             sommets.push_back(points2[i]);
         }
@@ -200,22 +213,22 @@ void city::init_pate_water()
     if (((sommets[0].x == sommets[2].x) || (sommets[0].y == sommets[2].y)) && ((sommets[1].x == sommets[3].x) || (sommets[1].y == sommets[3].y)))
     {
         vector<vec3> initial;
-        if ((sommets[0].x == -20.0f) && (sommets[1].x == 20.0f))
+        if ((sommets[0].x == x_min) && (sommets[1].x == x_max))
         {
             if (sommets[0].y < sommets[2].y)
             {
-                initial.push_back(vec3(-20.0f, -20.0f, 0));
+                initial.push_back(vec3(x_min, y_min, 0));
                 initial.push_back(sommets[0]);
                 initial.push_back(sommets[1]);
-                initial.push_back(vec3(20.0f, -20.0f, 0));
+                initial.push_back(vec3(x_max, y_min, 0));
                 initial.push_back(vec3(3, 0, 0));
                 //mesh pat = mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up);
                 patepos.push_back(initial);
                 initial.clear();
 
                 initial.push_back(sommets[2]);
-                initial.push_back(vec3(-20.0f, 20.0f, 0));
-                initial.push_back(vec3(20.0f, 20.0f, 0));
+                initial.push_back(vec3(x_min, y_max, 0));
+                initial.push_back(vec3(x_max, y_max, 0));
                 initial.push_back(sommets[3]);
                 initial.push_back(vec3(3, 0, 0));
                 //pat.push_back(mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up));
@@ -226,18 +239,18 @@ void city::init_pate_water()
             }
             else
             {
-                initial.push_back(vec3(-20.0f, -20.0f, 0));
+                initial.push_back(vec3(x_min, y_min, 0));
                 initial.push_back(sommets[2]);
                 initial.push_back(sommets[3]);
-                initial.push_back(vec3(20.0f, -20.0f, 0));
+                initial.push_back(vec3(x_max, y_min, 0));
                 initial.push_back(vec3(3, 0, 0));
                 //mesh pat = mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up);
                 patepos.push_back(initial);
                 initial.clear();
 
                 initial.push_back(sommets[0]);
-                initial.push_back(vec3(-20.0f, 20.0f, 0));
-                initial.push_back(vec3(20.0f, 20.0f, 0));
+                initial.push_back(vec3(x_min, y_max, 0));
+                initial.push_back(vec3(x_max, y_max, 0));
                 initial.push_back(sommets[1]);
                 initial.push_back(vec3(3, 0, 0));
                 //pat.push_back(mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up));
@@ -246,22 +259,22 @@ void city::init_pate_water()
                 //batiments.push_back(pat);
             }
         }
-        else if ((sommets[0].y == -20.0f) && (sommets[1].y == 20.0f))
+        else if ((sommets[0].y == y_min) && (sommets[1].y == y_max))
         {
             if (sommets[0].x < sommets[2].x)
             {
-                initial.push_back(vec3(-20.0f, -20.0f, 0));
+                initial.push_back(vec3(x_min, y_min, 0));
                 initial.push_back(sommets[0]);
                 initial.push_back(sommets[1]);
-                initial.push_back(vec3(20.0f, -20.0f, 0));
+                initial.push_back(vec3(x_max, y_min, 0));
                 initial.push_back(vec3(3, 0, 0));
                 //mesh pat = mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up);
                 patepos.push_back(initial);
                 initial.clear();
 
                 initial.push_back(sommets[2]);
-                initial.push_back(vec3(-20.0f, 20.0f, 0));
-                initial.push_back(vec3(20.0f, 20.0f, 0));
+                initial.push_back(vec3(x_min, y_max, 0));
+                initial.push_back(vec3(x_max, y_max, 0));
                 initial.push_back(sommets[3]);
                 initial.push_back(vec3(3, 0, 0));
                 //pat.push_back(mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up));
@@ -273,18 +286,18 @@ void city::init_pate_water()
             }
             else
             {
-                initial.push_back(vec3(-20.0f, -20.0f, 0));
+                initial.push_back(vec3(x_min, -y_min, 0));
                 initial.push_back(sommets[2]);
                 initial.push_back(sommets[3]);
-                initial.push_back(vec3(20.0f, -20.0f, 0));
+                initial.push_back(vec3(x_max, y_min, 0));
                 initial.push_back(vec3(3, 0, 0));
                 //                mesh pat = mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up);
                 patepos.push_back(initial);
                 initial.clear();
 
                 initial.push_back(sommets[0]);
-                initial.push_back(vec3(-20.0f, 20.0f, 0));
-                initial.push_back(vec3(20.0f, 20.0f, 0));
+                initial.push_back(vec3(x_min, y_max, 0));
+                initial.push_back(vec3(x_max, y_max, 0));
                 initial.push_back(sommets[1]);
                 initial.push_back(vec3(3, 0, 0));
                 //pat.push_back(mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up));
@@ -308,14 +321,14 @@ void city::init_pate_water()
 vector<vec3> city::getIntersection(float a, float b, float c)
 {
     vector<vec3> points;
-    // Intersection avec la droite d'eq x=-20;
-    points.push_back(vec3(-20, (20 * a - c) / b, 0));
-    // y = -20
-    points.push_back(vec3((20 * b - c) / a, -20, 0));
-    // x=20
-    points.push_back(vec3(20, (-20 * a - c) / b, 0));
-    //y=20
-    points.push_back(vec3((-20 * b - c) / a, 20, 0));
+    // Intersection avec la droite d'eq x=x_min;
+    points.push_back(vec3(x_min, -(x_min * a + c) / b, 0));
+    // y = y_min
+    points.push_back(vec3(-(y_min * b + c) / a, y_min, 0));
+    // x=x_max
+    points.push_back(vec3(x_max, -(x_max * a + c) / b, 0));
+    //y=y_max
+    points.push_back(vec3(-(y_max * b + c) / a, y_max, 0));
 
     return points;
 }
@@ -613,8 +626,7 @@ void city::compute_pate(int nb)
 mesh city::compute_batiment(vector<vec3> coords)
 {
     float prob = ((rand() / (float)RAND_MAX));
-    // formule pour avoir haut dans[a,b] haut = (b-a)*rand+a
-    float haut = (0.7f) * rand() / (float)RAND_MAX + 0.5;
+    float haut = (h_max - h_min) * rand() / (float)RAND_MAX + h_max;
     float scale = (0.15f) * rand() / (float)RAND_MAX + 0.85;
     float rotate = (0.1f) * rand() / (float)RAND_MAX - 0.05;
     float coloral = rand() / (float)RAND_MAX;
@@ -671,14 +683,6 @@ mesh city::compute_batiment(vector<vec3> coords)
         }
         bat.push_back(compute_windows_on_cube(som0, som3, som2, som1, som0 + 2 * up, som3 + 2 * up, som2 + 2 * up, som1 + 2 * up));
     }
-    /*else
-    {
-        vec3 center = (som0 + som1 + som2 + som3) / 4;
-        mesh cylindre = mesh_primitive_cylinder(3 * norm((som0 + som1) / 2 - center) / 4, center, center + 2.5f * up, 20, 10);
-        mesh cone = mesh_primitive_cone(3 * norm((som0 + som1) / 2 - center) / 4, 0.4 * haut, center + 2.5f * up);
-        bat.push_back(cylindre);
-        bat.push_back(cone);
-    }*/
     return bat;
 }
 
@@ -727,9 +731,7 @@ mesh city::compute_garden(vector<vec3> coords)
         for (vec3 q : res)
         {
             if (((q.x - p.x) * (q.x - p.x) + (q.y - p.y) * (q.y - p.y)) < 0.15) // Passer environ à 0.20 pour eviter les collisions entre les tree
-            {
                 enlv = true;
-            }
         }
         if (!enlv)
         {

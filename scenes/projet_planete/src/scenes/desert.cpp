@@ -21,7 +21,7 @@ desert::desert(user_parameters* user, std::function<void(scene_type)> _swap_func
     m_activated = true;
 
     // Configuration de la lumière
-    light = vec3(1.0f, 1.0f, 1.0f);
+    light = sun_visual.transform.translate;
 }
 
 desert::~desert() {}
@@ -30,7 +30,7 @@ void desert::display_visual()
 {
     user_reference->timer.update();
     float const time = user_reference->timer.t;
-    light = camera_m.position();
+    light = sun_visual.transform.translate;
 
     GLuint normal_shader = open_shader("normal");
     GLuint sun_shader = open_shader("sun");
@@ -132,7 +132,7 @@ void desert::set_terrain()
     visual = mesh_drawable(mesh, open_shader("normal"));
 
     image_raw texture = image_load_png("assets/textures/sand_texture.png");
-    GLuint texture_id = opengl_texture_to_gpu(texture, GL_REPEAT, GL_REPEAT);
+    GLuint texture_id = opengl_texture_to_gpu(texture, GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT);
     visual.texture = texture_id;
 }
 
@@ -142,7 +142,13 @@ void desert::set_skybox() {
 
 void desert::set_sun()
 {
-    sun_visual = mesh_drawable(mesh_primitive_sphere(sun_radius), open_shader("sun"));
+    sun_mesh = mesh_primitive_sphere(sun_radius);
+    sun_mesh.flip_connectivity();
+    sun_visual = mesh_drawable(sun_mesh, open_shader("sun"));
+    sun_visual.shading.phong.ambient = 100.0f;
+    sun_visual.shading.phong.diffuse = 100.0f;
+    sun_visual.shading.phong.specular = 100.0f;
+    sun_visual.shading.phong.specular_exponent = 0.01f;
     sun_visual.shading.color = vec3(1.0, 1.0, 0.0);
 }
 

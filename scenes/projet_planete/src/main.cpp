@@ -129,7 +129,7 @@ void initialize()
 	user.display_frame = false;
 
 	// Initialisation de la planète
-	scene = new planet(&user, swap_function);
+	scene = new desert(&user, swap_function);
 }
 
 void handle_window_update_callback(GLFWwindow *window, int width, int height)
