@@ -129,8 +129,8 @@ void initialize()
 	user.global_frame = mesh_drawable(mesh_primitive_frame(), scene_visual::open_shader("normal"));
 	user.display_frame = false;
 
-	// Initialisation de la planète
-	scene = new countryside(&user, swap_function);
+	// Initialisation de la planï¿½te
+	scene = new planet(&user, swap_function);
 }
 
 void handle_window_update_callback(GLFWwindow *window, int width, int height)
