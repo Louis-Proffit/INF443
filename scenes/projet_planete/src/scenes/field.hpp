@@ -36,7 +36,9 @@ public:
 	std::vector<vcl::mesh_drawable> fields_visuals;
 	std::vector<vcl::mesh_drawable> paths_visuals;
 
-	vcl::camera_around_center camera;
+	vcl::camera_around_center camera_c;
+	vcl::camera_minecraft camera_m;
+	bool m_activated;
 
 	vcl::mesh_drawable sun_visual;
 	skybox skybox;
@@ -73,6 +75,7 @@ private:
 	void set_textures();
 	void set_skybox();
 	void set_sun();
+	float get_altitude(vcl::vec2 position_in_plane);
 	vcl::mesh subdivide_path(vcl::mesh quadrangle);
 	vcl::mesh subdivide_field(vcl::mesh quadrangle);
 	void shuffle();

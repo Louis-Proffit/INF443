@@ -67,6 +67,3 @@ private:
 	static GLuint normal_shader;
 	static GLuint sun_shader;
 };
-
-
-
