@@ -7,13 +7,14 @@
 using namespace vcl;
 using namespace std;
 
-city::city(user_parameters* _user, std::function<void(scene_type)> swap_function) : scene_visual(_user, swap_function)
+city::city(user_parameters *_user, std::function<void(scene_type)> swap_function) : scene_visual(_user, swap_function)
 {
     // Configuration de la ville
     init_pate();
     init_ground();
     compute_pate(5);
-    for (size_t i = 0; i < patepos.size(); i++) create_city(patepos[i]);
+    for (size_t i = 0; i < patepos.size(); i++)
+        create_city(patepos[i]);
 
     batiments.fill_empty_field();
     roads.fill_empty_field();
@@ -26,16 +27,16 @@ city::city(user_parameters* _user, std::function<void(scene_type)> swap_function
     d_roads = mesh_drawable(roads, normal_shader);
     d_parcs = mesh_drawable(parcs, normal_shader);
     d_ground = mesh_drawable(ground, normal_shader);
-    
+
     // Configure textures and colors
     d_ground.texture = opengl_texture_to_gpu(image_load_png("assets/textures/texture_grass.png"), GL_REPEAT, GL_REPEAT);
-    box.init_skybox({ 0, 0, 0 }, skybox_radius, "fleuve", normal_shader);
+    box.init_skybox({0, 0, 0}, skybox_radius, "fleuve", normal_shader);
 
     // Configuration de la caméra
     camera_m.position_camera = vec3(0, 0, 0);
     camera_m.manipulator_set_altitude(get_altitude(camera_m.position_camera.xy()));
     camera_c.distance_to_center = 2.5f;
-    camera_c.look_at({ 4,3,2 }, { 0,0,0 }, { 0,0,1 });
+    camera_c.look_at({4, 3, 2}, {0, 0, 0}, {0, 0, 1});
     m_activated = true;
 }
 
@@ -43,70 +44,92 @@ city::~city() {}
 
 void city::display_visual()
 {
+    glClearColor(0.256f, 0.256f, 0.256f, 0.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_DEPTH_BUFFER_BIT);
     vec3 light = camera_c.position();
 
     GLuint normal_shader = scene_visual::open_shader("normal");
     glUseProgram(normal_shader);
     opengl_uniform(normal_shader, "projection", projection);
-    if (m_activated) opengl_uniform(normal_shader, "view", camera_m.matrix_view());
-    else             opengl_uniform(normal_shader, "view", camera_c.matrix_view());
+    if (m_activated)
+        opengl_uniform(normal_shader, "view", camera_m.matrix_view());
+    else
+        opengl_uniform(normal_shader, "view", camera_c.matrix_view());
     opengl_uniform(normal_shader, "light", light);
 
     draw(d_bat, this);
-    if (user_reference->draw_wireframe) draw_wireframe(d_bat, this);
+    if (user_reference->draw_wireframe)
+        draw_wireframe(d_bat, this);
     draw(d_roads, this);
-    if (user_reference->draw_wireframe) draw_wireframe(d_roads, this);
+    if (user_reference->draw_wireframe)
+        draw_wireframe(d_roads, this);
     draw(d_parcs, this);
-    if (user_reference->draw_wireframe) draw_wireframe(d_parcs, this);
+    if (user_reference->draw_wireframe)
+        draw_wireframe(d_parcs, this);
     draw(d_ground, this);
-    if (user_reference->draw_wireframe) draw_wireframe(d_ground, this);
-
+    if (user_reference->draw_wireframe)
+        draw_wireframe(d_ground, this);
 
     box.display_skybox(this);
 }
 
-void city::display_interface() 
+void city::display_interface()
 {
-    if (ImGui::Button("Retour maison")) {
+    if (ImGui::Button("Retour maison"))
+    {
         swap_function(scene_type::PLANET);
         std::cout << "swapped" << std::endl;
         return;
     }
-    if (m_activated) m_activated = !ImGui::Button("Camera aerienne");
-    else m_activated = ImGui::Button("Camera fpv");
+    if (m_activated)
+        m_activated = !ImGui::Button("Camera aerienne");
+    else
+        m_activated = ImGui::Button("Camera fpv");
 
     ImGui::Checkbox("Frame", &user_reference->display_frame);
     ImGui::Checkbox("Wireframe", &user_reference->draw_wireframe);
-    if (m_activated) ImGui::SliderFloat("Vitesse de déplacement", &user_reference->player_speed, 0.1, 2.0f, "%.3f", 2);
+    if (m_activated)
+        ImGui::SliderFloat("Vitesse de déplacement", &user_reference->player_speed, 0.1, 2.0f, "%.3f", 2);
 }
 
 void city::update_visual()
 {
-    vec2 const& p0 = user_reference->mouse_prev;
-    vec2 const& p1 = user_reference->mouse_curr;
-    if (m_activated) {
+    vec2 const &p0 = user_reference->mouse_prev;
+    vec2 const &p1 = user_reference->mouse_curr;
+    if (m_activated)
+    {
         vec2 dp(0, 0);
 
-        if (!user_reference->cursor_on_gui) {
-            if (user_reference->state.mouse_click_left && !user_reference->state.key_ctrl) {
+        if (!user_reference->cursor_on_gui)
+        {
+            if (user_reference->state.mouse_click_left && !user_reference->state.key_ctrl)
+            {
                 camera_m.manipulator_rotate_2_axis(p1.y - p0.y, p1.x - p0.x);
             }
         }
 
-        if (user_reference->state.key_up) dp.y += 1;
-        if (user_reference->state.key_down) dp.y -= 1;
-        if (user_reference->state.key_left) dp.x -= 1;
-        if (user_reference->state.key_right) dp.x += 1;
+        if (user_reference->state.key_up)
+            dp.y += 1;
+        if (user_reference->state.key_down)
+            dp.y -= 1;
+        if (user_reference->state.key_left)
+            dp.x -= 1;
+        if (user_reference->state.key_right)
+            dp.x += 1;
 
         int fps = user_reference->fps_record.fps;
-        if (fps <= 0) dp *= 0;
-        else dp *= user_reference->player_speed / fps;
+        if (fps <= 0)
+            dp *= 0;
+        else
+            dp *= user_reference->player_speed / fps;
 
         camera_m.manipulator_set_translation(dp);
         float new_z = get_altitude(camera_m.position_camera.xy());
         camera_m.manipulator_set_altitude(new_z);
     }
-    else {
+    else
+    {
         if (!user_reference->cursor_on_gui)
         {
             if (user_reference->state.mouse_click_left && !user_reference->state.key_ctrl)
@@ -132,7 +155,7 @@ void city::init_pate()
     patepos.push_back(initial);
 }
 
-void city::init_ground() 
+void city::init_ground()
 {
     ground.position.resize(4);
     ground.connectivity.resize(2);
@@ -598,7 +621,7 @@ vector<vector<vec3>> city::subdivise(vector<vec3> pate)
     return res;
 }
 
-void city::merge_pat(vector<vector<vec3>>& base, vector<vector<vec3>> to_add)
+void city::merge_pat(vector<vector<vec3>> &base, vector<vector<vec3>> to_add)
 {
     for (size_t i = 0; i < to_add.size(); i++)
     {
@@ -765,7 +788,7 @@ void city::create_city(vector<vec3> coords)
         batiments.push_back(compute_batiment(coords));
 }
 
-mesh city::compute_windows_on_cube(vec3 const& p000, vec3 const& p100, vec3 const& p110, vec3 const& p010, vec3 const& p001, vec3 const& p101, vec3 const& p111, vec3 const& p011)
+mesh city::compute_windows_on_cube(vec3 const &p000, vec3 const &p100, vec3 const &p110, vec3 const &p010, vec3 const &p001, vec3 const &p101, vec3 const &p111, vec3 const &p011)
 {
     mesh res;
     res.push_back(compute_windows_on_quadrangle(p000, p001, p101, p100));
@@ -775,7 +798,7 @@ mesh city::compute_windows_on_cube(vec3 const& p000, vec3 const& p100, vec3 cons
     return res;
 }
 
-mesh city::compute_windows_on_quadrangle(vec3 const& p00, vec3 const& p10, vec3 const& p11, vec3 const& p01)
+mesh city::compute_windows_on_quadrangle(vec3 const &p00, vec3 const &p10, vec3 const &p11, vec3 const &p01)
 {
     float height = 0.05f;
     float length = 0.1f;
@@ -824,7 +847,7 @@ mesh city::compute_windows_on_quadrangle(vec3 const& p00, vec3 const& p10, vec3 
     return res;
 }
 
-mesh city::compute_road_partial(vec3 const& p00, vec3 const& p10, vec3 const& p11, vec3 const& p01, bool const& isspecial)
+mesh city::compute_road_partial(vec3 const &p00, vec3 const &p10, vec3 const &p11, vec3 const &p01, bool const &isspecial)
 {
     mesh roa = mesh_primitive_quadrangle(p00, p10, p11, p01);
     roa.color.fill(vec3(0, 0, 0));
@@ -894,8 +917,10 @@ mesh city::compute_road_partial(vec3 const& p00, vec3 const& p10, vec3 const& p1
     return roa;
 }
 
-float city::get_altitude(vec2 const& new_position_in_plane)
+float city::get_altitude(vec2 const &new_position_in_plane)
 {
-    if (user_reference->sneak) return player_height / 2;
-    else return player_height;
+    if (user_reference->sneak)
+        return player_height / 2;
+    else
+        return player_height;
 }

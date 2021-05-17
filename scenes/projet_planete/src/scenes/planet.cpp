@@ -5,7 +5,7 @@
 
 using namespace vcl;
 
-planet::planet(user_parameters* user, std::function<void(scene_type)> _swap_function) : scene_visual(user, _swap_function)
+planet::planet(user_parameters *user, std::function<void(scene_type)> _swap_function) : scene_visual(user, _swap_function)
 {
     GLuint planet_shader = open_shader("planet");
     GLuint normal_shader = open_shader("normal");
@@ -24,11 +24,11 @@ planet::planet(user_parameters* user, std::function<void(scene_type)> _swap_func
     set_skybox();
     set_sun();
 
-    // Configuration de la caméra
+    // Configuration de la camï¿½ra
     camera.distance_to_center = 2.5f;
-    camera.look_at({ 4,3,2 }, { 0,0,0 }, { 0,0,1 });
+    camera.look_at({4, 3, 2}, {0, 0, 0}, {0, 0, 1});
 
-    // Configuration de la lumière
+    // Configuration de la lumiï¿½re
     light = vec3(1.0f, 1.0f, 1.0f);
 
     // Configuration du swap
@@ -39,6 +39,9 @@ planet::~planet() {}
 
 void planet::display_visual()
 {
+    glClearColor(0.256f, 0.256f, 0.256f, 0.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_DEPTH_BUFFER_BIT);
     user_reference->timer.update();
     float const time = user_reference->timer.t;
     light = camera.position();
@@ -63,11 +66,12 @@ void planet::display_visual()
     opengl_uniform(sun_shader, "view", camera.matrix_view());
     opengl_uniform(sun_shader, "light", light);
 
-
     draw(planet_visual, this);
 
-    if (user_reference->draw_wireframe) draw_wireframe(planet_visual, this);
-    for (size_t i = 0; i < number_of_islands; i++) {
+    if (user_reference->draw_wireframe)
+        draw_wireframe(planet_visual, this);
+    for (size_t i = 0; i < number_of_islands; i++)
+    {
         if (picking.active && picking.index == i)
             islands_visuals[i].shading.color = vec3(1, 0, 0);
         else
@@ -82,10 +86,11 @@ void planet::display_visual()
 
 void planet::update_visual()
 {
-    vec2 const& p0 = user_reference->mouse_prev;
-    vec2 const& p1 = user_reference->mouse_curr;
+    vec2 const &p0 = user_reference->mouse_prev;
+    vec2 const &p1 = user_reference->mouse_curr;
 
-    if (!user_reference->cursor_on_gui && !user_reference->state.key_shift) {
+    if (!user_reference->cursor_on_gui && !user_reference->state.key_shift)
+    {
         if (user_reference->state.mouse_click_left && !user_reference->state.key_ctrl)
             camera.manipulator_rotate_trackball(p0, p1);
         if (user_reference->state.mouse_click_left && user_reference->state.key_ctrl)
@@ -104,7 +109,7 @@ void planet::update_visual()
             vec3 const ray_direction = camera_ray_direction(camera.matrix_frame(), projection_inverse, p1);
             vec3 const ray_origin = camera.position();
 
-            intersection_structure intersection = intersection_ray_sphere(ray_origin, ray_direction, { 0, 0, 0 }, sphere_radius);
+            intersection_structure intersection = intersection_ray_sphere(ray_origin, ray_direction, {0, 0, 0}, sphere_radius);
 
             if (intersection.valid == true)
             {
@@ -113,7 +118,7 @@ void planet::update_visual()
                 {
                     if (norm(intersection.position - islands_centers[i]) < island_radius)
                     {
-                        picking = { true, i };
+                        picking = {true, i};
                         break;
                     }
                 }
@@ -121,7 +126,8 @@ void planet::update_visual()
         }
 
         if (user_reference->state.mouse_click_left && picking.active) // Action lors du clic
-            switch (terrain_types[picking.index]) {
+            switch (terrain_types[picking.index])
+            {
             case scene_type::CITY:
                 swap_function(scene_type::CITY);
                 break;
@@ -143,14 +149,13 @@ void planet::update_visual()
         picking.active = false;
 }
 
-
-void planet::display_interface() 
+void planet::display_interface()
 {
     ImGui::Checkbox("Frame", &user_reference->display_frame);
     ImGui::Checkbox("Wireframe", &user_reference->draw_wireframe);
 }
 
-void planet::set_planet() 
+void planet::set_planet()
 {
     create_sphere();
     image_raw texture = image_load_png("assets/textures/water_texture.png");
@@ -159,32 +164,42 @@ void planet::set_planet()
     planet_visual = mesh_float_drawable(planet_mesh, noise, parrallels, open_shader("planet"));
 }
 
-void planet::set_islands() 
+void planet::set_islands()
 {
     islands_centers.resize(number_of_islands);
     terrain_types.resize(number_of_islands);
 
     vec3 new_center;
     bool correct;
-    for (int i = 0; i < number_of_islands; i++){
+    for (int i = 0; i < number_of_islands; i++)
+    {
         /*new_center = get_point_on_sphere(2 * vec3(rand_interval(), rand_interval(), rand_interval()) - vec3(1, 1, 1));*/
-        while (true) {
+        while (true)
+        {
             correct = true;
             new_center = get_point_on_sphere(2 * vec3(rand_interval(), rand_interval(), rand_interval()) - vec3(1, 1, 1));
-            for (int j = 0; j < i; j++) {
-                if (norm(new_center - islands_centers[j]) < 0.6 * 2 * island_radius) correct = false;
+            for (int j = 0; j < i; j++)
+            {
+                if (norm(new_center - islands_centers[j]) < 0.6 * 2 * island_radius)
+                    correct = false;
             }
-            if (correct) break;
+            if (correct)
+                break;
             std::cout << "loop" << std::endl;
         }
         islands_centers[i] = new_center;
-        if (i < 5) terrain_types[i] = static_cast<scene_type>(i);
-        else terrain_types[i] = static_cast<scene_type>(int(rand_interval() * 5));
+        if (i < 5)
+            terrain_types[i] = static_cast<scene_type>(i);
+        else
+            terrain_types[i] = static_cast<scene_type>(int(rand_interval() * 5));
     }
 
-    for (int i = 0; i < number_of_islands; i++) {
-        for (int j = 0; j < number_of_islands; j++) {
-            if (i == j) continue;
+    for (int i = 0; i < number_of_islands; i++)
+    {
+        for (int j = 0; j < number_of_islands; j++)
+        {
+            if (i == j)
+                continue;
             assert_vcl(norm(islands_centers[i] - islands_centers[j]) >= 0.6 * 2 * island_radius, "islands too close");
         }
     }
@@ -192,12 +207,14 @@ void planet::set_islands()
     image_raw texture = image_load_png("assets/textures/lowpoly_palette.png");
     GLuint texture_id = opengl_texture_to_gpu(texture, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
 
-    for (int i = 0; i < number_of_islands; i++) {
+    for (int i = 0; i < number_of_islands; i++)
+    {
         mesh_drawable island_visual;
         mesh island_mesh;
 
-        switch (terrain_types[i]) {
-        case scene_type::FOREST :
+        switch (terrain_types[i])
+        {
+        case scene_type::FOREST:
             island_mesh = mesh_load_file_obj("assets/objects/oak/island_with_oak.obj");
             break;
         case scene_type::CITY:
@@ -224,7 +241,8 @@ void planet::set_islands()
     }
 }
 
-void planet::set_skybox() {
+void planet::set_skybox()
+{
     skybox.init_skybox(vec3(0, 0, 0), 10, "space", open_shader("normal"));
 }
 
@@ -235,7 +253,7 @@ void planet::set_sun()
     sun_visual.shading.color = vec3(1.0, 1.0, 0.0);
 }
 
-void planet::create_sphere() 
+void planet::create_sphere()
 {
 
     mesh _mesh = create_isocaedre();
@@ -246,34 +264,39 @@ void planet::create_sphere()
     int index_middle_1, index_middle_2, index_middle_3;
     vec3 middle_point_1, middle_point_2, middle_point_3;
 
-    std::map<int, int> middle_points; // Associe le hash_code des deux sommets de l'arrête avec l'indice du sommet du milieu
+    std::map<int, int> middle_points; // Associe le hash_code des deux sommets de l'arrï¿½te avec l'indice du sommet du milieu
 
-    for (int i = 0; i < sphere_division_steps; i++) {
+    for (int i = 0; i < sphere_division_steps; i++)
+    {
 
         middle_points.clear();
         number_of_positions = _mesh.position.size();
         number_of_triangles = _mesh.connectivity.size();
 
-        for (int j = 0; j < number_of_triangles; j++) {
+        for (int j = 0; j < number_of_triangles; j++)
+        {
 
             // Indice des sommets du triangle
             index_1 = _mesh.connectivity[j][0];
             index_2 = _mesh.connectivity[j][1];
             index_3 = _mesh.connectivity[j][2];
 
-            if (middle_points.find(index_1 + number_of_positions * index_2) == middle_points.end()) {
+            if (middle_points.find(index_1 + number_of_positions * index_2) == middle_points.end())
+            {
                 middle_point_1 = get_point_on_sphere((_mesh.position[index_1] + _mesh.position[index_2]) / 2);
                 _mesh.position.push_back(middle_point_1);
                 middle_points.insert(std::pair<int, int>(index_1 + number_of_positions * index_2, _mesh.position.size() - 1));
                 middle_points.insert(std::pair<int, int>(index_2 + number_of_positions * index_1, _mesh.position.size() - 1));
             }
-            if (middle_points.find(index_2 + number_of_positions * index_3) == middle_points.end()) {
+            if (middle_points.find(index_2 + number_of_positions * index_3) == middle_points.end())
+            {
                 middle_point_2 = get_point_on_sphere((_mesh.position[index_2] + _mesh.position[index_3]) / 2);
                 _mesh.position.push_back(middle_point_2);
                 middle_points.insert(std::pair<int, int>(index_2 + number_of_positions * index_3, _mesh.position.size() - 1));
                 middle_points.insert(std::pair<int, int>(index_3 + number_of_positions * index_2, _mesh.position.size() - 1));
             }
-            if (middle_points.find(index_3 + number_of_positions * index_1) == middle_points.end()) {
+            if (middle_points.find(index_3 + number_of_positions * index_1) == middle_points.end())
+            {
                 middle_point_3 = get_point_on_sphere((_mesh.position[index_3] + _mesh.position[index_1]) / 2);
                 _mesh.position.push_back(middle_point_3);
                 middle_points.insert(std::pair<int, int>(index_3 + number_of_positions * index_1, _mesh.position.size() - 1));
@@ -281,7 +304,8 @@ void planet::create_sphere()
             }
         }
 
-        for (int j = 0; j < number_of_triangles; j++) {
+        for (int j = 0; j < number_of_triangles; j++)
+        {
 
             // Indice des sommets du triangle
             index_1 = _mesh.connectivity[j][0];
@@ -305,7 +329,8 @@ void planet::create_sphere()
 
     /* Shuffle mesh */
     float perturbation_amp = 0.3 * norm(_mesh.position[_mesh.connectivity[0].x] - _mesh.position[_mesh.connectivity[0].y]);
-    for (int i = 0; i < number_of_positions; i++) _mesh.position[i] = get_point_on_sphere(_mesh.position[i] + perturbation_amp * (2 * vec3(rand_interval(), rand_interval(), rand_interval()) - vec3(1.0, 1.0, 1.0)));
+    for (int i = 0; i < number_of_positions; i++)
+        _mesh.position[i] = get_point_on_sphere(_mesh.position[i] + perturbation_amp * (2 * vec3(rand_interval(), rand_interval(), rand_interval()) - vec3(1.0, 1.0, 1.0)));
 
     /* Set final mesh */
 
@@ -322,7 +347,8 @@ void planet::create_sphere()
 
     // Parralels
     buffer<vec3> parrallels_position = buffer<vec3>(number_of_positions);
-    for (int i = 0; i < number_of_triangles; i++) {
+    for (int i = 0; i < number_of_triangles; i++)
+    {
         index_1 = _mesh.connectivity[i].x;
         index_2 = _mesh.connectivity[i].y;
         index_3 = _mesh.connectivity[i].z;
@@ -333,12 +359,13 @@ void planet::create_sphere()
     }
 
     // float t;
-    for (int i = 0; i < number_of_triangles; i++) {
+    for (int i = 0; i < number_of_triangles; i++)
+    {
         index_1 = _mesh.connectivity[i].x;
         index_2 = _mesh.connectivity[i].y;
         index_3 = _mesh.connectivity[i].z;
 
-        planet_mesh.connectivity[i] = uint3(3 * i , 3 * i + 1, 3 * i + 2);
+        planet_mesh.connectivity[i] = uint3(3 * i, 3 * i + 1, 3 * i + 2);
 
         planet_mesh.position[3 * i + 0] = _mesh.position[index_1];
         planet_mesh.position[3 * i + 1] = _mesh.position[index_2];
@@ -357,7 +384,7 @@ void planet::create_sphere()
         parrallels[3 * i + 1] = parrallels_position[index_2];
         parrallels[3 * i + 2] = parrallels_position[index_3];
     }
-    
+
     planet_mesh.fill_empty_field();
 }
 
@@ -383,7 +410,7 @@ mesh create_isocaedre()
     planet_mesh.position[10] = get_point_on_sphere(vec3(-phi, 0.0f, -1.0f));
     planet_mesh.position[11] = get_point_on_sphere(vec3(-phi, 0.0f, 1.0f));
 
-    // Triangles de de l'isocaèdre
+    // Triangles de de l'isocaï¿½dre
     planet_mesh.connectivity[0] = uint3(0, 11, 5);
     planet_mesh.connectivity[1] = uint3(0, 5, 1);
     planet_mesh.connectivity[2] = uint3(0, 1, 7);
@@ -408,27 +435,31 @@ mesh create_isocaedre()
     return planet_mesh;
 }
 
-vec3 get_point_on_sphere(vec3 position) 
+vec3 get_point_on_sphere(vec3 position)
 {
     float size = norm(position);
     return position / size * sphere_radius;
 }
 
-void curve_mesh(mesh* mesh, float radius) 
+void curve_mesh(mesh *mesh, float radius)
 {
     float max_norm = 0;
     int number_of_positions = mesh->position.size();
     float _norm;
 
-    for (int i = 0; i < number_of_positions; i++) {
+    for (int i = 0; i < number_of_positions; i++)
+    {
         _norm = norm(mesh->position[i].xy());
-        if (_norm > max_norm) max_norm = _norm;
+        if (_norm > max_norm)
+            max_norm = _norm;
     }
     float new_norm = island_radius / max_norm;
 
-    for (int i = 0; i < number_of_positions; i++) {
+    for (int i = 0; i < number_of_positions; i++)
+    {
         mesh->position[i] *= new_norm;
     }
 
-    for (int i = 0; i < number_of_positions; i++) mesh->position[i].z += sqrt(radius * radius - pow(mesh->position[i].x, 2) - pow(mesh->position[i].y, 2));
+    for (int i = 0; i < number_of_positions; i++)
+        mesh->position[i].z += sqrt(radius * radius - pow(mesh->position[i].x, 2) - pow(mesh->position[i].y, 2));
 }

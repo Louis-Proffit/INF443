@@ -24,6 +24,9 @@ countryside::~countryside() {}
 
 void countryside::display_visual()
 {
+    glClearColor(0.256f, 0.256f, 0.256f, 0.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_DEPTH_BUFFER_BIT);
     user_reference->timer.update();
     float const time = user_reference->timer.t;
     light = camera.position();
@@ -99,6 +102,7 @@ void countryside::set_terrain()
         mesh quadrangle = paths[i];
         paths[i] = subdivide_path(quadrangle);
         //quadrangle.~mesh();
+        //delete quadrangle;
     }
     for (int i = 0; i < fields.size(); i++)
     {

@@ -29,7 +29,7 @@ std::vector<std::vector<float>> gen = generateRandomHeightData(params);
 
 HillAlgorithmParameters params2 = HillAlgorithmParameters();
 
-std::vector<std::vector<float>> genfile = generateFileHeightData("../../assets/textures/heightmap_14.png", params2);
+std::vector<std::vector<float>> genfile = generateFileHeightData("../../assets/textures/heightmap_5.png", params2);
 
 //================================================
 //			Shader Declaration
@@ -119,15 +119,15 @@ int main(int, char *argv[])
 		//================================================
 		//				Real rendering
 		//=================================================
-		//part.updateParticles(scene.camera.position());
+		part.updateParticles(scene.camera.position());
 
-		//part.updateShadVbos(scene);
+		part.updateShadVbos(scene);
 		opengl_check;
 
 		//attention a bien uncomment le gl clear buffer si part
-		glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
+		/*glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
-		glClear(GL_DEPTH_BUFFER_BIT);
+		glClear(GL_DEPTH_BUFFER_BIT);*/
 		display_scene(clipPlane);
 
 		//wat.set_Uniforms(fbos.getReflectionTexture(), fbos.getRefractionTexture(), scene.camera.position(), fbos.movefactor);

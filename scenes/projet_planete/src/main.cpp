@@ -40,9 +40,6 @@ int main(int, char *argv[])
 	{
 		user.fps_record.update();
 
-		glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-		glClear(GL_DEPTH_BUFFER_BIT);
 		imgui_create_frame();
 
 		if (user.fps_record.event)
@@ -130,7 +127,7 @@ void initialize()
 	user.display_frame = false;
 
 	// Initialisation de la plan�te
-	scene = new planet(&user, swap_function);
+	scene = new countryside(&user, swap_function);
 }
 
 void handle_window_update_callback(GLFWwindow *window, int width, int height)

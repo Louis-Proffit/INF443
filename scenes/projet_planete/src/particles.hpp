@@ -24,12 +24,12 @@ struct particle
 class ParticleS
 {
 public:
-    const int MaxParticles = 2000;
-    particle ParticlesContainer[2000];
+    const int MaxParticles = 200;
+    particle ParticlesContainer[200];
     int LastUsedParticle = 0;
     GLuint VertexArrayID = 0;
-    GLfloat *g_particule_position_size_data = new GLfloat[2000 * 4];
-    GLubyte *g_particule_color_data = new GLubyte[2000 * 4];
+    GLfloat *g_particule_position_size_data = new GLfloat[200 * 4];
+    GLubyte *g_particule_color_data = new GLubyte[200 * 4];
     GLuint shad = 0;
     GLfloat g_vertex_buffer_data[12] = {
         -0.5f,

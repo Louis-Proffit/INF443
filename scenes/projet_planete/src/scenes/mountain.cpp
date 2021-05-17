@@ -5,7 +5,7 @@
 
 using namespace vcl;
 
-mountain::mountain(user_parameters* user, std::function<void(scene_type)> _swap_function) : scene_visual(user, _swap_function)
+mountain::mountain(user_parameters *user, std::function<void(scene_type)> _swap_function) : scene_visual(user, _swap_function)
 {
 
     // Configuration des visuels
@@ -13,9 +13,9 @@ mountain::mountain(user_parameters* user, std::function<void(scene_type)> _swap_
     set_skybox();
     set_sun();
 
-    // Configuration de la caméra
+    // Configuration de la camï¿½ra
 
-    // Configuration de la lumière
+    // Configuration de la lumiï¿½re
     light = vec3(1.0f, 1.0f, 1.0f);
 
     // Configuration du swap
@@ -26,6 +26,9 @@ mountain::~mountain() {}
 
 void mountain::display_visual()
 {
+    glClearColor(0.256f, 0.256f, 0.256f, 0.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_DEPTH_BUFFER_BIT);
     user_reference->timer.update();
     float const time = user_reference->timer.t;
     light = camera.position();
@@ -43,10 +46,10 @@ void mountain::display_visual()
     opengl_uniform(sun_shader, "view", camera.matrix_view());
     opengl_uniform(sun_shader, "light", light);
 
-
     draw(visual, this);
 
-    if (user_reference->draw_wireframe) draw_wireframe(visual, this);
+    if (user_reference->draw_wireframe)
+        draw_wireframe(visual, this);
 
     skybox.display_skybox(this);
 
@@ -55,8 +58,8 @@ void mountain::display_visual()
 
 void mountain::update_visual()
 {
-    vec2 const& p0 = user_reference->mouse_prev;
-    vec2 const& p1 = user_reference->mouse_curr;
+    vec2 const &p0 = user_reference->mouse_prev;
+    vec2 const &p1 = user_reference->mouse_curr;
 
     /*if (!user_reference->cursor_on_gui && !user_reference->state.key_shift) {
         if (user_reference->state.mouse_click_left && !user_reference->state.key_ctrl)
@@ -70,7 +73,6 @@ void mountain::update_visual()
     user_reference->mouse_prev = p1;
 }
 
-
 void mountain::display_interface()
 {
     ImGui::Checkbox("Frame", &user_reference->display_frame);
@@ -80,8 +82,10 @@ void mountain::display_interface()
 void mountain::set_terrain()
 {
     mesh = mesh_primitive_grid();
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 10; j++) {
+    for (int i = 0; i < 10; i++)
+    {
+        for (int j = 0; j < 10; j++)
+        {
             mesh.position[j].z = 0.1 * exp(-float(i) / 10 - float(j) / 10);
         }
     }
@@ -89,9 +93,8 @@ void mountain::set_terrain()
     visual = mesh_drawable(mesh, open_shader("normal"));
 }
 
-
-
-void mountain::set_skybox() {
+void mountain::set_skybox()
+{
     skybox.init_skybox(vec3(0, 0, 0), 10, "sundown", open_shader("normal"));
 }
 
