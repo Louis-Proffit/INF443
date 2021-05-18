@@ -65,7 +65,7 @@ mesh_drawable tree_real;
 Water wat;
 WaterFrameBuffers fbos;
 
-ParticleS part;
+ParticleS part = *(new ParticleS(500, "fire"));
 
 skybox cube;
 
@@ -269,7 +269,7 @@ void display_scene(vec4 clipPlane)
 	opengl_uniform(shader_heightmap, "projection", scene.projection);
 	opengl_uniform(shader_heightmap, "view", scene.camera.matrix_view());
 	opengl_uniform(shader_heightmap, "light", scene.camera.position());
-	draw(terrain_visual, scene);
+	//draw(terrain_visual, scene);
 	//draw_wireframe(terrain_visual, scene);
 
 	//draw(waterd, scene);

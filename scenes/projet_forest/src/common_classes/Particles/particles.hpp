@@ -24,12 +24,12 @@ struct particle
 class ParticleS
 {
 public:
-    const int MaxParticles = 2000;
-    particle ParticlesContainer[2000];
+    int MaxParticles;
+    particle *ParticlesContainer;
     int LastUsedParticle = 0;
     GLuint VertexArrayID = 0;
-    GLfloat *g_particule_position_size_data = new GLfloat[2000 * 4];
-    GLubyte *g_particule_color_data = new GLubyte[2000 * 4];
+    GLfloat *g_particule_position_size_data;
+    GLubyte *g_particule_color_data;
     GLuint shad = 0;
     GLfloat g_vertex_buffer_data[12] = {
         -0.5f,
@@ -50,10 +50,15 @@ public:
     GLuint particles_position_buffer;
     GLuint particles_color_buffer;
 
-    GLuint text;
-    GLuint textID;
+    GLuint text = 0;
+    GLuint textID = 0;
+    int nbRows;
+    std::string type;
 
     int ParticlesCount;
+
+    ParticleS(int nmax = 3000, std::string nametext = "snowflakes");
+    ~ParticleS();
 
     void setTexture(GLuint text_);
 
@@ -96,6 +101,9 @@ public:
         opengl_check;
 
         opengl_uniform(shad, scene);
+        opengl_check;
+
+        opengl_uniform(shad, "nbRows", nbRows);
         opengl_check;
 
         glBindVertexArray(VertexArrayID);
