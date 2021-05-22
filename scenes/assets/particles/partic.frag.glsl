@@ -12,7 +12,7 @@ uniform sampler2D myTexture;
 
 void main(){
 	vec4 flow = texture(myTexture,UV);
-	if( flow.x < 0.1) {
+	if( flow.x < 0.3) {
 		discard;
 	}
 	color = flow;

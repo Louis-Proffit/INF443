@@ -65,7 +65,7 @@ mesh_drawable tree_real;
 Water wat;
 WaterFrameBuffers fbos;
 
-ParticleS part = *(new ParticleS(500, "fire"));
+ParticleS part = *(new ParticleS(1000, "fire"));
 
 skybox cube;
 

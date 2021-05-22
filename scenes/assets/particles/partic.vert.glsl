@@ -29,8 +29,6 @@ mat4 VP = projection*view;
 
 void main()
 {
-	int blabla = nbRows;
-
 	float particleSize = xyzs.w; // because encoded this way.
 	vec3 particleCenter_wordspace = xyzs.xyz;
 
@@ -43,10 +41,11 @@ void main()
 	// UV of the vertex. No special space for this one.
 	UV = squareVertices.xy + vec2(0.5, 0.5);
 	UV.y = 1 - UV.y;
-	UV = UV/nbRows;
-	//UV.x =UV.x + color.x;
-	//UV.y =UV.y + color.y;
-	UV+=vec2(color.x,color.y);
+	float row = float(nbRows);
+	UV /= row;
+	UV.x += color.x;
+	UV.y += color.y;
+	//UV+=vec2(color.x,color.y);
 	particlecolor = color;
 }
 )";

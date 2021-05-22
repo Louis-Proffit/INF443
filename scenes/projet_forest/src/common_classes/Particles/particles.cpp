@@ -136,8 +136,11 @@ void ParticleS::updateParticles(vec3 CameraPosition)
 
             // Very bad way to generate a random color
             ParticlesContainer[particleIndex].color.x = 0;
+
             ParticlesContainer[particleIndex].color.y = 0;
+
             ParticlesContainer[particleIndex].color.z = 0;
+
             ParticlesContainer[particleIndex].color[3] = (rand() % 256) / 3;
 
             ParticlesContainer[particleIndex].size = (rand() % 1000) / 2000.0f + 0.1f;
@@ -214,12 +217,12 @@ void ParticleS::updateParticles(vec3 CameraPosition)
             ParticlesContainer[particleIndex].speed = maindir + randomdir * spread;
 
             // Very bad way to generate a random color
-            ParticlesContainer[particleIndex].color.x = 0;
-            ParticlesContainer[particleIndex].color.y = 0;
-            ParticlesContainer[particleIndex].color.z = 0;
+            ParticlesContainer[particleIndex].color.x = (rand() % 256) / 3;
+            ParticlesContainer[particleIndex].color.y = (rand() % 256) / 3;
+            ParticlesContainer[particleIndex].color.z = (rand() % 256) / 3;
             ParticlesContainer[particleIndex].color[3] = (rand() % 256) / 3;
 
-            ParticlesContainer[particleIndex].size = rand() / RAND_MAX;
+            ParticlesContainer[particleIndex].size = (rand() % 1000) / 2000.0f + 0.1f;
         }
 
         // Simulate all particles
@@ -250,7 +253,10 @@ void ParticleS::updateParticles(vec3 CameraPosition)
                     int progression = floor(lifefactor * nbRows * nbRows);
                     int column = progression % nbRows;
                     int row = progression / nbRows;
-                    std::cout << vec2(row / (float)nbRows, (column) / (float)nbRows) << std::endl;
+                    std::cout << vec2((row) / (float)nbRows, (column) / (float)nbRows) << std::endl;
+
+                    vec2 decalcolor = vec2((row) / (float)nbRows, (column) / (float)nbRows);
+                    std::cout << decalcolor << std::endl;
 
                     // Fill the GPU buffer
                     g_particule_position_size_data[4 * ParticlesCount + 0] = p.pos.x;
@@ -259,8 +265,8 @@ void ParticleS::updateParticles(vec3 CameraPosition)
 
                     g_particule_position_size_data[4 * ParticlesCount + 3] = p.size;
 
-                    g_particule_color_data[4 * ParticlesCount + 0] = (column) / (float)nbRows;
-                    g_particule_color_data[4 * ParticlesCount + 1] = (row) / (float)nbRows;
+                    g_particule_color_data[4 * ParticlesCount + 0] = decalcolor.x; // Le pb vient du type
+                    g_particule_color_data[4 * ParticlesCount + 1] = decalcolor.y;
                     g_particule_color_data[4 * ParticlesCount + 2] = p.color.z;
                     g_particule_color_data[4 * ParticlesCount + 3] = p.color[3];
                 }
