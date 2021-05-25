@@ -4,6 +4,8 @@
 #include <iostream>
 #include "scene_helper.hpp"
 #include "skybox.hpp"
+#include "particles.hpp"
+#include "tree_Lsystem/tree_LSys.hpp"
 
 class forest : public scene_visual
 {
@@ -15,6 +17,10 @@ public:
 
 	vcl::mesh_drawable sun_visual;
 	skybox skybox;
+
+	ParticleS grass;
+
+	TreeGenerator tree;
 
 	// Constructor and destructors;
 	forest(user_parameters *user, std::function<void(scene_type)> swap_function);
@@ -34,4 +40,6 @@ private:
 	void set_terrain();
 	void set_skybox();
 	void set_sun();
+	void set_grass();
+	void set_tree();
 };

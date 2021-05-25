@@ -1,0 +1,3232 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "projet_planete"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_executable",
+			"target_link_libraries",
+			"add_definitions",
+			"include",
+			"include_directories"
+		],
+		"files" : 
+		[
+			"CMakeLists.txt",
+			"/Users/paultheron/Desktop/Projet/INF443/library/third_party/CMakeLists.txt",
+			"/Users/paultheron/Desktop/Projet/INF443/library/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 27,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 45,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 47,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 18,
+				"parent" : 0
+			},
+			{
+				"file" : 2,
+				"parent" : 4
+			},
+			{
+				"command" : 3,
+				"file" : 2,
+				"line" : 8,
+				"parent" : 5
+			},
+			{
+				"file" : 1,
+				"parent" : 6
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 11,
+				"parent" : 7
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 15,
+				"parent" : 0
+			},
+			{
+				"command" : 4,
+				"file" : 2,
+				"line" : 3,
+				"parent" : 5
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 19,
+				"parent" : 7
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk -mmacosx-version-min=11.2   -g -O2 -std=c++14 -Wall -Wextra -Wno-sign-compare -Wno-type-limits"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 8,
+					"define" : "IMGUI_IMPL_OPENGL_LOADER_GLAD"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 9,
+					"path" : "/Users/paultheron/Desktop/Projet/INF443/scenes/projet_planete/src"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "/Users/paultheron/Desktop/Projet/INF443/library"
+				},
+				{
+					"backtrace" : 11,
+					"path" : "/usr/local/Cellar/glfw/3.3.3/include"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/usr/local/include"
+				}
+			],
+			"language" : "CXX",
+			"sourceIndexes" : 
+			[
+				1,
+				3,
+				5,
+				8,
+				12,
+				19,
+				21,
+				27,
+				31,
+				33,
+				36,
+				39,
+				41,
+				43,
+				45,
+				47,
+				49,
+				51,
+				53,
+				55,
+				57,
+				59,
+				62,
+				65,
+				67,
+				69,
+				71,
+				73,
+				76,
+				78,
+				80,
+				82,
+				84,
+				86,
+				88,
+				90,
+				94,
+				96,
+				98,
+				100,
+				103,
+				106,
+				108,
+				110,
+				112,
+				117,
+				119,
+				122,
+				124,
+				126,
+				128,
+				130,
+				132,
+				134,
+				136,
+				138,
+				140,
+				143,
+				146,
+				148,
+				150,
+				427,
+				429,
+				431,
+				432,
+				433,
+				435,
+				438,
+				442,
+				444,
+				447,
+				449,
+				450,
+				452,
+				454,
+				456,
+				458,
+				460,
+				462,
+				464,
+				466,
+				468,
+				470,
+				472,
+				474,
+				476
+			]
+		}
+	],
+	"id" : "projet_planete::@6890427a1f51a3e7e1df",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "-g",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "-Wl,-rpath,/usr/local/lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libglfw.3.3.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "-ldl",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "projet_planete",
+	"nameOnDisk" : "projet_planete",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				0,
+				2,
+				4,
+				6,
+				7,
+				9,
+				10,
+				11,
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				20,
+				22,
+				23,
+				24,
+				25,
+				26,
+				28,
+				29,
+				30,
+				32,
+				34,
+				35,
+				37,
+				38,
+				40,
+				42,
+				44,
+				46,
+				48,
+				50,
+				52,
+				54,
+				56,
+				58,
+				60,
+				61,
+				63,
+				64,
+				66,
+				68,
+				70,
+				72,
+				74,
+				75,
+				77,
+				79,
+				81,
+				83,
+				85,
+				87,
+				89,
+				91,
+				92,
+				93,
+				95,
+				97,
+				99,
+				101,
+				102,
+				104,
+				105,
+				107,
+				109,
+				111,
+				113,
+				114,
+				115,
+				116,
+				118,
+				120,
+				121,
+				123,
+				125,
+				127,
+				129,
+				131,
+				133,
+				135,
+				137,
+				139,
+				141,
+				142,
+				144,
+				145,
+				147,
+				149,
+				151,
+				152,
+				153,
+				154,
+				155,
+				156,
+				157,
+				158,
+				159,
+				160,
+				161,
+				162,
+				163,
+				164,
+				165,
+				166,
+				167,
+				168,
+				169,
+				170,
+				171,
+				172,
+				173,
+				174,
+				175,
+				176,
+				177,
+				178,
+				179,
+				180,
+				181,
+				182,
+				183,
+				184,
+				185,
+				186,
+				187,
+				188,
+				189,
+				190,
+				191,
+				192,
+				193,
+				194,
+				195,
+				196,
+				197,
+				198,
+				199,
+				200,
+				201,
+				202,
+				203,
+				204,
+				205,
+				206,
+				207,
+				208,
+				209,
+				210,
+				211,
+				212,
+				213,
+				214,
+				215,
+				216,
+				217,
+				218,
+				219,
+				220,
+				221,
+				222,
+				223,
+				224,
+				225,
+				226,
+				227,
+				228,
+				229,
+				230,
+				231,
+				232,
+				233,
+				234,
+				235,
+				236,
+				237,
+				238,
+				239,
+				240,
+				241,
+				242,
+				243,
+				244,
+				245,
+				246,
+				247,
+				248,
+				249,
+				250,
+				251,
+				252,
+				253,
+				254,
+				255,
+				256,
+				257,
+				258,
+				259,
+				260,
+				261,
+				262,
+				263,
+				264,
+				265,
+				266,
+				267,
+				268,
+				269,
+				270,
+				271,
+				272,
+				273,
+				274,
+				275,
+				276,
+				277,
+				278,
+				279,
+				280,
+				281,
+				282,
+				283,
+				284,
+				285,
+				286,
+				287,
+				288,
+				289,
+				290,
+				291,
+				292,
+				293,
+				294,
+				295,
+				296,
+				297,
+				298,
+				299,
+				300,
+				301,
+				302,
+				303,
+				304,
+				305,
+				306,
+				307,
+				308,
+				309,
+				310,
+				311,
+				312,
+				313,
+				314,
+				315,
+				316,
+				317,
+				318,
+				319,
+				320,
+				321,
+				322,
+				323,
+				324,
+				325,
+				326,
+				327,
+				328,
+				329,
+				330,
+				331,
+				332,
+				333,
+				334,
+				335,
+				336,
+				337,
+				338,
+				339,
+				340,
+				341,
+				342,
+				343,
+				344,
+				345,
+				346,
+				347,
+				348,
+				349,
+				350,
+				351,
+				352,
+				353,
+				354,
+				355,
+				356,
+				357,
+				358,
+				359,
+				360,
+				361,
+				362,
+				363,
+				364,
+				365,
+				366,
+				367,
+				368,
+				369,
+				370,
+				371,
+				372,
+				373,
+				374,
+				375,
+				376,
+				377,
+				378,
+				379,
+				380,
+				381,
+				382,
+				383,
+				384,
+				385,
+				386,
+				387,
+				388,
+				389,
+				390,
+				391,
+				392,
+				393,
+				394,
+				395,
+				396,
+				397,
+				398,
+				399,
+				400,
+				401,
+				402,
+				403,
+				404,
+				405,
+				406,
+				407,
+				408,
+				409,
+				410,
+				411,
+				412,
+				413,
+				414,
+				415,
+				416,
+				417,
+				418,
+				419,
+				420,
+				421,
+				422,
+				423,
+				424,
+				425,
+				426,
+				428,
+				430,
+				434,
+				436,
+				437,
+				439,
+				440,
+				441,
+				443,
+				445,
+				446,
+				448,
+				451,
+				453,
+				455,
+				457,
+				459,
+				461,
+				463,
+				465,
+				467,
+				469,
+				471,
+				473,
+				475,
+				477
+			]
+		},
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				1,
+				3,
+				5,
+				8,
+				12,
+				19,
+				21,
+				27,
+				31,
+				33,
+				36,
+				39,
+				41,
+				43,
+				45,
+				47,
+				49,
+				51,
+				53,
+				55,
+				57,
+				59,
+				62,
+				65,
+				67,
+				69,
+				71,
+				73,
+				76,
+				78,
+				80,
+				82,
+				84,
+				86,
+				88,
+				90,
+				94,
+				96,
+				98,
+				100,
+				103,
+				106,
+				108,
+				110,
+				112,
+				117,
+				119,
+				122,
+				124,
+				126,
+				128,
+				130,
+				132,
+				134,
+				136,
+				138,
+				140,
+				143,
+				146,
+				148,
+				150,
+				427,
+				429,
+				431,
+				432,
+				433,
+				435,
+				438,
+				442,
+				444,
+				447,
+				449,
+				450,
+				452,
+				454,
+				456,
+				458,
+				460,
+				462,
+				464,
+				466,
+				468,
+				470,
+				472,
+				474,
+				476
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/base/base.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/base/basic_types/basic_types.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/base/basic_types/basic_types.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/base/error/error.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/base/error/error.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/base/rand/rand.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/base/rand/rand.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/base/stl/stl.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/base/string/string.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/base/string/string.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/base/types/types.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/containers/buffer/buffer.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/containers/buffer/test/test_buffer.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/containers/buffer/test/test_buffer.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/containers/buffer_stack/buffer_stack.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/containers/buffer_stack/implementation/buffer_stack.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/containers/buffer_stack/implementation/buffer_stack2.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/containers/buffer_stack/implementation/buffer_stack3.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/containers/buffer_stack/implementation/buffer_stack4.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/containers/buffer_stack/special_types/special_types.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/containers/buffer_stack/special_types/special_types.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/containers/buffer_stack/test/test_buffer_stack.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/containers/buffer_stack/test/test_buffer_stack.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/containers/containers.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/containers/grid/grid.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/containers/grid/grid_2D/grid_2D.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/containers/grid/grid_3D/grid_3D.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/containers/grid/test/test_grid.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/containers/grid/test/test_grid.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/containers/grid_stack/grid_stack.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/containers/grid_stack/grid_stack_2D/grid_stack_2D.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/containers/grid_stack/grid_stack_2D/test/test_grid_stack_2D.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/containers/grid_stack/grid_stack_2D/test/test_grid_stack_2D.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/containers/offset_grid/offset_grid.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/containers/offset_grid/offset_grid.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/display.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/drawable/curve_drawable/curve_drawable.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/drawable/curve_drawable/curve_drawable.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/drawable/drawable.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/drawable/hierarchy_mesh_drawable/hierarchy_mesh_drawable.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/drawable/hierarchy_mesh_drawable/hierarchy_mesh_drawable.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/drawable/hierarchy_mesh_drawable/hierarchy_mesh_drawable_node/hierarchy_mesh_drawable_node.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/drawable/hierarchy_mesh_drawable/hierarchy_mesh_drawable_node/hierarchy_mesh_drawable_node.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/drawable/mesh_drawable/mesh_drawable.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/drawable/mesh_drawable/mesh_drawable.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/drawable/mesh_float_drawable/mesh_float_drawable.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/drawable/mesh_float_drawable/mesh_float_drawable.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/drawable/mesh_normal_drawable/mesh_normal_drawable.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/drawable/mesh_normal_drawable/mesh_normal_drawable.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/drawable/mesh_wireframe_drawable/mesh_wireframe_drawable.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/drawable/mesh_wireframe_drawable/mesh_wireframe_drawable.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/drawable/segments_drawable/segments_drawable.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/drawable/segments_drawable/segments_drawable.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/drawable/shading_parameters/shading_parameters.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/drawable/shading_parameters/shading_parameters.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/drawable/trajectory_drawable/trajectory_drawable.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/drawable/trajectory_drawable/trajectory_drawable.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/image/image.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/image/image.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/opengl/debug/debug.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/opengl/debug/debug.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/opengl/glad/glad.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/opengl/helper/opengl_helper.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/opengl/helper/opengl_helper.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/opengl/opengl.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/opengl/shaders/shaders.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/opengl/shaders/shaders.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/opengl/texture/texture.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/opengl/texture/texture.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/opengl/uniform/uniform.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/opengl/uniform/uniform.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/window/window.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/display/window/window.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/files/files.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/files/files.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/interaction/camera/camera.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/interaction/camera/camera_around_center/camera_around_center.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/interaction/camera/camera_around_center/camera_around_center.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/interaction/camera/camera_base/camera_base.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/interaction/camera/camera_base/camera_base.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/interaction/camera/camera_head/camera_head.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/interaction/camera/camera_head/camera_head.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/interaction/camera/camera_minecraft/camera_minecraft.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/interaction/camera/camera_minecraft/camera_minecraft.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/interaction/camera/camera_spherical_coordinates/camera_spherical_coordinates.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/interaction/camera/camera_spherical_coordinates/camera_spherical_coordinates.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/interaction/camera/common_functions/common_functions.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/interaction/camera/common_functions/common_functions.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/interaction/glfw_interaction/glfw_interaction.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/interaction/glfw_interaction/glfw_interaction.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/interaction/gui/gui.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/interaction/gui/gui.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/interaction/interaction.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/interaction/timer/timer.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/interaction/timer/timer_basic/timer_basic.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/interaction/timer/timer_basic/timer_basic.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/interaction/timer/timer_event_periodic/timer_event_periodic.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/interaction/timer/timer_event_periodic/timer_event_periodic.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/interaction/timer/timer_fps/timer_fps.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/interaction/timer/timer_fps/timer_fps.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/interaction/timer/timer_interval/timer_interval.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/interaction/timer/timer_interval/timer_interval.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/interaction/tracker/tracker.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/interaction/tracker/velocity_tracker/velocity_tracker.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/interaction/tracker/velocity_tracker/velocity_tracker.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/math/affine/affine.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/math/affine/affine_rt/affine_rt.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/math/affine/affine_rt/affine_rt.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/math/affine/affine_rts/affine_rts.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/math/affine/affine_rts/affine_rts.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/math/frame/frame.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/math/frame/frame.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/math/interpolation/interpolation.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/math/interpolation/interpolation.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/math/math.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/math/matrix/matrix.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/math/matrix/matrix_stack/matrix_stack.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/math/matrix/matrix_stack/special_types/definition/special_types.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/math/matrix/matrix_stack/special_types/definition/special_types.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/math/matrix/matrix_stack/special_types/mat4/mat4.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/math/matrix/matrix_stack/special_types/mat4/mat4.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/math/matrix/matrix_stack/special_types/special_types.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/math/matrix/test/test_matrix_stack.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/math/matrix/test/test_matrix_stack.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/math/projection/projection.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/math/projection/projection.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/math/quaternion/quaternion.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/math/quaternion/quaternion.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/math/rotation/rotation.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/math/rotation/rotation.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/math/rotation/test/test_rotation.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/math/rotation/test/test_rotation.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/math/vec_mat/test/test_vec_mat.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/math/vec_mat/test/test_vec_mat.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/math/vec_mat/vec_mat.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/math/vec_mat/vec_mat.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/shaders_preset/shaders_preset.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/shaders_preset/shaders_preset.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/shape/curve/curve.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/shape/curve/curve.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/shape/intersection/intersection.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/shape/intersection/intersection.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/shape/mesh/loader/loader.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/shape/mesh/loader/obj/obj.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/shape/mesh/loader/obj/obj.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/shape/mesh/mesh.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/shape/mesh/primitive/mesh_primitive.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/shape/mesh/primitive/mesh_primitive.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/shape/mesh/structure/mesh.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/shape/mesh/structure/mesh.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/shape/noise/noise.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/shape/noise/noise.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/shape/shape.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/vcl/vcl.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Cholesky/LDLT.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Cholesky/LLT.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Cholesky/LLT_LAPACKE.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/CholmodSupport/CholmodSupport.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/Array.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/ArrayBase.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/ArrayWrapper.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/Assign.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/AssignEvaluator.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/Assign_MKL.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/BandMatrix.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/Block.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/BooleanRedux.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/CommaInitializer.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/ConditionEstimator.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/CoreEvaluators.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/CoreIterators.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/CwiseBinaryOp.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/CwiseNullaryOp.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/CwiseTernaryOp.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/CwiseUnaryOp.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/CwiseUnaryView.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/DenseBase.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/DenseCoeffsBase.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/DenseStorage.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/Diagonal.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/DiagonalMatrix.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/DiagonalProduct.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/Dot.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/EigenBase.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/ForceAlignedAccess.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/Fuzzy.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/GeneralProduct.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/GenericPacketMath.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/GlobalFunctions.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/IO.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/Inverse.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/Map.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/MapBase.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/MathFunctions.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/MathFunctionsImpl.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/Matrix.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/MatrixBase.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/NestByValue.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/NoAlias.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/NumTraits.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/PermutationMatrix.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/PlainObjectBase.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/Product.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/ProductEvaluators.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/Random.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/Redux.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/Ref.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/Replicate.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/ReturnByValue.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/Reverse.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/Select.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/SelfAdjointView.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/SelfCwiseBinaryOp.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/Solve.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/SolveTriangular.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/SolverBase.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/StableNorm.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/Stride.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/Swap.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/Transpose.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/Transpositions.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/TriangularMatrix.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/VectorBlock.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/VectorwiseOp.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/Visitor.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/AVX/Complex.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/AVX/MathFunctions.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/AVX/PacketMath.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/AVX/TypeCasting.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/AVX512/MathFunctions.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/AVX512/PacketMath.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/AltiVec/Complex.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/AltiVec/MathFunctions.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/AltiVec/PacketMath.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/CUDA/Complex.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/CUDA/Half.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/CUDA/MathFunctions.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/CUDA/PacketMath.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/CUDA/PacketMathHalf.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/CUDA/TypeCasting.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/Default/ConjHelper.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/Default/Settings.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/NEON/Complex.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/NEON/MathFunctions.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/NEON/PacketMath.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/SSE/Complex.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/SSE/MathFunctions.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/SSE/PacketMath.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/SSE/TypeCasting.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/ZVector/Complex.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/ZVector/MathFunctions.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/ZVector/PacketMath.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/functors/AssignmentFunctors.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/functors/BinaryFunctors.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/functors/NullaryFunctors.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/functors/StlFunctors.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/functors/TernaryFunctors.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/functors/UnaryFunctors.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/products/GeneralBlockPanelKernel.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/products/GeneralMatrixMatrix.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/products/GeneralMatrixMatrixTriangular.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/products/GeneralMatrixMatrixTriangular_BLAS.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/products/GeneralMatrixMatrix_BLAS.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/products/GeneralMatrixVector.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/products/GeneralMatrixVector_BLAS.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/products/Parallelizer.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/products/SelfadjointMatrixMatrix.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/products/SelfadjointMatrixMatrix_BLAS.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/products/SelfadjointMatrixVector.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/products/SelfadjointMatrixVector_BLAS.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/products/SelfadjointProduct.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/products/SelfadjointRank2Update.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/products/TriangularMatrixMatrix.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/products/TriangularMatrixMatrix_BLAS.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/products/TriangularMatrixVector.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/products/TriangularMatrixVector_BLAS.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/products/TriangularSolverMatrix.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/products/TriangularSolverMatrix_BLAS.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/products/TriangularSolverVector.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/util/BlasUtil.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/util/Constants.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/util/DisableStupidWarnings.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/util/ForwardDeclarations.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/util/MKL_support.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/util/Macros.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/util/Memory.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/util/Meta.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/util/NonMPL2.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/util/ReenableStupidWarnings.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/util/StaticAssert.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Core/util/XprHelper.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Eigenvalues/ComplexEigenSolver.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Eigenvalues/ComplexSchur.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Eigenvalues/ComplexSchur_LAPACKE.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Eigenvalues/EigenSolver.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Eigenvalues/GeneralizedEigenSolver.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Eigenvalues/GeneralizedSelfAdjointEigenSolver.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Eigenvalues/HessenbergDecomposition.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Eigenvalues/RealQZ.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Eigenvalues/RealSchur.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Eigenvalues/RealSchur_LAPACKE.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Eigenvalues/SelfAdjointEigenSolver_LAPACKE.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Eigenvalues/Tridiagonalization.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Geometry/AlignedBox.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Geometry/AngleAxis.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Geometry/EulerAngles.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Geometry/Homogeneous.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Geometry/Hyperplane.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Geometry/OrthoMethods.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Geometry/ParametrizedLine.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Geometry/Quaternion.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Geometry/Rotation2D.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Geometry/RotationBase.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Geometry/Scaling.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Geometry/Transform.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Geometry/Translation.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Geometry/Umeyama.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Geometry/arch/Geometry_SSE.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Householder/BlockHouseholder.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Householder/Householder.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Householder/HouseholderSequence.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/IterativeLinearSolvers/BasicPreconditioners.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/IterativeLinearSolvers/BiCGSTAB.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/IterativeLinearSolvers/ConjugateGradient.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/IterativeLinearSolvers/IncompleteLUT.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/IterativeLinearSolvers/IterativeSolverBase.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/IterativeLinearSolvers/LeastSquareConjugateGradient.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/IterativeLinearSolvers/SolveWithGuess.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/Jacobi/Jacobi.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/LU/Determinant.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/LU/FullPivLU.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/LU/InverseImpl.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/LU/PartialPivLU.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/LU/PartialPivLU_LAPACKE.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/LU/arch/Inverse_SSE.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/MetisSupport/MetisSupport.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/OrderingMethods/Amd.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/OrderingMethods/Eigen_Colamd.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/OrderingMethods/Ordering.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/PaStiXSupport/PaStiXSupport.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/PardisoSupport/PardisoSupport.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/QR/ColPivHouseholderQR.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/QR/ColPivHouseholderQR_LAPACKE.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/QR/CompleteOrthogonalDecomposition.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/QR/FullPivHouseholderQR.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/QR/HouseholderQR.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/QR/HouseholderQR_LAPACKE.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SPQRSupport/SuiteSparseQRSupport.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SVD/BDCSVD.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SVD/JacobiSVD.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SVD/JacobiSVD_LAPACKE.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SVD/SVDBase.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SVD/UpperBidiagonalization.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCholesky/SimplicialCholesky.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCholesky/SimplicialCholesky_impl.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/AmbiVector.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/CompressedStorage.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/ConservativeSparseSparseProduct.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/MappedSparseMatrix.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseAssign.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseBlock.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseColEtree.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseCompressedBase.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseCwiseBinaryOp.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseCwiseUnaryOp.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseDenseProduct.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseDiagonalProduct.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseDot.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseFuzzy.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseMap.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseMatrix.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseMatrixBase.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparsePermutation.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseProduct.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseRedux.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseRef.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseSelfAdjointView.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseSolverBase.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseSparseProductWithPruning.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseTranspose.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseTriangularView.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseUtil.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseVector.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseView.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/TriangularSolver.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLUImpl.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU_Memory.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU_Structs.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU_SupernodalMatrix.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU_Utils.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU_column_bmod.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU_column_dfs.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU_copy_to_ucol.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU_gemm_kernel.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU_heap_relax_snode.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU_kernel_bmod.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU_panel_bmod.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU_panel_dfs.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU_pivotL.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU_pruneL.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU_relax_snode.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SparseQR/SparseQR.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/StlSupport/StdDeque.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/StlSupport/StdList.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/StlSupport/StdVector.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/StlSupport/details.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/SuperLUSupport/SuperLUSupport.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/UmfPackSupport/UmfPackSupport.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/misc/Image.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/misc/Kernel.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/misc/RealSvd2x2.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/misc/blas.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/misc/lapack.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/misc/lapacke.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/misc/lapacke_mangling.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/plugins/ArrayCwiseBinaryOps.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/plugins/ArrayCwiseUnaryOps.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/plugins/BlockMethods.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/plugins/CommonCwiseBinaryOps.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/plugins/CommonCwiseUnaryOps.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/plugins/MatrixCwiseBinaryOps.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/eigen/Eigen/src/plugins/MatrixCwiseUnaryOps.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/glad/include/glad/glad.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/glad/src/glad.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/imgui/imconfig.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/imgui/imgui.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/imgui/imgui.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/imgui/imgui_demo.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/imgui/imgui_draw.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/imgui/imgui_impl_glfw.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/imgui/imgui_impl_glfw.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/imgui/imgui_impl_opengl3.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/imgui/imgui_impl_opengl3.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/imgui/imgui_internal.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/imgui/imgui_widgets.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/imgui/imstb_rectpack.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/imgui/imstb_textedit.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/imgui/imstb_truetype.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/lodepng/lodepng.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/lodepng/lodepng.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/simplexnoise/simplexnoise1234.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/paultheron/Desktop/Projet/INF443/library/third_party/src/simplexnoise/simplexnoise1234.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/constants.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/heightmap.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/heightmap.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/main.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/orbiters.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/orbiters.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/particles.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/particles.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/scene_helper.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/scene_helper.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/scenes/city.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/scenes/city.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/scenes/desert.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/scenes/desert.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/scenes/field.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/scenes/field.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/scenes/forest.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/scenes/forest.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/scenes/mountain.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/scenes/mountain.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/scenes/planet.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/scenes/planet.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/skybox.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/skybox.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/terrain.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/terrain.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/tree_Lsystem/LSystem.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/tree_Lsystem/LSystem.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/tree_Lsystem/tree.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/tree_Lsystem/tree.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/tree_Lsystem/tree_LSys.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/tree_Lsystem/tree_LSys.hpp",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "EXECUTABLE"
+}

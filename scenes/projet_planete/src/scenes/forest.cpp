@@ -12,6 +12,8 @@ forest::forest(user_parameters *user, std::function<void(scene_type)> _swap_func
     set_terrain();
     set_skybox();
     set_sun();
+    set_grass();
+    set_tree();
 
     // Configuration de la cam�ra
     camera.distance_to_center = 2.5f;
@@ -28,15 +30,13 @@ forest::~forest() {}
 
 void forest::display_visual()
 {
-    glClearColor(0.256f, 0.256f, 0.256f, 0.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
-    glClear(GL_DEPTH_BUFFER_BIT);
     user_reference->timer.update();
     float const time = user_reference->timer.t;
     light = camera.position();
 
     GLuint normal_shader = open_shader("normal");
     GLuint sun_shader = open_shader("sun");
+    GLuint partic_shader = open_shader("partic");
 
     glUseProgram(normal_shader);
     opengl_uniform(normal_shader, "projection", projection);
@@ -48,6 +48,15 @@ void forest::display_visual()
     opengl_uniform(sun_shader, "view", camera.matrix_view());
     opengl_uniform(sun_shader, "light", light);
 
+    glUseProgram(partic_shader);
+    opengl_uniform(partic_shader, "projection", projection);
+    opengl_uniform(partic_shader, "view", camera.matrix_view());
+    //opengl_uniform(partic_shader, "light", light);
+    grass.updateParticles(camera.position());
+    grass.updateShadVbos(this);
+
+    tree.draw_tree(this);
+    opengl_check;
     draw(visual, this);
 
     if (user_reference->draw_wireframe)
@@ -91,11 +100,18 @@ void forest::set_terrain()
     {
         for (int j = 0; j < Nv; j++)
         {
+            const float u = i / (Nu - 1.0f);
+            const float v = j / (Nv - 1.0f);
+            float x = 2 * (x_max - x_min) * (u - 0.5f);
+            float y = 2 * (y_max - y_min) * (v - 0.5f);
+
             // mesh.position[j + Nv * i].z = 3 * exp(-float(i) / 10 - float(j) / 10);
             mesh.position[j + Nv * i].z += parameters.height * noise_perlin(mesh.position[j + Nv * i], parameters.octaves, parameters.persistency, parameters.frequency_gain);
+            mesh.uv[j + Nv * i] = vec2(x, y);
         }
     }
     visual = mesh_drawable(mesh, open_shader("normal"));
+    visual.texture = opengl_texture_to_gpu(image_load_png("../assets/textures/grass/grass-ground.png"), GL_REPEAT /**GL_TEXTURE_WRAP_S*/, GL_REPEAT /**GL_TEXTURE_WRAP_T*/);
 }
 
 void forest::set_skybox()
@@ -107,4 +123,15 @@ void forest::set_sun()
 {
     sun_visual = mesh_drawable(mesh_primitive_sphere(sun_radius), open_shader("sun"));
     sun_visual.shading.color = vec3(1.0, 1.0, 0.0);
+}
+
+void forest::set_grass()
+{
+    grass = *(new ParticleS(2000, "grass"));
+    grass.initVaoVbo();
+}
+
+void forest::set_tree()
+{
+    tree.initTree("Realtree_1");
 }

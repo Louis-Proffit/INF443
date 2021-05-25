@@ -66,4 +66,7 @@ private:
 	static GLuint planet_shader;
 	static GLuint normal_shader;
 	static GLuint sun_shader;
+	static GLuint heightmap_shader;
+	static GLuint water_shader;
+	static GLuint partic_shader;
 };
