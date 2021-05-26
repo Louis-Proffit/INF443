@@ -24,12 +24,12 @@ struct particle
 class ParticleS
 {
 public:
-    const int MaxParticles = 2000;
-    particle ParticlesContainer[2000];
+    int MaxParticles;
+    particle *ParticlesContainer;
     int LastUsedParticle = 0;
     GLuint VertexArrayID = 0;
-    GLfloat *g_particule_position_size_data = new GLfloat[2000 * 4];
-    GLubyte *g_particule_color_data = new GLubyte[2000 * 4];
+    GLfloat *g_particule_position_size_data;
+    GLubyte *g_particule_color_data;
     GLuint shad = 0;
     GLfloat g_vertex_buffer_data[12] = {
         -0.5f,
@@ -50,10 +50,15 @@ public:
     GLuint particles_position_buffer;
     GLuint particles_color_buffer;
 
-    GLuint text;
-    GLuint textID;
+    GLuint text = 0;
+    GLuint textID = 0;
+    int nbRows;
+    std::string type;
 
     int ParticlesCount;
+
+    ParticleS(int nmax = 3000, std::string nametext = "snowflakes");
+    ~ParticleS();
 
     void setTexture(GLuint text_);
 
@@ -71,6 +76,7 @@ public:
         glClear(GL_COLOR_BUFFER_BIT);
         glClear(GL_DEPTH_BUFFER_BIT);
 
+        std::cout << particles_position_buffer << std::endl;
         glBindBuffer(GL_ARRAY_BUFFER, particles_position_buffer);
         glBufferData(GL_ARRAY_BUFFER, MaxParticles * 4 * sizeof(GLfloat), NULL, GL_STREAM_DRAW); // Buffer orphaning, a common way to improve streaming perf.
         glBufferSubData(GL_ARRAY_BUFFER, 0, ParticlesCount * sizeof(GLfloat) * 4, g_particule_position_size_data);
@@ -96,6 +102,9 @@ public:
         opengl_check;
 
         opengl_uniform(shad, scene);
+        opengl_check;
+
+        opengl_uniform(shad, "nbRows", nbRows);
         opengl_check;
 
         glBindVertexArray(VertexArrayID);
@@ -137,12 +146,12 @@ public:
         glBindBuffer(GL_ARRAY_BUFFER, particles_color_buffer);
         opengl_check;
         glVertexAttribPointer(
-            2,                // attribute. No particular reason for 1, but must match the layout in the shader.
-            4,                // size : r + g + b + a => 4
-            GL_UNSIGNED_BYTE, // type
-            GL_TRUE,          // normalized?    *** YES, this means that the unsigned char[4] will be accessible with a vec4 (floats) in the shader ***
-            0,                // stride
-            nullptr           // array buffer offset
+            2,        // attribute. No particular reason for 1, but must match the layout in the shader.
+            4,        // size : r + g + b + a => 4
+            GL_FLOAT, // type
+            GL_FALSE, // normalized?    *** YES, this means that the unsigned char[4] will be accessible with a vec4 (floats) in the shader ***
+            0,        // stride
+            nullptr   // array buffer offset
         );
         opengl_check;
 

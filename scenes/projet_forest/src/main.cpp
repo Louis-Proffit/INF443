@@ -65,7 +65,7 @@ mesh_drawable tree_real;
 Water wat;
 WaterFrameBuffers fbos;
 
-ParticleS part;
+ParticleS part = *(new ParticleS(1000, "snowflakes"));
 
 skybox cube;
 
@@ -262,7 +262,7 @@ void display_scene(vec4 clipPlane)
 	opengl_check;
 	glBindTexture(GL_TEXTURE_2D, texture_snow);
 	opengl_check;
-	opengl_uniform(shader_heightmap, "image_texture_snow", 0);
+	opengl_uniform(shader_heightmap, "image_texture_snow", 2);
 	opengl_check;
 	opengl_uniform(shader_heightmap, "plane", clipPlane);
 	opengl_check;

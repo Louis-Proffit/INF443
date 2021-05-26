@@ -21,13 +21,15 @@ uniform mat4 projection;
 
 uniform vec3 cameraPosition;
 
+uniform int nbRows;
+
 vec3 CameraRight_worldspace= vec3(view[0][0], view[1][0], view[2][0]);
 vec3 CameraUp_worldspace = vec3(view[0][1], view[1][1], view[2][1]);
 mat4 VP = projection*view;
 
 void main()
 {
-	float particleSize = xyzs.w; // because we encoded it this way.
+	float particleSize = xyzs.w; // because encoded this way.
 	vec3 particleCenter_wordspace = xyzs.xyz;
 
 	vec3 vertexPosition_worldspace =
@@ -38,6 +40,12 @@ void main()
 
 	// UV of the vertex. No special space for this one.
 	UV = squareVertices.xy + vec2(0.5, 0.5);
+	UV.y = 1 - UV.y;
+	float row = float(nbRows);
+	UV /= row;
+	UV.x += color.x;
+	UV.y += color.y;
+	//UV+=vec2(color.x,color.y);
 	particlecolor = color;
 }
 )";
