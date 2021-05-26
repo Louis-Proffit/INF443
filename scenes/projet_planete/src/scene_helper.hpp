@@ -4,8 +4,8 @@
 #include "vcl/vcl.hpp"
 #include "constants.hpp"
 
-
-enum class scene_type {
+enum class scene_type
+{
 	MOUNTAIN,
 	DESERT,
 	CITY,
@@ -14,9 +14,9 @@ enum class scene_type {
 	PLANET
 };
 
-class user_parameters {
+class user_parameters
+{
 public:
-
 	user_parameters();
 	~user_parameters();
 
@@ -34,7 +34,8 @@ public:
 	float player_speed = 0.3f;
 };
 
-struct perlin_noise_parameters {
+struct perlin_noise_parameters
+{
 	int octaves;
 	float height;
 	float persistency;
@@ -44,15 +45,14 @@ struct perlin_noise_parameters {
 class scene_visual
 {
 public:
-
 	vcl::mat4 projection;
 	vcl::mat4 projection_inverse;
 	vcl::vec3 light;
-	user_parameters* user_reference;
+	user_parameters *user_reference;
 	std::function<void(scene_type)> swap_function;
 
-	scene_visual(user_parameters* _user, std::function<void(scene_type)> swap_function);
-	~scene_visual();
+	scene_visual(user_parameters *_user, std::function<void(scene_type)> swap_function);
+	virtual ~scene_visual();
 
 	virtual void display_visual() = 0;
 	virtual void update_visual() = 0;
@@ -60,10 +60,14 @@ public:
 	void handle_window_size_callback(int width, int height);
 
 	static void init();
-	static GLuint open_shader(std::string const& shader_name);
+	static GLuint open_shader(std::string const &shader_name);
 
 private:
 	static GLuint planet_shader;
 	static GLuint normal_shader;
 	static GLuint sun_shader;
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> 0f7e5a7636a9fd3a77fa84b160152b2f0b573279

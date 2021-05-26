@@ -40,9 +40,6 @@ int main(int, char *argv[])
 	{
 		user.fps_record.update();
 
-		glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-		glClear(GL_DEPTH_BUFFER_BIT);
 		imgui_create_frame();
 
 		if (user.fps_record.event)
@@ -129,7 +126,7 @@ void initialize()
 	user.global_frame = mesh_drawable(mesh_primitive_frame(), scene_visual::open_shader("normal"));
 	user.display_frame = false;
 
-	// Initialisation de la planète
+	// Initialisation de la planï¿½te
 	scene = new countryside(&user, swap_function);
 }
 

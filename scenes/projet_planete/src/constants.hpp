@@ -53,7 +53,6 @@
 #define sun_radius 0.1f
 #define sun_rotation_speed 0.02f
 
-
 // Planet graphics
 #define sphere_division_steps 4
 #define sphere_radius 1.0f
