@@ -6,7 +6,7 @@
 
 using namespace vcl;
 
-ParticleS::ParticleS(int nmax, std::string nametext)
+ParticleS::ParticleS(int nmax, std::string nametext, float xmin, float xmax, float ymin, float ymax)
 {
     MaxParticles = nmax;
     ParticlesContainer = new particle[nmax];
@@ -24,10 +24,14 @@ ParticleS::ParticleS(int nmax, std::string nametext)
     }
     else if (nametext == "grass")
     {
-        nbRows = 1;
+        nbRows = 8;
     }
     else
         nbRows = 0;
+    x_min = xmin;
+    y_min = ymin;
+    x_max = xmax;
+    y_max = ymax;
 }
 
 ParticleS::~ParticleS() {}
@@ -72,7 +76,7 @@ void ParticleS::initVaoVbo()
     }
     else if (type == "grass")
     {
-        text = opengl_texture_to_gpu(image_load_png("../assets/textures/grass/grass_texture.png"), GL_REPEAT /**GL_TEXTURE_WRAP_S*/, GL_REPEAT /**GL_TEXTURE_WRAP_T*/);
+        text = opengl_texture_to_gpu(image_load_png("../assets/textures/grass/grass-atlas.png"), GL_REPEAT /**GL_TEXTURE_WRAP_S*/, GL_REPEAT /**GL_TEXTURE_WRAP_T*/);
     }
     else
         error_vcl("la texture n'existe pas");
@@ -93,8 +97,8 @@ void ParticleS::initVaoVbo()
 
             ParticlesContainer[i].life = 15.0f; // This particle will live 5 seconds.
             vec3 randompos = vec3(
-                4 * ((rand() / (float)RAND_MAX) - 0.5f),
-                4 * ((rand() / (float)RAND_MAX) - 0.5f),
+                (x_max - x_min) * ((rand() / (float)RAND_MAX) - 0.5f),
+                (x_max - x_min) * ((rand() / (float)RAND_MAX) - 0.5f),
                 0.15f);
 
             ParticlesContainer[i].pos = randompos;
@@ -105,7 +109,7 @@ void ParticleS::initVaoVbo()
 
             ParticlesContainer[i].color.y = 0;
 
-            ParticlesContainer[i].color.z = 0;
+            ParticlesContainer[i].color.z = rand() % 64;
 
             ParticlesContainer[i].color[3] = 1;
 
@@ -340,7 +344,7 @@ void ParticleS::updateParticles(vec3 CameraPosition)
                 g_particule_position_size_data[4 * ParticlesCount + 3] = p.size;
 
                 g_particule_color_data[4 * ParticlesCount + 0] = p.color.x;
-                g_particule_color_data[4 * ParticlesCount + 1] = p.color.y;
+                g_particule_color_data[4 * ParticlesCount + 1] = 5;
                 g_particule_color_data[4 * ParticlesCount + 2] = p.color.z;
                 g_particule_color_data[4 * ParticlesCount + 3] = p.color[3];
             }

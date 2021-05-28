@@ -13,7 +13,7 @@ forest::forest(user_parameters *user, std::function<void(scene_type)> _swap_func
     set_skybox();
     set_sun();
     set_grass();
-    set_tree();
+    set_trees(_nbtree);
 
     // Configuration de la cam�ra
     camera.distance_to_center = 2.5f;
@@ -54,8 +54,11 @@ void forest::display_visual()
     //opengl_uniform(partic_shader, "light", light);
     grass.updateParticles(camera.position());
     grass.updateShadVbos(this);
+    for (int i = 0; i < _nbtree; i++)
+    {
+        trees[i].draw_tree(this);
+    }
 
-    tree.draw_tree(this);
     opengl_check;
     draw(visual, this);
 
@@ -127,11 +130,19 @@ void forest::set_sun()
 
 void forest::set_grass()
 {
-    grass = *(new ParticleS(2000, "grass"));
+    grass = *(new ParticleS(40000, "grass", x_min, x_max, y_min, y_max));
     grass.initVaoVbo();
 }
 
-void forest::set_tree()
+void forest::set_trees(int nbtree)
 {
-    tree.initTree("Realtree_1");
+    trees = new TreeGenerator[nbtree];
+
+    for (int i = 0; i < nbtree; i++)
+    {
+        trees[i].setShader(open_shader("tree"));
+        trees[i].initTree("Realtree_1");
+        vec3 randompos = vec3((x_max - x_min) * ((rand() / (float)RAND_MAX) - 0.5f), (x_max - x_min) * ((rand() / (float)RAND_MAX) - 0.5f), 0.15f);
+        trees[i].translate(randompos);
+    }
 }

@@ -19,7 +19,7 @@ public:
 
 	ParticleS grass;
 
-	TreeGenerator tree;
+	TreeGenerator *trees;
 
 	// Constructor and destructors;
 	forest(user_parameters *user, std::function<void(scene_type)> swap_function);
@@ -32,13 +32,14 @@ public:
 
 private:
 	perlin_noise_parameters parameters{3, 0.1, 0.3, 2.0};
-	float x_min = -2.0f;
-	float y_min = -2.0f;
-	float x_max = 2.0f;
-	float y_max = 2.0f;
+	float x_min = -10.0f;
+	float y_min = -10.0f;
+	float x_max = 10.0f;
+	float y_max = 10.0f;
+	int _nbtree = 100;
 	void set_terrain();
 	void set_skybox();
 	void set_sun();
 	void set_grass();
-	void set_tree();
+	void set_trees(int nbtree);
 };

@@ -11,6 +11,8 @@
 #include "../assets/shaders/water/water.frag.glsl"
 #include "../assets/shaders/particles/partic.vert.glsl"
 #include "../assets/shaders/particles/partic.frag.glsl"
+#include "../assets/shaders/tree/tree.vert.glsl"
+#include "../assets/shaders/tree/tree.frag.glsl"
 
 using namespace vcl;
 
@@ -20,6 +22,7 @@ GLuint scene_visual::normal_shader = 0;
 GLuint scene_visual::heightmap_shader = 0;
 GLuint scene_visual::water_shader = 0;
 GLuint scene_visual::partic_shader = 0;
+GLuint scene_visual::tree_shader = 0;
 
 scene_visual::scene_visual(user_parameters *user, std::function<void(scene_type)> _swap_function)
 {
@@ -46,6 +49,7 @@ void scene_visual::init()
 	scene_visual::heightmap_shader = opengl_create_shader_program(heightmap_vert, heightmap_frag);
 	scene_visual::partic_shader = opengl_create_shader_program(partic_vert, partic_frag);
 	scene_visual::water_shader = opengl_create_shader_program(water_vert, water_frag);
+	scene_visual::tree_shader = opengl_create_shader_program(tree_vertex, tree_fragment);
 
 	std::cout << "planet shader : " << planet_shader << std::endl;
 	std::cout << "sun shader : " << sun_shader << std::endl;
@@ -53,6 +57,7 @@ void scene_visual::init()
 	std::cout << "heightmap shader : " << heightmap_shader << std::endl;
 	std::cout << "particules shader : " << partic_shader << std::endl;
 	std::cout << "water shader : " << water_shader << std::endl;
+	std::cout << "tree shader : " << tree_shader << std::endl;
 }
 
 GLuint scene_visual::open_shader(std::string const &shader_name)
@@ -69,6 +74,8 @@ GLuint scene_visual::open_shader(std::string const &shader_name)
 		return water_shader;
 	else if (shader_name == "partic")
 		return partic_shader;
+	else if (shader_name == "tree")
+		return tree_shader;
 }
 
 
