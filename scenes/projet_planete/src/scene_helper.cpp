@@ -13,6 +13,8 @@
 #include "../assets/shaders/particles/partic.frag.glsl"
 #include "../assets/shaders/tree/tree.vert.glsl"
 #include "../assets/shaders/tree/tree.frag.glsl"
+#include "../assets/shaders/mountain/vert.glsl"
+#include "../assets/shaders/mountain/frag.glsl"
 
 using namespace vcl;
 
@@ -23,6 +25,8 @@ GLuint scene_visual::heightmap_shader = 0;
 GLuint scene_visual::water_shader = 0;
 GLuint scene_visual::particle_shader = 0;
 GLuint scene_visual::tree_shader = 0;
+GLuint scene_visual::mountain_shader = 0;
+
 GLuint scene_visual::texture_field_1 = 0;
 GLuint scene_visual::texture_field_2 = 0;
 GLuint scene_visual::texture_field_3 = 0;
@@ -34,6 +38,7 @@ GLuint scene_visual::texture_grass_billboard = 0;
 GLuint scene_visual::texture_fire = 0;
 GLuint scene_visual::texture_snowflake = 0;
 GLuint scene_visual::texture_lowpoly = 0;
+GLuint scene_visual::texture_rock = 0;
 GLuint scene_visual::texture_sb_desert_haut = 0;
 GLuint scene_visual::texture_sb_desert_bas = 0;
 GLuint scene_visual::texture_sb_desert_gauche = 0;
@@ -91,6 +96,8 @@ void scene_visual::init()
 	scene_visual::particle_shader = opengl_create_shader_program(partic_vert, partic_frag);
 	scene_visual::water_shader = opengl_create_shader_program(water_vert, water_frag);
 	scene_visual::tree_shader = opengl_create_shader_program(tree_vertex, tree_fragment);
+	scene_visual::mountain_shader = opengl_create_shader_program(mountain_vert, mountain_frag);
+
 	scene_visual::texture_field_1 = opengl_texture_to_gpu(image_load_png("../assets/textures/field/field_1.png"), GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT);
 	scene_visual::texture_field_2 = opengl_texture_to_gpu(image_load_png("../assets/textures/field/field_2.png"), GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT);
 	scene_visual::texture_field_3 = opengl_texture_to_gpu(image_load_png("../assets/textures/field/field_3.png"), GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT);
@@ -98,12 +105,13 @@ void scene_visual::init()
 	scene_visual::texture_grass_billboard = opengl_texture_to_gpu(image_load_png("../assets/textures/grass/grass_billboard.png"), GL_REPEAT, GL_REPEAT);
 	scene_visual::texture_grass = opengl_texture_to_gpu(image_load_png("../assets/textures/grass/grass_1.png"), GL_REPEAT, GL_REPEAT);
 	scene_visual::texture_grass_atlas = opengl_texture_to_gpu(image_load_png("../assets/textures/grass/grass_atlas.png"), GL_REPEAT, GL_REPEAT);
+	scene_visual::texture_rock = opengl_texture_to_gpu(image_load_png("../assets/textures/mountain/rock.png"), GL_REPEAT, GL_REPEAT);
 	scene_visual::texture_sand = opengl_texture_to_gpu(image_load_png("../assets/textures/desert/sand_1.png"), GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT);
 	scene_visual::texture_fire = opengl_texture_to_gpu(image_load_png("../assets/textures/fire/fire.png"), GL_REPEAT, GL_REPEAT);
 	scene_visual::texture_snowflake = opengl_texture_to_gpu(image_load_png("../assets/textures/snow/snowflake_3.png"), GL_REPEAT, GL_REPEAT);
 	scene_visual::texture_lowpoly = opengl_texture_to_gpu(image_load_png("../assets/textures/lowpoly_palette.png"), GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
 	scene_visual::texture_sb_desert_haut = opengl_texture_to_gpu(image_load_png("../assets/skyboxes/desert/top.png"), GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
-	scene_visual::texture_sb_desert_bas = opengl_texture_to_gpu(image_raw{ 1, 1, image_color_type::rgba, {255, 255, 255, 255} });
+	scene_visual::texture_sb_desert_bas = opengl_texture_to_gpu(image_raw{1, 1, image_color_type::rgba, {255, 255, 255, 255}});
 	scene_visual::texture_sb_desert_gauche = opengl_texture_to_gpu(image_load_png("../assets/skyboxes/desert/left.png"), GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
 	scene_visual::texture_sb_desert_droite = opengl_texture_to_gpu(image_load_png("../assets/skyboxes/desert/right.png"), GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
 	scene_visual::texture_sb_desert_devant = opengl_texture_to_gpu(image_load_png("../assets/skyboxes/desert/front.png"), GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
@@ -136,7 +144,8 @@ void scene_visual::init()
 
 GLuint scene_visual::get_shader(shader_type shader_type)
 {
-	switch (shader_type) {
+	switch (shader_type)
+	{
 	case shader_type::PLANET:
 		return planet_shader;
 	case shader_type::SUN:
@@ -151,12 +160,15 @@ GLuint scene_visual::get_shader(shader_type shader_type)
 		return particle_shader;
 	case shader_type::TREE:
 		return tree_shader;
+	case shader_type::MOUNTAIN:
+		return mountain_shader;
 	}
 }
 
 GLuint scene_visual::get_texture(texture_type texture_type)
 {
-	switch (texture_type) {
+	switch (texture_type)
+	{
 	case texture_type::FIELD_1:
 		return texture_field_1;
 	case texture_type::FIELD_2:
@@ -179,6 +191,8 @@ GLuint scene_visual::get_texture(texture_type texture_type)
 		return texture_fire;
 	case texture_type::LOWPOLY:
 		return texture_lowpoly;
+	case texture_type::ROCK:
+		return texture_rock;
 	case texture_type::SB_DESERT_HAUT:
 		return texture_sb_desert_haut;
 	case texture_type::SB_DESERT_BAS:
@@ -242,12 +256,12 @@ GLuint scene_visual::get_texture(texture_type texture_type)
 	}
 }
 
-environement::environement(user_parameters* user, std::function<void(scene_type)> swap_function)
-	:scene_visual(user, swap_function)
+environement::environement(user_parameters *user, std::function<void(scene_type)> swap_function)
+	: scene_visual(user, swap_function)
 {
 	camera_m.position_camera = vec3(0, 0, 0);
 	camera_c.distance_to_center = 2.5f;
-	camera_c.look_at({ 4, 3, 2 }, { 0, 0, 0 }, { 0, 0, 1 });
+	camera_c.look_at({4, 3, 2}, {0, 0, 0}, {0, 0, 1});
 	m_activated = true;
 }
 
@@ -258,8 +272,8 @@ void environement::display_visual()
 
 void environement::update_visual()
 {
-	vec2 const& p0 = user_reference->mouse_prev;
-	vec2 const& p1 = user_reference->mouse_curr;
+	vec2 const &p0 = user_reference->mouse_prev;
+	vec2 const &p1 = user_reference->mouse_curr;
 	if (m_activated)
 	{
 		vec2 dp(0, 0);
@@ -324,12 +338,13 @@ void environement::display_interface()
 	ImGui::SliderFloat("Vitesse de deplacement", &user_reference->player_speed, 0.1, 2.0f, "%.3f", 2);
 }
 
-void skybox::init_skybox(vec3 const& _center, float const& _radius, skybox_type skybox_type, GLuint shader)
+void skybox::init_skybox(vec3 const &_center, float const &_radius, skybox_type skybox_type, GLuint shader)
 {
 	this->center = _center;
 	this->radius = _radius;
 	GLuint derriere, devant, gauche, droite, haut, bas;
-	switch (skybox_type) {
+	switch (skybox_type)
+	{
 	case skybox_type::DESERT:
 		haut = scene_visual::get_texture(texture_type::SB_DESERT_HAUT);
 		bas = scene_visual::get_texture(texture_type::SB_DESERT_BAS);
@@ -376,34 +391,34 @@ void skybox::init_skybox(vec3 const& _center, float const& _radius, skybox_type 
 	mesh face_devant = mesh_primitive_grid(vec3(-radius, -radius, radius), vec3(-radius, -radius, -radius), vec3(-radius, radius, -radius), vec3(-radius, radius, radius), 2, 2);
 	dface_devant = mesh_drawable(face_devant, shader);
 	dface_devant.texture = devant;
-	dface_devant.shading.phong = { 1, 0, 0, 1 };
+	dface_devant.shading.phong = {1, 0, 0, 1};
 
 	//back face
 	mesh face_derriere = mesh_primitive_grid(vec3(radius, radius, radius), vec3(radius, radius, -radius), vec3(radius, -radius, -radius), vec3(radius, -radius, radius), 2, 2);
 	dface_derriere = mesh_drawable(face_derriere, shader);
 	dface_derriere.texture = derriere;
-	dface_derriere.shading.phong = { 1, 0, 0, 1 };
+	dface_derriere.shading.phong = {1, 0, 0, 1};
 
 	//face droite
 	mesh face_droite = mesh_primitive_grid(vec3(-radius, radius, radius), vec3(-radius, radius, -radius), vec3(radius, radius, -radius), vec3(radius, radius, radius), 2, 2);
 	dface_droite = mesh_drawable(face_droite, shader);
 	dface_droite.texture = droite;
-	dface_droite.shading.phong = { 1, 0, 0, 1 };
+	dface_droite.shading.phong = {1, 0, 0, 1};
 
 	//face gauche
 	mesh face_gauche = mesh_primitive_grid(vec3(radius, -radius, radius), vec3(radius, -radius, -radius), vec3(-radius, -radius, -radius), vec3(-radius, -radius, radius), 2, 2);
 	dface_gauche = mesh_drawable(face_gauche, shader);
 	dface_gauche.texture = gauche;
-	dface_gauche.shading.phong = { 1, 0, 0, 1 };
+	dface_gauche.shading.phong = {1, 0, 0, 1};
 
 	//dessus
 	mesh face_haut = mesh_primitive_grid(vec3(radius, -radius, radius), vec3(-radius, -radius, radius), vec3(-radius, radius, radius), vec3(radius, radius, radius), 2, 2);
 	dface_haut = mesh_drawable(face_haut, shader);
 	dface_haut.texture = haut;
-	dface_haut.shading.phong = { 1, 0, 0, 1 };
+	dface_haut.shading.phong = {1, 0, 0, 1};
 
 	mesh face_dessous = mesh_primitive_grid(vec3(radius, radius, -radius), vec3(-radius, radius, -radius), vec3(-radius, -radius, -radius), vec3(radius, -radius, -radius), 2, 2);
 	dface_dessous = mesh_drawable(face_dessous, shader);
 	dface_dessous.texture = bas;
-	dface_dessous.shading.phong = { 1, 0, 0, 1 };
+	dface_dessous.shading.phong = {1, 0, 0, 1};
 }

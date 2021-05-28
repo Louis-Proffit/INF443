@@ -14,17 +14,20 @@ enum class scene_type
 	PLANET
 };
 
-enum class shader_type {
+enum class shader_type
+{
 	PLANET,
 	NORMAL,
 	SUN,
 	HEIGHTMAP,
 	WATER,
 	PARTICLE,
-	TREE
+	TREE,
+	MOUNTAIN
 };
 
-enum class texture_type {
+enum class texture_type
+{
 	FIELD_1,
 	FIELD_2,
 	FIELD_3,
@@ -36,6 +39,7 @@ enum class texture_type {
 	SNOWFLAKE,
 	FIRE,
 	LOWPOLY,
+	ROCK,
 	SB_DESERT_HAUT,
 	SB_DESERT_BAS,
 	SB_DESERT_GAUCHE,
@@ -68,7 +72,8 @@ enum class texture_type {
 	SB_SUNDOWN_DERRIERE
 };
 
-enum class skybox_type {
+enum class skybox_type
+{
 	DESERT,
 	SUNDOWN,
 	SPACE,
@@ -103,20 +108,20 @@ struct perlin_noise_parameters
 class skybox
 {
 public:
-	vcl::mesh_drawable	dface_haut;
-	vcl::mesh_drawable	dface_gauche;
-	vcl::mesh_drawable	dface_droite;
-	vcl::mesh_drawable	dface_devant;
-	vcl::mesh_drawable	dface_derriere;
-	vcl::mesh_drawable	dface_dessous;
+	vcl::mesh_drawable dface_haut;
+	vcl::mesh_drawable dface_gauche;
+	vcl::mesh_drawable dface_droite;
+	vcl::mesh_drawable dface_devant;
+	vcl::mesh_drawable dface_derriere;
+	vcl::mesh_drawable dface_dessous;
 
 	vcl::vec3 center = vcl::vec3(0, 0, 0);
 	float radius = 10.0;
 
-	void init_skybox(vcl::vec3 const& _center, float const& _radius, skybox_type skybox_type, GLuint shader);
+	void init_skybox(vcl::vec3 const &_center, float const &_radius, skybox_type skybox_type, GLuint shader);
 
 	template <typename SCENE>
-	void display_skybox(SCENE const& scene)
+	void display_skybox(SCENE const &scene)
 	{
 		draw(dface_dessous, scene);
 		draw(dface_devant, scene);
@@ -155,6 +160,8 @@ public:
 	static GLuint water_shader;
 	static GLuint particle_shader;
 	static GLuint tree_shader;
+	static GLuint mountain_shader;
+
 	static GLuint texture_field_1;
 	static GLuint texture_field_2;
 	static GLuint texture_field_3;
@@ -163,9 +170,11 @@ public:
 	static GLuint texture_grass_atlas;
 	static GLuint texture_grass_billboard;
 	static GLuint texture_sand;
+	static GLuint texture_rock;
 	static GLuint texture_fire;
 	static GLuint texture_snowflake;
 	static GLuint texture_lowpoly;
+
 	static GLuint texture_sb_desert_haut;
 	static GLuint texture_sb_desert_bas;
 	static GLuint texture_sb_desert_gauche;
@@ -201,19 +210,18 @@ public:
 class environement : public scene_visual
 {
 public:
-
-	environement(user_parameters* _user, std::function<void(scene_type)> swap_function);
+	environement(user_parameters *_user, std::function<void(scene_type)> swap_function);
 
 	void display_visual();
-	virtual float get_altitude(vcl::vec2 const& position) = 0;
+	virtual float get_altitude(vcl::vec2 const &position) = 0;
 	void update_visual();
 	void display_interface();
 
-	vcl::camera_around_center	camera_c;
-	vcl::camera_minecraft		camera_m;
-	bool					m_activated = true;
-	float					x_min = -10.0;
-	float					y_min = -10.0;
-	float					x_max = 10.0;
-	float					y_max = 10.0;
+	vcl::camera_around_center camera_c;
+	vcl::camera_minecraft camera_m;
+	bool m_activated = true;
+	float x_min = -10.0;
+	float y_min = -10.0;
+	float x_max = 10.0;
+	float y_max = 10.0;
 };
