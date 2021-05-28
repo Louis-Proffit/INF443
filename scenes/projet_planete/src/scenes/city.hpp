@@ -3,7 +3,6 @@
 #include <iostream>
 #include "vcl/vcl.hpp"
 #include "scene_helper.hpp"
-#include "skybox.hpp"
 #include "tree_Lsystem/tree_LSys.hpp"
 
 class city : public environement

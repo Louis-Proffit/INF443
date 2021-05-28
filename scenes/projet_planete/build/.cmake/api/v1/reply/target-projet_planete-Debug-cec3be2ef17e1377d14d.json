@@ -1,0 +1,4063 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "Debug/projet_planete.exe"
+		},
+		{
+			"path" : "Debug/projet_planete.pdb"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_executable",
+			"target_link_libraries",
+			"add_definitions",
+			"include",
+			"include_directories"
+		],
+		"files" : 
+		[
+			"CMakeLists.txt",
+			"C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/CMakeLists.txt",
+			"C:/Users/Louis Proffit/OneDrive/Git/INF443/library/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 27,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 45,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 18,
+				"parent" : 0
+			},
+			{
+				"file" : 2,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 2,
+				"line" : 8,
+				"parent" : 4
+			},
+			{
+				"file" : 1,
+				"parent" : 5
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 11,
+				"parent" : 6
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 15,
+				"parent" : 0
+			},
+			{
+				"command" : 4,
+				"file" : 2,
+				"line" : 3,
+				"parent" : 4
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 25,
+				"parent" : 6
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /MP /W4 /wd4244 /wd4127 /wd4267"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 7,
+					"define" : "IMGUI_IMPL_OPENGL_LOADER_GLAD"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 8,
+					"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/scenes/projet_planete/src"
+				},
+				{
+					"backtrace" : 9,
+					"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/precompiled/windows/glfw/include"
+				}
+			],
+			"language" : "CXX",
+			"sourceIndexes" : 
+			[
+				1,
+				3,
+				5,
+				8,
+				12,
+				19,
+				21,
+				27,
+				31,
+				33,
+				36,
+				39,
+				41,
+				43,
+				45,
+				47,
+				49,
+				51,
+				53,
+				55,
+				57,
+				59,
+				62,
+				65,
+				67,
+				69,
+				71,
+				73,
+				76,
+				78,
+				80,
+				82,
+				84,
+				86,
+				88,
+				90,
+				94,
+				96,
+				98,
+				100,
+				103,
+				106,
+				108,
+				110,
+				112,
+				117,
+				119,
+				122,
+				124,
+				126,
+				128,
+				130,
+				132,
+				134,
+				136,
+				138,
+				140,
+				143,
+				146,
+				148,
+				150,
+				427,
+				429,
+				431,
+				432,
+				433,
+				435,
+				438,
+				442,
+				444,
+				447,
+				449,
+				450,
+				452,
+				454,
+				456,
+				458,
+				460,
+				462,
+				464,
+				466,
+				468,
+				470,
+				472,
+				474,
+				476,
+				478,
+				480
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df"
+		}
+	],
+	"id" : "projet_planete::@6890427a1f51a3e7e1df",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "/machine:x64 /debug /INCREMENTAL /subsystem:console",
+				"role" : "flags"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "\"C:\\Users\\Louis Proffit\\OneDrive\\Git\\INF443\\library\\third_party\\precompiled\\windows\\glfw\\lib\\glfw3.lib\"",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "projet_planete",
+	"nameOnDisk" : "projet_planete.exe",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "vcl\\base",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "vcl\\base\\basic_types",
+			"sourceIndexes" : 
+			[
+				1,
+				2
+			]
+		},
+		{
+			"name" : "vcl\\base\\error",
+			"sourceIndexes" : 
+			[
+				3,
+				4
+			]
+		},
+		{
+			"name" : "vcl\\base\\rand",
+			"sourceIndexes" : 
+			[
+				5,
+				6
+			]
+		},
+		{
+			"name" : "vcl\\base\\stl",
+			"sourceIndexes" : 
+			[
+				7
+			]
+		},
+		{
+			"name" : "vcl\\base\\string",
+			"sourceIndexes" : 
+			[
+				8,
+				9
+			]
+		},
+		{
+			"name" : "vcl\\base\\types",
+			"sourceIndexes" : 
+			[
+				10
+			]
+		},
+		{
+			"name" : "vcl\\containers\\buffer",
+			"sourceIndexes" : 
+			[
+				11
+			]
+		},
+		{
+			"name" : "vcl\\containers\\buffer\\test",
+			"sourceIndexes" : 
+			[
+				12,
+				13
+			]
+		},
+		{
+			"name" : "vcl\\containers\\buffer_stack",
+			"sourceIndexes" : 
+			[
+				14
+			]
+		},
+		{
+			"name" : "vcl\\containers\\buffer_stack\\implementation",
+			"sourceIndexes" : 
+			[
+				15,
+				16,
+				17,
+				18
+			]
+		},
+		{
+			"name" : "vcl\\containers\\buffer_stack\\special_types",
+			"sourceIndexes" : 
+			[
+				19,
+				20
+			]
+		},
+		{
+			"name" : "vcl\\containers\\buffer_stack\\test",
+			"sourceIndexes" : 
+			[
+				21,
+				22
+			]
+		},
+		{
+			"name" : "vcl\\containers",
+			"sourceIndexes" : 
+			[
+				23
+			]
+		},
+		{
+			"name" : "vcl\\containers\\grid",
+			"sourceIndexes" : 
+			[
+				24
+			]
+		},
+		{
+			"name" : "vcl\\containers\\grid\\grid_2D",
+			"sourceIndexes" : 
+			[
+				25
+			]
+		},
+		{
+			"name" : "vcl\\containers\\grid\\grid_3D",
+			"sourceIndexes" : 
+			[
+				26
+			]
+		},
+		{
+			"name" : "vcl\\containers\\grid\\test",
+			"sourceIndexes" : 
+			[
+				27,
+				28
+			]
+		},
+		{
+			"name" : "vcl\\containers\\grid_stack",
+			"sourceIndexes" : 
+			[
+				29
+			]
+		},
+		{
+			"name" : "vcl\\containers\\grid_stack\\grid_stack_2D",
+			"sourceIndexes" : 
+			[
+				30
+			]
+		},
+		{
+			"name" : "vcl\\containers\\grid_stack\\grid_stack_2D\\test",
+			"sourceIndexes" : 
+			[
+				31,
+				32
+			]
+		},
+		{
+			"name" : "vcl\\containers\\offset_grid",
+			"sourceIndexes" : 
+			[
+				33,
+				34
+			]
+		},
+		{
+			"name" : "vcl\\display",
+			"sourceIndexes" : 
+			[
+				35
+			]
+		},
+		{
+			"name" : "vcl\\display\\drawable\\curve_drawable",
+			"sourceIndexes" : 
+			[
+				36,
+				37
+			]
+		},
+		{
+			"name" : "vcl\\display\\drawable",
+			"sourceIndexes" : 
+			[
+				38
+			]
+		},
+		{
+			"name" : "vcl\\display\\drawable\\hierarchy_mesh_drawable",
+			"sourceIndexes" : 
+			[
+				39,
+				40
+			]
+		},
+		{
+			"name" : "vcl\\display\\drawable\\hierarchy_mesh_drawable\\hierarchy_mesh_drawable_node",
+			"sourceIndexes" : 
+			[
+				41,
+				42
+			]
+		},
+		{
+			"name" : "vcl\\display\\drawable\\mesh_drawable",
+			"sourceIndexes" : 
+			[
+				43,
+				44
+			]
+		},
+		{
+			"name" : "vcl\\display\\drawable\\mesh_float_drawable",
+			"sourceIndexes" : 
+			[
+				45,
+				46
+			]
+		},
+		{
+			"name" : "vcl\\display\\drawable\\mesh_normal_drawable",
+			"sourceIndexes" : 
+			[
+				47,
+				48
+			]
+		},
+		{
+			"name" : "vcl\\display\\drawable\\mesh_wireframe_drawable",
+			"sourceIndexes" : 
+			[
+				49,
+				50
+			]
+		},
+		{
+			"name" : "vcl\\display\\drawable\\segments_drawable",
+			"sourceIndexes" : 
+			[
+				51,
+				52
+			]
+		},
+		{
+			"name" : "vcl\\display\\drawable\\shading_parameters",
+			"sourceIndexes" : 
+			[
+				53,
+				54
+			]
+		},
+		{
+			"name" : "vcl\\display\\drawable\\trajectory_drawable",
+			"sourceIndexes" : 
+			[
+				55,
+				56
+			]
+		},
+		{
+			"name" : "vcl\\display\\image",
+			"sourceIndexes" : 
+			[
+				57,
+				58
+			]
+		},
+		{
+			"name" : "vcl\\display\\opengl\\debug",
+			"sourceIndexes" : 
+			[
+				59,
+				60
+			]
+		},
+		{
+			"name" : "vcl\\display\\opengl\\glad",
+			"sourceIndexes" : 
+			[
+				61
+			]
+		},
+		{
+			"name" : "vcl\\display\\opengl\\helper",
+			"sourceIndexes" : 
+			[
+				62,
+				63
+			]
+		},
+		{
+			"name" : "vcl\\display\\opengl",
+			"sourceIndexes" : 
+			[
+				64
+			]
+		},
+		{
+			"name" : "vcl\\display\\opengl\\shaders",
+			"sourceIndexes" : 
+			[
+				65,
+				66
+			]
+		},
+		{
+			"name" : "vcl\\display\\opengl\\texture",
+			"sourceIndexes" : 
+			[
+				67,
+				68
+			]
+		},
+		{
+			"name" : "vcl\\display\\opengl\\uniform",
+			"sourceIndexes" : 
+			[
+				69,
+				70
+			]
+		},
+		{
+			"name" : "vcl\\display\\window",
+			"sourceIndexes" : 
+			[
+				71,
+				72
+			]
+		},
+		{
+			"name" : "vcl\\files",
+			"sourceIndexes" : 
+			[
+				73,
+				74
+			]
+		},
+		{
+			"name" : "vcl\\interaction\\camera",
+			"sourceIndexes" : 
+			[
+				75
+			]
+		},
+		{
+			"name" : "vcl\\interaction\\camera\\camera_around_center",
+			"sourceIndexes" : 
+			[
+				76,
+				77
+			]
+		},
+		{
+			"name" : "vcl\\interaction\\camera\\camera_base",
+			"sourceIndexes" : 
+			[
+				78,
+				79
+			]
+		},
+		{
+			"name" : "vcl\\interaction\\camera\\camera_head",
+			"sourceIndexes" : 
+			[
+				80,
+				81
+			]
+		},
+		{
+			"name" : "vcl\\interaction\\camera\\camera_minecraft",
+			"sourceIndexes" : 
+			[
+				82,
+				83
+			]
+		},
+		{
+			"name" : "vcl\\interaction\\camera\\camera_spherical_coordinates",
+			"sourceIndexes" : 
+			[
+				84,
+				85
+			]
+		},
+		{
+			"name" : "vcl\\interaction\\camera\\common_functions",
+			"sourceIndexes" : 
+			[
+				86,
+				87
+			]
+		},
+		{
+			"name" : "vcl\\interaction\\glfw_interaction",
+			"sourceIndexes" : 
+			[
+				88,
+				89
+			]
+		},
+		{
+			"name" : "vcl\\interaction\\gui",
+			"sourceIndexes" : 
+			[
+				90,
+				91
+			]
+		},
+		{
+			"name" : "vcl\\interaction",
+			"sourceIndexes" : 
+			[
+				92
+			]
+		},
+		{
+			"name" : "vcl\\interaction\\timer",
+			"sourceIndexes" : 
+			[
+				93
+			]
+		},
+		{
+			"name" : "vcl\\interaction\\timer\\timer_basic",
+			"sourceIndexes" : 
+			[
+				94,
+				95
+			]
+		},
+		{
+			"name" : "vcl\\interaction\\timer\\timer_event_periodic",
+			"sourceIndexes" : 
+			[
+				96,
+				97
+			]
+		},
+		{
+			"name" : "vcl\\interaction\\timer\\timer_fps",
+			"sourceIndexes" : 
+			[
+				98,
+				99
+			]
+		},
+		{
+			"name" : "vcl\\interaction\\timer\\timer_interval",
+			"sourceIndexes" : 
+			[
+				100,
+				101
+			]
+		},
+		{
+			"name" : "vcl\\interaction\\tracker",
+			"sourceIndexes" : 
+			[
+				102
+			]
+		},
+		{
+			"name" : "vcl\\interaction\\tracker\\velocity_tracker",
+			"sourceIndexes" : 
+			[
+				103,
+				104
+			]
+		},
+		{
+			"name" : "vcl\\math\\affine",
+			"sourceIndexes" : 
+			[
+				105
+			]
+		},
+		{
+			"name" : "vcl\\math\\affine\\affine_rt",
+			"sourceIndexes" : 
+			[
+				106,
+				107
+			]
+		},
+		{
+			"name" : "vcl\\math\\affine\\affine_rts",
+			"sourceIndexes" : 
+			[
+				108,
+				109
+			]
+		},
+		{
+			"name" : "vcl\\math\\frame",
+			"sourceIndexes" : 
+			[
+				110,
+				111
+			]
+		},
+		{
+			"name" : "vcl\\math\\interpolation",
+			"sourceIndexes" : 
+			[
+				112,
+				113
+			]
+		},
+		{
+			"name" : "vcl\\math",
+			"sourceIndexes" : 
+			[
+				114
+			]
+		},
+		{
+			"name" : "vcl\\math\\matrix",
+			"sourceIndexes" : 
+			[
+				115
+			]
+		},
+		{
+			"name" : "vcl\\math\\matrix\\matrix_stack",
+			"sourceIndexes" : 
+			[
+				116
+			]
+		},
+		{
+			"name" : "vcl\\math\\matrix\\matrix_stack\\special_types\\definition",
+			"sourceIndexes" : 
+			[
+				117,
+				118
+			]
+		},
+		{
+			"name" : "vcl\\math\\matrix\\matrix_stack\\special_types\\mat4",
+			"sourceIndexes" : 
+			[
+				119,
+				120
+			]
+		},
+		{
+			"name" : "vcl\\math\\matrix\\matrix_stack\\special_types",
+			"sourceIndexes" : 
+			[
+				121
+			]
+		},
+		{
+			"name" : "vcl\\math\\matrix\\test",
+			"sourceIndexes" : 
+			[
+				122,
+				123
+			]
+		},
+		{
+			"name" : "vcl\\math\\projection",
+			"sourceIndexes" : 
+			[
+				124,
+				125
+			]
+		},
+		{
+			"name" : "vcl\\math\\quaternion",
+			"sourceIndexes" : 
+			[
+				126,
+				127
+			]
+		},
+		{
+			"name" : "vcl\\math\\rotation",
+			"sourceIndexes" : 
+			[
+				128,
+				129
+			]
+		},
+		{
+			"name" : "vcl\\math\\rotation\\test",
+			"sourceIndexes" : 
+			[
+				130,
+				131
+			]
+		},
+		{
+			"name" : "vcl\\math\\vec_mat\\test",
+			"sourceIndexes" : 
+			[
+				132,
+				133
+			]
+		},
+		{
+			"name" : "vcl\\math\\vec_mat",
+			"sourceIndexes" : 
+			[
+				134,
+				135
+			]
+		},
+		{
+			"name" : "vcl\\shaders_preset",
+			"sourceIndexes" : 
+			[
+				136,
+				137
+			]
+		},
+		{
+			"name" : "vcl\\shape\\curve",
+			"sourceIndexes" : 
+			[
+				138,
+				139
+			]
+		},
+		{
+			"name" : "vcl\\shape\\intersection",
+			"sourceIndexes" : 
+			[
+				140,
+				141
+			]
+		},
+		{
+			"name" : "vcl\\shape\\mesh\\loader",
+			"sourceIndexes" : 
+			[
+				142
+			]
+		},
+		{
+			"name" : "vcl\\shape\\mesh\\loader\\obj",
+			"sourceIndexes" : 
+			[
+				143,
+				144
+			]
+		},
+		{
+			"name" : "vcl\\shape\\mesh",
+			"sourceIndexes" : 
+			[
+				145
+			]
+		},
+		{
+			"name" : "vcl\\shape\\mesh\\primitive",
+			"sourceIndexes" : 
+			[
+				146,
+				147
+			]
+		},
+		{
+			"name" : "vcl\\shape\\mesh\\structure",
+			"sourceIndexes" : 
+			[
+				148,
+				149
+			]
+		},
+		{
+			"name" : "vcl\\shape\\noise",
+			"sourceIndexes" : 
+			[
+				150,
+				151
+			]
+		},
+		{
+			"name" : "vcl\\shape",
+			"sourceIndexes" : 
+			[
+				152
+			]
+		},
+		{
+			"name" : "vcl",
+			"sourceIndexes" : 
+			[
+				153
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\Cholesky",
+			"sourceIndexes" : 
+			[
+				154,
+				155,
+				156
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\CholmodSupport",
+			"sourceIndexes" : 
+			[
+				157
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\Core",
+			"sourceIndexes" : 
+			[
+				158,
+				159,
+				160,
+				161,
+				162,
+				163,
+				164,
+				165,
+				166,
+				167,
+				168,
+				169,
+				170,
+				171,
+				172,
+				173,
+				174,
+				175,
+				176,
+				177,
+				178,
+				179,
+				180,
+				181,
+				182,
+				183,
+				184,
+				185,
+				186,
+				187,
+				188,
+				189,
+				190,
+				191,
+				192,
+				193,
+				194,
+				195,
+				196,
+				197,
+				198,
+				199,
+				200,
+				201,
+				202,
+				203,
+				204,
+				205,
+				206,
+				207,
+				208,
+				209,
+				210,
+				211,
+				212,
+				213,
+				214,
+				215,
+				216,
+				217,
+				218,
+				219,
+				220,
+				221,
+				222,
+				223,
+				224
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\Core\\arch\\AVX",
+			"sourceIndexes" : 
+			[
+				225,
+				226,
+				227,
+				228
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\Core\\arch\\AVX512",
+			"sourceIndexes" : 
+			[
+				229,
+				230
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\Core\\arch\\AltiVec",
+			"sourceIndexes" : 
+			[
+				231,
+				232,
+				233
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\Core\\arch\\CUDA",
+			"sourceIndexes" : 
+			[
+				234,
+				235,
+				236,
+				237,
+				238,
+				239
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\Core\\arch\\Default",
+			"sourceIndexes" : 
+			[
+				240,
+				241
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\Core\\arch\\NEON",
+			"sourceIndexes" : 
+			[
+				242,
+				243,
+				244
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\Core\\arch\\SSE",
+			"sourceIndexes" : 
+			[
+				245,
+				246,
+				247,
+				248
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\Core\\arch\\ZVector",
+			"sourceIndexes" : 
+			[
+				249,
+				250,
+				251
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\Core\\functors",
+			"sourceIndexes" : 
+			[
+				252,
+				253,
+				254,
+				255,
+				256,
+				257
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\Core\\products",
+			"sourceIndexes" : 
+			[
+				258,
+				259,
+				260,
+				261,
+				262,
+				263,
+				264,
+				265,
+				266,
+				267,
+				268,
+				269,
+				270,
+				271,
+				272,
+				273,
+				274,
+				275,
+				276,
+				277,
+				278
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\Core\\util",
+			"sourceIndexes" : 
+			[
+				279,
+				280,
+				281,
+				282,
+				283,
+				284,
+				285,
+				286,
+				287,
+				288,
+				289,
+				290
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\Eigenvalues",
+			"sourceIndexes" : 
+			[
+				291,
+				292,
+				293,
+				294,
+				295,
+				296,
+				297,
+				298,
+				299,
+				300,
+				301,
+				302,
+				303,
+				304
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\Geometry",
+			"sourceIndexes" : 
+			[
+				305,
+				306,
+				307,
+				308,
+				309,
+				310,
+				311,
+				312,
+				313,
+				314,
+				315,
+				316,
+				317,
+				318
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\Geometry\\arch",
+			"sourceIndexes" : 
+			[
+				319
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\Householder",
+			"sourceIndexes" : 
+			[
+				320,
+				321,
+				322
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\IterativeLinearSolvers",
+			"sourceIndexes" : 
+			[
+				323,
+				324,
+				325,
+				326,
+				327,
+				328,
+				329,
+				330
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\Jacobi",
+			"sourceIndexes" : 
+			[
+				331
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\LU",
+			"sourceIndexes" : 
+			[
+				332,
+				333,
+				334,
+				335,
+				336
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\LU\\arch",
+			"sourceIndexes" : 
+			[
+				337
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\MetisSupport",
+			"sourceIndexes" : 
+			[
+				338
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\OrderingMethods",
+			"sourceIndexes" : 
+			[
+				339,
+				340,
+				341
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\PaStiXSupport",
+			"sourceIndexes" : 
+			[
+				342
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\PardisoSupport",
+			"sourceIndexes" : 
+			[
+				343
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\QR",
+			"sourceIndexes" : 
+			[
+				344,
+				345,
+				346,
+				347,
+				348,
+				349
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\SPQRSupport",
+			"sourceIndexes" : 
+			[
+				350
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\SVD",
+			"sourceIndexes" : 
+			[
+				351,
+				352,
+				353,
+				354,
+				355
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\SparseCholesky",
+			"sourceIndexes" : 
+			[
+				356,
+				357
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\SparseCore",
+			"sourceIndexes" : 
+			[
+				358,
+				359,
+				360,
+				361,
+				362,
+				363,
+				364,
+				365,
+				366,
+				367,
+				368,
+				369,
+				370,
+				371,
+				372,
+				373,
+				374,
+				375,
+				376,
+				377,
+				378,
+				379,
+				380,
+				381,
+				382,
+				383,
+				384,
+				385,
+				386,
+				387
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\SparseLU",
+			"sourceIndexes" : 
+			[
+				388,
+				389,
+				390,
+				391,
+				392,
+				393,
+				394,
+				395,
+				396,
+				397,
+				398,
+				399,
+				400,
+				401,
+				402,
+				403,
+				404
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\SparseQR",
+			"sourceIndexes" : 
+			[
+				405
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\StlSupport",
+			"sourceIndexes" : 
+			[
+				406,
+				407,
+				408,
+				409
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\SuperLUSupport",
+			"sourceIndexes" : 
+			[
+				410
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\UmfPackSupport",
+			"sourceIndexes" : 
+			[
+				411
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\misc",
+			"sourceIndexes" : 
+			[
+				412,
+				413,
+				414,
+				415,
+				416,
+				417,
+				418
+			]
+		},
+		{
+			"name" : "third_party\\src\\eigen\\Eigen\\src\\plugins",
+			"sourceIndexes" : 
+			[
+				419,
+				420,
+				421,
+				422,
+				423,
+				424,
+				425
+			]
+		},
+		{
+			"name" : "third_party\\src\\glad\\include\\glad",
+			"sourceIndexes" : 
+			[
+				426
+			]
+		},
+		{
+			"name" : "third_party\\src\\glad\\src",
+			"sourceIndexes" : 
+			[
+				427
+			]
+		},
+		{
+			"name" : "third_party\\src\\imgui",
+			"sourceIndexes" : 
+			[
+				428,
+				429,
+				430,
+				431,
+				432,
+				433,
+				434,
+				435,
+				436,
+				437,
+				438,
+				439,
+				440,
+				441
+			]
+		},
+		{
+			"name" : "third_party\\src\\lodepng",
+			"sourceIndexes" : 
+			[
+				442,
+				443
+			]
+		},
+		{
+			"name" : "third_party\\src\\simplexnoise",
+			"sourceIndexes" : 
+			[
+				444,
+				445
+			]
+		},
+		{
+			"name" : "src",
+			"sourceIndexes" : 
+			[
+				446,
+				447,
+				448,
+				449,
+				450,
+				451,
+				452,
+				453,
+				454,
+				455,
+				468,
+				469,
+				470,
+				471
+			]
+		},
+		{
+			"name" : "src\\scenes",
+			"sourceIndexes" : 
+			[
+				456,
+				457,
+				458,
+				459,
+				460,
+				461,
+				462,
+				463,
+				464,
+				465,
+				466,
+				467
+			]
+		},
+		{
+			"name" : "src\\tree_Lsystem",
+			"sourceIndexes" : 
+			[
+				472,
+				473,
+				474,
+				475,
+				476,
+				477
+			]
+		},
+		{
+			"name" : "src\\water",
+			"sourceIndexes" : 
+			[
+				478,
+				479,
+				480,
+				481
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/base/base.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/base/basic_types/basic_types.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/base/basic_types/basic_types.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/base/error/error.cpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/base/error/error.hpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/base/rand/rand.cpp",
+			"sourceGroupIndex" : 3
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/base/rand/rand.hpp",
+			"sourceGroupIndex" : 3
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/base/stl/stl.hpp",
+			"sourceGroupIndex" : 4
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/base/string/string.cpp",
+			"sourceGroupIndex" : 5
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/base/string/string.hpp",
+			"sourceGroupIndex" : 5
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/base/types/types.hpp",
+			"sourceGroupIndex" : 6
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/containers/buffer/buffer.hpp",
+			"sourceGroupIndex" : 7
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/containers/buffer/test/test_buffer.cpp",
+			"sourceGroupIndex" : 8
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/containers/buffer/test/test_buffer.hpp",
+			"sourceGroupIndex" : 8
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/containers/buffer_stack/buffer_stack.hpp",
+			"sourceGroupIndex" : 9
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/containers/buffer_stack/implementation/buffer_stack.hpp",
+			"sourceGroupIndex" : 10
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/containers/buffer_stack/implementation/buffer_stack2.hpp",
+			"sourceGroupIndex" : 10
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/containers/buffer_stack/implementation/buffer_stack3.hpp",
+			"sourceGroupIndex" : 10
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/containers/buffer_stack/implementation/buffer_stack4.hpp",
+			"sourceGroupIndex" : 10
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/containers/buffer_stack/special_types/special_types.cpp",
+			"sourceGroupIndex" : 11
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/containers/buffer_stack/special_types/special_types.hpp",
+			"sourceGroupIndex" : 11
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/containers/buffer_stack/test/test_buffer_stack.cpp",
+			"sourceGroupIndex" : 12
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/containers/buffer_stack/test/test_buffer_stack.hpp",
+			"sourceGroupIndex" : 12
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/containers/containers.hpp",
+			"sourceGroupIndex" : 13
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/containers/grid/grid.hpp",
+			"sourceGroupIndex" : 14
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/containers/grid/grid_2D/grid_2D.hpp",
+			"sourceGroupIndex" : 15
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/containers/grid/grid_3D/grid_3D.hpp",
+			"sourceGroupIndex" : 16
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/containers/grid/test/test_grid.cpp",
+			"sourceGroupIndex" : 17
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/containers/grid/test/test_grid.hpp",
+			"sourceGroupIndex" : 17
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/containers/grid_stack/grid_stack.hpp",
+			"sourceGroupIndex" : 18
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/containers/grid_stack/grid_stack_2D/grid_stack_2D.hpp",
+			"sourceGroupIndex" : 19
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/containers/grid_stack/grid_stack_2D/test/test_grid_stack_2D.cpp",
+			"sourceGroupIndex" : 20
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/containers/grid_stack/grid_stack_2D/test/test_grid_stack_2D.hpp",
+			"sourceGroupIndex" : 20
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/containers/offset_grid/offset_grid.cpp",
+			"sourceGroupIndex" : 21
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/containers/offset_grid/offset_grid.hpp",
+			"sourceGroupIndex" : 21
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/display.hpp",
+			"sourceGroupIndex" : 22
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/drawable/curve_drawable/curve_drawable.cpp",
+			"sourceGroupIndex" : 23
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/drawable/curve_drawable/curve_drawable.hpp",
+			"sourceGroupIndex" : 23
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/drawable/drawable.hpp",
+			"sourceGroupIndex" : 24
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/drawable/hierarchy_mesh_drawable/hierarchy_mesh_drawable.cpp",
+			"sourceGroupIndex" : 25
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/drawable/hierarchy_mesh_drawable/hierarchy_mesh_drawable.hpp",
+			"sourceGroupIndex" : 25
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/drawable/hierarchy_mesh_drawable/hierarchy_mesh_drawable_node/hierarchy_mesh_drawable_node.cpp",
+			"sourceGroupIndex" : 26
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/drawable/hierarchy_mesh_drawable/hierarchy_mesh_drawable_node/hierarchy_mesh_drawable_node.hpp",
+			"sourceGroupIndex" : 26
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/drawable/mesh_drawable/mesh_drawable.cpp",
+			"sourceGroupIndex" : 27
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/drawable/mesh_drawable/mesh_drawable.hpp",
+			"sourceGroupIndex" : 27
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/drawable/mesh_float_drawable/mesh_float_drawable.cpp",
+			"sourceGroupIndex" : 28
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/drawable/mesh_float_drawable/mesh_float_drawable.hpp",
+			"sourceGroupIndex" : 28
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/drawable/mesh_normal_drawable/mesh_normal_drawable.cpp",
+			"sourceGroupIndex" : 29
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/drawable/mesh_normal_drawable/mesh_normal_drawable.hpp",
+			"sourceGroupIndex" : 29
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/drawable/mesh_wireframe_drawable/mesh_wireframe_drawable.cpp",
+			"sourceGroupIndex" : 30
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/drawable/mesh_wireframe_drawable/mesh_wireframe_drawable.hpp",
+			"sourceGroupIndex" : 30
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/drawable/segments_drawable/segments_drawable.cpp",
+			"sourceGroupIndex" : 31
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/drawable/segments_drawable/segments_drawable.hpp",
+			"sourceGroupIndex" : 31
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/drawable/shading_parameters/shading_parameters.cpp",
+			"sourceGroupIndex" : 32
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/drawable/shading_parameters/shading_parameters.hpp",
+			"sourceGroupIndex" : 32
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/drawable/trajectory_drawable/trajectory_drawable.cpp",
+			"sourceGroupIndex" : 33
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/drawable/trajectory_drawable/trajectory_drawable.hpp",
+			"sourceGroupIndex" : 33
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/image/image.cpp",
+			"sourceGroupIndex" : 34
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/image/image.hpp",
+			"sourceGroupIndex" : 34
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/opengl/debug/debug.cpp",
+			"sourceGroupIndex" : 35
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/opengl/debug/debug.hpp",
+			"sourceGroupIndex" : 35
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/opengl/glad/glad.hpp",
+			"sourceGroupIndex" : 36
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/opengl/helper/opengl_helper.cpp",
+			"sourceGroupIndex" : 37
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/opengl/helper/opengl_helper.hpp",
+			"sourceGroupIndex" : 37
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/opengl/opengl.hpp",
+			"sourceGroupIndex" : 38
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/opengl/shaders/shaders.cpp",
+			"sourceGroupIndex" : 39
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/opengl/shaders/shaders.hpp",
+			"sourceGroupIndex" : 39
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/opengl/texture/texture.cpp",
+			"sourceGroupIndex" : 40
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/opengl/texture/texture.hpp",
+			"sourceGroupIndex" : 40
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/opengl/uniform/uniform.cpp",
+			"sourceGroupIndex" : 41
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/opengl/uniform/uniform.hpp",
+			"sourceGroupIndex" : 41
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/window/window.cpp",
+			"sourceGroupIndex" : 42
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/display/window/window.hpp",
+			"sourceGroupIndex" : 42
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/files/files.cpp",
+			"sourceGroupIndex" : 43
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/files/files.hpp",
+			"sourceGroupIndex" : 43
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/interaction/camera/camera.hpp",
+			"sourceGroupIndex" : 44
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/interaction/camera/camera_around_center/camera_around_center.cpp",
+			"sourceGroupIndex" : 45
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/interaction/camera/camera_around_center/camera_around_center.hpp",
+			"sourceGroupIndex" : 45
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/interaction/camera/camera_base/camera_base.cpp",
+			"sourceGroupIndex" : 46
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/interaction/camera/camera_base/camera_base.hpp",
+			"sourceGroupIndex" : 46
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/interaction/camera/camera_head/camera_head.cpp",
+			"sourceGroupIndex" : 47
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/interaction/camera/camera_head/camera_head.hpp",
+			"sourceGroupIndex" : 47
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/interaction/camera/camera_minecraft/camera_minecraft.cpp",
+			"sourceGroupIndex" : 48
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/interaction/camera/camera_minecraft/camera_minecraft.hpp",
+			"sourceGroupIndex" : 48
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/interaction/camera/camera_spherical_coordinates/camera_spherical_coordinates.cpp",
+			"sourceGroupIndex" : 49
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/interaction/camera/camera_spherical_coordinates/camera_spherical_coordinates.hpp",
+			"sourceGroupIndex" : 49
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/interaction/camera/common_functions/common_functions.cpp",
+			"sourceGroupIndex" : 50
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/interaction/camera/common_functions/common_functions.hpp",
+			"sourceGroupIndex" : 50
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/interaction/glfw_interaction/glfw_interaction.cpp",
+			"sourceGroupIndex" : 51
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/interaction/glfw_interaction/glfw_interaction.hpp",
+			"sourceGroupIndex" : 51
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/interaction/gui/gui.cpp",
+			"sourceGroupIndex" : 52
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/interaction/gui/gui.hpp",
+			"sourceGroupIndex" : 52
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/interaction/interaction.hpp",
+			"sourceGroupIndex" : 53
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/interaction/timer/timer.hpp",
+			"sourceGroupIndex" : 54
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/interaction/timer/timer_basic/timer_basic.cpp",
+			"sourceGroupIndex" : 55
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/interaction/timer/timer_basic/timer_basic.hpp",
+			"sourceGroupIndex" : 55
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/interaction/timer/timer_event_periodic/timer_event_periodic.cpp",
+			"sourceGroupIndex" : 56
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/interaction/timer/timer_event_periodic/timer_event_periodic.hpp",
+			"sourceGroupIndex" : 56
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/interaction/timer/timer_fps/timer_fps.cpp",
+			"sourceGroupIndex" : 57
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/interaction/timer/timer_fps/timer_fps.hpp",
+			"sourceGroupIndex" : 57
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/interaction/timer/timer_interval/timer_interval.cpp",
+			"sourceGroupIndex" : 58
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/interaction/timer/timer_interval/timer_interval.hpp",
+			"sourceGroupIndex" : 58
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/interaction/tracker/tracker.hpp",
+			"sourceGroupIndex" : 59
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/interaction/tracker/velocity_tracker/velocity_tracker.cpp",
+			"sourceGroupIndex" : 60
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/interaction/tracker/velocity_tracker/velocity_tracker.hpp",
+			"sourceGroupIndex" : 60
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/math/affine/affine.hpp",
+			"sourceGroupIndex" : 61
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/math/affine/affine_rt/affine_rt.cpp",
+			"sourceGroupIndex" : 62
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/math/affine/affine_rt/affine_rt.hpp",
+			"sourceGroupIndex" : 62
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/math/affine/affine_rts/affine_rts.cpp",
+			"sourceGroupIndex" : 63
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/math/affine/affine_rts/affine_rts.hpp",
+			"sourceGroupIndex" : 63
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/math/frame/frame.cpp",
+			"sourceGroupIndex" : 64
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/math/frame/frame.hpp",
+			"sourceGroupIndex" : 64
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/math/interpolation/interpolation.cpp",
+			"sourceGroupIndex" : 65
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/math/interpolation/interpolation.hpp",
+			"sourceGroupIndex" : 65
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/math/math.hpp",
+			"sourceGroupIndex" : 66
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/math/matrix/matrix.hpp",
+			"sourceGroupIndex" : 67
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/math/matrix/matrix_stack/matrix_stack.hpp",
+			"sourceGroupIndex" : 68
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/math/matrix/matrix_stack/special_types/definition/special_types.cpp",
+			"sourceGroupIndex" : 69
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/math/matrix/matrix_stack/special_types/definition/special_types.hpp",
+			"sourceGroupIndex" : 69
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/math/matrix/matrix_stack/special_types/mat4/mat4.cpp",
+			"sourceGroupIndex" : 70
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/math/matrix/matrix_stack/special_types/mat4/mat4.hpp",
+			"sourceGroupIndex" : 70
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/math/matrix/matrix_stack/special_types/special_types.hpp",
+			"sourceGroupIndex" : 71
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/math/matrix/test/test_matrix_stack.cpp",
+			"sourceGroupIndex" : 72
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/math/matrix/test/test_matrix_stack.hpp",
+			"sourceGroupIndex" : 72
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/math/projection/projection.cpp",
+			"sourceGroupIndex" : 73
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/math/projection/projection.hpp",
+			"sourceGroupIndex" : 73
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/math/quaternion/quaternion.cpp",
+			"sourceGroupIndex" : 74
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/math/quaternion/quaternion.hpp",
+			"sourceGroupIndex" : 74
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/math/rotation/rotation.cpp",
+			"sourceGroupIndex" : 75
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/math/rotation/rotation.hpp",
+			"sourceGroupIndex" : 75
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/math/rotation/test/test_rotation.cpp",
+			"sourceGroupIndex" : 76
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/math/rotation/test/test_rotation.hpp",
+			"sourceGroupIndex" : 76
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/math/vec_mat/test/test_vec_mat.cpp",
+			"sourceGroupIndex" : 77
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/math/vec_mat/test/test_vec_mat.hpp",
+			"sourceGroupIndex" : 77
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/math/vec_mat/vec_mat.cpp",
+			"sourceGroupIndex" : 78
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/math/vec_mat/vec_mat.hpp",
+			"sourceGroupIndex" : 78
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/shaders_preset/shaders_preset.cpp",
+			"sourceGroupIndex" : 79
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/shaders_preset/shaders_preset.hpp",
+			"sourceGroupIndex" : 79
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/shape/curve/curve.cpp",
+			"sourceGroupIndex" : 80
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/shape/curve/curve.hpp",
+			"sourceGroupIndex" : 80
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/shape/intersection/intersection.cpp",
+			"sourceGroupIndex" : 81
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/shape/intersection/intersection.hpp",
+			"sourceGroupIndex" : 81
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/shape/mesh/loader/loader.hpp",
+			"sourceGroupIndex" : 82
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/shape/mesh/loader/obj/obj.cpp",
+			"sourceGroupIndex" : 83
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/shape/mesh/loader/obj/obj.hpp",
+			"sourceGroupIndex" : 83
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/shape/mesh/mesh.hpp",
+			"sourceGroupIndex" : 84
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/shape/mesh/primitive/mesh_primitive.cpp",
+			"sourceGroupIndex" : 85
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/shape/mesh/primitive/mesh_primitive.hpp",
+			"sourceGroupIndex" : 85
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/shape/mesh/structure/mesh.cpp",
+			"sourceGroupIndex" : 86
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/shape/mesh/structure/mesh.hpp",
+			"sourceGroupIndex" : 86
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/shape/noise/noise.cpp",
+			"sourceGroupIndex" : 87
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/shape/noise/noise.hpp",
+			"sourceGroupIndex" : 87
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/shape/shape.hpp",
+			"sourceGroupIndex" : 88
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/vcl/vcl.hpp",
+			"sourceGroupIndex" : 89
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Cholesky/LDLT.h",
+			"sourceGroupIndex" : 90
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Cholesky/LLT.h",
+			"sourceGroupIndex" : 90
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Cholesky/LLT_LAPACKE.h",
+			"sourceGroupIndex" : 90
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/CholmodSupport/CholmodSupport.h",
+			"sourceGroupIndex" : 91
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/Array.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/ArrayBase.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/ArrayWrapper.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/Assign.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/AssignEvaluator.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/Assign_MKL.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/BandMatrix.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/Block.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/BooleanRedux.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/CommaInitializer.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/ConditionEstimator.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/CoreEvaluators.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/CoreIterators.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/CwiseBinaryOp.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/CwiseNullaryOp.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/CwiseTernaryOp.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/CwiseUnaryOp.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/CwiseUnaryView.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/DenseBase.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/DenseCoeffsBase.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/DenseStorage.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/Diagonal.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/DiagonalMatrix.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/DiagonalProduct.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/Dot.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/EigenBase.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/ForceAlignedAccess.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/Fuzzy.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/GeneralProduct.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/GenericPacketMath.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/GlobalFunctions.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/IO.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/Inverse.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/Map.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/MapBase.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/MathFunctions.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/MathFunctionsImpl.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/Matrix.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/MatrixBase.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/NestByValue.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/NoAlias.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/NumTraits.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/PermutationMatrix.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/PlainObjectBase.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/Product.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/ProductEvaluators.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/Random.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/Redux.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/Ref.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/Replicate.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/ReturnByValue.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/Reverse.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/Select.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/SelfAdjointView.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/SelfCwiseBinaryOp.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/Solve.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/SolveTriangular.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/SolverBase.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/StableNorm.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/Stride.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/Swap.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/Transpose.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/Transpositions.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/TriangularMatrix.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/VectorBlock.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/VectorwiseOp.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/Visitor.h",
+			"sourceGroupIndex" : 92
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/AVX/Complex.h",
+			"sourceGroupIndex" : 93
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/AVX/MathFunctions.h",
+			"sourceGroupIndex" : 93
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/AVX/PacketMath.h",
+			"sourceGroupIndex" : 93
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/AVX/TypeCasting.h",
+			"sourceGroupIndex" : 93
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/AVX512/MathFunctions.h",
+			"sourceGroupIndex" : 94
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/AVX512/PacketMath.h",
+			"sourceGroupIndex" : 94
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/AltiVec/Complex.h",
+			"sourceGroupIndex" : 95
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/AltiVec/MathFunctions.h",
+			"sourceGroupIndex" : 95
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/AltiVec/PacketMath.h",
+			"sourceGroupIndex" : 95
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/CUDA/Complex.h",
+			"sourceGroupIndex" : 96
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/CUDA/Half.h",
+			"sourceGroupIndex" : 96
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/CUDA/MathFunctions.h",
+			"sourceGroupIndex" : 96
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/CUDA/PacketMath.h",
+			"sourceGroupIndex" : 96
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/CUDA/PacketMathHalf.h",
+			"sourceGroupIndex" : 96
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/CUDA/TypeCasting.h",
+			"sourceGroupIndex" : 96
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/Default/ConjHelper.h",
+			"sourceGroupIndex" : 97
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/Default/Settings.h",
+			"sourceGroupIndex" : 97
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/NEON/Complex.h",
+			"sourceGroupIndex" : 98
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/NEON/MathFunctions.h",
+			"sourceGroupIndex" : 98
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/NEON/PacketMath.h",
+			"sourceGroupIndex" : 98
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/SSE/Complex.h",
+			"sourceGroupIndex" : 99
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/SSE/MathFunctions.h",
+			"sourceGroupIndex" : 99
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/SSE/PacketMath.h",
+			"sourceGroupIndex" : 99
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/SSE/TypeCasting.h",
+			"sourceGroupIndex" : 99
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/ZVector/Complex.h",
+			"sourceGroupIndex" : 100
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/ZVector/MathFunctions.h",
+			"sourceGroupIndex" : 100
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/arch/ZVector/PacketMath.h",
+			"sourceGroupIndex" : 100
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/functors/AssignmentFunctors.h",
+			"sourceGroupIndex" : 101
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/functors/BinaryFunctors.h",
+			"sourceGroupIndex" : 101
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/functors/NullaryFunctors.h",
+			"sourceGroupIndex" : 101
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/functors/StlFunctors.h",
+			"sourceGroupIndex" : 101
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/functors/TernaryFunctors.h",
+			"sourceGroupIndex" : 101
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/functors/UnaryFunctors.h",
+			"sourceGroupIndex" : 101
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/products/GeneralBlockPanelKernel.h",
+			"sourceGroupIndex" : 102
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/products/GeneralMatrixMatrix.h",
+			"sourceGroupIndex" : 102
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/products/GeneralMatrixMatrixTriangular.h",
+			"sourceGroupIndex" : 102
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/products/GeneralMatrixMatrixTriangular_BLAS.h",
+			"sourceGroupIndex" : 102
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/products/GeneralMatrixMatrix_BLAS.h",
+			"sourceGroupIndex" : 102
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/products/GeneralMatrixVector.h",
+			"sourceGroupIndex" : 102
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/products/GeneralMatrixVector_BLAS.h",
+			"sourceGroupIndex" : 102
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/products/Parallelizer.h",
+			"sourceGroupIndex" : 102
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/products/SelfadjointMatrixMatrix.h",
+			"sourceGroupIndex" : 102
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/products/SelfadjointMatrixMatrix_BLAS.h",
+			"sourceGroupIndex" : 102
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/products/SelfadjointMatrixVector.h",
+			"sourceGroupIndex" : 102
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/products/SelfadjointMatrixVector_BLAS.h",
+			"sourceGroupIndex" : 102
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/products/SelfadjointProduct.h",
+			"sourceGroupIndex" : 102
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/products/SelfadjointRank2Update.h",
+			"sourceGroupIndex" : 102
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/products/TriangularMatrixMatrix.h",
+			"sourceGroupIndex" : 102
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/products/TriangularMatrixMatrix_BLAS.h",
+			"sourceGroupIndex" : 102
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/products/TriangularMatrixVector.h",
+			"sourceGroupIndex" : 102
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/products/TriangularMatrixVector_BLAS.h",
+			"sourceGroupIndex" : 102
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/products/TriangularSolverMatrix.h",
+			"sourceGroupIndex" : 102
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/products/TriangularSolverMatrix_BLAS.h",
+			"sourceGroupIndex" : 102
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/products/TriangularSolverVector.h",
+			"sourceGroupIndex" : 102
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/util/BlasUtil.h",
+			"sourceGroupIndex" : 103
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/util/Constants.h",
+			"sourceGroupIndex" : 103
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/util/DisableStupidWarnings.h",
+			"sourceGroupIndex" : 103
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/util/ForwardDeclarations.h",
+			"sourceGroupIndex" : 103
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/util/MKL_support.h",
+			"sourceGroupIndex" : 103
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/util/Macros.h",
+			"sourceGroupIndex" : 103
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/util/Memory.h",
+			"sourceGroupIndex" : 103
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/util/Meta.h",
+			"sourceGroupIndex" : 103
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/util/NonMPL2.h",
+			"sourceGroupIndex" : 103
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/util/ReenableStupidWarnings.h",
+			"sourceGroupIndex" : 103
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/util/StaticAssert.h",
+			"sourceGroupIndex" : 103
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Core/util/XprHelper.h",
+			"sourceGroupIndex" : 103
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Eigenvalues/ComplexEigenSolver.h",
+			"sourceGroupIndex" : 104
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Eigenvalues/ComplexSchur.h",
+			"sourceGroupIndex" : 104
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Eigenvalues/ComplexSchur_LAPACKE.h",
+			"sourceGroupIndex" : 104
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Eigenvalues/EigenSolver.h",
+			"sourceGroupIndex" : 104
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Eigenvalues/GeneralizedEigenSolver.h",
+			"sourceGroupIndex" : 104
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Eigenvalues/GeneralizedSelfAdjointEigenSolver.h",
+			"sourceGroupIndex" : 104
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Eigenvalues/HessenbergDecomposition.h",
+			"sourceGroupIndex" : 104
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h",
+			"sourceGroupIndex" : 104
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Eigenvalues/RealQZ.h",
+			"sourceGroupIndex" : 104
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Eigenvalues/RealSchur.h",
+			"sourceGroupIndex" : 104
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Eigenvalues/RealSchur_LAPACKE.h",
+			"sourceGroupIndex" : 104
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h",
+			"sourceGroupIndex" : 104
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Eigenvalues/SelfAdjointEigenSolver_LAPACKE.h",
+			"sourceGroupIndex" : 104
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Eigenvalues/Tridiagonalization.h",
+			"sourceGroupIndex" : 104
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Geometry/AlignedBox.h",
+			"sourceGroupIndex" : 105
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Geometry/AngleAxis.h",
+			"sourceGroupIndex" : 105
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Geometry/EulerAngles.h",
+			"sourceGroupIndex" : 105
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Geometry/Homogeneous.h",
+			"sourceGroupIndex" : 105
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Geometry/Hyperplane.h",
+			"sourceGroupIndex" : 105
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Geometry/OrthoMethods.h",
+			"sourceGroupIndex" : 105
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Geometry/ParametrizedLine.h",
+			"sourceGroupIndex" : 105
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Geometry/Quaternion.h",
+			"sourceGroupIndex" : 105
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Geometry/Rotation2D.h",
+			"sourceGroupIndex" : 105
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Geometry/RotationBase.h",
+			"sourceGroupIndex" : 105
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Geometry/Scaling.h",
+			"sourceGroupIndex" : 105
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Geometry/Transform.h",
+			"sourceGroupIndex" : 105
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Geometry/Translation.h",
+			"sourceGroupIndex" : 105
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Geometry/Umeyama.h",
+			"sourceGroupIndex" : 105
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Geometry/arch/Geometry_SSE.h",
+			"sourceGroupIndex" : 106
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Householder/BlockHouseholder.h",
+			"sourceGroupIndex" : 107
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Householder/Householder.h",
+			"sourceGroupIndex" : 107
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Householder/HouseholderSequence.h",
+			"sourceGroupIndex" : 107
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/IterativeLinearSolvers/BasicPreconditioners.h",
+			"sourceGroupIndex" : 108
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/IterativeLinearSolvers/BiCGSTAB.h",
+			"sourceGroupIndex" : 108
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/IterativeLinearSolvers/ConjugateGradient.h",
+			"sourceGroupIndex" : 108
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h",
+			"sourceGroupIndex" : 108
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/IterativeLinearSolvers/IncompleteLUT.h",
+			"sourceGroupIndex" : 108
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/IterativeLinearSolvers/IterativeSolverBase.h",
+			"sourceGroupIndex" : 108
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/IterativeLinearSolvers/LeastSquareConjugateGradient.h",
+			"sourceGroupIndex" : 108
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/IterativeLinearSolvers/SolveWithGuess.h",
+			"sourceGroupIndex" : 108
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/Jacobi/Jacobi.h",
+			"sourceGroupIndex" : 109
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/LU/Determinant.h",
+			"sourceGroupIndex" : 110
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/LU/FullPivLU.h",
+			"sourceGroupIndex" : 110
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/LU/InverseImpl.h",
+			"sourceGroupIndex" : 110
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/LU/PartialPivLU.h",
+			"sourceGroupIndex" : 110
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/LU/PartialPivLU_LAPACKE.h",
+			"sourceGroupIndex" : 110
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/LU/arch/Inverse_SSE.h",
+			"sourceGroupIndex" : 111
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/MetisSupport/MetisSupport.h",
+			"sourceGroupIndex" : 112
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/OrderingMethods/Amd.h",
+			"sourceGroupIndex" : 113
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/OrderingMethods/Eigen_Colamd.h",
+			"sourceGroupIndex" : 113
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/OrderingMethods/Ordering.h",
+			"sourceGroupIndex" : 113
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/PaStiXSupport/PaStiXSupport.h",
+			"sourceGroupIndex" : 114
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/PardisoSupport/PardisoSupport.h",
+			"sourceGroupIndex" : 115
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/QR/ColPivHouseholderQR.h",
+			"sourceGroupIndex" : 116
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/QR/ColPivHouseholderQR_LAPACKE.h",
+			"sourceGroupIndex" : 116
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/QR/CompleteOrthogonalDecomposition.h",
+			"sourceGroupIndex" : 116
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/QR/FullPivHouseholderQR.h",
+			"sourceGroupIndex" : 116
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/QR/HouseholderQR.h",
+			"sourceGroupIndex" : 116
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/QR/HouseholderQR_LAPACKE.h",
+			"sourceGroupIndex" : 116
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SPQRSupport/SuiteSparseQRSupport.h",
+			"sourceGroupIndex" : 117
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SVD/BDCSVD.h",
+			"sourceGroupIndex" : 118
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SVD/JacobiSVD.h",
+			"sourceGroupIndex" : 118
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SVD/JacobiSVD_LAPACKE.h",
+			"sourceGroupIndex" : 118
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SVD/SVDBase.h",
+			"sourceGroupIndex" : 118
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SVD/UpperBidiagonalization.h",
+			"sourceGroupIndex" : 118
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCholesky/SimplicialCholesky.h",
+			"sourceGroupIndex" : 119
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCholesky/SimplicialCholesky_impl.h",
+			"sourceGroupIndex" : 119
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/AmbiVector.h",
+			"sourceGroupIndex" : 120
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/CompressedStorage.h",
+			"sourceGroupIndex" : 120
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/ConservativeSparseSparseProduct.h",
+			"sourceGroupIndex" : 120
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/MappedSparseMatrix.h",
+			"sourceGroupIndex" : 120
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseAssign.h",
+			"sourceGroupIndex" : 120
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseBlock.h",
+			"sourceGroupIndex" : 120
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseColEtree.h",
+			"sourceGroupIndex" : 120
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseCompressedBase.h",
+			"sourceGroupIndex" : 120
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseCwiseBinaryOp.h",
+			"sourceGroupIndex" : 120
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseCwiseUnaryOp.h",
+			"sourceGroupIndex" : 120
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseDenseProduct.h",
+			"sourceGroupIndex" : 120
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseDiagonalProduct.h",
+			"sourceGroupIndex" : 120
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseDot.h",
+			"sourceGroupIndex" : 120
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseFuzzy.h",
+			"sourceGroupIndex" : 120
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseMap.h",
+			"sourceGroupIndex" : 120
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseMatrix.h",
+			"sourceGroupIndex" : 120
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseMatrixBase.h",
+			"sourceGroupIndex" : 120
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparsePermutation.h",
+			"sourceGroupIndex" : 120
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseProduct.h",
+			"sourceGroupIndex" : 120
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseRedux.h",
+			"sourceGroupIndex" : 120
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseRef.h",
+			"sourceGroupIndex" : 120
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseSelfAdjointView.h",
+			"sourceGroupIndex" : 120
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseSolverBase.h",
+			"sourceGroupIndex" : 120
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseSparseProductWithPruning.h",
+			"sourceGroupIndex" : 120
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseTranspose.h",
+			"sourceGroupIndex" : 120
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseTriangularView.h",
+			"sourceGroupIndex" : 120
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseUtil.h",
+			"sourceGroupIndex" : 120
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseVector.h",
+			"sourceGroupIndex" : 120
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/SparseView.h",
+			"sourceGroupIndex" : 120
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseCore/TriangularSolver.h",
+			"sourceGroupIndex" : 120
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU.h",
+			"sourceGroupIndex" : 121
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLUImpl.h",
+			"sourceGroupIndex" : 121
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU_Memory.h",
+			"sourceGroupIndex" : 121
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU_Structs.h",
+			"sourceGroupIndex" : 121
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU_SupernodalMatrix.h",
+			"sourceGroupIndex" : 121
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU_Utils.h",
+			"sourceGroupIndex" : 121
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU_column_bmod.h",
+			"sourceGroupIndex" : 121
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU_column_dfs.h",
+			"sourceGroupIndex" : 121
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU_copy_to_ucol.h",
+			"sourceGroupIndex" : 121
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU_gemm_kernel.h",
+			"sourceGroupIndex" : 121
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU_heap_relax_snode.h",
+			"sourceGroupIndex" : 121
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU_kernel_bmod.h",
+			"sourceGroupIndex" : 121
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU_panel_bmod.h",
+			"sourceGroupIndex" : 121
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU_panel_dfs.h",
+			"sourceGroupIndex" : 121
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU_pivotL.h",
+			"sourceGroupIndex" : 121
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU_pruneL.h",
+			"sourceGroupIndex" : 121
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseLU/SparseLU_relax_snode.h",
+			"sourceGroupIndex" : 121
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SparseQR/SparseQR.h",
+			"sourceGroupIndex" : 122
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/StlSupport/StdDeque.h",
+			"sourceGroupIndex" : 123
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/StlSupport/StdList.h",
+			"sourceGroupIndex" : 123
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/StlSupport/StdVector.h",
+			"sourceGroupIndex" : 123
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/StlSupport/details.h",
+			"sourceGroupIndex" : 123
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/SuperLUSupport/SuperLUSupport.h",
+			"sourceGroupIndex" : 124
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/UmfPackSupport/UmfPackSupport.h",
+			"sourceGroupIndex" : 125
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/misc/Image.h",
+			"sourceGroupIndex" : 126
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/misc/Kernel.h",
+			"sourceGroupIndex" : 126
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/misc/RealSvd2x2.h",
+			"sourceGroupIndex" : 126
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/misc/blas.h",
+			"sourceGroupIndex" : 126
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/misc/lapack.h",
+			"sourceGroupIndex" : 126
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/misc/lapacke.h",
+			"sourceGroupIndex" : 126
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/misc/lapacke_mangling.h",
+			"sourceGroupIndex" : 126
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/plugins/ArrayCwiseBinaryOps.h",
+			"sourceGroupIndex" : 127
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/plugins/ArrayCwiseUnaryOps.h",
+			"sourceGroupIndex" : 127
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/plugins/BlockMethods.h",
+			"sourceGroupIndex" : 127
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/plugins/CommonCwiseBinaryOps.h",
+			"sourceGroupIndex" : 127
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/plugins/CommonCwiseUnaryOps.h",
+			"sourceGroupIndex" : 127
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/plugins/MatrixCwiseBinaryOps.h",
+			"sourceGroupIndex" : 127
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/eigen/Eigen/src/plugins/MatrixCwiseUnaryOps.h",
+			"sourceGroupIndex" : 127
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/glad/include/glad/glad.hpp",
+			"sourceGroupIndex" : 128
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/glad/src/glad.cpp",
+			"sourceGroupIndex" : 129
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/imgui/imconfig.h",
+			"sourceGroupIndex" : 130
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/imgui/imgui.cpp",
+			"sourceGroupIndex" : 130
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/imgui/imgui.h",
+			"sourceGroupIndex" : 130
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/imgui/imgui_demo.cpp",
+			"sourceGroupIndex" : 130
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/imgui/imgui_draw.cpp",
+			"sourceGroupIndex" : 130
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/imgui/imgui_impl_glfw.cpp",
+			"sourceGroupIndex" : 130
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/imgui/imgui_impl_glfw.h",
+			"sourceGroupIndex" : 130
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/imgui/imgui_impl_opengl3.cpp",
+			"sourceGroupIndex" : 130
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/imgui/imgui_impl_opengl3.h",
+			"sourceGroupIndex" : 130
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/imgui/imgui_internal.h",
+			"sourceGroupIndex" : 130
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/imgui/imgui_widgets.cpp",
+			"sourceGroupIndex" : 130
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/imgui/imstb_rectpack.h",
+			"sourceGroupIndex" : 130
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/imgui/imstb_textedit.h",
+			"sourceGroupIndex" : 130
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/imgui/imstb_truetype.h",
+			"sourceGroupIndex" : 130
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/lodepng/lodepng.cpp",
+			"sourceGroupIndex" : 131
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/lodepng/lodepng.h",
+			"sourceGroupIndex" : 131
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/simplexnoise/simplexnoise1234.cpp",
+			"sourceGroupIndex" : 132
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/Users/Louis Proffit/OneDrive/Git/INF443/library/third_party/src/simplexnoise/simplexnoise1234.hpp",
+			"sourceGroupIndex" : 132
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/constants.hpp",
+			"sourceGroupIndex" : 133
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/heightmap.cpp",
+			"sourceGroupIndex" : 133
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/heightmap.hpp",
+			"sourceGroupIndex" : 133
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/main.cpp",
+			"sourceGroupIndex" : 133
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/orbiters.cpp",
+			"sourceGroupIndex" : 133
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/orbiters.hpp",
+			"sourceGroupIndex" : 133
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/particles.cpp",
+			"sourceGroupIndex" : 133
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/particles.hpp",
+			"sourceGroupIndex" : 133
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/scene_helper.cpp",
+			"sourceGroupIndex" : 133
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/scene_helper.hpp",
+			"sourceGroupIndex" : 133
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/scenes/city.cpp",
+			"sourceGroupIndex" : 134
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/scenes/city.hpp",
+			"sourceGroupIndex" : 134
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/scenes/desert.cpp",
+			"sourceGroupIndex" : 134
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/scenes/desert.hpp",
+			"sourceGroupIndex" : 134
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/scenes/field.cpp",
+			"sourceGroupIndex" : 134
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/scenes/field.hpp",
+			"sourceGroupIndex" : 134
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/scenes/forest.cpp",
+			"sourceGroupIndex" : 134
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/scenes/forest.hpp",
+			"sourceGroupIndex" : 134
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/scenes/mountain.cpp",
+			"sourceGroupIndex" : 134
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/scenes/mountain.hpp",
+			"sourceGroupIndex" : 134
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/scenes/planet.cpp",
+			"sourceGroupIndex" : 134
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/scenes/planet.hpp",
+			"sourceGroupIndex" : 134
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/skybox.cpp",
+			"sourceGroupIndex" : 133
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/skybox.hpp",
+			"sourceGroupIndex" : 133
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/terrain.cpp",
+			"sourceGroupIndex" : 133
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/terrain.hpp",
+			"sourceGroupIndex" : 133
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/tree_Lsystem/LSystem.cpp",
+			"sourceGroupIndex" : 135
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/tree_Lsystem/LSystem.hpp",
+			"sourceGroupIndex" : 135
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/tree_Lsystem/tree.cpp",
+			"sourceGroupIndex" : 135
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/tree_Lsystem/tree.hpp",
+			"sourceGroupIndex" : 135
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/tree_Lsystem/tree_LSys.cpp",
+			"sourceGroupIndex" : 135
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/tree_Lsystem/tree_LSys.hpp",
+			"sourceGroupIndex" : 135
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/water/water.cpp",
+			"sourceGroupIndex" : 136
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/water/water.hpp",
+			"sourceGroupIndex" : 136
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/water/waterfbuffer.cpp",
+			"sourceGroupIndex" : 136
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/water/waterfbuffer.hpp",
+			"sourceGroupIndex" : 136
+		}
+	],
+	"type" : "EXECUTABLE"
+}

@@ -116,14 +116,14 @@ void initialize()
 	curve_drawable::default_shader = shader_uniform_color;
 	segments_drawable::default_shader = shader_uniform_color;*/
 	scene_visual::init();
-	mesh_drawable::default_shader = scene_visual::open_shader(shader_type::NORMAL);
+	mesh_drawable::default_shader = scene_visual::get_shader(shader_type::NORMAL);
 
 	GLuint const texture_white = opengl_texture_to_gpu(image_raw{1, 1, image_color_type::rgba, {255, 255, 255, 255}});
 	mesh_drawable::default_texture = texture_white;
 	mesh_float_drawable::default_texture = texture_white;
 
 	// Param�trisation de l'utilisateur
-	user.global_frame = mesh_drawable(mesh_primitive_frame(), scene_visual::open_shader(shader_type::NORMAL));
+	user.global_frame = mesh_drawable(mesh_primitive_frame(), scene_visual::get_shader(shader_type::NORMAL));
 	user.display_frame = false;
 
 	// Initialisation de la plan�te

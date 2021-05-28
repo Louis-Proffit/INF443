@@ -5,7 +5,7 @@
 
 using namespace vcl;
 
-mountain::mountain(user_parameters *user, std::function<void(scene_type)> _swap_function) : scene_visual(user, _swap_function)
+mountain::mountain(user_parameters *user, std::function<void(scene_type)> _swap_function) : environement(user, _swap_function)
 {
 
     // Configuration des visuels
@@ -22,8 +22,6 @@ mountain::mountain(user_parameters *user, std::function<void(scene_type)> _swap_
     swap_function = _swap_function;
 }
 
-mountain::~mountain() {}
-
 void mountain::display_visual()
 {
     glClearColor(0.256f, 0.256f, 0.256f, 0.0f);
@@ -31,19 +29,22 @@ void mountain::display_visual()
     glClear(GL_DEPTH_BUFFER_BIT);
     user_reference->timer.update();
     float const time = user_reference->timer.t;
-    light = camera.position();
+    if (m_activated) light = camera_m.position();
+    else light = camera_c.position();
 
-    GLuint normal_shader = open_shader(shader_type::NORMAL);
-    GLuint sun_shader = open_shader(shader_type::SUN);
+    GLuint normal_shader = get_shader(shader_type::NORMAL);
+    GLuint sun_shader = get_shader(shader_type::SUN);
 
     glUseProgram(normal_shader);
     opengl_uniform(normal_shader, "projection", projection);
-    opengl_uniform(normal_shader, "view", camera.matrix_view());
+    if (m_activated) opengl_uniform(normal_shader, "view", camera_m.matrix_view());
+    else opengl_uniform(normal_shader, "view", camera_c.matrix_view());
     opengl_uniform(normal_shader, "light", light);
 
     glUseProgram(sun_shader);
     opengl_uniform(sun_shader, "projection", projection);
-    opengl_uniform(sun_shader, "view", camera.matrix_view());
+    if (m_activated) opengl_uniform(sun_shader, "view", camera_m.matrix_view());
+    else opengl_uniform(sun_shader, "view", camera_c.matrix_view());
     opengl_uniform(sun_shader, "light", light);
 
     draw(visual, this);
@@ -58,25 +59,18 @@ void mountain::display_visual()
 
 void mountain::update_visual()
 {
-    vec2 const &p0 = user_reference->mouse_prev;
-    vec2 const &p1 = user_reference->mouse_curr;
-
-    /*if (!user_reference->cursor_on_gui && !user_reference->state.key_shift) {
-        if (user_reference->state.mouse_click_left && !user_reference->state.key_ctrl)
-            camera.manipulator_rotate_trackball(p0, p1);
-        if (user_reference->state.mouse_click_left && user_reference->state.key_ctrl)
-            camera.manipulator_translate_in_plane(p1 - p0);
-        if (user_reference->state.mouse_click_right)
-            camera.manipulator_scale_distance_to_center((p1 - p0).y);
-    }*/
-
-    user_reference->mouse_prev = p1;
+    super::update_visual();
 }
 
 void mountain::display_interface()
 {
-    ImGui::Checkbox("Frame", &user_reference->display_frame);
-    ImGui::Checkbox("Wireframe", &user_reference->draw_wireframe);
+    super::display_interface();
+}
+
+float mountain::get_altitude(vcl::vec2 const& position_in_plane)
+{
+    if (user_reference->sneak) return player_height / 2;
+    return player_height;
 }
 
 void mountain::set_terrain()
@@ -90,16 +84,16 @@ void mountain::set_terrain()
         }
     }
 
-    visual = mesh_drawable(mesh, open_shader(shader_type::NORMAL));
+    visual = mesh_drawable(mesh, get_shader(shader_type::NORMAL));
 }
 
 void mountain::set_skybox()
 {
-    skybox.init_skybox(vec3(0, 0, 0), 10, "sundown", open_shader(shader_type::NORMAL));
+    skybox.init_skybox(vec3(0, 0, 0), 10, skybox_type::SUNDOWN, get_shader(shader_type::NORMAL));
 }
 
 void mountain::set_sun()
 {
-    sun_visual = mesh_drawable(mesh_primitive_sphere(sun_radius), open_shader(shader_type::SUN));
+    sun_visual = mesh_drawable(mesh_primitive_sphere(sun_radius), get_shader(shader_type::SUN));
     sun_visual.shading.color = vec3(1.0, 1.0, 0.0);
 }
