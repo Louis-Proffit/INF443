@@ -76,33 +76,44 @@ void city::display_visual()
     opengl_uniform(tree_shader, "light", light);
 
     /* Trees */
-    for (tree_located tree : trees) {
-        switch (tree.type) {
+    for (tree_located tree : trees)
+    {
+        switch (tree.type)
+        {
         case tree_type::COOL:
             tree_cool.translate(tree.position);
             draw(tree_cool.dtrunk, this);
-            if (tree_cool.hasleaves) draw(tree_cool.dleaves, this);
-            if (user_reference->draw_wireframe) {
+            if (tree_cool.hasleaves)
+                draw(tree_cool.dleaves, this);
+            if (user_reference->draw_wireframe)
+            {
                 draw_wireframe(tree_cool.dtrunk, this);
-                if (tree_cool.hasleaves) draw_wireframe(tree_cool.dleaves, this);
+                if (tree_cool.hasleaves)
+                    draw_wireframe(tree_cool.dleaves, this);
             }
             break;
         case tree_type::CLASSIC:
             tree_classic.translate(tree.position);
             draw(tree_real.dtrunk, this);
-            if (tree_real.hasleaves) draw(tree_real.dleaves, this);
-            if (user_reference->draw_wireframe) {
+            if (tree_real.hasleaves)
+                draw(tree_real.dleaves, this);
+            if (user_reference->draw_wireframe)
+            {
                 draw_wireframe(tree_real.dtrunk, this);
-                if (tree_real.hasleaves) draw_wireframe(tree_real.dleaves, this);
+                if (tree_real.hasleaves)
+                    draw_wireframe(tree_real.dleaves, this);
             }
             break;
         case tree_type::REAL_1:
             tree_real.translate(tree.position);
             draw(tree_real.dtrunk, this);
-            if (tree_real.hasleaves) draw(tree_real.dleaves, this);
-            if (user_reference->draw_wireframe) {
+            if (tree_real.hasleaves)
+                draw(tree_real.dleaves, this);
+            if (user_reference->draw_wireframe)
+            {
                 draw_wireframe(tree_real.dtrunk, this);
-                if (tree_real.hasleaves) draw_wireframe(tree_real.dleaves, this);
+                if (tree_real.hasleaves)
+                    draw_wireframe(tree_real.dleaves, this);
             }
             break;
         }
@@ -427,12 +438,14 @@ vector<vector<vec3>> city::subdivise(vector<vec3> pate)
 
 void city::merge_pat(vector<vector<vec3>> &base, vector<vector<vec3>> &to_add)
 {
-    for (size_t i = 0; i < to_add.size(); i++) base.push_back(to_add[i]);
+    for (size_t i = 0; i < to_add.size(); i++)
+        base.push_back(to_add[i]);
 }
 
-void city::add_tree_positions(vector<tree_located> & to_add)
+void city::add_tree_positions(vector<tree_located> &to_add)
 {
-    for (size_t i = 0; i < to_add.size(); i++) trees.push_back(to_add[i]);
+    for (size_t i = 0; i < to_add.size(); i++)
+        trees.push_back(to_add[i]);
 }
 
 void city::compute_pate(int nb)
@@ -443,7 +456,7 @@ void city::compute_pate(int nb)
         vector<vector<vec3>> current;
         for (size_t i = 0; i < base.size(); i++)
         {
-            merge_pat(current, subdivise(base[i]));
+            //merge_pat(current, subdivise(base[i]));
         }
         base.clear();
         merge_pat(base, current);
@@ -568,7 +581,7 @@ mesh city::compute_garden(vector<vec3> coords)
         if (!enlv)
         {
 
-            result.push_back({ TreeGenerator::random_tree_type(), p});
+            result.push_back({TreeGenerator::random_tree_type(), p});
         }
     }
     add_tree_positions(result);
@@ -577,7 +590,7 @@ mesh city::compute_garden(vector<vec3> coords)
 
 void city::create_city(vector<vec3> coords)
 {
-    if (coords[4].x == 0) 
+    if (coords[4].x == 0)
         batiments.push_back(compute_batiment(coords));
     else if (coords[4].x == 1)
         parcs.push_back(compute_garden(coords));

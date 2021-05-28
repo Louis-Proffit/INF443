@@ -26,11 +26,7 @@
 	"objects" : 
 	[
 		{
-<<<<<<< HEAD:scenes/projet_planete/build/.cmake/api/v1/reply/index-2021-05-28T12-44-39-0211.json
 			"jsonFile" : "codemodel-v2-8e78ddba79f6f9929580.json",
-=======
-			"jsonFile" : "codemodel-v2-36e91ae985b9823d4cfa.json",
->>>>>>> refs/remotes/origin/main:scenes/projet_planete/build/.cmake/api/v1/reply/index-2021-05-28T12-05-58-0297.json
 			"kind" : "codemodel",
 			"version" : 
 			{
@@ -90,11 +86,7 @@
 						}
 					},
 					{
-<<<<<<< HEAD:scenes/projet_planete/build/.cmake/api/v1/reply/index-2021-05-28T12-44-39-0211.json
 						"jsonFile" : "codemodel-v2-8e78ddba79f6f9929580.json",
-=======
-						"jsonFile" : "codemodel-v2-36e91ae985b9823d4cfa.json",
->>>>>>> refs/remotes/origin/main:scenes/projet_planete/build/.cmake/api/v1/reply/index-2021-05-28T12-05-58-0297.json
 						"kind" : "codemodel",
 						"version" : 
 						{

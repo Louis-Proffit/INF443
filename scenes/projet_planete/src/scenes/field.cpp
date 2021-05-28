@@ -249,36 +249,19 @@ mesh countryside::subdivide_field(vcl::mesh quadrangle)
 void countryside::shuffle()
 {
     // Shuffle paths
-<<<<<<< HEAD
     for (int i = 0; i < paths.size(); i++)
     {
         for (int j = 0; j < paths[i].position.size(); j++)
         {
-=======
-    for (int i = 0; i < paths.size(); i++) {
-        for (int j = 0; j < paths[i].position.size(); j++) {
->>>>>>> refs/remotes/origin/main
             paths[i].position[j].z += parameters.height * noise_perlin(paths[i].position[j].xy(), parameters.octaves, parameters.persistency, parameters.frequency_gain);
         }
     }
     // Shuffle fields
-<<<<<<< HEAD
-
     for (int i = 0; i < fields.size(); i++)
     {
         for (int j = 0; j < fields[i].field_mesh.position.size(); j++)
         {
-
-            for (int i = 0; i < fields.size(); i++)
-            {
-                for (int j = 0; j < fields[i].field_mesh.position.size(); j++)
-                    fields[i].field_mesh.position[j].z += parameters.height * noise_perlin(fields[i].field_mesh.position[j].xy(), parameters.octaves, parameters.persistency, parameters.frequency_gain);
-            }
-=======
-    for (int i = 0; i < fields.size(); i++) {
-        for (int j = 0; j < fields[i].field_mesh.position.size(); j++) {
             fields[i].field_mesh.position[j].z += parameters.height * noise_perlin(fields[i].field_mesh.position[j].xy(), parameters.octaves, parameters.persistency, parameters.frequency_gain);
->>>>>>> refs/remotes/origin/main
         }
     }
 }

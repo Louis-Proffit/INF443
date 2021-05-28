@@ -14,14 +14,11 @@ desert::desert(user_parameters *user, std::function<void(scene_type)> _swap_func
     set_sun();
     set_water();
 
-<<<<<<< HEAD
     // Configuration de la cam�ra
     camera_m.position_camera = vec3(0, 0, 0);
     camera_m.manipulator_set_altitude(get_altitude(camera_m.position_camera.xy()));
     camera_c.distance_to_center = 2.5f;
     camera_c.look_at({4, 3, 2}, {0, 0, 0}, {0, 0, 1});
-=======
->>>>>>> refs/remotes/origin/main
     // Configuration de la lumi�re
     light = sun_visual.transform.translate;
 }
@@ -30,47 +27,24 @@ void desert::display_visual()
 {
     user_reference->timer.update();
     float const time = user_reference->timer.t;
-<<<<<<< HEAD
     display_reflec_refrac(clipPlane);
     glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     glClear(GL_DEPTH_BUFFER_BIT);
     display_scene(clipPlane);
-=======
-    light = sun_visual.transform.translate;
-
-    GLuint normal_shader = open_shader(shader_type::NORMAL);
-    GLuint sun_shader = open_shader(shader_type::SUN);
-
-    glUseProgram(normal_shader);
-    opengl_uniform(normal_shader, "projection", projection);
->>>>>>> refs/remotes/origin/main
     if (m_activated)
         wat.set_Uniforms(fbos.getReflectionTexture(), fbos.getRefractionTexture(), camera_m.position(), fbos.movefactor);
     else
         wat.set_Uniforms(fbos.getReflectionTexture(), fbos.getRefractionTexture(), camera_c.position(), fbos.movefactor);
-    // à dessiner en dernier !!
 
     glUseProgram(water_shader);
     opengl_uniform(water_shader, "projection", projection);
     if (m_activated)
         opengl_uniform(water_shader, "view", camera_m.matrix_view());
     else
-<<<<<<< HEAD
         opengl_uniform(water_shader, "view", camera_c.matrix_view());
     opengl_uniform(water_shader, "light", light);
     draw(wat.waterd, this);
-=======
-        opengl_uniform(sun_shader, "view", camera_c.matrix_view());
-    ;
-    opengl_uniform(sun_shader, "light", light);
-
-    draw(terrain_visual, this);
-    if (user_reference->draw_wireframe)
-        draw_wireframe(terrain_visual, this);
-    /*draw(sun_visual, this);
-    if (user_reference->draw_wireframe) draw_wireframe(sun_visual, this);*/
->>>>>>> refs/remotes/origin/main
 }
 
 void desert::update_visual()
@@ -102,14 +76,9 @@ void desert::set_terrain()
     horizontal_scale = 1.0f;
     height_data = generateFileHeightData("assets/heightmaps/desert.png", horizontal_scale);
     terrain_mesh = createFromHeightData(height_data, parameters);
-<<<<<<< HEAD
     for (int i = 0; i < terrain_mesh.position.size(); i++)
         terrain_mesh.position[i].z += profile(terrain_mesh.position[i].xy());
-    terrain_visual = mesh_drawable(terrain_mesh, open_shader("normal"));
-=======
-    for (int i = 0; i < terrain_mesh.position.size(); i++) terrain_mesh.position[i].z += profile(terrain_mesh.position[i].xy());
     terrain_visual = mesh_drawable(terrain_mesh, open_shader(shader_type::NORMAL));
->>>>>>> refs/remotes/origin/main
 
     image_raw texture = image_load_png("assets/textures/sand_texture.png");
     GLuint texture_id = opengl_texture_to_gpu(texture, GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT);
@@ -192,8 +161,8 @@ void desert::display_scene(vec4 clipPlane)
 
     light = sun_visual.transform.translate;
 
-    GLuint normal_shader = open_shader("normal");
-    GLuint sun_shader = open_shader("sun");
+    GLuint normal_shader = open_shader(shader_type::NORMAL);
+    GLuint sun_shader = open_shader(shader_type::SUN);
 
     glUseProgram(normal_shader);
     opengl_uniform(normal_shader, "projection", projection);
@@ -202,6 +171,7 @@ void desert::display_scene(vec4 clipPlane)
     else
         opengl_uniform(normal_shader, "view", camera_c.matrix_view());
     opengl_uniform(normal_shader, "light", light);
+    opengl_uniform(normal_shader, "plane", clipPlane);
 
     glUseProgram(sun_shader);
     opengl_uniform(sun_shader, "projection", projection);
@@ -211,6 +181,7 @@ void desert::display_scene(vec4 clipPlane)
         opengl_uniform(sun_shader, "view", camera_c.matrix_view());
     ;
     opengl_uniform(sun_shader, "light", light);
+    opengl_uniform(sun_shader, "plane", clipPlane);
 
     draw(terrain_visual, this);
     if (user_reference->draw_wireframe)
@@ -248,6 +219,7 @@ void desert::display_reflec_refrac(vec4 clipPlane)
         glClear(GL_DEPTH_BUFFER_BIT);
 
         display_scene(clipPlane);
+
         camera_m.manipulator_rotate_2_axis(-2 * camera_m.rotation_orthogonal, 0);
         camera_m.position_camera = eye;
     }

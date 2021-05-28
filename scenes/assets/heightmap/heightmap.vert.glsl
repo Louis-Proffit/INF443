@@ -20,6 +20,7 @@ uniform mat4 view;
 uniform mat4 projection;
 
 uniform vec4 plane = vec4(0 ,0 , -1 ,1);
+
 void main()
 {
 	fragment.position = vec3(model * vec4(position,1.0));

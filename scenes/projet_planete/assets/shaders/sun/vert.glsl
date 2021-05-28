@@ -27,6 +27,7 @@ uniform float pulse_horizontal;
 uniform float pulse_vertical;
 uniform float height_horizontal;
 uniform float height_vertical;
+uniform vec4 plane = vec4(0 ,0 , -1 ,1);
 
 void main()
 {
@@ -40,6 +41,7 @@ void main()
 	fragment.height_proportion = vertical_movement;
 	fragment.eye = vec3(inverse(view)*vec4(0,0,0,1.0));
 
+	gl_ClipDistance[0] = dot(model*vec4(position,1.0), plane);
 	gl_Position = projection * view * model * vec4(new_position, 1.0);
 }
 )";
