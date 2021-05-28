@@ -71,78 +71,12 @@ void countryside::display_visual()
 
 void countryside::update_visual()
 {
-<<<<<<< HEAD
     super::update_visual();
-=======
-    vec2 const &p0 = user_reference->mouse_prev;
-    vec2 const &p1 = user_reference->mouse_curr;
-    if (m_activated)
-    {
-        vec2 dp(0, 0);
-
-        if (!user_reference->cursor_on_gui)
-        {
-            if (user_reference->state.mouse_click_left && !user_reference->state.key_ctrl)
-            {
-                camera_m.manipulator_rotate_2_axis(p1.y - p0.y, p1.x - p0.x);
-            }
-        }
-
-        if (user_reference->state.key_up)
-            dp.y += 1;
-        if (user_reference->state.key_down)
-            dp.y -= 1;
-        if (user_reference->state.key_left)
-            dp.x -= 1;
-        if (user_reference->state.key_right)
-            dp.x += 1;
-
-        int fps = user_reference->fps_record.fps;
-        if (fps <= 0)
-            dp *= 0;
-        else
-            dp = dp *= user_reference->player_speed / fps;
-
-        camera_m.manipulator_set_translation(dp);
-        float new_z = get_altitude(camera_m.position_camera.xy());
-        camera_m.manipulator_set_altitude(new_z);
-    }
-    else
-    {
-        if (!user_reference->cursor_on_gui)
-        {
-            if (user_reference->state.mouse_click_left && !user_reference->state.key_ctrl)
-                camera_c.manipulator_rotate_trackball(p0, p1);
-            if (user_reference->state.mouse_click_left && user_reference->state.key_ctrl)
-                camera_c.manipulator_translate_in_plane(p1 - p0);
-            if (user_reference->state.mouse_click_right)
-                camera_c.manipulator_scale_distance_to_center((p1 - p0).y);
-        }
-    }
-
-    user_reference->mouse_prev = p1;
->>>>>>> ce046201d03c909d13d72652311ba218d0f37a86
 }
 
 void countryside::display_interface()
 {
-<<<<<<< HEAD
     super::display_interface();
-=======
-    if (ImGui::Button("Retour maison"))
-    {
-        swap_function(scene_type::PLANET);
-        std::cout << "swapped" << std::endl;
-        return;
-    }
-    if (m_activated)
-        m_activated = !ImGui::Button("Camera aerienne");
-    else
-        m_activated = ImGui::Button("Camera fpv");
-    ImGui::Checkbox("Frame", &user_reference->display_frame);
-    ImGui::Checkbox("Wireframe", &user_reference->draw_wireframe);
-    ImGui::SliderFloat("Vitesse de d�placement", &user_reference->player_speed, 0.1, 2.0f, "%.3f", 2);
->>>>>>> ce046201d03c909d13d72652311ba218d0f37a86
 }
 
 void countryside::set_terrain()
@@ -179,8 +113,10 @@ void countryside::set_terrain()
     GLuint normal_shader = scene_visual::open_shader("normal");
     fields_visuals.resize(fields.size());
     paths_visuals.resize(paths.size());
-    for (int i = 0; i < fields.size(); i++)     fields_visuals[i] = mesh_drawable(fields[i].field_mesh, normal_shader);
-    for (int i = 0; i < paths.size(); i++)      paths_visuals[i] = mesh_drawable(paths[i], normal_shader);
+    for (int i = 0; i < fields.size(); i++)
+        fields_visuals[i] = mesh_drawable(fields[i].field_mesh, normal_shader);
+    for (int i = 0; i < paths.size(); i++)
+        paths_visuals[i] = mesh_drawable(paths[i], normal_shader);
     set_textures();
 }
 
@@ -270,7 +206,7 @@ void countryside::set_sun()
     sun_visual.shading.color = vec3(1.0, 1.0, 0.0);
 }
 
-float countryside::get_altitude(vcl::vec2 const& position_in_plane)
+float countryside::get_altitude(vcl::vec2 const &position_in_plane)
 {
     if (!user_reference->sneak)
         return path_z_max + player_height + parameters.height * noise_perlin(position_in_plane, parameters.octaves, parameters.persistency, parameters.frequency_gain);
@@ -313,29 +249,25 @@ mesh countryside::subdivide_field(vcl::mesh quadrangle)
 void countryside::shuffle()
 {
     // Shuffle paths
-<<<<<<< HEAD
-    for (int i = 0; i < paths.size(); i++) {
-        for (int j = 0; j < paths[i].position.size(); j++) {
-=======
     for (int i = 0; i < paths.size(); i++)
     {
         for (int j = 0; j < paths[i].position.size(); j++)
         {
->>>>>>> ce046201d03c909d13d72652311ba218d0f37a86
             paths[i].position[j].z += parameters.height * noise_perlin(paths[i].position[j].xy(), parameters.octaves, parameters.persistency, parameters.frequency_gain);
         }
     }
     // Shuffle fields
-<<<<<<< HEAD
-    for (int i = 0; i < fields.size(); i++) {
-        for (int j = 0; j < fields[i].field_mesh.position.size(); j++) {
-=======
+
     for (int i = 0; i < fields.size(); i++)
     {
         for (int j = 0; j < fields[i].field_mesh.position.size(); j++)
         {
->>>>>>> ce046201d03c909d13d72652311ba218d0f37a86
-            fields[i].field_mesh.position[j].z += parameters.height * noise_perlin(fields[i].field_mesh.position[j].xy(), parameters.octaves, parameters.persistency, parameters.frequency_gain);
+
+            for (int i = 0; i < fields.size(); i++)
+            {
+                for (int j = 0; j < fields[i].field_mesh.position.size(); j++)
+                    fields[i].field_mesh.position[j].z += parameters.height * noise_perlin(fields[i].field_mesh.position[j].xy(), parameters.octaves, parameters.persistency, parameters.frequency_gain);
+            }
         }
     }
 }

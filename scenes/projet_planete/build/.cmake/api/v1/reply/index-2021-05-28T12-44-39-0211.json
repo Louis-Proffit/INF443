@@ -3,16 +3,15 @@
 	{
 		"generator" : 
 		{
-			"multiConfig" : true,
-			"name" : "Visual Studio 16 2019",
-			"platform" : "x64"
+			"multiConfig" : false,
+			"name" : "Unix Makefiles"
 		},
 		"paths" : 
 		{
-			"cmake" : "C:/Program Files/CMake/bin/cmake.exe",
-			"cpack" : "C:/Program Files/CMake/bin/cpack.exe",
-			"ctest" : "C:/Program Files/CMake/bin/ctest.exe",
-			"root" : "C:/Program Files/CMake/share/cmake-3.20"
+			"cmake" : "/usr/local/Cellar/cmake/3.20.0/bin/cmake",
+			"cpack" : "/usr/local/Cellar/cmake/3.20.0/bin/cpack",
+			"ctest" : "/usr/local/Cellar/cmake/3.20.0/bin/ctest",
+			"root" : "/usr/local/Cellar/cmake/3.20.0/share/cmake"
 		},
 		"version" : 
 		{
@@ -20,14 +19,14 @@
 			"major" : 3,
 			"minor" : 20,
 			"patch" : 0,
-			"string" : "3.20.0-rc3",
-			"suffix" : "rc3"
+			"string" : "3.20.0",
+			"suffix" : ""
 		}
 	},
 	"objects" : 
 	[
 		{
-			"jsonFile" : "codemodel-v2-bd1655cfb0f2a81bd968.json",
+			"jsonFile" : "codemodel-v2-8e78ddba79f6f9929580.json",
 			"kind" : "codemodel",
 			"version" : 
 			{
@@ -36,7 +35,7 @@
 			}
 		},
 		{
-			"jsonFile" : "cache-v2-0b6a75cf237f863a1b15.json",
+			"jsonFile" : "cache-v2-960e671b14fbb7ac9ebd.json",
 			"kind" : "cache",
 			"version" : 
 			{
@@ -45,7 +44,7 @@
 			}
 		},
 		{
-			"jsonFile" : "toolchains-v1-cb9a1266f1397c0d7bea.json",
+			"jsonFile" : "toolchains-v1-87006051dea6c0c52e26.json",
 			"kind" : "toolchains",
 			"version" : 
 			{
@@ -78,7 +77,7 @@
 				"responses" : 
 				[
 					{
-						"jsonFile" : "cache-v2-0b6a75cf237f863a1b15.json",
+						"jsonFile" : "cache-v2-960e671b14fbb7ac9ebd.json",
 						"kind" : "cache",
 						"version" : 
 						{
@@ -87,7 +86,7 @@
 						}
 					},
 					{
-						"jsonFile" : "codemodel-v2-bd1655cfb0f2a81bd968.json",
+						"jsonFile" : "codemodel-v2-8e78ddba79f6f9929580.json",
 						"kind" : "codemodel",
 						"version" : 
 						{
@@ -96,7 +95,7 @@
 						}
 					},
 					{
-						"jsonFile" : "toolchains-v1-cb9a1266f1397c0d7bea.json",
+						"jsonFile" : "toolchains-v1-87006051dea6c0c52e26.json",
 						"kind" : "toolchains",
 						"version" : 
 						{

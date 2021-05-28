@@ -22,11 +22,6 @@ public:
     template <typename SCENE>
     void draw_water(SCENE const &scene)
     {
-        vec3 light = scene.camera.position();
-        glUseProgram(shader);
-        opengl_uniform(shader, "projection", scene.projection);
-        opengl_uniform(shader, "view", scene.camera.matrix_view());
-        opengl_uniform(shader, "light", light);
         draw(waterd, scene);
     }
 };

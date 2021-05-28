@@ -12,25 +12,154 @@ desert::desert(user_parameters *user, std::function<void(scene_type)> _swap_func
     set_terrain();
     set_skybox();
     set_sun();
+    set_water();
 
     // Configuration de la cam�ra
     camera_m.position_camera = vec3(0, 0, 0);
     camera_m.manipulator_set_altitude(get_altitude(camera_m.position_camera.xy()));
     camera_c.distance_to_center = 2.5f;
     camera_c.look_at({4, 3, 2}, {0, 0, 0}, {0, 0, 1});
-    m_activated = true;
-
     // Configuration de la lumi�re
     light = sun_visual.transform.translate;
 }
 
 void desert::display_visual()
 {
+    user_reference->timer.update();
+    float const time = user_reference->timer.t;
+    display_reflec_refrac(clipPlane);
+    glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_DEPTH_BUFFER_BIT);
+    display_scene(clipPlane);
+    if (m_activated)
+        wat.set_Uniforms(fbos.getReflectionTexture(), fbos.getRefractionTexture(), camera_m.position(), fbos.movefactor);
+    else
+        wat.set_Uniforms(fbos.getReflectionTexture(), fbos.getRefractionTexture(), camera_c.position(), fbos.movefactor);
+    // à dessiner en dernier !!
+
+    glUseProgram(water_shader);
+    opengl_uniform(water_shader, "projection", projection);
+    if (m_activated)
+        opengl_uniform(water_shader, "view", camera_m.matrix_view());
+    else
+        opengl_uniform(water_shader, "view", camera_c.matrix_view());
+    opengl_uniform(water_shader, "light", light);
+    draw(wat.waterd, this);
+}
+
+void desert::update_visual()
+{
+    super::update_visual();
+
+    if (height_updated)
+    {
+        for (int i = 0; i < parameters.rows; i++)
+        {
+            for (int j = 0; j < parameters.columns; j++)
+                terrain_mesh.position[parameters.columns * i + j].z = height_data[i][j] * horizontal_scale + profile(terrain_mesh.position[parameters.columns * i + j].xy());
+        }
+        terrain_visual.update_position(terrain_mesh.position);
+        terrain_visual.update_normal(terrain_mesh.normal);
+        height_updated = false;
+    }
+}
+
+void desert::display_interface()
+{
+    height_updated = ImGui::SliderFloat("Echelle horizontale", &horizontal_scale, 0, 3.0f, "%.3f", 2);
+    super::display_interface();
+}
+
+void desert::set_terrain()
+{
+    parameters = heightmap_parameters{0, 0, x_min, y_min, x_max, y_max};
+    horizontal_scale = 1.0f;
+    height_data = generateFileHeightData("assets/heightmaps/desert.png", horizontal_scale);
+    terrain_mesh = createFromHeightData(height_data, parameters);
+    for (int i = 0; i < terrain_mesh.position.size(); i++)
+        terrain_mesh.position[i].z += profile(terrain_mesh.position[i].xy());
+    terrain_visual = mesh_drawable(terrain_mesh, open_shader("normal"));
+
+    image_raw texture = image_load_png("assets/textures/sand_texture.png");
+    GLuint texture_id = opengl_texture_to_gpu(texture, GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT);
+    terrain_visual.texture = texture_id;
+}
+
+void desert::set_skybox()
+{
+    skybox.init_skybox(vec3(0, 0, 0), x_max - x_min + y_max - y_min, "desert", open_shader("normal"));
+}
+
+void desert::set_sun()
+{
+    sun_mesh = mesh_primitive_sphere(sun_radius);
+    sun_mesh.flip_connectivity();
+    sun_visual = mesh_drawable(sun_mesh, open_shader("sun"));
+    sun_visual.shading.color = vec3(1.0, 1.0, 0.0);
+}
+
+float desert::get_altitude(vec2 const &new_position_in_plane)
+{
+    float i_float = parameters.rows * (new_position_in_plane.x - x_min) / (x_max - x_min);
+    float j_float = parameters.columns * (new_position_in_plane.y - y_min) / (y_max - y_min);
+    double delta_z;
+    if (user_reference->sneak)
+        delta_z = player_height / 2;
+    else
+        delta_z = player_height;
+    int i = int(i_float);
+    int j = int(j_float);
+    float z_1, z_2, z_3, z_4, z_5, dx, dy;
+    dx = i_float - int(i_float);
+    dy = j_float - int(j_float);
+    if (dx > dy)
+    {
+        z_1 = terrain_mesh.position[i * parameters.columns + j].z;
+        z_2 = terrain_mesh.position[(i + 1) * parameters.columns + j].z;
+        z_3 = terrain_mesh.position[(i + 1) * parameters.columns + j + 1].z;
+        z_4 = z_1 + dx * (z_2 - z_1);
+        z_5 = z_1 + (z_3 - z_1) * dx;
+        return z_4 + (z_5 - z_4) * dy / dx + delta_z;
+    }
+    else
+    {
+        z_1 = terrain_mesh.position[i * parameters.columns + j].z;
+        z_2 = terrain_mesh.position[i * parameters.columns + j + 1].z;
+        z_3 = terrain_mesh.position[(i + 1) * parameters.columns + j + 1].z;
+        z_4 = z_2 + dx * (z_3 - z_2);
+        z_5 = z_1 + (z_3 - z_1) * dx;
+        z_4 + (z_5 - z_4) * (1 - dy) / (1 - dx) + delta_z;
+        return z_4 + (z_5 - z_4) * (1 - dy) / (1 - dx) + delta_z;
+    }
+}
+
+float desert::profile(vec2 const &position_in_plane)
+{
+    float transition_down = 0.8;
+    float transition_up = 0.9;
+    float z_min = -0.2;
+    float z_max = 0.2;
+    float coord_x = std::max((position_in_plane.x - x_min) / (x_max - x_min), (x_max - position_in_plane.x) / (x_max - x_min));
+    float coord_y = std::max((position_in_plane.y - y_min) / (y_max - y_min), (y_max - position_in_plane.y) / (y_max - y_min));
+    float coord = std::max(coord_x, coord_y);
+    if (coord < transition_down)
+        return z_max;
+    else if (coord < transition_up)
+    {
+        float t = 0.5 * (1 + cos(PI / (transition_up - transition_down) * (coord - transition_down)));
+        return t * z_max + (1 - t) * z_min;
+    }
+    else
+        return z_min;
+}
+
+void desert::display_scene(vec4 clipPlane)
+{
     glClearColor(0.256f, 0.256f, 0.256f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     glClear(GL_DEPTH_BUFFER_BIT);
-    user_reference->timer.update();
-    float const time = user_reference->timer.t;
+
     light = sun_visual.transform.translate;
 
     GLuint normal_shader = open_shader("normal");
@@ -61,101 +190,58 @@ void desert::display_visual()
     skybox.display_skybox(this);
 }
 
-void desert::update_visual()
+void desert::display_reflec_refrac(vec4 clipPlane)
 {
-    super::update_visual();
+    // Water Refraction rendering
+    fbos.movefactor += (0.3 / 58.0);
+    glEnable(GL_CLIP_DISTANCE0);
+    fbos.bindRefractionFrameBuffer();
 
-    if (height_updated)
+    glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_DEPTH_BUFFER_BIT);
+
+    display_scene(-clipPlane);
+
+    // Water Reflection rendering
+
+    fbos.bindReflectionFrameBuffer();
+    if (m_activated)
     {
-        for (int i = 0; i < parameters.rows; i++)
-        {
-            for (int j = 0; j < parameters.columns; j++)
-                terrain_mesh.position[parameters.columns * i + j].z = height_data[i][j] * horizontal_scale + profile(terrain_mesh.position[parameters.columns * i + j].xy());
-        }
-        terrain_visual.update_position(terrain_mesh.position);
-        height_updated = false;
-    }
-}
+        float pos = 2 * (camera_m.position().z - wat.waterHeight);
+        vec3 eye = camera_m.position();
+        camera_m.manipulator_rotate_2_axis(-2 * camera_m.rotation_orthogonal, 0);
+        camera_m.position_camera = eye - vec3(0, 0, pos);
 
-void desert::display_interface()
-{
-    height_updated = ImGui::SliderFloat("Echelle horizontale", &horizontal_scale, 0, 3.0f, "%.3f", 2);
-    super::display_interface();
-}
+        glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_DEPTH_BUFFER_BIT);
 
-void desert::set_terrain()
-{
-    parameters = heightmap_parameters{0, 0, x_min, y_min, x_max, y_max};
-    horizontal_scale = 1.0f;
-    height_data = generateFileHeightData("assets/heightmaps/desert.png", horizontal_scale);
-    terrain_mesh = createFromHeightData(height_data, parameters);
-    for (int i = 0; i < terrain_mesh.position.size(); i++) terrain_mesh.position[i].z += profile(terrain_mesh.position[i].xy());
-    terrain_visual = mesh_drawable(terrain_mesh, open_shader("normal"));
-
-    image_raw texture = image_load_png("assets/textures/sand_texture.png");
-    GLuint texture_id = opengl_texture_to_gpu(texture, GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT);
-    terrain_visual.texture = texture_id;
-}
-
-void desert::set_skybox()
-{
-    skybox.init_skybox(vec3(0, 0, 0), x_max - x_min + y_max - y_min, "desert", open_shader("normal"));
-}
-
-void desert::set_sun()
-{
-    sun_mesh = mesh_primitive_sphere(sun_radius);
-    sun_mesh.flip_connectivity();
-    sun_visual = mesh_drawable(sun_mesh, open_shader("sun"));
-    sun_visual.shading.color = vec3(1.0, 1.0, 0.0);
-}
-
-float desert::get_altitude(vec2 const &new_position_in_plane)
-{
-    float i_float = parameters.rows * (new_position_in_plane.x - x_min) / (x_max - x_min);
-    float j_float = parameters.columns * (new_position_in_plane.y - y_min) / (y_max - y_min);
-    double delta_z;
-    if (user_reference->sneak) delta_z = player_height / 2;
-    else delta_z = player_height;
-    int i = int(i_float);
-    int j = int(j_float);
-    float z_1, z_2, z_3, z_4, z_5, dx, dy;
-    dx = i_float - int(i_float);
-    dy = j_float - int(j_float);
-    if (dx > dy)
-    {
-        z_1 = terrain_mesh.position[i * parameters.columns + j].z;
-        z_2 = terrain_mesh.position[(i + 1) * parameters.columns + j].z;
-        z_3 = terrain_mesh.position[(i + 1) * parameters.columns + j + 1].z;
-        z_4 = z_1 + dx * (z_2 - z_1);
-        z_5 = z_1 + (z_3 - z_1) * dx;
-        return z_4 + (z_5 - z_4) * dy / dx + delta_z;
+        display_scene(clipPlane);
+        camera_m.manipulator_rotate_2_axis(-2 * camera_m.rotation_orthogonal, 0);
+        camera_m.position_camera = eye;
     }
     else
     {
-        z_1 = terrain_mesh.position[i * parameters.columns + j].z;
-        z_2 = terrain_mesh.position[i * parameters.columns + j + 1].z;
-        z_3 = terrain_mesh.position[(i + 1) * parameters.columns + j + 1].z;
-        z_4 = z_2 + dx * (z_3 - z_2);
-        z_5 = z_1 + (z_3 - z_1) * dx;
-        z_4 + (z_5 - z_4) * (1 - dy) / (1 - dx) + delta_z;
-        return z_4 + (z_5 - z_4) * (1 - dy) / (1 - dx) + delta_z;
+        vec3 eye = camera_c.position();
+        float pos = 2 * (eye.z - wat.waterHeight);
+        // std::cout << camera_c.center_of_rotation;
+        camera_c.look_at(eye - vec3(0, 0, pos), camera_c.center_of_rotation, vec3(0, 0, 1));
+
+        glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_DEPTH_BUFFER_BIT);
+
+        display_scene(clipPlane);
+        camera_c.look_at(eye, camera_c.center_of_rotation, vec3(0, 0, 1));
     }
+    fbos.unbindCurrentFrameBuffer();
+    glDisable(GL_CLIP_DISTANCE0);
 }
 
-float desert::profile(vec2 const& position_in_plane) 
+void desert::set_water()
 {
-    float transition_down = 0.8;
-    float transition_up = 0.9;
-    float z_min = -0.2;
-    float z_max = 0.2;
-    float coord_x = std::max((position_in_plane.x - x_min) / (x_max - x_min), (x_max - position_in_plane.x) / (x_max - x_min));
-    float coord_y = std::max((position_in_plane.y - y_min) / (y_max - y_min), (y_max - position_in_plane.y) / (y_max - y_min));
-    float coord = std::max(coord_x, coord_y);
-    if (coord < transition_down) return z_max;
-    else if (coord < transition_up) {
-        float t = 0.5 * (1 + cos(PI / (transition_up - transition_down) * (coord - transition_down)));
-        return t * z_max + (1 - t) * z_min;
-    }
-    else return z_min;
+    wat.init_water(scene_visual::water_shader);
+    fbos.initWaterFrameBuffers();
+    clipPlane = vec4(0, 0, 1, -wat.waterHeight);
 }
