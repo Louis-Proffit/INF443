@@ -152,11 +152,11 @@ void TreeGenerator::GenerateModel(std::string system, int iterations, std::strin
 
     result.fill_empty_field();
     trunk = result;
-    dtrunk = mesh_drawable(trunk); //, shader);
+    dtrunk = mesh_drawable(trunk, shader); //, shader);
     if (hasleaves)
     {
         leaves.fill_empty_field();
-        dleaves = mesh_drawable(leaves); //, shader);
+        dleaves = mesh_drawable(leaves, shader); //, shader);
     }
 }
 
@@ -193,7 +193,7 @@ void TreeGenerator::initTree(std::string treename, bool blockleaves, GLuint shad
 {
     if (treename == "Realtree_1")
     {
-        std::cout << "Generating Realtree_1" << std::endl;
+        // std::cout << "Generating Realtree_1" << std::endl;
 
         m_system.ClearAxioms();
         translationOffset = .1f;
@@ -205,7 +205,7 @@ void TreeGenerator::initTree(std::string treename, bool blockleaves, GLuint shad
         dtrunk.transform.scale = 3.0f;
         dleaves.transform.scale = 3.0f;
         dtrunk.texture = opengl_texture_to_gpu(image_load_png("../assets/textures/tree/trunk.png"));
-        dleaves.texture = opengl_texture_to_gpu(image_load_png("../assets/textures/tree/fern.png"));
+        dleaves.texture = opengl_texture_to_gpu(image_load_png("../assets/textures/tree/pine.png"));
     }
     if (treename == "Classique")
     {
@@ -220,7 +220,7 @@ void TreeGenerator::initTree(std::string treename, bool blockleaves, GLuint shad
         dtrunk.transform.scale = 3.0f;
         dleaves.transform.scale = 3.0f;
         dtrunk.texture = opengl_texture_to_gpu(image_load_png("../assets/textures/tree/trunk.png"));
-        dleaves.texture = opengl_texture_to_gpu(image_load_png("../assets/textures/tree/fern.png"));
+        dleaves.texture = opengl_texture_to_gpu(image_load_png("../assets/textures/tree/pine.png"));
         if (blockleaves)
             hasleaves = false;
     }
@@ -325,6 +325,11 @@ void TreeGenerator::translate(vec3 _translation)
 {
     dtrunk.transform.translate = _translation;
     dleaves.transform.translate = _translation;
-    dtrunk.transform.scale = 0.5f;
-    dleaves.transform.scale = 0.5f;
+    dtrunk.transform.scale = 0.8f;
+    dleaves.transform.scale = 0.8f;
+}
+
+void TreeGenerator::setShader(GLuint shader)
+{
+    TreeGenerator::shader_basic_w = shader;
 }

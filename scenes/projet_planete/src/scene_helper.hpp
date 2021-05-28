@@ -69,4 +69,5 @@ private:
 	static GLuint heightmap_shader;
 	static GLuint water_shader;
 	static GLuint partic_shader;
+	static GLuint tree_shader;
 };

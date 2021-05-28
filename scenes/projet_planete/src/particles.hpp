@@ -57,7 +57,12 @@ public:
 
     int ParticlesCount;
 
-    ParticleS(int nmax = 3000, std::string nametext = "snowflakes");
+    float x_min;
+    float y_min;
+    float x_max;
+    float y_max;
+
+    ParticleS(int nmax = 3000, std::string nametext = "snowflakes", float xmin = -10.0f, float xmax = 10.0f, float ymin = -10.0f, float ymax = 10.0f);
     ~ParticleS();
 
     void setTexture(GLuint text_);
@@ -149,12 +154,12 @@ public:
         glBindBuffer(GL_ARRAY_BUFFER, particles_color_buffer);
         opengl_check;
         glVertexAttribPointer(
-            2,        // attribute. No particular reason for 1, but must match the layout in the shader.
-            4,        // size : r + g + b + a => 4
-            GL_FLOAT, // type
-            GL_FALSE, // normalized?    *** YES, this means that the unsigned char[4] will be accessible with a vec4 (floats) in the shader ***
-            0,        // stride
-            nullptr   // array buffer offset
+            2,                // attribute. No particular reason for 1, but must match the layout in the shader.
+            4,                // size : r + g + b + a => 4
+            GL_UNSIGNED_BYTE, // type
+            GL_FALSE,         // normalized?    *** YES, this means that the unsigned char[4] will be accessible with a vec4 (floats) in the shader ***
+            0,                // stride
+            nullptr           // array buffer offset
         );
         opengl_check;
 

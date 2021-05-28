@@ -43,8 +43,9 @@ void main()
 	UV.y = 1 - UV.y;
 	float row = float(nbRows);
 	UV /= row;
-	UV.x += color.x;
-	UV.y += color.y;
+	int number = int(color.z);
+	UV.x += (number%nbRows)/row;
+	UV.y += (number/nbRows)/row;
 	//UV+=vec2(color.x,color.y);
 	particlecolor = color;
 }
