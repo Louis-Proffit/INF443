@@ -15,6 +15,16 @@ enum class scene_type
 	PLANET
 };
 
+enum class shader_type {
+	PLANET,
+	NORMAL,
+	SUN,
+	HEIGHTMAP,
+	WATER,
+	PARTICLE,
+	TREE
+};
+
 class user_parameters
 {
 public:
@@ -60,23 +70,23 @@ public:
 
 	static void init();
 
-	static GLuint open_shader(std::string const &shader_name);
+	static GLuint open_shader(shader_type shader_type);
 	static GLuint planet_shader;
 	static GLuint normal_shader;
 	static GLuint sun_shader;
 	static GLuint heightmap_shader;
 	static GLuint water_shader;
-	static GLuint partic_shader;
+	static GLuint particle_shader;
 	static GLuint tree_shader;
 };
 
 class environement : public scene_visual
 {
-public:
+protected:
 
-	environement(user_parameters* _user, std::function<void(scene_type)> swap_function) : scene_visual(_user, swap_function) {}
+	environement(user_parameters* _user, std::function<void(scene_type)> swap_function);
 
-	virtual void display_visual() = 0;
+	void display_visual();
 	virtual float get_altitude(vcl::vec2 const& position) = 0;
 	void update_visual();
 	void display_interface();
@@ -84,4 +94,8 @@ public:
 	camera_around_center	camera_c;
 	camera_minecraft		camera_m;
 	bool					m_activated = true;
+	float					x_min = -10.0;
+	float					y_min = -10.0;
+	float					x_max = 10.0;
+	float					y_max = 10.0;
 };

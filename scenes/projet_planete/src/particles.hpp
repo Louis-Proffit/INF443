@@ -22,7 +22,7 @@ struct particle
     }
 };
 
-class ParticleS
+class Particles
 {
 public:
     int MaxParticles;
@@ -62,9 +62,10 @@ public:
     float y_min;
     float x_max;
     float y_max;
-
-    ParticleS(int nmax = 3000, std::string nametext = "snowflakes", float xmin = -10.0f, float xmax = 10.0f, float ymin = -10.0f, float ymax = 10.0f);
-    ~ParticleS();
+    float z_min = 0.05;
+    float z_max = 0.1;
+    Particles(int nmax = 3000, std::string nametext = "snowflakes", float xmin = -10.0f, float xmax = 10.0f, float ymin = -10.0f, float ymax = 10.0f);
+    ~Particles();
 
     void setTexture(GLuint text_);
 

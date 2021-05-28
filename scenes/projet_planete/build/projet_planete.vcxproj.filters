@@ -253,9 +253,6 @@
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\tree_Lsystem\LSystem.cpp">
       <Filter>src\tree_Lsystem</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\tree_Lsystem\tree.cpp">
-      <Filter>src\tree_Lsystem</Filter>
-    </ClCompile>
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\tree_Lsystem\tree_LSys.cpp">
       <Filter>src\tree_Lsystem</Filter>
     </ClCompile>
@@ -1429,9 +1426,6 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\tree_Lsystem\LSystem.hpp">
-      <Filter>src\tree_Lsystem</Filter>
-    </ClInclude>
-    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\tree_Lsystem\tree.hpp">
       <Filter>src\tree_Lsystem</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\tree_Lsystem\tree_LSys.hpp">

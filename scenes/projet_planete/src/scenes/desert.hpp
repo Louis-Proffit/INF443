@@ -8,8 +8,13 @@
 #include "water/water.hpp"
 #include "water/waterfbuffer.hpp"
 
+<<<<<<< HEAD
 class desert : public environement
 {
+=======
+class desert : public environement{
+
+>>>>>>> refs/remotes/origin/main
 public:
 	// Constructor and destructors;
 	desert(user_parameters *user, std::function<void(scene_type)> swap_function);

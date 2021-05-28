@@ -1,0 +1,118 @@
+{
+	"cmake" : 
+	{
+		"generator" : 
+		{
+			"multiConfig" : false,
+			"name" : "Unix Makefiles"
+		},
+		"paths" : 
+		{
+			"cmake" : "/usr/local/Cellar/cmake/3.20.0/bin/cmake",
+			"cpack" : "/usr/local/Cellar/cmake/3.20.0/bin/cpack",
+			"ctest" : "/usr/local/Cellar/cmake/3.20.0/bin/ctest",
+			"root" : "/usr/local/Cellar/cmake/3.20.0/share/cmake"
+		},
+		"version" : 
+		{
+			"isDirty" : false,
+			"major" : 3,
+			"minor" : 20,
+			"patch" : 0,
+			"string" : "3.20.0",
+			"suffix" : ""
+		}
+	},
+	"objects" : 
+	[
+		{
+<<<<<<< HEAD:scenes/projet_planete/build/.cmake/api/v1/reply/index-2021-05-28T12-44-39-0211.json
+			"jsonFile" : "codemodel-v2-8e78ddba79f6f9929580.json",
+=======
+			"jsonFile" : "codemodel-v2-36e91ae985b9823d4cfa.json",
+>>>>>>> refs/remotes/origin/main:scenes/projet_planete/build/.cmake/api/v1/reply/index-2021-05-28T12-05-58-0297.json
+			"kind" : "codemodel",
+			"version" : 
+			{
+				"major" : 2,
+				"minor" : 2
+			}
+		},
+		{
+			"jsonFile" : "cache-v2-960e671b14fbb7ac9ebd.json",
+			"kind" : "cache",
+			"version" : 
+			{
+				"major" : 2,
+				"minor" : 0
+			}
+		},
+		{
+			"jsonFile" : "toolchains-v1-87006051dea6c0c52e26.json",
+			"kind" : "toolchains",
+			"version" : 
+			{
+				"major" : 1,
+				"minor" : 0
+			}
+		}
+	],
+	"reply" : 
+	{
+		"client-vscode" : 
+		{
+			"query.json" : 
+			{
+				"requests" : 
+				[
+					{
+						"kind" : "cache",
+						"version" : 2
+					},
+					{
+						"kind" : "codemodel",
+						"version" : 2
+					},
+					{
+						"kind" : "toolchains",
+						"version" : 1
+					}
+				],
+				"responses" : 
+				[
+					{
+						"jsonFile" : "cache-v2-960e671b14fbb7ac9ebd.json",
+						"kind" : "cache",
+						"version" : 
+						{
+							"major" : 2,
+							"minor" : 0
+						}
+					},
+					{
+<<<<<<< HEAD:scenes/projet_planete/build/.cmake/api/v1/reply/index-2021-05-28T12-44-39-0211.json
+						"jsonFile" : "codemodel-v2-8e78ddba79f6f9929580.json",
+=======
+						"jsonFile" : "codemodel-v2-36e91ae985b9823d4cfa.json",
+>>>>>>> refs/remotes/origin/main:scenes/projet_planete/build/.cmake/api/v1/reply/index-2021-05-28T12-05-58-0297.json
+						"kind" : "codemodel",
+						"version" : 
+						{
+							"major" : 2,
+							"minor" : 2
+						}
+					},
+					{
+						"jsonFile" : "toolchains-v1-87006051dea6c0c52e26.json",
+						"kind" : "toolchains",
+						"version" : 
+						{
+							"major" : 1,
+							"minor" : 0
+						}
+					}
+				]
+			}
+		}
+	}
+}

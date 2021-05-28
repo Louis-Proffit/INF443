@@ -33,8 +33,8 @@ void mountain::display_visual()
     float const time = user_reference->timer.t;
     light = camera.position();
 
-    GLuint normal_shader = open_shader("normal");
-    GLuint sun_shader = open_shader("sun");
+    GLuint normal_shader = open_shader(shader_type::NORMAL);
+    GLuint sun_shader = open_shader(shader_type::SUN);
 
     glUseProgram(normal_shader);
     opengl_uniform(normal_shader, "projection", projection);
@@ -90,16 +90,16 @@ void mountain::set_terrain()
         }
     }
 
-    visual = mesh_drawable(mesh, open_shader("normal"));
+    visual = mesh_drawable(mesh, open_shader(shader_type::NORMAL));
 }
 
 void mountain::set_skybox()
 {
-    skybox.init_skybox(vec3(0, 0, 0), 10, "sundown", open_shader("normal"));
+    skybox.init_skybox(vec3(0, 0, 0), 10, "sundown", open_shader(shader_type::NORMAL));
 }
 
 void mountain::set_sun()
 {
-    sun_visual = mesh_drawable(mesh_primitive_sphere(sun_radius), open_shader("sun"));
+    sun_visual = mesh_drawable(mesh_primitive_sphere(sun_radius), open_shader(shader_type::SUN));
     sun_visual.shading.color = vec3(1.0, 1.0, 0.0);
 }

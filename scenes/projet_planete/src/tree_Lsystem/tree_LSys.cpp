@@ -6,8 +6,6 @@
 
 using namespace vcl;
 
-GLuint TreeGenerator::shader_basic_w = 0;
-
 void TreeGenerator::GenerateModel(std::string system, int iterations, std::string modelName, vec3 startingPoint, float radius, GLuint shader)
 {
     mesh result;
@@ -152,32 +150,16 @@ void TreeGenerator::GenerateModel(std::string system, int iterations, std::strin
 
     result.fill_empty_field();
     trunk = result;
-    dtrunk = mesh_drawable(trunk, shader); //, shader);
+    dtrunk = mesh_drawable(trunk, shader);
     if (hasleaves)
     {
         leaves.fill_empty_field();
-        dleaves = mesh_drawable(leaves, shader); //, shader);
+        dleaves = mesh_drawable(leaves, shader);
     }
 }
 
 void TreeGenerator::GenerateLeave(vec3 startingPoint, vec3 translationVector, float height)
 {
-    // mesh feuille1 = mesh_primitive_triangle(startingPoint, startingPoint + vec3(0.02f, 0, 0), startingPoint + vec3(0, 0, 0.04f));
-    //mesh feuille2 = mesh_primitive_triangle(startingPoint, startingPoint + vec3(0.02f, 0, 0), startingPoint + vec3(0, 0, 0.04f));
-    //mesh feuille3 = mesh_primitive_triangle(startingPoint, startingPoint + vec3(0.02f, 0, 0), startingPoint + vec3(0, 0, 0.04f));
-    /*int rotat = PI / 8;
-    rotation rotationX = rotation({1, 0, 0}, rotat);
-    rotation negRotationX = rotation({-1, 0, 0}, rotat);
-    rotation rotationY = rotation({0, 1, 0}, rotat);
-    rotation negRotationY = rotation({0, -1, 0}, rotat);
-    rotation rotationZ = rotation({0, 0, 1}, rotat);
-    rotation negRotationZ = rotation({0, 0, -1}, rotat);
-    mesh feuille1 = mesh_primitive_triangle(startingPoint - vec3(height / 4, 0, 0), startingPoint + vec3(height / 4, 0, 0), startingPoint + height * normalize(rotationX * negRotationY * translationVector));
-    mesh feuille2 = mesh_primitive_triangle(startingPoint - vec3(height / 4, 0, 0), startingPoint + vec3(0, height / 4, 0), startingPoint + height * normalize(rotationZ * rotationY * translationVector));
-    mesh feuille3 = mesh_primitive_triangle(startingPoint - vec3(0, height / 4, 0), startingPoint + vec3(height / 4, 0, 0), startingPoint + height * normalize(negRotationX * negRotationZ * translationVector));
-    feuille1.push_back(feuille2);
-    feuille1.push_back(feuille3);
-    return feuille1;*/
 
     affine_rts trans;
     //trans.scale = height;
@@ -189,43 +171,68 @@ void TreeGenerator::GenerateLeave(vec3 startingPoint, vec3 translationVector, fl
         leaves.push_back(feuille);
 }
 
-void TreeGenerator::initTree(std::string treename, bool blockleaves, GLuint shader)
+void TreeGenerator::initTree(tree_type tree_type, GLuint shader, bool blockleaves)
 {
-    if (treename == "Realtree_1")
-    {
-        // std::cout << "Generating Realtree_1" << std::endl;
-
+    switch (tree_type) {
+    case tree_type::REAL_1:
         m_system.ClearAxioms();
         translationOffset = .1f;
         scaleOffset = 1.35f;
         rotationOffset = 3.14f / 4;
         m_system.AddAxiom('H', "F[[[[[[xH]XH]zyxH]ZYXH]yXH]YxH]H");
         m_system.AddAxiom('F', "FsF");
-        GenerateModel("H", 4, "Test", vec3(0, 0, 0), .05f);
+        GenerateModel("H", 4, "Test", vec3(0, 0, 0), .05f, shader);
         dtrunk.transform.scale = 3.0f;
         dleaves.transform.scale = 3.0f;
         dtrunk.texture = opengl_texture_to_gpu(image_load_png("../assets/textures/tree/trunk.png"));
         dleaves.texture = opengl_texture_to_gpu(image_load_png("../assets/textures/tree/pine.png"));
-    }
-    if (treename == "Classique")
-    {
+        break;
+    case tree_type::REAL_2:
+        std::cout << "Generating RealTree_2" << std::endl;
+        m_system.ClearAxioms();
+        translationOffset = .1f;
+        scaleOffset = 1.05f;
+        rotationOffset = 3.14f / 3;
+        m_system.AddAxiom('H', "F[[[[xH]XH]yH]YH]tFH");
+        m_system.AddAxiom('F', "FF");
+        GenerateModel("H", 4, "Test", vec3(0, 0, 0), .01f, shader);
+        break;
+    case tree_type::REAL_3:
+        std::cout << "Generating RealTree3" << std::endl;
+        m_system.ClearAxioms();
+        translationOffset = .1f;
+        scaleOffset = 1.5f;
+        rotationOffset = 3.14f / 4;
+        m_system.AddAxiom('H', "F[[[[[[xH]XH]zyxH]ZYXH]yXH]YxH]tFH");
+        m_system.AddAxiom('F', "FF");
+        GenerateModel("H", 4, "Test", vec3(0, 0, 0), .01f, shader);
+        break;
+    case tree_type::CLASSIC:
         std::cout << "Generating Classique" << std::endl;
-
         m_system.ClearAxioms();
         translationOffset = .1f;
         scaleOffset = 1.8f;
         rotationOffset = 3.14f / 4;
         m_system.AddAxiom('H', "F[xsH][XsH][ysH][YsH]");
-        GenerateModel("FFH", 5, "Test", vec3(0, 0, 0), .03f);
+        GenerateModel("FFH", 5, "Test", vec3(0, 0, 0), .03f, shader);
         dtrunk.transform.scale = 3.0f;
         dleaves.transform.scale = 3.0f;
         dtrunk.texture = opengl_texture_to_gpu(image_load_png("../assets/textures/tree/trunk.png"));
         dleaves.texture = opengl_texture_to_gpu(image_load_png("../assets/textures/tree/pine.png"));
         if (blockleaves)
             hasleaves = false;
-    }
-    if (treename == "Sapin")
-    {
+        break;
+    case tree_type::COOL:
+        std::cout << "Generating coolTree..." << std::endl;
+        m_system.ClearAxioms();
+        rotationOffset = 0.4485496f;
+        translationOffset = 0.1f;
+        scaleOffset = 1.0f;
+        m_system.AddAxiom('R', "F[ZxR][ZyR][ZzR][YxR][YyR][YzR][XxR][XyR][XzR][xR][yR][zR]FR");
+        m_system.AddAxiom('F', "FF");
+        GenerateModel("R", 4, "Tree2", vec3(0, 0, 0), .01f, shader);
+        break;
+    case tree_type::SAPIN:
         std::cout << "Generating Sapin" << std::endl;
 
         m_system.ClearAxioms();
@@ -234,71 +241,39 @@ void TreeGenerator::initTree(std::string treename, bool blockleaves, GLuint shad
         rotationOffset = 2 * 3.14f / 3;
         m_system.AddAxiom('H', "F[xH][XH][yH][YH]H");
         m_system.AddAxiom('F', "FF");
-        GenerateModel("H", 5, "Test", vec3(0, 0, 0), .01f);
+        GenerateModel("H", 5, "Test", vec3(0, 0, 0), .01f, shader);
         dtrunk.transform.scale = 3.0f;
         dleaves.transform.scale = 3.0f;
         dtrunk.texture = opengl_texture_to_gpu(image_load_png("../../assets/textures/trunk.png"));
         dleaves.texture = opengl_texture_to_gpu(image_load_png("../../assets/textures/leaf.png"));
         if (blockleaves)
             hasleaves = false;
-    }
-    else if (treename == "Realtree_2")
-    {
-        std::cout << "Generating RealTree_2" << std::endl;
+        break;
+    case tree_type::BUISSON:
+        std::cout << "Generating buisson..." << std::endl;
         m_system.ClearAxioms();
-        translationOffset = .1f;
-        scaleOffset = 1.05f;
-        rotationOffset = 3.14f / 3;
-        m_system.AddAxiom('H', "F[[[[xH]XH]yH]YH]tFH");
-        m_system.AddAxiom('F', "FF");
-        GenerateModel("H", 4, "Test", vec3(0, 0, 0), .01f);
-    }
-    else if (treename == "Realtree_3")
-    {
-        std::cout << "Generating RealTree3" << std::endl;
+        rotationOffset = .4f;
+        translationOffset = .2f;
+        scaleOffset = 1.0f;
+        m_system.AddAxiom('R', "YYTF[xFR]C[XFRFR]");
+        GenerateModel("+TT+R", 7, "Tree5", vec3(0, 0, 0), .02f, shader);
+        break;
+    case tree_type::FOUGERE:
         m_system.ClearAxioms();
-        translationOffset = .1f;
-        scaleOffset = 1.5f;
-        rotationOffset = 3.14f / 4;
-        m_system.AddAxiom('H', "F[[[[[[xH]XH]zyxH]ZYXH]yXH]YxH]tFH");
-        m_system.AddAxiom('F', "FF");
-        GenerateModel("H", 4, "Test", vec3(0, 0, 0), .01f);
-
-        // Attention ne pas faire avec plus que 4 sinon ca fait bug l'affichage
-    }
-
-    else if (treename == "brin")
-    {
+        rotationOffset = 0.3926991f;
+        translationOffset = 0.1f;
+        m_system.AddAxiom('F', "F[Fx[[zFZXFZYF]X[ZFxzFyzF]][ZFzYFzXF]Y[zFyZFxZF]C+]");
+        GenerateModel("+TT+F", 3, "Fougere", vec3(0, 0, 0), 0.01f, shader);
+        break;
+    case tree_type::BRIN:
         std::cout << "Generating brin ..." << std::endl;
         m_system.ClearAxioms();
         rotationOffset = 0.3f;
         translationOffset = 0.4f;
         m_system.AddAxiom('R', "FFF[FXYZ[FxRxF[zFRzXFC]R[ZFZyFC]]yFRyF]");
-        GenerateModel("+TT+R", 5, "Brin", vec3(0, 0, 0), .1f);
-    }
-
-    else if (treename == "fougere")
-    {
-        m_system.ClearAxioms();
-        rotationOffset = 0.3926991f;
-        translationOffset = 0.1f;
-        m_system.AddAxiom('F', "F[Fx[[zFZXFZYF]X[ZFxzFyzF]][ZFzYFzXF]Y[zFyZFxZF]C+]");
-        GenerateModel("+TT+F", 3, "Fougere", vec3(0, 0, 0), 0.01f);
-    }
-
-    else if (treename == "coolTree")
-    {
-        std::cout << "Generating coolTree..." << std::endl;
-        m_system.ClearAxioms();
-        rotationOffset = 0.4485496f;
-        translationOffset = 0.1f;
-        scaleOffset = 1.0f;
-        m_system.AddAxiom('R', "F[ZxR][ZyR][ZzR][YxR][YyR][YzR][XxR][XyR][XzR][xR][yR][zR]FR");
-        m_system.AddAxiom('F', "FF");
-        GenerateModel("R", 4, "Tree2", vec3(0, 0, 0), .01f);
-    }
-    else if (treename == "wtf")
-    {
+        GenerateModel("+TT+R", 5, "Brin", vec3(0, 0, 0), .1f, shader);
+        break;
+    case tree_type::WTF:
         std::cout << "Generating wtf..." << std::endl;
         m_system.ClearAxioms();
         rotationOffset = 0.1f;
@@ -306,19 +281,17 @@ void TreeGenerator::initTree(std::string treename, bool blockleaves, GLuint shad
         scaleOffset = 1.0f;
         m_system.AddAxiom('R', "F[[yyBBzB]XB]");
         m_system.AddAxiom('B', "XXYYYYYYYYFRFzzFRRC");
-        GenerateModel("+TT+R", 7, "Tree4", vec3(0, 0, 0), .01f);
+        GenerateModel("+TT+R", 7, "Tree4", vec3(0, 0, 0), .01f, shader);
+        break;
     }
+}
 
-    else if (treename == "buisson")
-    {
-        std::cout << "Generating buisson..." << std::endl;
-        m_system.ClearAxioms();
-        rotationOffset = .4f;
-        translationOffset = .2f;
-        scaleOffset = 1.0f;
-        m_system.AddAxiom('R', "YYTF[xFR]C[XFRFR]");
-        GenerateModel("+TT+R", 7, "Tree5", vec3(0, 0, 0), .02f);
-    }
+tree_type TreeGenerator::random_tree_type()
+{
+    float random = rand_interval();
+    if (random < 0.33) return tree_type::CLASSIC;
+    else if (random < 0.66) return tree_type::COOL;
+    if (random < 1.0) return tree_type::REAL_1;
 }
 
 void TreeGenerator::translate(vec3 _translation)
@@ -327,9 +300,4 @@ void TreeGenerator::translate(vec3 _translation)
     dleaves.transform.translate = _translation;
     dtrunk.transform.scale = 0.8f;
     dleaves.transform.scale = 0.8f;
-}
-
-void TreeGenerator::setShader(GLuint shader)
-{
-    TreeGenerator::shader_basic_w = shader;
 }

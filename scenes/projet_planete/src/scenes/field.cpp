@@ -35,8 +35,8 @@ void countryside::display_visual()
     else
         light = camera_c.position();
 
-    GLuint normal_shader = open_shader("normal");
-    GLuint sun_shader = open_shader("sun");
+    GLuint normal_shader = open_shader(shader_type::NORMAL);
+    GLuint sun_shader = open_shader(shader_type::SUN);
 
     glUseProgram(normal_shader);
     opengl_uniform(normal_shader, "projection", projection);
@@ -110,7 +110,7 @@ void countryside::set_terrain()
     // Shuffle meshes
     shuffle();
 
-    GLuint normal_shader = scene_visual::open_shader("normal");
+    GLuint normal_shader = scene_visual::open_shader(shader_type::NORMAL);
     fields_visuals.resize(fields.size());
     paths_visuals.resize(paths.size());
     for (int i = 0; i < fields.size(); i++)
@@ -197,12 +197,12 @@ void countryside::set_textures()
 
 void countryside::set_skybox()
 {
-    skybox.init_skybox(vec3(0, 0, 0), 10, "fleuve", open_shader("normal"));
+    skybox.init_skybox(vec3(0, 0, 0), 10, "fleuve", open_shader(shader_type::NORMAL));
 }
 
 void countryside::set_sun()
 {
-    sun_visual = mesh_drawable(mesh_primitive_sphere(sun_radius), open_shader("sun"));
+    sun_visual = mesh_drawable(mesh_primitive_sphere(sun_radius), open_shader(shader_type::SUN));
     sun_visual.shading.color = vec3(1.0, 1.0, 0.0);
 }
 
@@ -249,14 +249,20 @@ mesh countryside::subdivide_field(vcl::mesh quadrangle)
 void countryside::shuffle()
 {
     // Shuffle paths
+<<<<<<< HEAD
     for (int i = 0; i < paths.size(); i++)
     {
         for (int j = 0; j < paths[i].position.size(); j++)
         {
+=======
+    for (int i = 0; i < paths.size(); i++) {
+        for (int j = 0; j < paths[i].position.size(); j++) {
+>>>>>>> refs/remotes/origin/main
             paths[i].position[j].z += parameters.height * noise_perlin(paths[i].position[j].xy(), parameters.octaves, parameters.persistency, parameters.frequency_gain);
         }
     }
     // Shuffle fields
+<<<<<<< HEAD
 
     for (int i = 0; i < fields.size(); i++)
     {
@@ -268,6 +274,11 @@ void countryside::shuffle()
                 for (int j = 0; j < fields[i].field_mesh.position.size(); j++)
                     fields[i].field_mesh.position[j].z += parameters.height * noise_perlin(fields[i].field_mesh.position[j].xy(), parameters.octaves, parameters.persistency, parameters.frequency_gain);
             }
+=======
+    for (int i = 0; i < fields.size(); i++) {
+        for (int j = 0; j < fields[i].field_mesh.position.size(); j++) {
+            fields[i].field_mesh.position[j].z += parameters.height * noise_perlin(fields[i].field_mesh.position[j].xy(), parameters.octaves, parameters.persistency, parameters.frequency_gain);
+>>>>>>> refs/remotes/origin/main
         }
     }
 }

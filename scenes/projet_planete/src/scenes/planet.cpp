@@ -7,9 +7,9 @@ using namespace vcl;
 
 planet::planet(user_parameters *user, std::function<void(scene_type)> _swap_function) : scene_visual(user, _swap_function)
 {
-    GLuint planet_shader = open_shader("planet");
-    GLuint normal_shader = open_shader("normal");
-    GLuint sun_shader = open_shader("sun");
+    GLuint planet_shader = open_shader(shader_type::PLANET);
+    GLuint normal_shader = open_shader(shader_type::NORMAL);
+    GLuint sun_shader = open_shader(shader_type::SUN);
 
     // Initialisation des shaders
     glUseProgram(planet_shader);
@@ -46,9 +46,9 @@ void planet::display_visual()
     float const time = user_reference->timer.t;
     light = camera.position();
 
-    GLuint planet_shader = open_shader("planet");
-    GLuint normal_shader = open_shader("normal");
-    GLuint sun_shader = open_shader("sun");
+    GLuint planet_shader = open_shader(shader_type::PLANET);
+    GLuint normal_shader = open_shader(shader_type::NORMAL);
+    GLuint sun_shader = open_shader(shader_type::SUN);
 
     glUseProgram(planet_shader);
     opengl_uniform(planet_shader, "time", time);
@@ -161,7 +161,7 @@ void planet::set_planet()
     image_raw texture = image_load_png("assets/textures/water_texture.png");
     GLuint texture_id = opengl_texture_to_gpu(texture, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
     planet_visual.texture = texture_id;
-    planet_visual = mesh_float_drawable(planet_mesh, noise, parrallels, open_shader("planet"));
+    planet_visual = mesh_float_drawable(planet_mesh, noise, parrallels, open_shader(shader_type::PLANET));
 }
 
 void planet::set_islands()
@@ -233,7 +233,7 @@ void planet::set_islands()
 
         curve_mesh(&island_mesh, 0.99 * sphere_radius);
         island_mesh.fill_empty_field();
-        island_visual = mesh_drawable(island_mesh, open_shader("normal"));
+        island_visual = mesh_drawable(island_mesh, open_shader(shader_type::NORMAL));
         island_visual.texture = texture_id;
 
         island_visual.transform = affine_rts(rotation_around_center(rotation_between_vector(vec3(0, 0, 1), normalize(islands_centers[i])), vec3(0, 0, 0)));
@@ -243,13 +243,13 @@ void planet::set_islands()
 
 void planet::set_skybox()
 {
-    skybox.init_skybox(vec3(0, 0, 0), 10, "space", open_shader("normal"));
+    skybox.init_skybox(vec3(0, 0, 0), 10, "space", open_shader(shader_type::NORMAL));
 }
 
 void planet::set_sun()
 {
     sun = mesh_primitive_sphere(sun_radius);
-    sun_visual = mesh_drawable(sun, open_shader("sun"));
+    sun_visual = mesh_drawable(sun, open_shader(shader_type::SUN));
     sun_visual.shading.color = vec3(1.0, 1.0, 0.0);
 }
 

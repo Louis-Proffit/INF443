@@ -2,11 +2,27 @@
 #include "tree_Lsystem/LSystem.hpp"
 #include "vcl/vcl.hpp"
 #include <iostream>
-//#include "Model.hpp"
-
-using namespace vcl;
 
 #define PI 3.14159265359f
+
+enum class tree_type {
+    CLASSIC,
+    REAL_1,
+    REAL_2,
+    REAL_3,
+    COOL,
+    SAPIN,
+    FOUGERE,
+    BRIN,
+    WTF,
+    BUISSON
+};
+
+struct tree_located
+{
+    tree_type type;
+    vcl::vec3 position;
+};
 
 class TreeGenerator
 {
@@ -15,41 +31,19 @@ public:
     float rotationOffset = PI / 8;
     float scaleOffset = 5.0f;
     float translationOffset = 1.0f;
-    mesh trunk;
-    mesh leaves;
-    mesh_drawable dtrunk;
-    mesh_drawable dleaves;
+    vcl::mesh trunk;
+    vcl::mesh leaves;
+    vcl::mesh_drawable dtrunk;
+    vcl::mesh_drawable dleaves;
     bool hasleaves = false;
-    static GLuint shader_basic_w;
 
-    void GenerateModel(std::string system, int iterations, std::string modelName, vec3 startingPoint, float radius, GLuint shader = shader_basic_w);
+    void GenerateModel(std::string system, int iterations, std::string modelName, vcl::vec3 startingPoint, float radius, GLuint shader);
 
-    void GenerateLeave(vec3 startingPoint, vec3 translationVector, float height);
+    void GenerateLeave(vcl::vec3 startingPoint, vcl::vec3 translationVector, float height);
 
-    void translate(vec3 _translation);
+    void translate(vcl::vec3 _translation);
 
-    void initTree(std::string treename = "brin", bool blockleaves = false, GLuint shader = shader_basic_w);
+    void initTree(tree_type treename, GLuint shader, bool blockleaves = false);
 
-    void setShader(GLuint shader);
-
-    template <typename SCENE>
-    void draw_tree(SCENE const &scene)
-    {
-        vec3 light = scene->camera.position();
-        glUseProgram(dtrunk.shader);
-        opengl_uniform(dtrunk.shader, "projection", scene->projection);
-        opengl_uniform(dtrunk.shader, "view", scene->camera.matrix_view());
-        opengl_uniform(dtrunk.shader, "light", light);
-
-        draw(dtrunk, scene);
-
-        if (hasleaves)
-        {
-            glUseProgram(dleaves.shader);
-            opengl_uniform(dleaves.shader, "projection", scene->projection);
-            opengl_uniform(dleaves.shader, "view", scene->camera.matrix_view());
-            opengl_uniform(dleaves.shader, "light", light);
-            draw(dleaves, scene);
-        }
-    }
+    static tree_type random_tree_type();
 };
