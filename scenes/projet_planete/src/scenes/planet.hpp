@@ -25,7 +25,6 @@ public:
 	vcl::mesh_drawable sun_visual;
 
 	vcl::camera_around_center camera;
-	skybox skybox;
 
 	// Picking
 	picking_structure picking;

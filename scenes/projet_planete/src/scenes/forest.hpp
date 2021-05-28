@@ -16,7 +16,6 @@ public:
 	vcl::camera_around_center camera;
 
 	vcl::mesh_drawable sun_visual;
-	skybox skybox;
 
 	ParticleS grass;
 

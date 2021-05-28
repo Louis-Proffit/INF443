@@ -5,7 +5,7 @@
 
 using namespace vcl;
 
-desert::desert(user_parameters *user, std::function<void(scene_type)> _swap_function) : scene_visual(user, _swap_function)
+desert::desert(user_parameters *user, std::function<void(scene_type)> _swap_function) : environement(user, _swap_function)
 {
 
     // Configuration des visuels
@@ -23,8 +23,6 @@ desert::desert(user_parameters *user, std::function<void(scene_type)> _swap_func
     // Configuration de la lumi�re
     light = sun_visual.transform.translate;
 }
-
-desert::~desert() {}
 
 void desert::display_visual()
 {
@@ -55,9 +53,9 @@ void desert::display_visual()
     ;
     opengl_uniform(sun_shader, "light", light);
 
-    draw(visual, this);
+    draw(terrain_visual, this);
     if (user_reference->draw_wireframe)
-        draw_wireframe(visual, this);
+        draw_wireframe(terrain_visual, this);
     /*draw(sun_visual, this);
     if (user_reference->draw_wireframe) draw_wireframe(sun_visual, this);*/
     skybox.display_skybox(this);
@@ -65,101 +63,43 @@ void desert::display_visual()
 
 void desert::update_visual()
 {
-    vec2 const &p0 = user_reference->mouse_prev;
-    vec2 const &p1 = user_reference->mouse_curr;
-    if (m_activated)
-    {
-        vec2 dp(0, 0);
-
-        if (!user_reference->cursor_on_gui)
-        {
-            if (user_reference->state.mouse_click_left && !user_reference->state.key_ctrl)
-            {
-                camera_m.manipulator_rotate_2_axis(p1.y - p0.y, p1.x - p0.x);
-            }
-        }
-
-        if (user_reference->state.key_up)
-            dp.y += 1;
-        if (user_reference->state.key_down)
-            dp.y -= 1;
-        if (user_reference->state.key_left)
-            dp.x -= 1;
-        if (user_reference->state.key_right)
-            dp.x += 1;
-
-        int fps = user_reference->fps_record.fps;
-        if (fps <= 0)
-            dp *= 0;
-        else
-            dp = dp *= user_reference->player_speed / fps;
-
-        camera_m.manipulator_set_translation(dp);
-        float new_z = get_altitude(camera_m.position_camera.xy());
-        camera_m.manipulator_set_altitude(new_z);
-    }
-    else
-    {
-        if (!user_reference->cursor_on_gui)
-        {
-            if (user_reference->state.mouse_click_left && !user_reference->state.key_ctrl)
-                camera_c.manipulator_rotate_trackball(p0, p1);
-            if (user_reference->state.mouse_click_left && user_reference->state.key_ctrl)
-                camera_c.manipulator_translate_in_plane(p1 - p0);
-            if (user_reference->state.mouse_click_right)
-                camera_c.manipulator_scale_distance_to_center((p1 - p0).y);
-        }
-    }
-
-    user_reference->mouse_prev = p1;
+    super::update_visual();
 
     if (height_updated)
     {
         for (int i = 0; i < parameters.rows; i++)
         {
             for (int j = 0; j < parameters.columns; j++)
-                mesh.position[parameters.columns * i + j].z = height_data[i][j] * horizontal_scale;
+                terrain_mesh.position[parameters.columns * i + j].z = height_data[i][j] * horizontal_scale + profile(terrain_mesh.position[parameters.columns * i + j].xy());
         }
-        visual.update_position(mesh.position);
+        terrain_visual.update_position(terrain_mesh.position);
         height_updated = false;
     }
 }
 
 void desert::display_interface()
 {
-    if (ImGui::Button("Retour maison"))
-    {
-        swap_function(scene_type::PLANET);
-        std::cout << "swapped" << std::endl;
-        return;
-    }
-    if (m_activated)
-        m_activated = !ImGui::Button("Camera aerienne");
-    else
-        m_activated = ImGui::Button("Camera fpv");
-
-    ImGui::Checkbox("Frame", &user_reference->display_frame);
-    ImGui::Checkbox("Wireframe", &user_reference->draw_wireframe);
-    height_updated = ImGui::SliderFloat("Echelle horizontale", &horizontal_scale, 0, 2.0f, "%.3f", 2);
-    ImGui::SliderFloat("Vitesse de d�placement", &user_reference->player_speed, 0.1, 2.0f, "%.3f", 2);
+    height_updated = ImGui::SliderFloat("Echelle horizontale", &horizontal_scale, 0, 3.0f, "%.3f", 2);
+    super::display_interface();
 }
 
 void desert::set_terrain()
 {
-    parameters = heightmap_parameters{0, 0, -5, -5, 5, 5};
-    horizontal_scale = 0.2f;
+    parameters = heightmap_parameters{0, 0, x_min, y_min, x_max, y_max};
+    horizontal_scale = 1.0f;
     height_data = generateFileHeightData("assets/heightmaps/desert.png", horizontal_scale);
-    mesh = createFromHeightData(height_data, parameters);
-    visual = mesh_drawable(mesh, open_shader("normal"));
+    terrain_mesh = createFromHeightData(height_data, parameters);
+    for (int i = 0; i < terrain_mesh.position.size(); i++) terrain_mesh.position[i].z += profile(terrain_mesh.position[i].xy());
+    terrain_visual = mesh_drawable(terrain_mesh, open_shader("normal"));
 
     image_raw texture = image_load_png("assets/textures/sand_texture.png");
     GLuint texture_id = opengl_texture_to_gpu(texture, GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT);
-    visual.texture = texture_id;
+    terrain_visual.texture = texture_id;
 }
 
 void desert::set_skybox()
 {
-    skybox.init_skybox(vec3(0, 0, 0), 10, "desert", open_shader("normal"));
+    skybox.init_skybox(vec3(0, 0, 0), x_max - x_min + y_max - y_min, "desert", open_shader("normal"));
 }
 
 void desert::set_sun()
@@ -167,17 +107,16 @@ void desert::set_sun()
     sun_mesh = mesh_primitive_sphere(sun_radius);
     sun_mesh.flip_connectivity();
     sun_visual = mesh_drawable(sun_mesh, open_shader("sun"));
-    /*sun_visual.shading.phong.ambient = 100.0f;
-    sun_visual.shading.phong.diffuse = 100.0f;
-    sun_visual.shading.phong.specular = 100.0f;
-    sun_visual.shading.phong.specular_exponent = 0.01f;*/
     sun_visual.shading.color = vec3(1.0, 1.0, 0.0);
 }
 
 float desert::get_altitude(vec2 const &new_position_in_plane)
 {
-    float i_float = parameters.rows * (new_position_in_plane.x - parameters.min_x) / (parameters.max_x - parameters.min_x);
-    float j_float = parameters.columns * (new_position_in_plane.y - parameters.min_y) / (parameters.max_y - parameters.min_y);
+    float i_float = parameters.rows * (new_position_in_plane.x - x_min) / (x_max - x_min);
+    float j_float = parameters.columns * (new_position_in_plane.y - y_min) / (y_max - y_min);
+    double delta_z;
+    if (user_reference->sneak) delta_z = player_height / 2;
+    else delta_z = player_height;
     int i = int(i_float);
     int j = int(j_float);
     float z_1, z_2, z_3, z_4, z_5, dx, dy;
@@ -185,24 +124,38 @@ float desert::get_altitude(vec2 const &new_position_in_plane)
     dy = j_float - int(j_float);
     if (dx > dy)
     {
-        z_1 = mesh.position[i * parameters.columns + j].z;
-        z_2 = mesh.position[(i + 1) * parameters.columns + j].z;
-        z_3 = mesh.position[(i + 1) * parameters.columns + j + 1].z;
+        z_1 = terrain_mesh.position[i * parameters.columns + j].z;
+        z_2 = terrain_mesh.position[(i + 1) * parameters.columns + j].z;
+        z_3 = terrain_mesh.position[(i + 1) * parameters.columns + j + 1].z;
         z_4 = z_1 + dx * (z_2 - z_1);
         z_5 = z_1 + (z_3 - z_1) * dx;
-        if (user_reference->sneak)
-            return player_height / 2 + z_4 + (z_5 - z_4) * dy / dx;
-        return player_height + z_4 + (z_5 - z_4) * dy / dx;
+        return z_4 + (z_5 - z_4) * dy / dx + delta_z;
     }
     else
     {
-        z_1 = mesh.position[i * parameters.columns + j].z;
-        z_2 = mesh.position[i * parameters.columns + j + 1].z;
-        z_3 = mesh.position[(i + 1) * parameters.columns + j + 1].z;
+        z_1 = terrain_mesh.position[i * parameters.columns + j].z;
+        z_2 = terrain_mesh.position[i * parameters.columns + j + 1].z;
+        z_3 = terrain_mesh.position[(i + 1) * parameters.columns + j + 1].z;
         z_4 = z_2 + dx * (z_3 - z_2);
         z_5 = z_1 + (z_3 - z_1) * dx;
-        if (user_reference->sneak)
-            return player_height / 2 + z_4 + (z_5 - z_4) * (1 - dy) / (1 - dx);
-        return player_height + z_4 + (z_5 - z_4) * (1 - dy) / (1 - dx);
+        z_4 + (z_5 - z_4) * (1 - dy) / (1 - dx) + delta_z;
+        return z_4 + (z_5 - z_4) * (1 - dy) / (1 - dx) + delta_z;
     }
+}
+
+float desert::profile(vec2 const& position_in_plane) 
+{
+    float transition_down = 0.8;
+    float transition_up = 0.9;
+    float z_min = -0.2;
+    float z_max = 0.2;
+    float coord_x = std::max((position_in_plane.x - x_min) / (x_max - x_min), (x_max - position_in_plane.x) / (x_max - x_min));
+    float coord_y = std::max((position_in_plane.y - y_min) / (y_max - y_min), (y_max - position_in_plane.y) / (y_max - y_min));
+    float coord = std::max(coord_x, coord_y);
+    if (coord < transition_down) return z_max;
+    else if (coord < transition_up) {
+        float t = 0.5 * (1 + cos(PI / (transition_up - transition_down) * (coord - transition_down)));
+        return t * z_max + (1 - t) * z_min;
+    }
+    else return z_min;
 }

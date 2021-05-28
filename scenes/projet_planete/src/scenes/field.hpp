@@ -3,7 +3,6 @@
 #include "vcl/vcl.hpp"
 #include <iostream>
 #include "scene_helper.hpp"
-#include "skybox.hpp"
 
 enum class field_type
 {
@@ -30,7 +29,7 @@ struct field
 	field(vcl::mesh field_mesh) : field_mesh(field_mesh), type(field_type::EMPTY){};
 };
 
-class countryside : public scene_visual
+class countryside : public environement
 {
 public:
 	std::vector<field> fields;
@@ -38,16 +37,10 @@ public:
 	std::vector<vcl::mesh_drawable> fields_visuals;
 	std::vector<vcl::mesh_drawable> paths_visuals;
 
-	vcl::camera_around_center camera_c;
-	vcl::camera_minecraft camera_m;
-	bool m_activated;
-
 	vcl::mesh_drawable sun_visual;
-	skybox skybox;
 
 	// Constructor and destructors;
-	countryside(user_parameters *user, std::function<void(scene_type)> swap_function);
-	~countryside();
+	countryside(user_parameters* user, std::function<void(scene_type)> swap_function);
 
 	// Redefine the virtuals
 	void display_visual();
@@ -55,6 +48,7 @@ public:
 	void display_interface();
 
 private:
+	typedef environement super;
 	float x_min = -2.0f;
 	float y_min = -2.0f;
 	float x_max = 2.0f;
@@ -75,7 +69,7 @@ private:
 	void set_textures();
 	void set_skybox();
 	void set_sun();
-	float get_altitude(vcl::vec2 position_in_plane);
+	float get_altitude(vcl::vec2 const& position_in_plane);
 	vcl::mesh subdivide_path(vcl::mesh quadrangle);
 	vcl::mesh subdivide_field(vcl::mesh quadrangle);
 	void shuffle();

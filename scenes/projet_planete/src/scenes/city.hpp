@@ -5,13 +5,14 @@
 #include "scene_helper.hpp"
 #include "skybox.hpp"
 
-class city : public scene_visual
+class city : public environement
 {
 public:
-    float x_min = -2.0f;
-    float y_min = -2.0f;
-    float x_max = 2.0f;
-    float y_max = 2.0f;
+    typedef environement super;
+    float x_min = -10.0f;
+    float y_min = -10.0f;
+    float x_max = 10.0f;
+    float y_max = 10.0f;
     float texture_unit_length = 0.1f;
     float h_max = 0.1f;
     float h_min = 0.05f;
@@ -25,20 +26,12 @@ public:
     vcl::mesh roads;
     vcl::mesh parcs;
 
-    skybox box;
-
     vcl::mesh_drawable d_ground;
     vcl::mesh_drawable d_bat;
     vcl::mesh_drawable d_roads;
     vcl::mesh_drawable d_parcs;
 
-    // Camera
-    vcl::camera_around_center camera_c;
-    vcl::camera_minecraft camera_m;
-    bool m_activated;
-
     city(user_parameters *_user, std::function<void(scene_type)> swap_function);
-    ~city();
     void display_visual();
     void update_visual();
     void display_interface();

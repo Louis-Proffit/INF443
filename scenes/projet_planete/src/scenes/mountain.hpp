@@ -13,7 +13,6 @@ public:
 	vcl::camera_head camera;
 
 	vcl::mesh_drawable sun_visual;
-	skybox skybox;
 
 	// Constructor and destructors;
 	mountain(user_parameters* user, std::function<void(scene_type)> swap_function);

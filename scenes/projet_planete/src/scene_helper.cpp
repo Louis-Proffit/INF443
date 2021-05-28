@@ -1,10 +1,10 @@
-#include "scene_helper.hpp"
-#include "../build/assets/shaders/planet/vert.glsl"
-#include "../build/assets/shaders/planet/frag.glsl"
-#include "../build/assets/shaders/sun/vert.glsl"
-#include "../build/assets/shaders/sun/frag.glsl"
-#include "../build/assets/shaders/normal/vert.glsl"
-#include "../build/assets/shaders/normal/frag.glsl"
+﻿#include "scene_helper.hpp"
+#include "../assets/shaders/planet/vert.glsl"
+#include "../assets/shaders/planet/frag.glsl"
+#include "../assets/shaders/sun/vert.glsl"
+#include "../assets/shaders/sun/frag.glsl"
+#include "../assets/shaders/normal/vert.glsl"
+#include "../assets/shaders/normal/frag.glsl"
 #include "../assets/shaders/heightmap/heightmap.frag.glsl"
 #include "../assets/shaders/heightmap/heightmap.vert.glsl"
 #include "../assets/shaders/water/water.vert.glsl"
@@ -21,22 +21,10 @@ GLuint scene_visual::heightmap_shader = 0;
 GLuint scene_visual::water_shader = 0;
 GLuint scene_visual::partic_shader = 0;
 
-user_parameters::user_parameters()
-{
-}
-
-user_parameters::~user_parameters()
-{
-}
-
 scene_visual::scene_visual(user_parameters *user, std::function<void(scene_type)> _swap_function)
 {
 	user_reference = user;
 	swap_function = _swap_function;
-}
-
-scene_visual::~scene_visual()
-{
 }
 
 void scene_visual::handle_window_size_callback(int width, int height)
@@ -81,4 +69,73 @@ GLuint scene_visual::open_shader(std::string const &shader_name)
 		return water_shader;
 	else if (shader_name == "partic")
 		return partic_shader;
+}
+
+
+void environement::update_visual() 
+{
+	vec2 const& p0 = user_reference->mouse_prev;
+	vec2 const& p1 = user_reference->mouse_curr;
+	if (m_activated)
+	{
+		vec2 dp(0, 0);
+
+		if (!user_reference->cursor_on_gui)
+		{
+			if (user_reference->state.mouse_click_left && !user_reference->state.key_ctrl)
+			{
+				camera_m.manipulator_rotate_2_axis(p1.y - p0.y, p1.x - p0.x);
+			}
+		}
+
+		if (user_reference->state.key_up)
+			dp.y += 1;
+		if (user_reference->state.key_down)
+			dp.y -= 1;
+		if (user_reference->state.key_left)
+			dp.x -= 1;
+		if (user_reference->state.key_right)
+			dp.x += 1;
+
+		int fps = user_reference->fps_record.fps;
+		if (fps <= 0)
+			dp *= 0;
+		else
+			dp = dp *= user_reference->player_speed / fps;
+
+		camera_m.manipulator_set_translation(dp);
+		float new_z = get_altitude(camera_m.position_camera.xy());
+		camera_m.manipulator_set_altitude(new_z);
+	}
+	else
+	{
+		if (!user_reference->cursor_on_gui)
+		{
+			if (user_reference->state.mouse_click_left && !user_reference->state.key_ctrl)
+				camera_c.manipulator_rotate_trackball(p0, p1);
+			if (user_reference->state.mouse_click_left && user_reference->state.key_ctrl)
+				camera_c.manipulator_translate_in_plane(p1 - p0);
+			if (user_reference->state.mouse_click_right)
+				camera_c.manipulator_scale_distance_to_center((p1 - p0).y);
+		}
+	}
+
+	user_reference->mouse_prev = p1;
+}
+
+void environement::display_interface()
+{
+	if (ImGui::Button("Retour maison"))
+	{
+		swap_function(scene_type::PLANET);
+		return;
+	}
+	if (m_activated)
+		m_activated = !ImGui::Button("Camera aerienne");
+	else
+		m_activated = ImGui::Button("Camera fpv");
+
+	ImGui::Checkbox("Frame", &user_reference->display_frame);
+	ImGui::Checkbox("Wireframe", &user_reference->draw_wireframe);
+	ImGui::SliderFloat("Vitesse de deplacement", &user_reference->player_speed, 0.1, 2.0f, "%.3f", 2);
 }

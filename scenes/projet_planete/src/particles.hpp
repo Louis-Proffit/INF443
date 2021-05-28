@@ -2,6 +2,7 @@
 
 #include "vcl/vcl.hpp"
 
+#include <algorithm>
 #include "scene_helper.hpp"
 
 using namespace vcl;

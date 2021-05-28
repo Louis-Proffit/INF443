@@ -220,8 +220,14 @@
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\orbiters.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\particles.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\city.cpp">
+      <Filter>src\scenes</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\desert.cpp">
       <Filter>src\scenes</Filter>
@@ -238,14 +244,20 @@
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.cpp">
       <Filter>src\scenes</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\scenes\city.cpp">
-      <Filter>src\scenes</Filter>
-    </ClCompile>
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\skybox.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\terrain.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\tree_Lsystem\LSystem.cpp">
+      <Filter>src\tree_Lsystem</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\tree_Lsystem\tree.cpp">
+      <Filter>src\tree_Lsystem</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\tree_Lsystem\tree_LSys.cpp">
+      <Filter>src\tree_Lsystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1386,8 +1398,14 @@
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\orbiters.hpp">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\particles.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\city.hpp">
+      <Filter>src\scenes</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\desert.hpp">
       <Filter>src\scenes</Filter>
@@ -1404,14 +1422,20 @@
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.hpp">
       <Filter>src\scenes</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\scenes\city.hpp">
-      <Filter>src\scenes</Filter>
-    </ClInclude>
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\skybox.hpp">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\terrain.hpp">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\tree_Lsystem\LSystem.hpp">
+      <Filter>src\tree_Lsystem</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\tree_Lsystem\tree.hpp">
+      <Filter>src\tree_Lsystem</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\tree_Lsystem\tree_LSys.hpp">
+      <Filter>src\tree_Lsystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1423,6 +1447,9 @@
     </Filter>
     <Filter Include="src\scenes">
       <UniqueIdentifier>{190009DE-719D-3C1A-8321-C8FE69152ACD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\tree_Lsystem">
+      <UniqueIdentifier>{C04E0226-C2A9-3FEC-BCCB-7D6B5B457F37}</UniqueIdentifier>
     </Filter>
     <Filter Include="third_party">
       <UniqueIdentifier>{C457DDF1-FE07-315C-B154-8C2B082B39B7}</UniqueIdentifier>

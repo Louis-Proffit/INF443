@@ -7,7 +7,7 @@
 using namespace vcl;
 using namespace std;
 
-city::city(user_parameters *_user, std::function<void(scene_type)> swap_function) : scene_visual(_user, swap_function)
+city::city(user_parameters *_user, std::function<void(scene_type)> swap_function) : environement(_user, swap_function)
 {
     // Configuration de la ville
     init_pate();
@@ -30,7 +30,7 @@ city::city(user_parameters *_user, std::function<void(scene_type)> swap_function
 
     // Configure textures and colors
     d_ground.texture = opengl_texture_to_gpu(image_load_png("assets/textures/texture_grass.png"), GL_REPEAT, GL_REPEAT);
-    box.init_skybox({0, 0, 0}, skybox_radius, "fleuve", normal_shader);
+    skybox.init_skybox({0, 0, 0}, skybox_radius, "fleuve", normal_shader);
 
     // Configuration de la caméra
     camera_m.position_camera = vec3(0, 0, 0);
@@ -39,8 +39,6 @@ city::city(user_parameters *_user, std::function<void(scene_type)> swap_function
     camera_c.look_at({4, 3, 2}, {0, 0, 0}, {0, 0, 1});
     m_activated = true;
 }
-
-city::~city() {}
 
 void city::display_visual()
 {
@@ -71,77 +69,17 @@ void city::display_visual()
     if (user_reference->draw_wireframe)
         draw_wireframe(d_ground, this);
 
-    box.display_skybox(this);
+    skybox.display_skybox(this);
 }
 
 void city::display_interface()
 {
-    if (ImGui::Button("Retour maison"))
-    {
-        swap_function(scene_type::PLANET);
-        std::cout << "swapped" << std::endl;
-        return;
-    }
-    if (m_activated)
-        m_activated = !ImGui::Button("Camera aerienne");
-    else
-        m_activated = ImGui::Button("Camera fpv");
-
-    ImGui::Checkbox("Frame", &user_reference->display_frame);
-    ImGui::Checkbox("Wireframe", &user_reference->draw_wireframe);
-    if (m_activated)
-        ImGui::SliderFloat("Vitesse de déplacement", &user_reference->player_speed, 0.1, 2.0f, "%.3f", 2);
+    super::display_interface();
 }
 
 void city::update_visual()
 {
-    vec2 const &p0 = user_reference->mouse_prev;
-    vec2 const &p1 = user_reference->mouse_curr;
-    if (m_activated)
-    {
-        vec2 dp(0, 0);
-
-        if (!user_reference->cursor_on_gui)
-        {
-            if (user_reference->state.mouse_click_left && !user_reference->state.key_ctrl)
-            {
-                camera_m.manipulator_rotate_2_axis(p1.y - p0.y, p1.x - p0.x);
-            }
-        }
-
-        if (user_reference->state.key_up)
-            dp.y += 1;
-        if (user_reference->state.key_down)
-            dp.y -= 1;
-        if (user_reference->state.key_left)
-            dp.x -= 1;
-        if (user_reference->state.key_right)
-            dp.x += 1;
-
-        int fps = user_reference->fps_record.fps;
-        if (fps <= 0)
-            dp *= 0;
-        else
-            dp *= user_reference->player_speed / fps;
-
-        camera_m.manipulator_set_translation(dp);
-        float new_z = get_altitude(camera_m.position_camera.xy());
-        camera_m.manipulator_set_altitude(new_z);
-    }
-    else
-    {
-        if (!user_reference->cursor_on_gui)
-        {
-            if (user_reference->state.mouse_click_left && !user_reference->state.key_ctrl)
-                camera_c.manipulator_rotate_trackball(p0, p1);
-            if (user_reference->state.mouse_click_left && user_reference->state.key_ctrl)
-                camera_c.manipulator_translate_in_plane(p1 - p0);
-            if (user_reference->state.mouse_click_right)
-                camera_c.manipulator_scale_distance_to_center((p1 - p0).y);
-        }
-    }
-
-    user_reference->mouse_prev = p1;
+    super::update_visual();
 }
 
 void city::init_pate()
