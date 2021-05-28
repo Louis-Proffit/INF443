@@ -8,8 +8,8 @@ using namespace vcl;
 class WaterFrameBuffers
 {
 public:
-    int REFLECTION_WIDTH = 320;
-    int REFLECTION_HEIGHT = 180;
+    int REFLECTION_WIDTH = 1280;
+    int REFLECTION_HEIGHT = 720;
 
     int REFRACTION_WIDTH = 1280;
     int REFRACTION_HEIGHT = 720;

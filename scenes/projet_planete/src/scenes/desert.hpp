@@ -6,7 +6,8 @@
 #include "water/water.hpp"
 #include "water/waterfbuffer.hpp"
 
-class desert : public environement{
+class desert : public environement
+{
 
 public:
 	// Constructor and destructors;
