@@ -3,7 +3,6 @@
 #include "vcl/vcl.hpp"
 #include <iostream>
 #include "scene_helper.hpp"
-#include "skybox.hpp"
 #include "particles.hpp"
 #include "tree_Lsystem/tree_LSys.hpp"
 

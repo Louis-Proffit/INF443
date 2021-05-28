@@ -35,8 +35,8 @@ void countryside::display_visual()
     else
         light = camera_c.position();
 
-    GLuint normal_shader = open_shader(shader_type::NORMAL);
-    GLuint sun_shader = open_shader(shader_type::SUN);
+    GLuint normal_shader = get_shader(shader_type::NORMAL);
+    GLuint sun_shader = get_shader(shader_type::SUN);
 
     glUseProgram(normal_shader);
     opengl_uniform(normal_shader, "projection", projection);
@@ -110,7 +110,7 @@ void countryside::set_terrain()
     // Shuffle meshes
     shuffle();
 
-    GLuint normal_shader = scene_visual::open_shader(shader_type::NORMAL);
+    GLuint normal_shader = scene_visual::get_shader(shader_type::NORMAL);
     fields_visuals.resize(fields.size());
     paths_visuals.resize(paths.size());
     for (int i = 0; i < fields.size(); i++)
@@ -183,26 +183,33 @@ void countryside::set_types()
 
 void countryside::set_textures()
 {
-    std::vector<GLuint> textures_id = std::vector<GLuint>(12);
-    for (int i = 0; i < 12; i++)
-    {
-        std::string file_name = "assets/textures/ground_textures/ground" + std::to_string(i + 2) + "_Diffuse.png";
-        textures_id[i] = opengl_texture_to_gpu(image_load_png(file_name), GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT);
-    }
     for (int i = 0; i < fields.size(); i++)
-        fields_visuals[i].texture = textures_id[static_cast<int>(fields[i].type)];
+        switch (fields[i].type) {
+        case field_type::UN:
+            fields_visuals[i].texture = scene_visual::get_texture(texture_type::FIELD_2);
+            break;
+        case field_type::DEUX:
+            fields_visuals[i].texture = scene_visual::get_texture(texture_type::FIELD_2);
+            break;
+        case field_type::TROIS:
+            fields_visuals[i].texture = scene_visual::get_texture(texture_type::FIELD_3);
+            break;
+        case field_type::QUATRE:
+            fields_visuals[i].texture = scene_visual::get_texture(texture_type::FIELD_4);
+            break;
+        }
     for (int i = 0; i < fields.size(); i++)
-        paths_visuals[i].texture = opengl_texture_to_gpu(image_load_png("assets/textures/ground_textures/ground1_Diffuse.png"), GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT);
+        paths_visuals[i].texture = scene_visual::get_texture(texture_type::FIELD_1);
 }
 
 void countryside::set_skybox()
 {
-    skybox.init_skybox(vec3(0, 0, 0), 10, "fleuve", open_shader(shader_type::NORMAL));
+    skybox.init_skybox(vec3(0, 0, 0), 10, skybox_type::FLEUVE, get_shader(shader_type::NORMAL));
 }
 
 void countryside::set_sun()
 {
-    sun_visual = mesh_drawable(mesh_primitive_sphere(sun_radius), open_shader(shader_type::SUN));
+    sun_visual = mesh_drawable(mesh_primitive_sphere(sun_radius), get_shader(shader_type::SUN));
     sun_visual.shading.color = vec3(1.0, 1.0, 0.0);
 }
 
@@ -249,18 +256,14 @@ mesh countryside::subdivide_field(vcl::mesh quadrangle)
 void countryside::shuffle()
 {
     // Shuffle paths
-    for (int i = 0; i < paths.size(); i++)
-    {
-        for (int j = 0; j < paths[i].position.size(); j++)
-        {
+    for (int i = 0; i < paths.size(); i++) {
+        for (int j = 0; j < paths[i].position.size(); j++) {
             paths[i].position[j].z += parameters.height * noise_perlin(paths[i].position[j].xy(), parameters.octaves, parameters.persistency, parameters.frequency_gain);
         }
     }
-    // Shuffle fields
-    for (int i = 0; i < fields.size(); i++)
-    {
-        for (int j = 0; j < fields[i].field_mesh.position.size(); j++)
-        {
+
+    for (int i = 0; i < fields.size(); i++) {
+        for (int j = 0; j < fields[i].field_mesh.position.size(); j++) {
             fields[i].field_mesh.position[j].z += parameters.height * noise_perlin(fields[i].field_mesh.position[j].xy(), parameters.octaves, parameters.persistency, parameters.frequency_gain);
         }
     }

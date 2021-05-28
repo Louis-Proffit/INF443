@@ -21,13 +21,13 @@ city::city(user_parameters *_user, std::function<void(scene_type)> swap_function
     parcs.fill_empty_field();
     ground.fill_empty_field();
 
-    GLuint tree_shader = scene_visual::open_shader(shader_type::TREE);
+    GLuint tree_shader = scene_visual::get_shader(shader_type::TREE);
     tree_classic.initTree(tree_type::CLASSIC, tree_shader);
     tree_cool.initTree(tree_type::COOL, tree_shader);
     tree_real.initTree(tree_type::REAL_1, tree_shader);
 
     // Configure meshes
-    GLuint normal_shader = scene_visual::open_shader(shader_type::NORMAL);
+    GLuint normal_shader = scene_visual::get_shader(shader_type::NORMAL);
     d_bat = mesh_drawable(batiments, normal_shader);
     d_roads = mesh_drawable(roads, normal_shader);
     d_parcs = mesh_drawable(parcs, normal_shader);
@@ -35,8 +35,8 @@ city::city(user_parameters *_user, std::function<void(scene_type)> swap_function
 
     // Configure textures and colors
     d_ground.shading.color = vec3(0.5, 0.5, 0.5);
-    d_parcs.texture = opengl_texture_to_gpu(image_load_png("assets/textures/texture_grass.png"), GL_REPEAT, GL_REPEAT);
-    skybox.init_skybox({0, 0, 0}, std::max(x_max - x_min, y_max - y_min), "fleuve", normal_shader);
+    d_parcs.texture = scene_visual::get_texture(texture_type::GRASS);
+    skybox.init_skybox({0, 0, 0}, std::max(x_max - x_min, y_max - y_min), skybox_type::FLEUVE, normal_shader);
 
     x_min = -10.0;
     y_min = -10.0;
@@ -57,7 +57,7 @@ void city::display_visual()
     vec3 light = camera_c.position();
 
     /* Shaders*/
-    GLuint normal_shader = scene_visual::open_shader(shader_type::NORMAL);
+    GLuint normal_shader = scene_visual::get_shader(shader_type::NORMAL);
     glUseProgram(normal_shader);
     opengl_uniform(normal_shader, "projection", projection);
     if (m_activated)
@@ -66,7 +66,7 @@ void city::display_visual()
         opengl_uniform(normal_shader, "view", camera_c.matrix_view());
     opengl_uniform(normal_shader, "light", light);
 
-    GLuint tree_shader = scene_visual::open_shader(shader_type::TREE);
+    GLuint tree_shader = scene_visual::get_shader(shader_type::TREE);
     glUseProgram(tree_shader);
     opengl_uniform(tree_shader, "projection", projection);
     if (m_activated)

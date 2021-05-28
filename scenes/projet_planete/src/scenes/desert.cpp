@@ -80,21 +80,20 @@ void desert::set_terrain()
         terrain_mesh.position[i].z += profile(terrain_mesh.position[i].xy());
     terrain_visual = mesh_drawable(terrain_mesh, open_shader(shader_type::NORMAL));
 
-    image_raw texture = image_load_png("assets/textures/sand_texture.png");
-    GLuint texture_id = opengl_texture_to_gpu(texture, GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT);
+    GLuint texture_id = scene_visual::get_texture(texture_type::SAND);
     terrain_visual.texture = texture_id;
 }
 
 void desert::set_skybox()
 {
-    skybox.init_skybox(vec3(0, 0, 0), x_max - x_min + y_max - y_min, "desert", open_shader(shader_type::NORMAL));
+    skybox.init_skybox(vec3(0, 0, 0), x_max - x_min + y_max - y_min, skybox_type::DESERT, get_shader(shader_type::NORMAL));
 }
 
 void desert::set_sun()
 {
     sun_mesh = mesh_primitive_sphere(sun_radius);
     sun_mesh.flip_connectivity();
-    sun_visual = mesh_drawable(sun_mesh, open_shader(shader_type::SUN));
+    sun_visual = mesh_drawable(sun_mesh, get_shader(shader_type::SUN));
     sun_visual.shading.color = vec3(1.0, 1.0, 0.0);
 }
 

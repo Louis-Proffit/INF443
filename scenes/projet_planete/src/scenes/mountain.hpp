@@ -3,6 +3,7 @@
 #include "vcl/vcl.hpp"
 #include <iostream>
 #include "scene_helper.hpp"
+<<<<<<< HEAD
 #include "skybox.hpp"
 #include "heightmap.hpp"
 #include "water/water.hpp"
@@ -10,18 +11,33 @@
 
 class mountain : public environement
 {
+=======
+
+class mountain : public environement {
+public:
+	vcl::mesh mesh;
+	vcl::mesh_drawable visual;
+
+	vcl::mesh_drawable sun_visual;
+>>>>>>> refs/remotes/origin/main
 
 public:
 	// Constructor and destructors;
+<<<<<<< HEAD
 	mountain(user_parameters *user, std::function<void(scene_type)> swap_function);
+=======
+	mountain(user_parameters* user, std::function<void(scene_type)> swap_function);
+>>>>>>> refs/remotes/origin/main
 
 	// Redefine the virtuals
 	void display_visual();
 	void update_visual();
 	void display_interface();
+	float get_altitude(vcl::vec2 const& position_in_plane);
 
 private:
 	typedef environement super;
+<<<<<<< HEAD
 	float horizontal_scale;
 	bool height_updated;
 	float x_min = -10.0;
@@ -35,6 +51,8 @@ private:
 	heightmap_parameters parameters;
 
 	std::vector<std::vector<float>> height_data;
+=======
+>>>>>>> refs/remotes/origin/main
 	void set_terrain();
 	void set_skybox();
 	void set_sun();

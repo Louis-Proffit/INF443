@@ -47,6 +47,7 @@ void mountain::display_visual()
     draw(wat.waterd, this);
 }
 
+<<<<<<< HEAD
 void mountain::update_visual()
 {
     super::update_visual();
@@ -154,32 +155,52 @@ float mountain::profile(vec2 const &position_in_plane)
 }
 
 void mountain::display_scene(vec4 clipPlane)
+=======
+void mountain::display_visual()
+>>>>>>> refs/remotes/origin/main
 {
     glClearColor(0.256f, 0.256f, 0.256f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     glClear(GL_DEPTH_BUFFER_BIT);
+<<<<<<< HEAD
 
     light = sun_visual.transform.translate;
+=======
+    user_reference->timer.update();
+    float const time = user_reference->timer.t;
+    if (m_activated) light = camera_m.position();
+    else light = camera_c.position();
+>>>>>>> refs/remotes/origin/main
 
-    GLuint normal_shader = open_shader(shader_type::NORMAL);
-    GLuint sun_shader = open_shader(shader_type::SUN);
+    GLuint normal_shader = get_shader(shader_type::NORMAL);
+    GLuint sun_shader = get_shader(shader_type::SUN);
 
     glUseProgram(normal_shader);
     opengl_uniform(normal_shader, "projection", projection);
+<<<<<<< HEAD
     if (m_activated)
         opengl_uniform(normal_shader, "view", camera_m.matrix_view());
     else
         opengl_uniform(normal_shader, "view", camera_c.matrix_view());
+=======
+    if (m_activated) opengl_uniform(normal_shader, "view", camera_m.matrix_view());
+    else opengl_uniform(normal_shader, "view", camera_c.matrix_view());
+>>>>>>> refs/remotes/origin/main
     opengl_uniform(normal_shader, "light", light);
     opengl_uniform(normal_shader, "plane", clipPlane);
 
     glUseProgram(sun_shader);
     opengl_uniform(sun_shader, "projection", projection);
+<<<<<<< HEAD
     if (m_activated)
         opengl_uniform(sun_shader, "view", camera_m.matrix_view());
     else
         opengl_uniform(sun_shader, "view", camera_c.matrix_view());
     ;
+=======
+    if (m_activated) opengl_uniform(sun_shader, "view", camera_m.matrix_view());
+    else opengl_uniform(sun_shader, "view", camera_c.matrix_view());
+>>>>>>> refs/remotes/origin/main
     opengl_uniform(sun_shader, "light", light);
     opengl_uniform(sun_shader, "plane", clipPlane);
 
@@ -193,6 +214,7 @@ void mountain::display_scene(vec4 clipPlane)
 
 void mountain::display_reflec_refrac(vec4 clipPlane)
 {
+<<<<<<< HEAD
     // Water Refraction rendering
     fbos.movefactor += (0.3 / 58.0);
     glEnable(GL_CLIP_DISTANCE0);
@@ -201,6 +223,21 @@ void mountain::display_reflec_refrac(vec4 clipPlane)
     glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     glClear(GL_DEPTH_BUFFER_BIT);
+=======
+    super::update_visual();
+}
+
+void mountain::display_interface()
+{
+    super::display_interface();
+}
+
+float mountain::get_altitude(vcl::vec2 const& position_in_plane)
+{
+    if (user_reference->sneak) return player_height / 2;
+    return player_height;
+}
+>>>>>>> refs/remotes/origin/main
 
     display_scene(-clipPlane);
 
@@ -230,6 +267,7 @@ void mountain::display_reflec_refrac(vec4 clipPlane)
         // std::cout << camera_c.center_of_rotation;
         camera_c.look_at(eye - vec3(0, 0, pos), camera_c.center_of_rotation, vec3(0, 0, 1));
 
+<<<<<<< HEAD
         glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
         glClear(GL_DEPTH_BUFFER_BIT);
@@ -239,11 +277,24 @@ void mountain::display_reflec_refrac(vec4 clipPlane)
     }
     fbos.unbindCurrentFrameBuffer();
     glDisable(GL_CLIP_DISTANCE0);
+=======
+    visual = mesh_drawable(mesh, get_shader(shader_type::NORMAL));
+}
+
+void mountain::set_skybox()
+{
+    skybox.init_skybox(vec3(0, 0, 0), 10, skybox_type::SUNDOWN, get_shader(shader_type::NORMAL));
+>>>>>>> refs/remotes/origin/main
 }
 
 void mountain::set_water()
 {
+<<<<<<< HEAD
     wat.init_water(scene_visual::water_shader);
     fbos.initWaterFrameBuffers();
     clipPlane = vec4(0, 0, 1, -wat.waterHeight);
+=======
+    sun_visual = mesh_drawable(mesh_primitive_sphere(sun_radius), get_shader(shader_type::SUN));
+    sun_visual.shading.color = vec3(1.0, 1.0, 0.0);
+>>>>>>> refs/remotes/origin/main
 }

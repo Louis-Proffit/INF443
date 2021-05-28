@@ -10,14 +10,6 @@ enum class field_type
 	DEUX,
 	TROIS,
 	QUATRE,
-	CINQ,
-	SIX,
-	SEPT,
-	HUIT,
-	NEUF,
-	DIX,
-	ONZE,
-	DOUZE,
 	EMPTY
 };
 

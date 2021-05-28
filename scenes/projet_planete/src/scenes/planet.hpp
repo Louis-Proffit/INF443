@@ -3,7 +3,6 @@
 #include "vcl/vcl.hpp"
 #include "constants.hpp"
 #include "scene_helper.hpp"
-#include "skybox.hpp"
 
 struct picking_structure {
 	bool active;
@@ -46,6 +45,6 @@ private:
 	void set_sun();
 };
 
-vec3 get_point_on_sphere(vec3 position);
-mesh create_isocaedre();
-void curve_mesh(mesh* mesh, float radius);
+vcl::vec3 get_point_on_sphere(vcl::vec3 position);
+vcl::mesh create_isocaedre();
+void curve_mesh(vcl::mesh* mesh, float radius);

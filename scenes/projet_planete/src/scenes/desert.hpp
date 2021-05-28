@@ -1,9 +1,7 @@
 #pragma once
 
 #include "vcl/vcl.hpp"
-#include <iostream>
 #include "scene_helper.hpp"
-#include "skybox.hpp"
 #include "heightmap.hpp"
 #include "water/water.hpp"
 #include "water/waterfbuffer.hpp"
@@ -46,8 +44,8 @@ private:
 
 	Water wat;
 	WaterFrameBuffers fbos;
-	vec4 clipPlane = vec4(0, 0, 0, 0);
+	vcl::vec4 clipPlane = vcl::vec4(0, 0, 0, 0);
 
-	void display_scene(vec4 clipPlane);
-	void display_reflec_refrac(vec4 clipPlane);
+	void display_scene(vcl::vec4 clipPlane);
+	void display_reflec_refrac(vcl::vec4 clipPlane);
 };

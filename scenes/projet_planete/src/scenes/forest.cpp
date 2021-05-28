@@ -19,8 +19,8 @@ forest::forest(user_parameters *user, std::function<void(scene_type)> _swap_func
     camera_m.manipulator_set_altitude(get_altitude(camera_m.position().xy()));
 
     /* Initialise les arbres*/
-    GLuint tree_shader = scene_visual::open_shader(shader_type::TREE);
-    tree_cool.initTree(tree_type::COOL, tree_shader);
+    GLuint tree_shader = scene_visual::get_shader(shader_type::TREE);
+    tree_cool.initTree(tree_type::REAL_2, tree_shader);
     tree_real.initTree(tree_type::REAL_1, tree_shader);
     tree_classic.initTree(tree_type::CLASSIC, tree_shader);
 }
@@ -33,10 +33,10 @@ void forest::display_visual()
     else light = camera_c.position();
 
     /* Shaders */
-    GLuint normal_shader = open_shader(shader_type::NORMAL);
-    GLuint sun_shader = open_shader(shader_type::SUN);
-    GLuint partic_shader = open_shader(shader_type::PARTICLE);
-    GLuint tree_shader = open_shader(shader_type::TREE);
+    GLuint normal_shader = get_shader(shader_type::NORMAL);
+    GLuint sun_shader = get_shader(shader_type::SUN);
+    GLuint partic_shader = get_shader(shader_type::PARTICLE);
+    GLuint tree_shader = get_shader(shader_type::TREE);
 
     glUseProgram(normal_shader);
     opengl_uniform(normal_shader, "projection", projection);
@@ -141,18 +141,18 @@ void forest::set_terrain()
             mesh.uv[j + Nv * i] = vec2(x, y);
         }
     }
-    visual = mesh_drawable(mesh, open_shader(shader_type::NORMAL));
-    visual.texture = opengl_texture_to_gpu(image_load_png("../assets/textures/grass/grass-ground.png"), GL_REPEAT, GL_REPEAT);
+    visual = mesh_drawable(mesh, get_shader(shader_type::NORMAL));
+    visual.texture = scene_visual::get_texture(texture_type::GRASS);
 }
 
 void forest::set_skybox()
 {
-    skybox.init_skybox(vec3(0, 0, 0), 10, "sundown", open_shader(shader_type::NORMAL));
+    skybox.init_skybox(vec3(0, 0, 0), 10, skybox_type::SUNDOWN, get_shader(shader_type::NORMAL));
 }
 
 void forest::set_sun()
 {
-    sun_visual = mesh_drawable(mesh_primitive_sphere(sun_radius), open_shader(shader_type::SUN));
+    sun_visual = mesh_drawable(mesh_primitive_sphere(sun_radius), get_shader(shader_type::SUN));
     sun_visual.shading.color = vec3(1.0, 1.0, 0.0);
 }
 

@@ -66,18 +66,9 @@ void Particles::SortParticles()
 
 void Particles::initVaoVbo()
 {
-    if (type == "snowflakes")
-    {
-        text = opengl_texture_to_gpu(image_load_png("../../assets/particles/snowflake_3.png"), GL_REPEAT /**GL_TEXTURE_WRAP_S*/, GL_REPEAT /**GL_TEXTURE_WRAP_T*/);
-    }
-    else if (type == "fire")
-    {
-        text = opengl_texture_to_gpu(image_load_png("../../assets/particles/fire.png"), GL_REPEAT /**GL_TEXTURE_WRAP_S*/, GL_REPEAT /**GL_TEXTURE_WRAP_T*/);
-    }
-    else if (type == "grass")
-    {
-        text = opengl_texture_to_gpu(image_load_png("../assets/textures/grass/grass-atlas.png"), GL_REPEAT /**GL_TEXTURE_WRAP_S*/, GL_REPEAT /**GL_TEXTURE_WRAP_T*/);
-    }
+    if (type == "snowflakes") text = scene_visual::get_texture(texture_type::SNOWFLAKE);
+    else if (type == "fire") text = scene_visual::get_texture(texture_type::FIRE);
+    else if (type == "grass") text = scene_visual::get_texture(texture_type::GRASS_ATLAS);
     else
         error_vcl("la texture n'existe pas");
 
@@ -116,7 +107,7 @@ void Particles::initVaoVbo()
             ParticlesContainer[i].size = z_min + rand_interval() * (z_max - z_min);
         }
     }
-    shad = scene_visual::open_shader(shader_type::PARTICLE);
+    shad = scene_visual::get_shader(shader_type::PARTICLE);
     opengl_check;
 
     glGenBuffers(1, &billboard_vertex_buffer);
