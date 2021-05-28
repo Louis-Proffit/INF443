@@ -21,33 +21,43 @@ city::city(user_parameters *_user, std::function<void(scene_type)> swap_function
     parcs.fill_empty_field();
     ground.fill_empty_field();
 
+    GLuint tree_shader = scene_visual::open_shader(shader_type::TREE);
+    tree_classic.initTree(tree_type::CLASSIC, tree_shader);
+    tree_cool.initTree(tree_type::COOL, tree_shader);
+    tree_real.initTree(tree_type::REAL_1, tree_shader);
+
     // Configure meshes
-    GLuint normal_shader = scene_visual::open_shader("normal");
+    GLuint normal_shader = scene_visual::open_shader(shader_type::NORMAL);
     d_bat = mesh_drawable(batiments, normal_shader);
     d_roads = mesh_drawable(roads, normal_shader);
     d_parcs = mesh_drawable(parcs, normal_shader);
     d_ground = mesh_drawable(ground, normal_shader);
 
     // Configure textures and colors
-    d_ground.texture = opengl_texture_to_gpu(image_load_png("assets/textures/texture_grass.png"), GL_REPEAT, GL_REPEAT);
-    skybox.init_skybox({0, 0, 0}, skybox_radius, "fleuve", normal_shader);
+    d_ground.shading.color = vec3(0.5, 0.5, 0.5);
+    d_parcs.texture = opengl_texture_to_gpu(image_load_png("assets/textures/texture_grass.png"), GL_REPEAT, GL_REPEAT);
+    skybox.init_skybox({0, 0, 0}, std::max(x_max - x_min, y_max - y_min), "fleuve", normal_shader);
 
-    // Configuration de la caméra
-    camera_m.position_camera = vec3(0, 0, 0);
+    x_min = -10.0;
+    y_min = -10.0;
+    x_max = 10.0;
+    y_max = 10.0;
+
+    // Camera
     camera_m.manipulator_set_altitude(get_altitude(camera_m.position_camera.xy()));
-    camera_c.distance_to_center = 2.5f;
-    camera_c.look_at({4, 3, 2}, {0, 0, 0}, {0, 0, 1});
-    m_activated = true;
 }
 
 void city::display_visual()
 {
+    super::display_visual();
+
     glClearColor(0.256f, 0.256f, 0.256f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     glClear(GL_DEPTH_BUFFER_BIT);
     vec3 light = camera_c.position();
 
-    GLuint normal_shader = scene_visual::open_shader("normal");
+    /* Shaders*/
+    GLuint normal_shader = scene_visual::open_shader(shader_type::NORMAL);
     glUseProgram(normal_shader);
     opengl_uniform(normal_shader, "projection", projection);
     if (m_activated)
@@ -55,6 +65,48 @@ void city::display_visual()
     else
         opengl_uniform(normal_shader, "view", camera_c.matrix_view());
     opengl_uniform(normal_shader, "light", light);
+
+    GLuint tree_shader = scene_visual::open_shader(shader_type::TREE);
+    glUseProgram(tree_shader);
+    opengl_uniform(tree_shader, "projection", projection);
+    if (m_activated)
+        opengl_uniform(tree_shader, "view", camera_m.matrix_view());
+    else
+        opengl_uniform(tree_shader, "view", camera_c.matrix_view());
+    opengl_uniform(tree_shader, "light", light);
+
+    /* Trees */
+    for (tree_located tree : trees) {
+        switch (tree.type) {
+        case tree_type::COOL:
+            tree_cool.translate(tree.position);
+            draw(tree_cool.dtrunk, this);
+            if (tree_cool.hasleaves) draw(tree_cool.dleaves, this);
+            if (user_reference->draw_wireframe) {
+                draw_wireframe(tree_cool.dtrunk, this);
+                if (tree_cool.hasleaves) draw_wireframe(tree_cool.dleaves, this);
+            }
+            break;
+        case tree_type::CLASSIC:
+            tree_classic.translate(tree.position);
+            draw(tree_real.dtrunk, this);
+            if (tree_real.hasleaves) draw(tree_real.dleaves, this);
+            if (user_reference->draw_wireframe) {
+                draw_wireframe(tree_real.dtrunk, this);
+                if (tree_real.hasleaves) draw_wireframe(tree_real.dleaves, this);
+            }
+            break;
+        case tree_type::REAL_1:
+            tree_real.translate(tree.position);
+            draw(tree_real.dtrunk, this);
+            if (tree_real.hasleaves) draw(tree_real.dleaves, this);
+            if (user_reference->draw_wireframe) {
+                draw_wireframe(tree_real.dtrunk, this);
+                if (tree_real.hasleaves) draw_wireframe(tree_real.dleaves, this);
+            }
+            break;
+        }
+    }
 
     draw(d_bat, this);
     if (user_reference->draw_wireframe)
@@ -68,8 +120,6 @@ void city::display_visual()
     draw(d_ground, this);
     if (user_reference->draw_wireframe)
         draw_wireframe(d_ground, this);
-
-    skybox.display_skybox(this);
 }
 
 void city::display_interface()
@@ -108,190 +158,6 @@ void city::init_ground()
     ground.uv[1] = vec2((x_max - x_min) / texture_unit_length, 0);
     ground.uv[2] = vec2((x_max - x_min) / texture_unit_length, (y_max - y_min) / texture_unit_length);
     ground.uv[3] = vec2(0, (y_max - y_min) / texture_unit_length);
-}
-
-void city::init_pate_water()
-{
-    float xA = (x_max - x_min) * rand() / (float)RAND_MAX + x_min;
-    float yA = (y_max - y_min) * rand() / (float)RAND_MAX + y_min;
-    float xB = (x_max - x_min) * rand() / (float)RAND_MAX + x_min;
-    float yB = (y_max - y_min) * rand() / (float)RAND_MAX + y_min;
-    vec3 pA = vec3(xA, yA, 0);
-    vec3 pB = vec3(xB, yB, 0);
-    vec3 dir = normalize(pB - pA);
-    vec3 normal = vec3(dir.y, -dir.x, 0); // Already normalized
-    float largeur = 0.8f;
-    vec3 pAs = pA + largeur * normal;
-    float as = dir.y;
-    float bs = -dir.x;
-    float cs = -as * pAs.x - bs * pAs.y;
-    vector<vec3> points1 = getIntersection(as, bs, cs);
-    pAs = pA - 2 * largeur * normal;
-    cs = -as * pAs.x - bs * pAs.y;
-    vector<vec3> points2 = getIntersection(as, bs, cs);
-
-    /*std::cout << points1[0] << std::endl;
-    std::cout << points1[1] << std::endl;
-    std::cout << points1[2] << std::endl;
-    std::cout << points1[3] << std::endl;
-    std::cout << " " << std::endl;
-    std::cout << points2[0] << std::endl;
-    std::cout << points2[1] << std::endl;
-    std::cout << points2[2] << std::endl;
-    std::cout << points2[3] << std::endl;
-    std::cout << " " << std::endl;*/
-    vector<vec3> sommets;
-    for (size_t i = 0; i < 4; i++)
-    {
-        vec3 current = points1[i];
-        if ((x_min <= current.x) && (current.x <= x_max) && (y_min <= current.y) && (current.y <= y_max))
-        {
-            sommets.push_back(points1[i]);
-        }
-    }
-    for (size_t i = 0; i < 4; i++)
-    {
-        vec3 current = points2[i];
-        if ((x_min <= current.x) && (current.x <= x_max) && (y_min <= current.y) && (current.y <= y_max))
-        {
-            sommets.push_back(points2[i]);
-        }
-    }
-    vec3 up = vec3(0, 0, 5);
-    mesh mer = mesh_primitive_quadrangle(sommets[0] + up, sommets[2] + up, sommets[3] + up, sommets[1] + up);
-    mer.color.fill(vec3(0, 0, 1));
-    mer.color[0] = vec3(1, 0, 0);
-    mer.color[1] = vec3(0, 1, 0);
-    //batiments.push_back(mer);
-    std::cout << sommets[0] << std::endl;
-    std::cout << sommets[1] << std::endl;
-    std::cout << sommets[2] << std::endl;
-    std::cout << sommets[3] << std::endl;
-    std::cout << " " << std::endl;
-
-    // filtrage pour avoir 2 quadrangles séparés par le fleuve.
-
-    if (((sommets[0].x == sommets[2].x) || (sommets[0].y == sommets[2].y)) && ((sommets[1].x == sommets[3].x) || (sommets[1].y == sommets[3].y)))
-    {
-        vector<vec3> initial;
-        if ((sommets[0].x == x_min) && (sommets[1].x == x_max))
-        {
-            if (sommets[0].y < sommets[2].y)
-            {
-                initial.push_back(vec3(x_min, y_min, 0));
-                initial.push_back(sommets[0]);
-                initial.push_back(sommets[1]);
-                initial.push_back(vec3(x_max, y_min, 0));
-                initial.push_back(vec3(3, 0, 0));
-                //mesh pat = mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up);
-                patepos.push_back(initial);
-                initial.clear();
-
-                initial.push_back(sommets[2]);
-                initial.push_back(vec3(x_min, y_max, 0));
-                initial.push_back(vec3(x_max, y_max, 0));
-                initial.push_back(sommets[3]);
-                initial.push_back(vec3(3, 0, 0));
-                //pat.push_back(mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up));
-
-                //pat.color.fill(vec3(1, 0.5f, 1));
-                //batiments.push_back(pat);
-                patepos.push_back(initial);
-            }
-            else
-            {
-                initial.push_back(vec3(x_min, y_min, 0));
-                initial.push_back(sommets[2]);
-                initial.push_back(sommets[3]);
-                initial.push_back(vec3(x_max, y_min, 0));
-                initial.push_back(vec3(3, 0, 0));
-                //mesh pat = mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up);
-                patepos.push_back(initial);
-                initial.clear();
-
-                initial.push_back(sommets[0]);
-                initial.push_back(vec3(x_min, y_max, 0));
-                initial.push_back(vec3(x_max, y_max, 0));
-                initial.push_back(sommets[1]);
-                initial.push_back(vec3(3, 0, 0));
-                //pat.push_back(mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up));
-                patepos.push_back(initial);
-                //pat.color.fill(vec3(1, 0.5f, 1));
-                //batiments.push_back(pat);
-            }
-        }
-        else if ((sommets[0].y == y_min) && (sommets[1].y == y_max))
-        {
-            if (sommets[0].x < sommets[2].x)
-            {
-                initial.push_back(vec3(x_min, y_min, 0));
-                initial.push_back(sommets[0]);
-                initial.push_back(sommets[1]);
-                initial.push_back(vec3(x_max, y_min, 0));
-                initial.push_back(vec3(3, 0, 0));
-                //mesh pat = mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up);
-                patepos.push_back(initial);
-                initial.clear();
-
-                initial.push_back(sommets[2]);
-                initial.push_back(vec3(x_min, y_max, 0));
-                initial.push_back(vec3(x_max, y_max, 0));
-                initial.push_back(sommets[3]);
-                initial.push_back(vec3(3, 0, 0));
-                //pat.push_back(mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up));
-
-                //pat.color.fill(vec3(1, 0.5f, 1));
-                //batiments.push_back(pat);
-                patepos.push_back(initial);
-                //init_pate();
-            }
-            else
-            {
-                initial.push_back(vec3(x_min, -y_min, 0));
-                initial.push_back(sommets[2]);
-                initial.push_back(sommets[3]);
-                initial.push_back(vec3(x_max, y_min, 0));
-                initial.push_back(vec3(3, 0, 0));
-                //                mesh pat = mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up);
-                patepos.push_back(initial);
-                initial.clear();
-
-                initial.push_back(sommets[0]);
-                initial.push_back(vec3(x_min, y_max, 0));
-                initial.push_back(vec3(x_max, y_max, 0));
-                initial.push_back(sommets[1]);
-                initial.push_back(vec3(3, 0, 0));
-                //pat.push_back(mesh_primitive_quadrangle(initial[0] + up, initial[3] + up, initial[2] + up, initial[1] + up));
-                patepos.push_back(initial);
-                //pat.color.fill(vec3(1, 0.5f, 1));
-                //batiments.push_back(pat);
-                //init_pate();
-            }
-        }
-        else
-        {
-            init_pate();
-        }
-    }
-    else
-    {
-        init_pate();
-    }
-}
-
-vector<vec3> city::getIntersection(float a, float b, float c)
-{
-    vector<vec3> points;
-    // Intersection avec la droite d'eq x=x_min;
-    points.push_back(vec3(x_min, -(x_min * a + c) / b, 0));
-    // y = y_min
-    points.push_back(vec3(-(y_min * b + c) / a, y_min, 0));
-    // x=x_max
-    points.push_back(vec3(x_max, -(x_max * a + c) / b, 0));
-    //y=y_max
-    points.push_back(vec3(-(y_max * b + c) / a, y_max, 0));
-
-    return points;
 }
 
 vec3 city::random_divider()
@@ -559,12 +425,14 @@ vector<vector<vec3>> city::subdivise(vector<vec3> pate)
     return res;
 }
 
-void city::merge_pat(vector<vector<vec3>> &base, vector<vector<vec3>> to_add)
+void city::merge_pat(vector<vector<vec3>> &base, vector<vector<vec3>> &to_add)
 {
-    for (size_t i = 0; i < to_add.size(); i++)
-    {
-        base.push_back(to_add[i]);
-    }
+    for (size_t i = 0; i < to_add.size(); i++) base.push_back(to_add[i]);
+}
+
+void city::add_tree_positions(vector<tree_located> & to_add)
+{
+    for (size_t i = 0; i < to_add.size(); i++) trees.push_back(to_add[i]);
 }
 
 void city::compute_pate(int nb)
@@ -679,7 +547,7 @@ mesh city::compute_garden(vector<vec3> coords)
         N = 16;
     else
         N = 60;
-    vector<vec3> res;
+    vector<tree_located> result;
     for (int i = 0; i < N; i++)
     {
         float u = rand() / (float)RAND_MAX;
@@ -689,39 +557,30 @@ mesh city::compute_garden(vector<vec3> coords)
         vec3 p = (u * p00 + w * p01 + v * p11 + z * p10) / (u + v + w + z);
 
         bool enlv = false;
-        for (vec3 q : res)
+        float type;
+        vec3 q;
+        for (tree_located tree : result)
         {
+            q = tree.position;
             if (((q.x - p.x) * (q.x - p.x) + (q.y - p.y) * (q.y - p.y)) < 0.15) // Passer environ à 0.20 pour eviter les collisions entre les tree
                 enlv = true;
         }
         if (!enlv)
         {
-            res.push_back(p);
-            //std::cout << p << std::endl;
+
+            result.push_back({ TreeGenerator::random_tree_type(), p});
         }
     }
-    /*vector<vec3> topush;
-    for (int i = 0; i < res.size(); i++)
-    {
-        topush.push_back(res[i]);
-        topush.push_back(vec3(0, 0, 0));
-        treePositions.push_back(topush);
-        topush.clear();
-    }*/
-    //std::cout << " " << std::endl;
+    add_tree_positions(result);
     return sol;
 }
 
 void city::create_city(vector<vec3> coords)
 {
-    if (coords[4].x == 0)
-    {
+    if (coords[4].x == 0) 
         batiments.push_back(compute_batiment(coords));
-    }
     else if (coords[4].x == 1)
-    {
         parcs.push_back(compute_garden(coords));
-    }
     else
         batiments.push_back(compute_batiment(coords));
 }
@@ -744,43 +603,30 @@ mesh city::compute_windows_on_quadrangle(vec3 const &p00, vec3 const &p10, vec3 
     float decalvert = 0.7f * height;
     vec3 xloc = normalize(p10 - p00);
     vec3 yloc = normalize(p01 - p00);
-    //std::cout << norm(p10 - p00) << std::endl;
-    //std::cout << norm(p01 - p00) << std::endl;
-    //std::cout << " " << std::endl;
     vec3 decalnormal = cross(yloc, xloc);
-    vec3 current_hor = p00 + 0.01f * decalnormal;
-    vec3 current_vert = p00 + 0.01f * decalnormal;
-    //bool ispossiblelong = (norm(p10 - current_hor) > (4 * length));
-    //bool ispossiblehaut = (norm(p01 - current_vert) > (4 * height));
+    vec3 current_hor = p00 + eps * decalnormal;
+    vec3 current_vert = p00 + eps * decalnormal;
     mesh res;
     float imax = floor(norm(p10 - p00) / (length + decalhoriz));
     float jmax = floor(norm(p01 - p00) / (height + decalvert));
-    //std::cout << imax << std::endl;
-    //std::cout << jmax << std::endl;
-    //std::cout << " " << std::endl;
-    for (auto j = 0; j < jmax; j++)
+    for (int j = 0; j < jmax; j++)
     {
         current_vert = current_vert + decalvert * yloc;
-        for (auto i = 0; i < imax; i++)
+        for (int i = 0; i < imax; i++)
         {
             current_hor += decalhoriz * xloc;
             vec3 currentp00 = current_hor + current_vert - p00;
             mesh fenetre = mesh_primitive_quadrangle(currentp00, currentp00 + length * xloc, currentp00 + length * xloc + height * yloc, currentp00 + height * yloc);
             float randf = rand() / (float)RAND_MAX;
             if (randf < 0.8f)
-            {
                 fenetre.color.fill(vec3(240, 255, 255) / 255.0f);
-            }
             else
-            {
                 fenetre.color.fill(vec3(239, 239, 239) / 255.0f);
-            }
             res.push_back(fenetre);
             current_hor += length * xloc;
         }
         current_hor = p00;
         current_vert = current_vert + height * yloc;
-        //std::cout << current_vert << std::endl;
     }
     return res;
 }

@@ -1,27 +1,21 @@
 ﻿  main.cpp
-  city.cpp
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes/city.hpp(19,15): warning C4305: 'initializing': truncation from 'double' to 'float' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp)
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\city.hpp(19,15): warning C4305: 'initializing': truncation from 'double' to 'float' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\city.cpp)
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes/forest.hpp(34,54): warning C4305: 'initializing': truncation from 'double' to 'float' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp)
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes/field.hpp(64,54): warning C4305: 'initializing': truncation from 'double' to 'float' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp)
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\city.cpp(25,28): warning C4458: declaration of 'normal_shader' hides class member
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(65,16): message : see declaration of 'scene_visual::normal_shader' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\city.cpp)
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes/city.hpp(16,15): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\particles.hpp(65,17): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\particles.hpp(66,17): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes/forest.hpp(34,54): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes/field.hpp(64,54): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(80,3): warning C5205: delete of an abstract class 'scene_visual' that has a non-virtual destructor results in undefined behavior
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(44): message : see declaration of 'scene_visual'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\city.cpp(48,18): warning C4458: declaration of 'light' hides class member
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(49,12): message : see declaration of 'scene_visual::light' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\city.cpp)
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\city.cpp(50,28): warning C4458: declaration of 'normal_shader' hides class member
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(65,16): message : see declaration of 'scene_visual::normal_shader' (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\city.cpp)
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(54): message : see declaration of 'scene_visual'
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(85,3): warning C5205: delete of an abstract class 'scene_visual' that has a non-virtual destructor results in undefined behavior
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(44): message : see declaration of 'scene_visual'
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(54): message : see declaration of 'scene_visual'
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(90,3): warning C5205: delete of an abstract class 'scene_visual' that has a non-virtual destructor results in undefined behavior
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(44): message : see declaration of 'scene_visual'
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(54): message : see declaration of 'scene_visual'
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(95,3): warning C5205: delete of an abstract class 'scene_visual' that has a non-virtual destructor results in undefined behavior
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(44): message : see declaration of 'scene_visual'
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(54): message : see declaration of 'scene_visual'
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(100,3): warning C5205: delete of an abstract class 'scene_visual' that has a non-virtual destructor results in undefined behavior
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(44): message : see declaration of 'scene_visual'
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(54): message : see declaration of 'scene_visual'
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(105,3): warning C5205: delete of an abstract class 'scene_visual' that has a non-virtual destructor results in undefined behavior
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(44): message : see declaration of 'scene_visual'
+C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(54): message : see declaration of 'scene_visual'
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(133,48): warning C4459: declaration of 'window' hides global declaration
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(22,13): message : see declaration of 'window'
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(133,48): warning C4100: 'window': unreferenced formal parameter
@@ -33,18 +27,10 @@ C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(14
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(144,70): warning C4100: 'k': unreferenced formal parameter
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(144,63): warning C4100: 'j': unreferenced formal parameter
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(144,56): warning C4100: 'i': unreferenced formal parameter
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\city.cpp(739,88): warning C4100: 'p11': unreferenced formal parameter
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\city.cpp(858,38): warning C4100: 'new_position_in_plane': unreferenced formal parameter
-C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_drawable/mesh_drawable.hpp(51,56): warning C4100: 'scene': unreferenced formal parameter (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp)
+C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_drawable/mesh_drawable.hpp(51,56): warning C4100: 'scene': unreferenced formal parameter
 C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp(54): message : see reference to function template instantiation 'void vcl::draw<scene_visual*>(const vcl::mesh_drawable &,const SCENE &)' being compiled
           with
           [
               SCENE=scene_visual *
-          ]
-C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_drawable/mesh_drawable.hpp(51,56): warning C4100: 'scene': unreferenced formal parameter (compiling source file C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\city.cpp)
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\city.cpp(59): message : see reference to function template instantiation 'void vcl::draw<city*>(const vcl::mesh_drawable &,const SCENE &)' being compiled
-          with
-          [
-              SCENE=city *
           ]
   projet_planete.vcxproj -> C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\build\RelWithDebInfo\projet_planete.exe

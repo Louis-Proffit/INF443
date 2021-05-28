@@ -21,7 +21,7 @@ GLuint scene_visual::sun_shader = 0;
 GLuint scene_visual::normal_shader = 0;
 GLuint scene_visual::heightmap_shader = 0;
 GLuint scene_visual::water_shader = 0;
-GLuint scene_visual::partic_shader = 0;
+GLuint scene_visual::particle_shader = 0;
 GLuint scene_visual::tree_shader = 0;
 
 scene_visual::scene_visual(user_parameters *user, std::function<void(scene_type)> _swap_function)
@@ -47,7 +47,7 @@ void scene_visual::init()
 	scene_visual::sun_shader = opengl_create_shader_program(sun_vert, sun_frag);
 	scene_visual::normal_shader = opengl_create_shader_program(normal_vert, normal_frag);
 	scene_visual::heightmap_shader = opengl_create_shader_program(heightmap_vert, heightmap_frag);
-	scene_visual::partic_shader = opengl_create_shader_program(partic_vert, partic_frag);
+	scene_visual::particle_shader = opengl_create_shader_program(partic_vert, partic_frag);
 	scene_visual::water_shader = opengl_create_shader_program(water_vert, water_frag);
 	scene_visual::tree_shader = opengl_create_shader_program(tree_vertex, tree_fragment);
 
@@ -55,31 +55,46 @@ void scene_visual::init()
 	std::cout << "sun shader : " << sun_shader << std::endl;
 	std::cout << "normal shader : " << normal_shader << std::endl;
 	std::cout << "heightmap shader : " << heightmap_shader << std::endl;
-	std::cout << "particules shader : " << partic_shader << std::endl;
+	std::cout << "particules shader : " << particle_shader << std::endl;
 	std::cout << "water shader : " << water_shader << std::endl;
 	std::cout << "tree shader : " << tree_shader << std::endl;
 }
 
-GLuint scene_visual::open_shader(std::string const &shader_name)
+GLuint scene_visual::open_shader(shader_type shader_type)
 {
-	if (shader_name == "planet")
+	switch (shader_type) {
+	case shader_type::PLANET:
 		return planet_shader;
-	else if (shader_name == "sun")
+	case shader_type::SUN:
 		return sun_shader;
-	else if (shader_name == "normal")
+	case shader_type::NORMAL:
 		return normal_shader;
-	else if (shader_name == "heightmap")
+	case shader_type::HEIGHTMAP:
 		return heightmap_shader;
-	else if (shader_name == "water")
+	case shader_type::WATER:
 		return water_shader;
-	else if (shader_name == "partic")
-		return partic_shader;
-	else if (shader_name == "tree")
+	case shader_type::PARTICLE:
+		return particle_shader;
+	case shader_type::TREE:
 		return tree_shader;
+	}
 }
 
+environement::environement(user_parameters* user, std::function<void(scene_type)> swap_function)
+	:scene_visual(user, swap_function)
+{
+	camera_m.position_camera = vec3(0, 0, 0);
+	camera_c.distance_to_center = 2.5f;
+	camera_c.look_at({ 4, 3, 2 }, { 0, 0, 0 }, { 0, 0, 1 });
+	m_activated = true;
+}
 
-void environement::update_visual() 
+void environement::display_visual()
+{
+	skybox.display_skybox(this);
+}
+
+void environement::update_visual()
 {
 	vec2 const& p0 = user_reference->mouse_prev;
 	vec2 const& p1 = user_reference->mouse_curr;
@@ -91,7 +106,7 @@ void environement::update_visual()
 		{
 			if (user_reference->state.mouse_click_left && !user_reference->state.key_ctrl)
 			{
-				camera_m.manipulator_rotate_2_axis(p1.y - p0.y, p1.x - p0.x);
+				camera_m.manipulator_rotate_2_axis(p0.y - p1.y, p1.x - p0.x);
 			}
 		}
 

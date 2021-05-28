@@ -5,7 +5,7 @@
 
 using namespace vcl;
 
-forest::forest(user_parameters *user, std::function<void(scene_type)> _swap_function) : scene_visual(user, _swap_function)
+forest::forest(user_parameters *user, std::function<void(scene_type)> _swap_function) : environement(user, _swap_function)
 {
 
     // Configuration des visuels
@@ -13,50 +13,97 @@ forest::forest(user_parameters *user, std::function<void(scene_type)> _swap_func
     set_skybox();
     set_sun();
     set_grass();
-    set_trees(_nbtree);
+    set_trees();
 
-    // Configuration de la cam�ra
-    camera.distance_to_center = 2.5f;
-    camera.look_at({4, 3, 2}, {0, 0, 0}, {0, 0, 1});
+    /* Initialise la caméra*/
+    camera_m.manipulator_set_altitude(get_altitude(camera_m.position().xy()));
 
-    // Configuration de la lumi�re
-    light = vec3(1.0f, 1.0f, 1.0f);
-
-    // Configuration du swap
-    swap_function = _swap_function;
+    /* Initialise les arbres*/
+    GLuint tree_shader = scene_visual::open_shader(shader_type::TREE);
+    tree_cool.initTree(tree_type::COOL, tree_shader);
+    tree_real.initTree(tree_type::REAL_1, tree_shader);
+    tree_classic.initTree(tree_type::CLASSIC, tree_shader);
 }
-
-forest::~forest() {}
 
 void forest::display_visual()
 {
     user_reference->timer.update();
     float const time = user_reference->timer.t;
-    light = camera.position();
+    if (m_activated) light = camera_m.position();
+    else light = camera_c.position();
 
-    GLuint normal_shader = open_shader("normal");
-    GLuint sun_shader = open_shader("sun");
-    GLuint partic_shader = open_shader("partic");
+    /* Shaders */
+    GLuint normal_shader = open_shader(shader_type::NORMAL);
+    GLuint sun_shader = open_shader(shader_type::SUN);
+    GLuint partic_shader = open_shader(shader_type::PARTICLE);
+    GLuint tree_shader = open_shader(shader_type::TREE);
 
     glUseProgram(normal_shader);
     opengl_uniform(normal_shader, "projection", projection);
-    opengl_uniform(normal_shader, "view", camera.matrix_view());
+    if (m_activated)
+        opengl_uniform(normal_shader, "view", camera_m.matrix_view());
+    else
+        opengl_uniform(normal_shader, "view", camera_c.matrix_view());
     opengl_uniform(normal_shader, "light", light);
 
     glUseProgram(sun_shader);
     opengl_uniform(sun_shader, "projection", projection);
-    opengl_uniform(sun_shader, "view", camera.matrix_view());
+    if (m_activated)
+        opengl_uniform(sun_shader, "view", camera_m.matrix_view());
+    else
+        opengl_uniform(sun_shader, "view", camera_c.matrix_view());
     opengl_uniform(sun_shader, "light", light);
 
     glUseProgram(partic_shader);
     opengl_uniform(partic_shader, "projection", projection);
-    opengl_uniform(partic_shader, "view", camera.matrix_view());
-    //opengl_uniform(partic_shader, "light", light);
-    grass.updateParticles(camera.position());
+    if (m_activated)
+        opengl_uniform(partic_shader, "view", camera_m.matrix_view());
+    else
+        opengl_uniform(partic_shader, "view", camera_c.matrix_view());
+
+    glUseProgram(tree_shader);
+    opengl_uniform(tree_shader, "projection", projection);
+    if (m_activated)
+        opengl_uniform(tree_shader, "view", camera_m.matrix_view());
+    else
+        opengl_uniform(tree_shader, "view", camera_c.matrix_view());
+    opengl_uniform(tree_shader, "light", light);
+
+    /* Particules*/
+    if (m_activated) grass.updateParticles(camera_m.position());
+    else grass.updateParticles(camera_c.position());
     grass.updateShadVbos(this);
-    for (int i = 0; i < _nbtree; i++)
-    {
-        trees[i].draw_tree(this);
+
+    for (tree_located tree : trees) {
+        switch (tree.type) {
+        case tree_type::COOL:
+            tree_cool.translate(tree.position);
+            draw(tree_cool.dtrunk, this);
+            if (tree_cool.hasleaves) draw(tree_cool.dleaves, this);
+            if (user_reference->draw_wireframe) {
+                draw_wireframe(tree_cool.dtrunk, this);
+                if (tree_cool.hasleaves) draw_wireframe(tree_cool.dleaves, this);
+            }
+            break;
+        case tree_type::CLASSIC:
+            tree_classic.translate(tree.position);
+            draw(tree_real.dtrunk, this);
+            if (tree_real.hasleaves) draw(tree_real.dleaves, this);
+            if (user_reference->draw_wireframe) {
+                draw_wireframe(tree_real.dtrunk, this);
+                if (tree_real.hasleaves) draw_wireframe(tree_real.dleaves, this);
+            }
+            break;
+        case tree_type::REAL_1:
+            tree_real.translate(tree.position);
+            draw(tree_real.dtrunk, this);
+            if (tree_real.hasleaves) draw(tree_real.dleaves, this);
+            if (user_reference->draw_wireframe) {
+                draw_wireframe(tree_real.dtrunk, this);
+                if (tree_real.hasleaves) draw_wireframe(tree_real.dleaves, this);
+            }
+            break;
+        }
     }
 
     opengl_check;
@@ -64,34 +111,16 @@ void forest::display_visual()
 
     if (user_reference->draw_wireframe)
         draw_wireframe(visual, this);
-
-    //skybox.display_skybox(this);
-
-    //draw(sun_visual, this);
 }
 
 void forest::update_visual()
 {
-    vec2 const &p0 = user_reference->mouse_prev;
-    vec2 const &p1 = user_reference->mouse_curr;
-
-    if (!user_reference->cursor_on_gui && !user_reference->state.key_shift)
-    {
-        if (user_reference->state.mouse_click_left && !user_reference->state.key_ctrl)
-            camera.manipulator_rotate_trackball(p0, p1);
-        if (user_reference->state.mouse_click_left && user_reference->state.key_ctrl)
-            camera.manipulator_translate_in_plane(p1 - p0);
-        if (user_reference->state.mouse_click_right)
-            camera.manipulator_scale_distance_to_center((p1 - p0).y);
-    }
-
-    user_reference->mouse_prev = p1;
+    super::update_visual();
 }
 
 void forest::display_interface()
 {
-    ImGui::Checkbox("Frame", &user_reference->display_frame);
-    ImGui::Checkbox("Wireframe", &user_reference->draw_wireframe);
+    super::display_interface();
 }
 
 void forest::set_terrain()
@@ -108,41 +137,45 @@ void forest::set_terrain()
             float x = 2 * (x_max - x_min) * (u - 0.5f);
             float y = 2 * (y_max - y_min) * (v - 0.5f);
 
-            // mesh.position[j + Nv * i].z = 3 * exp(-float(i) / 10 - float(j) / 10);
             mesh.position[j + Nv * i].z += parameters.height * noise_perlin(mesh.position[j + Nv * i], parameters.octaves, parameters.persistency, parameters.frequency_gain);
             mesh.uv[j + Nv * i] = vec2(x, y);
         }
     }
-    visual = mesh_drawable(mesh, open_shader("normal"));
-    visual.texture = opengl_texture_to_gpu(image_load_png("../assets/textures/grass/grass-ground.png"), GL_REPEAT /**GL_TEXTURE_WRAP_S*/, GL_REPEAT /**GL_TEXTURE_WRAP_T*/);
+    visual = mesh_drawable(mesh, open_shader(shader_type::NORMAL));
+    visual.texture = opengl_texture_to_gpu(image_load_png("../assets/textures/grass/grass-ground.png"), GL_REPEAT, GL_REPEAT);
 }
 
 void forest::set_skybox()
 {
-    skybox.init_skybox(vec3(0, 0, 0), 10, "sundown", open_shader("normal"));
+    skybox.init_skybox(vec3(0, 0, 0), 10, "sundown", open_shader(shader_type::NORMAL));
 }
 
 void forest::set_sun()
 {
-    sun_visual = mesh_drawable(mesh_primitive_sphere(sun_radius), open_shader("sun"));
+    sun_visual = mesh_drawable(mesh_primitive_sphere(sun_radius), open_shader(shader_type::SUN));
     sun_visual.shading.color = vec3(1.0, 1.0, 0.0);
 }
 
 void forest::set_grass()
 {
-    grass = *(new ParticleS(40000, "grass", x_min, x_max, y_min, y_max));
+    grass = Particles(nb_particles, "grass", x_min, x_max, y_min, y_max);
     grass.initVaoVbo();
 }
 
-void forest::set_trees(int nbtree)
+void forest::set_trees()
 {
-    trees = new TreeGenerator[nbtree];
-
-    for (int i = 0; i < nbtree; i++)
+    trees.resize(nb_tree);
+    for (int i = 0; i < nb_tree; i++)
     {
-        trees[i].setShader(open_shader("tree"));
-        trees[i].initTree("Realtree_1");
-        vec3 randompos = vec3((x_max - x_min) * ((rand() / (float)RAND_MAX) - 0.5f), (x_max - x_min) * ((rand() / (float)RAND_MAX) - 0.5f), 0.15f);
-        trees[i].translate(randompos);
+        vec3 position = vec3((x_max - x_min) * (rand_interval() - 0.5f), (x_max - x_min) * (rand_interval() - 0.5f), 0);
+        position.z = parameters.height * noise_perlin(position.xy(), parameters.octaves, parameters.persistency, parameters.frequency_gain);
+        trees[i] = { TreeGenerator::random_tree_type(), position };
     }
+}
+
+float forest::get_altitude(vcl::vec2 const& position_in_plane)
+{
+    float z = parameters.height * noise_perlin(position_in_plane, parameters.octaves, parameters.persistency, parameters.frequency_gain);
+    if (user_reference->sneak) return player_height / 2 + z;
+    else return player_height + z;
 }

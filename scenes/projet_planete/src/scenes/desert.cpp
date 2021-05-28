@@ -13,13 +13,6 @@ desert::desert(user_parameters *user, std::function<void(scene_type)> _swap_func
     set_skybox();
     set_sun();
 
-    // Configuration de la cam�ra
-    camera_m.position_camera = vec3(0, 0, 0);
-    camera_m.manipulator_set_altitude(get_altitude(camera_m.position_camera.xy()));
-    camera_c.distance_to_center = 2.5f;
-    camera_c.look_at({4, 3, 2}, {0, 0, 0}, {0, 0, 1});
-    m_activated = true;
-
     // Configuration de la lumi�re
     light = sun_visual.transform.translate;
 }
@@ -33,8 +26,8 @@ void desert::display_visual()
     float const time = user_reference->timer.t;
     light = sun_visual.transform.translate;
 
-    GLuint normal_shader = open_shader("normal");
-    GLuint sun_shader = open_shader("sun");
+    GLuint normal_shader = open_shader(shader_type::NORMAL);
+    GLuint sun_shader = open_shader(shader_type::SUN);
 
     glUseProgram(normal_shader);
     opengl_uniform(normal_shader, "projection", projection);
@@ -58,7 +51,6 @@ void desert::display_visual()
         draw_wireframe(terrain_visual, this);
     /*draw(sun_visual, this);
     if (user_reference->draw_wireframe) draw_wireframe(sun_visual, this);*/
-    skybox.display_skybox(this);
 }
 
 void desert::update_visual()
@@ -90,7 +82,7 @@ void desert::set_terrain()
     height_data = generateFileHeightData("assets/heightmaps/desert.png", horizontal_scale);
     terrain_mesh = createFromHeightData(height_data, parameters);
     for (int i = 0; i < terrain_mesh.position.size(); i++) terrain_mesh.position[i].z += profile(terrain_mesh.position[i].xy());
-    terrain_visual = mesh_drawable(terrain_mesh, open_shader("normal"));
+    terrain_visual = mesh_drawable(terrain_mesh, open_shader(shader_type::NORMAL));
 
     image_raw texture = image_load_png("assets/textures/sand_texture.png");
     GLuint texture_id = opengl_texture_to_gpu(texture, GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT);
@@ -99,14 +91,14 @@ void desert::set_terrain()
 
 void desert::set_skybox()
 {
-    skybox.init_skybox(vec3(0, 0, 0), x_max - x_min + y_max - y_min, "desert", open_shader("normal"));
+    skybox.init_skybox(vec3(0, 0, 0), x_max - x_min + y_max - y_min, "desert", open_shader(shader_type::NORMAL));
 }
 
 void desert::set_sun()
 {
     sun_mesh = mesh_primitive_sphere(sun_radius);
     sun_mesh.flip_connectivity();
-    sun_visual = mesh_drawable(sun_mesh, open_shader("sun"));
+    sun_visual = mesh_drawable(sun_mesh, open_shader(shader_type::SUN));
     sun_visual.shading.color = vec3(1.0, 1.0, 0.0);
 }
 

@@ -6,7 +6,7 @@
 
 using namespace vcl;
 
-ParticleS::ParticleS(int nmax, std::string nametext, float xmin, float xmax, float ymin, float ymax)
+Particles::Particles(int nmax, std::string nametext, float xmin, float xmax, float ymin, float ymax)
 {
     MaxParticles = nmax;
     ParticlesContainer = new particle[nmax];
@@ -34,9 +34,9 @@ ParticleS::ParticleS(int nmax, std::string nametext, float xmin, float xmax, flo
     y_max = ymax;
 }
 
-ParticleS::~ParticleS() {}
+Particles::~Particles() {}
 
-int ParticleS::FindUnusedParticle()
+int Particles::FindUnusedParticle()
 {
     for (int i = LastUsedParticle; i < MaxParticles; i++)
     {
@@ -59,12 +59,12 @@ int ParticleS::FindUnusedParticle()
     return 0; // All particles are taken, override the first one
 }
 
-void ParticleS::SortParticles()
+void Particles::SortParticles()
 {
     std::sort(&ParticlesContainer[0], &ParticlesContainer[MaxParticles]);
 }
 
-void ParticleS::initVaoVbo()
+void Particles::initVaoVbo()
 {
     if (type == "snowflakes")
     {
@@ -113,10 +113,10 @@ void ParticleS::initVaoVbo()
 
             ParticlesContainer[i].color[3] = 1;
 
-            ParticlesContainer[i].size = (rand() % 1000) / 4000.0f + 0.1f;
+            ParticlesContainer[i].size = z_min + rand_interval() * (z_max - z_min);
         }
     }
-    shad = scene_visual::open_shader("partic");
+    shad = scene_visual::open_shader(shader_type::PARTICLE);
     opengl_check;
 
     glGenBuffers(1, &billboard_vertex_buffer);
@@ -142,7 +142,7 @@ void ParticleS::initVaoVbo()
     opengl_check;
 }
 
-void ParticleS::updateParticles(vec3 CameraPosition)
+void Particles::updateParticles(vec3 CameraPosition)
 {
     if (type == "snowflakes")
     {
@@ -359,7 +359,7 @@ void ParticleS::updateParticles(vec3 CameraPosition)
     }
     SortParticles();
 }
-void ParticleS::cleanUp()
+void Particles::cleanUp()
 {
     glDeleteBuffers(1, &particles_color_buffer);
     glDeleteBuffers(1, &particles_position_buffer);
@@ -368,7 +368,7 @@ void ParticleS::cleanUp()
     glDeleteVertexArrays(1, &VertexArrayID);
 }
 
-void ParticleS::setTexture(GLuint text_)
+void Particles::setTexture(GLuint text_)
 {
     text = text_;
 }

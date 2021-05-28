@@ -7,6 +7,7 @@
 #include "heightmap.hpp"
 
 class desert : public environement{
+
 public:
 
 	// Constructor and destructors;
