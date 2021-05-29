@@ -72,7 +72,7 @@ public:
     int FindUnusedParticle();
     void SortParticles();
 
-    void initVaoVbo();
+    void initVaoVbo(GLuint shader);
 
     void updateParticles(vec3 CameraPosition);
 
@@ -80,9 +80,9 @@ public:
     void updateShadVbos(SCENE const &scene)
     {
         opengl_check;
-        glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-        glClear(GL_DEPTH_BUFFER_BIT);
+        //glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
+        //glClear(GL_COLOR_BUFFER_BIT);
+        //glClear(GL_DEPTH_BUFFER_BIT);
 
         glBindVertexArray(VertexArrayID);
         opengl_check;

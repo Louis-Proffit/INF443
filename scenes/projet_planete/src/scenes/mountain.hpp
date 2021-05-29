@@ -7,6 +7,7 @@
 #include "heightmap.hpp"
 #include "water/water.hpp"
 #include "water/waterfbuffer.hpp"
+#include "particles.hpp"
 
 class mountain : public environement
 {
@@ -21,6 +22,8 @@ public:
 	void display_interface();
 	float get_altitude(vcl::vec2 const &position_in_plane);
 
+	Particles snow;
+
 private:
 	typedef environement super;
 	float horizontal_scale;
@@ -29,6 +32,7 @@ private:
 	float y_min = -10.0;
 	float x_max = 10.0;
 	float y_max = 10.0;
+	int nb_particles = 3000;
 	vcl::mesh sun_mesh;
 	vcl::mesh terrain_mesh;
 	vcl::mesh_drawable terrain_visual;
@@ -40,6 +44,7 @@ private:
 	void set_skybox();
 	void set_sun();
 	void set_water();
+	void set_snow();
 	float profile(vcl::vec2 const &position_in_plane);
 
 	// Pour l'affichage de l'eau

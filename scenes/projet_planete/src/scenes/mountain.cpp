@@ -13,6 +13,7 @@ mountain::mountain(user_parameters *user, std::function<void(scene_type)> _swap_
     set_skybox();
     set_sun();
     set_water();
+    set_snow();
 
     // Configuration de la cam�ra
     camera_m.position_camera = vec3(0, 0, 0);
@@ -37,6 +38,20 @@ void mountain::display_visual()
     else
         wat.set_Uniforms(fbos.getReflectionTexture(), fbos.getRefractionTexture(), camera_c.position(), fbos.movefactor);
 
+    GLuint partic_mountain_shader = get_shader(shader_type::PARTICLE_MOUNTAIN);
+
+    glUseProgram(partic_mountain_shader);
+    opengl_uniform(partic_mountain_shader, "projection", projection);
+    if (m_activated)
+        opengl_uniform(partic_mountain_shader, "view", camera_m.matrix_view());
+    else
+        opengl_uniform(partic_mountain_shader, "view", camera_c.matrix_view());
+
+    if (m_activated)
+        snow.updateParticles(camera_m.position());
+    else
+        snow.updateParticles(camera_c.position());
+    snow.updateShadVbos(this);
     glUseProgram(water_shader);
     opengl_uniform(water_shader, "projection", projection);
     if (m_activated)
@@ -44,6 +59,7 @@ void mountain::display_visual()
     else
         opengl_uniform(water_shader, "view", camera_c.matrix_view());
     opengl_uniform(water_shader, "light", light);
+    opengl_uniform(water_shader, "fog_falloff", 0.06f);
     draw(wat.waterd, this);
 }
 
@@ -186,6 +202,7 @@ void mountain::display_scene(vec4 clipPlane)
     draw(terrain_visual, this);
     if (user_reference->draw_wireframe)
         draw_wireframe(terrain_visual, this);
+
     /*draw(sun_visual, this);
     if (user_reference->draw_wireframe) draw_wireframe(sun_visual, this);*/
     glUseProgram(mountain_shader);
@@ -249,4 +266,10 @@ void mountain::set_water()
     wat.init_water(scene_visual::water_shader);
     fbos.initWaterFrameBuffers();
     clipPlane = vec4(0, 0, 1, -wat.waterHeight);
+}
+
+void mountain::set_snow()
+{
+    snow = Particles(nb_particles, "snowflakes", x_min, x_max, y_min, y_max);
+    snow.initVaoVbo(scene_visual::get_shader(shader_type::PARTICLE_MOUNTAIN));
 }

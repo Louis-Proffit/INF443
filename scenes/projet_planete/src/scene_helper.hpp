@@ -23,7 +23,8 @@ enum class shader_type
 	WATER,
 	PARTICLE,
 	TREE,
-	MOUNTAIN
+	MOUNTAIN,
+	PARTICLE_MOUNTAIN
 };
 
 enum class texture_type
@@ -161,6 +162,7 @@ public:
 	static GLuint particle_shader;
 	static GLuint tree_shader;
 	static GLuint mountain_shader;
+	static GLuint particle_mountain_shader;
 
 	static GLuint texture_field_1;
 	static GLuint texture_field_2;

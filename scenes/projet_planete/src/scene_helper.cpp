@@ -11,6 +11,7 @@
 #include "../assets/shaders/water/water.frag.glsl"
 #include "../assets/shaders/particles/partic.vert.glsl"
 #include "../assets/shaders/particles/partic.frag.glsl"
+#include "../assets/shaders/particles/partic.mountain.frag.glsl"
 #include "../assets/shaders/tree/tree.vert.glsl"
 #include "../assets/shaders/tree/tree.frag.glsl"
 #include "../assets/shaders/mountain/vert.glsl"
@@ -26,6 +27,7 @@ GLuint scene_visual::water_shader = 0;
 GLuint scene_visual::particle_shader = 0;
 GLuint scene_visual::tree_shader = 0;
 GLuint scene_visual::mountain_shader = 0;
+GLuint scene_visual::particle_mountain_shader = 0;
 
 GLuint scene_visual::texture_field_1 = 0;
 GLuint scene_visual::texture_field_2 = 0;
@@ -97,6 +99,7 @@ void scene_visual::init()
 	scene_visual::water_shader = opengl_create_shader_program(water_vert, water_frag);
 	scene_visual::tree_shader = opengl_create_shader_program(tree_vertex, tree_fragment);
 	scene_visual::mountain_shader = opengl_create_shader_program(mountain_vert, mountain_frag);
+	scene_visual::particle_mountain_shader = opengl_create_shader_program(partic_vert, partic_mountain_frag);
 
 	scene_visual::texture_field_1 = opengl_texture_to_gpu(image_load_png("../assets/textures/field/field_1.png"), GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT);
 	scene_visual::texture_field_2 = opengl_texture_to_gpu(image_load_png("../assets/textures/field/field_2.png"), GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT);
@@ -162,6 +165,8 @@ GLuint scene_visual::get_shader(shader_type shader_type)
 		return tree_shader;
 	case shader_type::MOUNTAIN:
 		return mountain_shader;
+	case shader_type::PARTICLE_MOUNTAIN:
+		return particle_mountain_shader;
 	}
 }
 

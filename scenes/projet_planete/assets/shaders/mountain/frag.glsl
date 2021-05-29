@@ -59,7 +59,7 @@ void main()
 
 	float depth = length(fragment.eye-fragment.position);
 	float w_depth = exp(-fog_falloff*depth*depth);
-	vec3 color_with_fog = w_depth*color_shading+(1-w_depth)*vec3(1.0,1.0,1.0);
+	vec3 color_with_fog = w_depth*color_shading+(1-w_depth)*vec3(0.7,0.7,0.7);
 
 	FragColor = vec4(color_with_fog, alpha * color_image_texture.a);
 }

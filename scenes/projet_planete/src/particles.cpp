@@ -64,11 +64,14 @@ void Particles::SortParticles()
     std::sort(&ParticlesContainer[0], &ParticlesContainer[MaxParticles]);
 }
 
-void Particles::initVaoVbo()
+void Particles::initVaoVbo(GLuint shader)
 {
-    if (type == "snowflakes") text = scene_visual::get_texture(texture_type::SNOWFLAKE);
-    else if (type == "fire") text = scene_visual::get_texture(texture_type::FIRE);
-    else if (type == "grass") text = scene_visual::get_texture(texture_type::GRASS_ATLAS);
+    if (type == "snowflakes")
+        text = scene_visual::get_texture(texture_type::SNOWFLAKE);
+    else if (type == "fire")
+        text = scene_visual::get_texture(texture_type::FIRE);
+    else if (type == "grass")
+        text = scene_visual::get_texture(texture_type::GRASS_ATLAS);
     else
         error_vcl("la texture n'existe pas");
 
@@ -107,7 +110,7 @@ void Particles::initVaoVbo()
             ParticlesContainer[i].size = z_min + rand_interval() * (z_max - z_min);
         }
     }
-    shad = scene_visual::get_shader(shader_type::PARTICLE);
+    shad = shader;
     opengl_check;
 
     glGenBuffers(1, &billboard_vertex_buffer);
@@ -143,11 +146,11 @@ void Particles::updateParticles(vec3 CameraPosition)
         for (int i = 0; i < newparticles; i++)
         {
             int particleIndex = FindUnusedParticle();
-            ParticlesContainer[particleIndex].life = 5.0f; // This particle will live 5 seconds.
+            ParticlesContainer[particleIndex].life = 2.0f; // This particle will live 5 seconds.
             vec3 randompos = vec3(
-                4 * ((rand() / (float)RAND_MAX) - 0.5f),
-                4 * ((rand() / (float)RAND_MAX) - 0.5f),
-                10.0f);
+                (x_max - x_min) * ((rand() / (float)RAND_MAX) - 0.5f),
+                (y_max - y_min) * ((rand() / (float)RAND_MAX) - 0.5f),
+                8.0f);
 
             ParticlesContainer[particleIndex].pos = randompos;
 
@@ -172,7 +175,7 @@ void Particles::updateParticles(vec3 CameraPosition)
 
             ParticlesContainer[particleIndex].color[3] = (rand() % 256) / 3;
 
-            ParticlesContainer[particleIndex].size = (rand() % 1000) / 2000.0f + 0.1f;
+            ParticlesContainer[particleIndex].size = 1.5f * z_min + rand_interval() * (z_max - z_min);
         }
 
         // Simulate all particles
