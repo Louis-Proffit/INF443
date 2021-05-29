@@ -24,12 +24,12 @@ struct field
 class countryside : public environement
 {
 public:
-	std::vector<field> fields;
-	std::vector<vcl::mesh> paths;
+	std::vector<field>				fields;
+	std::vector<vcl::mesh>			paths;
 	std::vector<vcl::mesh_drawable> fields_visuals;
 	std::vector<vcl::mesh_drawable> paths_visuals;
-
-	vcl::mesh_drawable sun_visual;
+	vcl::mesh_drawable			tractor_visual;
+	vcl::mesh_drawable			sun_visual;
 
 	// Constructor and destructors;
 	countryside(user_parameters* user, std::function<void(scene_type)> swap_function);
@@ -41,10 +41,6 @@ public:
 
 private:
 	typedef environement super;
-	float x_min = -2.0f;
-	float y_min = -2.0f;
-	float x_max = 2.0f;
-	float y_max = 2.0f;
 	float random_compression = 0.3f; // les champs sont r�guliers si le coeff vaut 0, et peuvent �tre triangles si on atteint 1
 
 	float field_min_dimension = 0.3f;
@@ -56,6 +52,7 @@ private:
 	perlin_noise_parameters parameters{3, 0.1, 0.3, 2.0};
 
 	void set_terrain();
+	void set_tractor();
 	bool subdivide(int current_subdivisions);
 	void set_types();
 	void set_textures();
@@ -65,4 +62,5 @@ private:
 	vcl::mesh subdivide_path(vcl::mesh quadrangle);
 	vcl::mesh subdivide_field(vcl::mesh quadrangle);
 	void shuffle();
+	float profile(vcl::vec2 const& position_in_plane);
 };
