@@ -456,6 +456,9 @@ void city::compute_pate(int nb)
         vector<vector<vec3>> current;
         for (size_t i = 0; i < base.size(); i++)
         {
+            vector<vector<vec3>> to_add = subdivise(base[i]);
+            for (size_t z = 0; z < to_add.size(); z++)
+                current.push_back(to_add[z]);
             //merge_pat(current, subdivise(base[i]));
         }
         base.clear();
