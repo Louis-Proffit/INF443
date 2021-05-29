@@ -27,9 +27,11 @@ public:
 	std::vector<field>				fields;
 	std::vector<vcl::mesh>			paths;
 	std::vector<vcl::mesh_drawable> fields_visuals;
-	std::vector<vcl::mesh_drawable> paths_visuals;
-	vcl::mesh_drawable			tractor_visual;
-	vcl::mesh_drawable			sun_visual;
+	vcl::mesh_drawable				path_visual;
+	std::vector<vcl::vec3>			tractor_positions;
+	vcl::mesh_drawable				sand_visual;
+	vcl::mesh_drawable				tractor_visual;
+	vcl::mesh_drawable				sun_visual;
 
 	// Constructor and destructors;
 	countryside(user_parameters* user, std::function<void(scene_type)> swap_function);
@@ -46,12 +48,16 @@ private:
 	float field_min_dimension = 0.3f;
 	int field_subdivisions = 10;
 	float path_proportion = 0.05f; // proportion du champ sur laquelle on empi�te pour faire un chemin
-	float path_z_max = 0.01f;
-	float path_z_min = -0.1f;
+	float path_dz = 0.005;
+	float border_proportion = 0.01f;
+	float sand_proportion = 0.5f;
+	int number_of_tractors = 3;
 
 	perlin_noise_parameters parameters{3, 0.1, 0.3, 2.0};
 
 	void set_terrain();
+	void set_sand();
+	void set_border();
 	void set_tractor();
 	bool subdivide(int current_subdivisions);
 	void set_types();

@@ -7,8 +7,14 @@ using namespace vcl;
 
 countryside::countryside(user_parameters *user, std::function<void(scene_type)> _swap_function) : environement(user, _swap_function)
 {
+    x_min = -2.0;
+    x_min = -2.0;
+    y_max = 2.0;
+    y_max = 2.0;
+
     // Configuration des visuels
     set_terrain();
+    set_sand();
     set_tractor();
     set_skybox();
     set_sun();
@@ -22,10 +28,6 @@ countryside::countryside(user_parameters *user, std::function<void(scene_type)> 
 
     // Configuration de la lumi�re
     light = vec3(1.0f, 1.0f, 1.0f);
-    x_min = -5.0;
-    x_min = -5.0;
-    y_max = 5.0;
-    y_max = 5.0;
 }
 
 void countryside::display_visual()
@@ -50,7 +52,6 @@ void countryside::display_visual()
     else
         opengl_uniform(normal_shader, "view", camera_c.matrix_view());
     opengl_uniform(normal_shader, "light", light);
-    draw(tractor_visual, this);
 
     glUseProgram(sun_shader);
     opengl_uniform(sun_shader, "projection", projection);
@@ -60,19 +61,24 @@ void countryside::display_visual()
         opengl_uniform(sun_shader, "view", camera_c.matrix_view());
     opengl_uniform(sun_shader, "light", light);
 
+    draw(path_visual, this);
     for (mesh_drawable field_visual : fields_visuals)
         draw(field_visual, this);
-    for (mesh_drawable path_visual : paths_visuals)
-        draw(path_visual, this);
-    if (user_reference->draw_wireframe)
+    for (vec3 position : tractor_positions) {
+        tractor_visual.transform.translate = position;
+        draw(tractor_visual, this);
+    }
+    draw(sand_visual, this);
+    if (user_reference->draw_wireframe) {
         for (mesh_drawable field_visual : fields_visuals)
             draw_wireframe(field_visual, this);
-    if (user_reference->draw_wireframe)
-        for (mesh_drawable path_visual : paths_visuals)
-            draw_wireframe(path_visual, this);
+        draw_wireframe(path_visual, this);
+        draw_wireframe(sand_visual, this);
+        draw_wireframe(sun_visual, this);
+    }
+        
 
     skybox.display_skybox(this);
-    draw(sun_visual, this);
 }
 
 void countryside::update_visual()
@@ -96,6 +102,8 @@ void countryside::set_terrain()
         subdivide_again = subdivide(current_subdivisions);
         current_subdivisions++;
     }
+
+    set_border();
     set_types();
 
     // Subdivide paths and fields
@@ -116,14 +124,64 @@ void countryside::set_terrain()
     // Shuffle meshes
     shuffle();
 
+    // Merge paths
+    mesh path;
+    for (int i = 0; i < paths.size(); i++) {
+        path.push_back(paths[i]);
+    }
+
     GLuint normal_shader = scene_visual::get_shader(shader_type::NORMAL);
     fields_visuals.resize(fields.size());
-    paths_visuals.resize(paths.size());
     for (int i = 0; i < fields.size(); i++)
         fields_visuals[i] = mesh_drawable(fields[i].field_mesh, normal_shader);
-    for (int i = 0; i < paths.size(); i++)
-        paths_visuals[i] = mesh_drawable(paths[i], normal_shader);
+    path_visual = mesh_drawable(path, normal_shader);
     set_textures();
+}
+
+void countryside::set_sand()
+{
+    mesh sand;
+    int N1 = 100;
+    int N2 = 500;
+    float delta = (x_max - x_min) * sand_proportion / 2.0;
+    mesh side = mesh_primitive_grid(vec3(x_min - delta, y_min, 0), vec3(x_max + delta, y_min, 0), vec3(x_max + delta, y_min - delta, 0), vec3(x_min - delta, y_min - delta, 0), N2, N1); // Bas
+    sand.push_back(side);
+    side.~mesh();
+    side = mesh_primitive_grid(vec3(x_min, y_max + delta, 0), vec3(x_min, y_min - delta, 0), vec3(x_min - delta, y_min - delta, 0), vec3(x_min - delta, y_max + delta, 0), N2, N1); // Gauche
+    sand.push_back(side);
+    side.~mesh();
+    side = mesh_primitive_grid(vec3(x_max, y_max + delta, 0), vec3(x_max, y_min - delta, 0), vec3(x_max + delta, y_min - delta, 0), vec3(x_max + delta, y_max + delta, 0), N2, N1); // Gauche
+    sand.push_back(side);
+    side.~mesh();
+    side = mesh_primitive_grid(vec3(x_min - delta, y_max, 0), vec3(x_max + delta, y_max, 0), vec3(x_max + delta, y_max + delta, 0), vec3(x_min - delta, y_max + delta, 0), N2, N1); // Haut
+    sand.push_back(side);
+
+    for (int i = 0; i < sand.position.size(); i++) {
+        sand.position[i].z += profile(sand.position[i].xy()) + parameters.height * noise_perlin(sand.position[i].xy(), parameters.octaves, parameters.persistency, parameters.frequency_gain);
+    }
+    for (int i = 0; i < sand.position.size(); i++) {
+        sand.uv[i].x = 2 * sand.position[i].x;
+        sand.uv[i].y = 2 * sand.position[i].y;
+    }
+    GLuint normal_shader = get_shader(shader_type::NORMAL);
+    sand_visual = mesh_drawable(sand, normal_shader);
+    sand_visual.texture = get_texture(texture_type::SAND);
+}
+
+void countryside::set_border()
+{
+    float delta = (x_max - x_min) * border_proportion / 2.0;
+    mesh side = mesh_primitive_quadrangle(vec3(x_min - delta, y_min, 0), vec3(x_max + delta, y_min, 0), vec3(x_max + delta, y_min - delta, 0), vec3(x_min - delta, y_min - delta, 0)); // Bas
+    paths.push_back(side);
+    side.~mesh();
+    side = mesh_primitive_quadrangle(vec3(x_min, y_max + delta, 0), vec3(x_min, y_min - delta, 0), vec3(x_min - delta, y_min - delta, 0), vec3(x_min - delta, y_max + delta, 0)); // Gauche
+    paths.push_back(side);
+    side.~mesh();
+    side = mesh_primitive_quadrangle(vec3(x_max, y_max + delta, 0), vec3(x_max, y_min - delta, 0), vec3(x_max + delta, y_min - delta, 0), vec3(x_max + delta, y_max + delta, 0)); // Gauche
+    paths.push_back(side);
+    side.~mesh();
+    side = mesh_primitive_quadrangle(vec3(x_min - delta, y_max, 0), vec3(x_max + delta, y_max, 0), vec3(x_max + delta, y_max + delta, 0), vec3(x_min - delta, y_max + delta, 0)); // Haut
+    paths.push_back(side);
 }
 
 void countryside::set_tractor()
@@ -135,10 +193,14 @@ void countryside::set_tractor()
     tractor_visual.texture = get_texture(texture_type::LOWPOLY);
 
     /* Set transform */
-    vec2 position = vec2(x_min + rand_interval() * (x_max - x_min), y_min + rand_interval() * (y_max - y_min));
-    tractor_visual.transform.translate.x = position.x;
-    tractor_visual.transform.translate.y = position.y;
-    tractor_visual.transform.translate.z = parameters.height * noise_perlin(position, parameters.octaves, parameters.persistency, parameters.frequency_gain) + profile(position);
+    tractor_positions.resize(number_of_tractors);
+    vec3 position;
+    for (int i = 0; i < number_of_tractors; i++) {
+        position = vec3(0.9 * x_min + 0.9 * rand_interval() * (x_max - x_min), 0.9 * y_min + 0.9 * rand_interval() * (y_max - y_min), 0);
+        position.z = parameters.height* noise_perlin(position.xy(), parameters.octaves, parameters.persistency, parameters.frequency_gain) + profile(position.xy());
+        tractor_positions[i] = position;
+        position.~vec3();
+    }
 }
 
 bool countryside::subdivide(int current_subdivisions)
@@ -204,7 +266,7 @@ void countryside::set_types()
 
 void countryside::set_textures()
 {
-    for (int i = 0; i < fields.size(); i++)
+    for (int i = 0; i < fields.size(); i++) {
         switch (fields[i].type) {
         case field_type::UN:
             fields_visuals[i].texture = scene_visual::get_texture(texture_type::FIELD_2);
@@ -219,13 +281,13 @@ void countryside::set_textures()
             fields_visuals[i].texture = scene_visual::get_texture(texture_type::FIELD_4);
             break;
         }
-    for (int i = 0; i < fields.size(); i++)
-        paths_visuals[i].texture = scene_visual::get_texture(texture_type::FIELD_1);
+    }
+    path_visual.texture = scene_visual::get_texture(texture_type::FIELD_1);
 }
 
 void countryside::set_skybox()
 {
-    skybox.init_skybox(vec3(0, 0, 0), 10, skybox_type::FLEUVE, get_shader(shader_type::NORMAL));
+    skybox.init_skybox(vec3(0, 0, 0), x_max - x_min, skybox_type::FLEUVE, get_shader(shader_type::NORMAL));
 }
 
 void countryside::set_sun()
@@ -245,21 +307,24 @@ float countryside::get_altitude(vcl::vec2 const& position_in_plane)
 
 mesh countryside::subdivide_path(vcl::mesh quadrangle)
 {
-    int Nx = std::max(5, int(norm(quadrangle.position[0] - quadrangle.position[1]) * field_subdivisions / (field_min_dimension * (x_max - x_min))));
-    int Ny = 3 * std::max(5, int(norm(quadrangle.position[1] - quadrangle.position[2]) * field_subdivisions / (field_min_dimension * (x_max - x_min))));
-    mesh result = mesh_primitive_grid(
-        quadrangle.position[0],
-        quadrangle.position[1],
-        quadrangle.position[2],
-        quadrangle.position[3],
-        Nx, Ny);
+    int Nx = std::max(10, int(50 * norm(quadrangle.position[0] - quadrangle.position[1])));
+    int Ny = std::max(10, int(50 * norm(quadrangle.position[1] - quadrangle.position[2]))); // Plus grand
+    vec3 delta = vec3(0, 0, path_dz);
+    mesh result = mesh_primitive_cubic_grid(
+        quadrangle.position[0] + delta,
+        quadrangle.position[1] + delta,
+        quadrangle.position[2] + delta,
+        quadrangle.position[3] + delta,
+        quadrangle.position[0] - delta,
+        quadrangle.position[1] - delta,
+        quadrangle.position[2] - delta,
+        quadrangle.position[3] - delta,
+        Ny, 3, Nx);
 
     for (int i = 0; i < result.uv.size(); i++)
-    { // Compresses the ground texture
-        if (Nx > Ny)
-            result.uv[i].y *= Nx;
-        else
-            result.uv[i].x *= Ny;
+    {
+        result.uv[i].x = 2 * result.position[i].x + 2 * result.position[i].z;
+        result.uv[i].y = 2 * result.position[i].y + 2 * result.position[i].z;
     }
     return result;
 }
@@ -290,9 +355,9 @@ void countryside::shuffle()
 
 float countryside::profile(vec2 const& position_in_plane)
 {
-    float transition_down = 0.8;
-    float transition_up = 0.9;
-    float z_min = -0.2;
+    float transition_down = 1.0;
+    float transition_up = 1.2;
+    float z_min = -0.4;
     float z_max = 0.2;
     float coord_x = std::max((position_in_plane.x - x_min) / (x_max - x_min), (x_max - position_in_plane.x) / (x_max - x_min));
     float coord_y = std::max((position_in_plane.y - y_min) / (y_max - y_min), (y_max - position_in_plane.y) / (y_max - y_min));

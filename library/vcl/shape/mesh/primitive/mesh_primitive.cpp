@@ -409,12 +409,12 @@ namespace vcl
 		//vec3 p011 = p000 + u*vec3{0,1,1};
 
 		mesh shape;
-		shape.push_back(mesh_primitive_grid(p000, p100, p101, p001, Nx, Nz));
-		shape.push_back(mesh_primitive_grid(p100, p110, p111, p101, Ny, Nz));
-		shape.push_back(mesh_primitive_grid(p110, p010, p011, p111, Nx, Nz));
-		shape.push_back(mesh_primitive_grid(p010, p000, p001, p011, Ny, Nz));
-		shape.push_back(mesh_primitive_grid(p001, p101, p111, p011, Nx, Ny));
-		shape.push_back(mesh_primitive_grid(p100, p000, p010, p110, Nx, Ny));
+		shape.push_back(mesh_primitive_grid(p010, p000, p001, p011, Nx, Ny));
+		shape.push_back(mesh_primitive_grid(p100, p110, p111, p101, Nx, Ny));
+		shape.push_back(mesh_primitive_grid(p000, p100, p101, p001, Nz, Ny));
+		shape.push_back(mesh_primitive_grid(p110, p010, p011, p111, Nz, Ny));
+		shape.push_back(mesh_primitive_grid(p001, p101, p111, p011, Nz, Nx));
+		shape.push_back(mesh_primitive_grid(p100, p000, p010, p110, Nz, Nx));
 
 		return shape;
 	}
