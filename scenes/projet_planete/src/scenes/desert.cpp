@@ -78,7 +78,7 @@ void desert::set_terrain()
     terrain_mesh = createFromHeightData(height_data, parameters);
     for (int i = 0; i < terrain_mesh.position.size(); i++)
         terrain_mesh.position[i].z += profile(terrain_mesh.position[i].xy());
-    terrain_visual = mesh_drawable(terrain_mesh, scene_visual::get_shader(shader_type::NORMAL));
+    terrain_visual = mesh_drawable(terrain_mesh, get_shader(shader_type::NORMAL));
 
     GLuint texture_id = scene_visual::get_texture(texture_type::SAND);
     terrain_visual.texture = texture_id;
@@ -160,8 +160,8 @@ void desert::display_scene(vec4 clipPlane)
 
     light = sun_visual.transform.translate;
 
-    GLuint normal_shader = scene_visual::get_shader(shader_type::NORMAL);
-    GLuint sun_shader = scene_visual::get_shader(shader_type::SUN);
+    GLuint normal_shader = get_shader(shader_type::NORMAL);
+    GLuint sun_shader = get_shader(shader_type::SUN);
 
     glUseProgram(normal_shader);
     opengl_uniform(normal_shader, "projection", projection);

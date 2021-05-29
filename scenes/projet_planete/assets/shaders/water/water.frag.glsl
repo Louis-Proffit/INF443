@@ -41,6 +41,8 @@ const float waveStrength = 0.003;
 const float shineDamper = 20.0;
 const float reflectivity = 0.6;
 
+uniform float fog_falloff = 0;
+
 void main()
 {
 	/*vec2 uv_image = vec2(fragment.uv.x, 1.0-fragment.uv.y);
@@ -99,6 +101,15 @@ void main()
 
 	FragColor = mix(reflectColour,refractColour,refractiveFactor);
 	/*FragColor = vec4((Ka + Kd * diffuse) * mix(FragColor, vec4(0.0,0.3,0.5,1.0),0.2).xyz + Ks * specular * vec3(1.0, 1.0, 1.0), mix(FragColor, vec4(0.0,0.3,0.5,1.0),0.2).a);*/ 
+
+	float depth = length(fragment.eye-fragment.position);
+	float w_depth = exp(-fog_falloff*depth*depth);
+	 
+
 	FragColor = mix(FragColor, vec4(0.0,0.3,0.5,1.0),0.2)+ vec4(specularHighlights,0.0);
+
+	vec3 color_with_fog = w_depth*FragColor.xyz+(1-w_depth)*vec3(0.7,0.7,0.7);
+
+	FragColor = vec4(color_with_fog, FragColor.a);
 }
 )";

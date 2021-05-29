@@ -29,8 +29,10 @@ void forest::display_visual()
 {
     user_reference->timer.update();
     float const time = user_reference->timer.t;
-    if (m_activated) light = camera_m.position();
-    else light = camera_c.position();
+    if (m_activated)
+        light = camera_m.position();
+    else
+        light = camera_c.position();
 
     /* Shaders */
     GLuint normal_shader = get_shader(shader_type::NORMAL);
@@ -70,37 +72,50 @@ void forest::display_visual()
     opengl_uniform(tree_shader, "light", light);
 
     /* Particules*/
-    if (m_activated) grass.updateParticles(camera_m.position());
-    else grass.updateParticles(camera_c.position());
+    if (m_activated)
+        grass.updateParticles(camera_m.position());
+    else
+        grass.updateParticles(camera_c.position());
     grass.updateShadVbos(this);
 
-    for (tree_located tree : trees) {
-        switch (tree.type) {
+    for (tree_located tree : trees)
+    {
+        switch (tree.type)
+        {
         case tree_type::COOL:
             tree_cool.translate(tree.position);
             draw(tree_cool.dtrunk, this);
-            if (tree_cool.hasleaves) draw(tree_cool.dleaves, this);
-            if (user_reference->draw_wireframe) {
+            if (tree_cool.hasleaves)
+                draw(tree_cool.dleaves, this);
+            if (user_reference->draw_wireframe)
+            {
                 draw_wireframe(tree_cool.dtrunk, this);
-                if (tree_cool.hasleaves) draw_wireframe(tree_cool.dleaves, this);
+                if (tree_cool.hasleaves)
+                    draw_wireframe(tree_cool.dleaves, this);
             }
             break;
         case tree_type::CLASSIC:
             tree_classic.translate(tree.position);
             draw(tree_real.dtrunk, this);
-            if (tree_real.hasleaves) draw(tree_real.dleaves, this);
-            if (user_reference->draw_wireframe) {
+            if (tree_real.hasleaves)
+                draw(tree_real.dleaves, this);
+            if (user_reference->draw_wireframe)
+            {
                 draw_wireframe(tree_real.dtrunk, this);
-                if (tree_real.hasleaves) draw_wireframe(tree_real.dleaves, this);
+                if (tree_real.hasleaves)
+                    draw_wireframe(tree_real.dleaves, this);
             }
             break;
         case tree_type::REAL_1:
             tree_real.translate(tree.position);
             draw(tree_real.dtrunk, this);
-            if (tree_real.hasleaves) draw(tree_real.dleaves, this);
-            if (user_reference->draw_wireframe) {
+            if (tree_real.hasleaves)
+                draw(tree_real.dleaves, this);
+            if (user_reference->draw_wireframe)
+            {
                 draw_wireframe(tree_real.dtrunk, this);
-                if (tree_real.hasleaves) draw_wireframe(tree_real.dleaves, this);
+                if (tree_real.hasleaves)
+                    draw_wireframe(tree_real.dleaves, this);
             }
             break;
         }
@@ -159,7 +174,7 @@ void forest::set_sun()
 void forest::set_grass()
 {
     grass = Particles(nb_particles, "grass", x_min, x_max, y_min, y_max);
-    grass.initVaoVbo();
+    grass.initVaoVbo(scene_visual::get_shader(shader_type::PARTICLE));
 }
 
 void forest::set_trees()
@@ -169,13 +184,15 @@ void forest::set_trees()
     {
         vec3 position = vec3((x_max - x_min) * (rand_interval() - 0.5f), (x_max - x_min) * (rand_interval() - 0.5f), 0);
         position.z = parameters.height * noise_perlin(position.xy(), parameters.octaves, parameters.persistency, parameters.frequency_gain);
-        trees[i] = { TreeGenerator::random_tree_type(), position };
+        trees[i] = {TreeGenerator::random_tree_type(), position};
     }
 }
 
-float forest::get_altitude(vcl::vec2 const& position_in_plane)
+float forest::get_altitude(vcl::vec2 const &position_in_plane)
 {
     float z = parameters.height * noise_perlin(position_in_plane, parameters.octaves, parameters.persistency, parameters.frequency_gain);
-    if (user_reference->sneak) return player_height / 2 + z;
-    else return player_height + z;
+    if (user_reference->sneak)
+        return player_height / 2 + z;
+    else
+        return player_height + z;
 }
