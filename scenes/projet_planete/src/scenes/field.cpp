@@ -9,6 +9,7 @@ countryside::countryside(user_parameters *user, std::function<void(scene_type)> 
 {
     // Configuration des visuels
     set_terrain();
+    set_tractor();
     set_skybox();
     set_sun();
 
@@ -21,6 +22,10 @@ countryside::countryside(user_parameters *user, std::function<void(scene_type)> 
 
     // Configuration de la lumi�re
     light = vec3(1.0f, 1.0f, 1.0f);
+    x_min = -5.0;
+    x_min = -5.0;
+    y_max = 5.0;
+    y_max = 5.0;
 }
 
 void countryside::display_visual()
@@ -45,6 +50,7 @@ void countryside::display_visual()
     else
         opengl_uniform(normal_shader, "view", camera_c.matrix_view());
     opengl_uniform(normal_shader, "light", light);
+    draw(tractor_visual, this);
 
     glUseProgram(sun_shader);
     opengl_uniform(sun_shader, "projection", projection);
@@ -120,6 +126,21 @@ void countryside::set_terrain()
     set_textures();
 }
 
+void countryside::set_tractor()
+{
+    mesh tractor = mesh_load_file_obj("../assets/objects/tractor/tractor.obj");
+    GLuint normal_shader = scene_visual::get_shader(shader_type::NORMAL);
+    tractor_visual = mesh_drawable(tractor, normal_shader);
+    tractor_visual.transform.scale = 0.02;
+    tractor_visual.texture = get_texture(texture_type::LOWPOLY);
+
+    /* Set transform */
+    vec2 position = vec2(x_min + rand_interval() * (x_max - x_min), y_min + rand_interval() * (y_max - y_min));
+    tractor_visual.transform.translate.x = position.x;
+    tractor_visual.transform.translate.y = position.y;
+    tractor_visual.transform.translate.z = parameters.height * noise_perlin(position, parameters.octaves, parameters.persistency, parameters.frequency_gain) + profile(position);
+}
+
 bool countryside::subdivide(int current_subdivisions)
 {
     bool answer = false;
@@ -177,7 +198,7 @@ void countryside::set_types()
 {
     for (int i = 0; i < fields.size(); i++)
     {
-        fields[i].type = static_cast<field_type>(int(rand_interval() * 12));
+        fields[i].type = static_cast<field_type>(int(rand_interval() * 4));
     }
 }
 
@@ -213,31 +234,26 @@ void countryside::set_sun()
     sun_visual.shading.color = vec3(1.0, 1.0, 0.0);
 }
 
-float countryside::get_altitude(vcl::vec2 const &position_in_plane)
+float countryside::get_altitude(vcl::vec2 const& position_in_plane)
 {
+    float dz = profile(position_in_plane);
     if (!user_reference->sneak)
-        return path_z_max + player_height + parameters.height * noise_perlin(position_in_plane, parameters.octaves, parameters.persistency, parameters.frequency_gain);
+        return dz + player_height + parameters.height * noise_perlin(position_in_plane, parameters.octaves, parameters.persistency, parameters.frequency_gain);
     else
-        return path_z_max + player_height / 2 + parameters.height * noise_perlin(position_in_plane, parameters.octaves, parameters.persistency, parameters.frequency_gain);
+        return dz + player_height / 2 + parameters.height * noise_perlin(position_in_plane, parameters.octaves, parameters.persistency, parameters.frequency_gain);
 }
 
 mesh countryside::subdivide_path(vcl::mesh quadrangle)
 {
-    vec3 up_shift = vec3(0, 0, path_z_max);
-    vec3 down_shift = vec3(0, 0, path_z_min);
-    int Nx = std::max(2, int(norm(quadrangle.position[0] - quadrangle.position[1]) * field_subdivisions / (field_min_dimension * (x_max - x_min))));
-    int Ny = std::max(2, int(norm(quadrangle.position[1] - quadrangle.position[2]) * field_subdivisions / (field_min_dimension * (x_max - x_min))));
-    int Nz = 3;
-    mesh result = mesh_primitive_cubic_grid(
-        quadrangle.position[0] + up_shift,
-        quadrangle.position[1] + up_shift,
-        quadrangle.position[2] + up_shift,
-        quadrangle.position[3] + up_shift,
-        quadrangle.position[0] + down_shift,
-        quadrangle.position[1] + down_shift,
-        quadrangle.position[2] + down_shift,
-        quadrangle.position[3] + down_shift,
-        Nx, Ny, Nz);
+    int Nx = std::max(5, int(norm(quadrangle.position[0] - quadrangle.position[1]) * field_subdivisions / (field_min_dimension * (x_max - x_min))));
+    int Ny = 3 * std::max(5, int(norm(quadrangle.position[1] - quadrangle.position[2]) * field_subdivisions / (field_min_dimension * (x_max - x_min))));
+    mesh result = mesh_primitive_grid(
+        quadrangle.position[0],
+        quadrangle.position[1],
+        quadrangle.position[2],
+        quadrangle.position[3],
+        Nx, Ny);
+
     for (int i = 0; i < result.uv.size(); i++)
     { // Compresses the ground texture
         if (Nx > Ny)
@@ -259,12 +275,35 @@ void countryside::shuffle()
     for (int i = 0; i < paths.size(); i++) {
         for (int j = 0; j < paths[i].position.size(); j++) {
             paths[i].position[j].z += parameters.height * noise_perlin(paths[i].position[j].xy(), parameters.octaves, parameters.persistency, parameters.frequency_gain);
+            paths[i].position[j].z += profile(paths[i].position[j].xy());
         }
     }
 
+    // Shuffle fields
     for (int i = 0; i < fields.size(); i++) {
         for (int j = 0; j < fields[i].field_mesh.position.size(); j++) {
             fields[i].field_mesh.position[j].z += parameters.height * noise_perlin(fields[i].field_mesh.position[j].xy(), parameters.octaves, parameters.persistency, parameters.frequency_gain);
+            fields[i].field_mesh.position[j].z += profile(fields[i].field_mesh.position[j].xy());
         }
     }
+}
+
+float countryside::profile(vec2 const& position_in_plane)
+{
+    float transition_down = 0.8;
+    float transition_up = 0.9;
+    float z_min = -0.2;
+    float z_max = 0.2;
+    float coord_x = std::max((position_in_plane.x - x_min) / (x_max - x_min), (x_max - position_in_plane.x) / (x_max - x_min));
+    float coord_y = std::max((position_in_plane.y - y_min) / (y_max - y_min), (y_max - position_in_plane.y) / (y_max - y_min));
+    float coord = std::max(coord_x, coord_y);
+    if (coord < transition_down)
+        return z_max;
+    else if (coord < transition_up)
+    {
+        float t = 0.5 * (1 + cos(PI / (transition_up - transition_down) * (coord - transition_down)));
+        return t * z_max + (1 - t) * z_min;
+    }
+    else
+        return z_min;
 }

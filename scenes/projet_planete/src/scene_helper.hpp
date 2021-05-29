@@ -211,9 +211,9 @@ public:
 
 	vcl::camera_around_center	camera_c;
 	vcl::camera_minecraft		camera_m;
-	bool					m_activated = true;
-	float					x_min = -10.0;
-	float					y_min = -10.0;
-	float					x_max = 10.0;
-	float					y_max = 10.0;
+	bool						m_activated = true;
+	float						x_min = -10.0;
+	float						y_min = -10.0;
+	float						x_max = 10.0;
+	float						y_max = 10.0;
 };
