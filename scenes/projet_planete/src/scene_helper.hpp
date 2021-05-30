@@ -41,6 +41,7 @@ enum class texture_type
 	FIRE,
 	LOWPOLY,
 	ROCK,
+	SNOW,
 	SB_DESERT_HAUT,
 	SB_DESERT_BAS,
 	SB_DESERT_GAUCHE,
@@ -144,6 +145,7 @@ public:
 	std::function<void(scene_type)> swap_function;
 
 	scene_visual(user_parameters *_user, std::function<void(scene_type)> swap_function);
+	//virtual ~scene_visual();
 
 	virtual void display_visual() = 0;
 	virtual void update_visual() = 0;
@@ -174,6 +176,7 @@ public:
 	static GLuint texture_sand;
 	static GLuint texture_rock;
 	static GLuint texture_fire;
+	static GLuint texture_snow;
 	static GLuint texture_snowflake;
 	static GLuint texture_lowpoly;
 
@@ -219,11 +222,11 @@ public:
 	void update_visual();
 	void display_interface();
 
-	vcl::camera_around_center	camera_c;
-	vcl::camera_minecraft		camera_m;
-	bool						m_activated = true;
-	float						x_min = -10.0;
-	float						y_min = -10.0;
-	float						x_max = 10.0;
-	float						y_max = 10.0;
+	vcl::camera_around_center camera_c;
+	vcl::camera_minecraft camera_m;
+	bool m_activated = true;
+	float x_min = -10.0;
+	float y_min = -10.0;
+	float x_max = 10.0;
+	float y_max = 10.0;
 };

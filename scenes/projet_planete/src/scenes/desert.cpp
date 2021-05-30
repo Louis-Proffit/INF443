@@ -73,7 +73,7 @@ void desert::display_interface()
 void desert::set_terrain()
 {
     parameters = heightmap_parameters{0, 0, x_min, y_min, x_max, y_max};
-    horizontal_scale = 1.0f;
+    horizontal_scale = 0.6f;
     height_data = generateFileHeightData("assets/heightmaps/desert.png", horizontal_scale);
     terrain_mesh = createFromHeightData(height_data, parameters);
     for (int i = 0; i < terrain_mesh.position.size(); i++)

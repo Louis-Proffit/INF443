@@ -1,4 +1,5 @@
 ﻿#include "scene_helper.hpp"
+#include "vcl/vcl.hpp"
 #include "../assets/shaders/planet/vert.glsl"
 #include "../assets/shaders/planet/frag.glsl"
 #include "../assets/shaders/sun/vert.glsl"
@@ -41,6 +42,7 @@ GLuint scene_visual::texture_fire = 0;
 GLuint scene_visual::texture_snowflake = 0;
 GLuint scene_visual::texture_lowpoly = 0;
 GLuint scene_visual::texture_rock = 0;
+GLuint scene_visual::texture_snow = 0;
 GLuint scene_visual::texture_sb_desert_haut = 0;
 GLuint scene_visual::texture_sb_desert_bas = 0;
 GLuint scene_visual::texture_sb_desert_gauche = 0;
@@ -109,6 +111,7 @@ void scene_visual::init()
 	scene_visual::texture_grass = opengl_texture_to_gpu(image_load_png("../assets/textures/grass/grass_1.png"), GL_REPEAT, GL_REPEAT);
 	scene_visual::texture_grass_atlas = opengl_texture_to_gpu(image_load_png("../assets/textures/grass/grass_atlas.png"), GL_REPEAT, GL_REPEAT);
 	scene_visual::texture_rock = opengl_texture_to_gpu(image_load_png("../assets/textures/mountain/rock.png"), GL_REPEAT, GL_REPEAT);
+	scene_visual::texture_snow = opengl_texture_to_gpu(image_load_png("../assets/textures/mountain/snow.png"), GL_REPEAT, GL_REPEAT);
 	scene_visual::texture_sand = opengl_texture_to_gpu(image_load_png("../assets/textures/desert/sand_1.png"), GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT);
 	scene_visual::texture_fire = opengl_texture_to_gpu(image_load_png("../assets/textures/fire/fire.png"), GL_REPEAT, GL_REPEAT);
 	scene_visual::texture_snowflake = opengl_texture_to_gpu(image_load_png("../assets/textures/snow/snowflake_3.png"), GL_REPEAT, GL_REPEAT);
@@ -198,6 +201,8 @@ GLuint scene_visual::get_texture(texture_type texture_type)
 		return texture_lowpoly;
 	case texture_type::ROCK:
 		return texture_rock;
+	case texture_type::SNOW:
+		return texture_snow;
 	case texture_type::SB_DESERT_HAUT:
 		return texture_sb_desert_haut;
 	case texture_type::SB_DESERT_BAS:

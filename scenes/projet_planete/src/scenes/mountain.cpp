@@ -89,7 +89,7 @@ void mountain::display_interface()
 void mountain::set_terrain()
 {
     parameters = heightmap_parameters{0, 0, x_min, y_min, x_max, y_max};
-    horizontal_scale = 1.0f;
+    horizontal_scale = 2.0f;
     height_data = generateFileHeightData("../assets/heightmaps/mountain3.png", horizontal_scale);
     terrain_mesh = createFromHeightData(height_data, parameters);
     for (int i = 0; i < terrain_mesh.position.size(); i++)
@@ -179,6 +179,8 @@ void mountain::display_scene(vec4 clipPlane)
     GLuint mountain_shader = get_shader(shader_type::MOUNTAIN);
     GLuint sun_shader = get_shader(shader_type::SUN);
 
+    GLuint texture_snow = scene_visual::get_texture(texture_type::SNOW);
+
     glUseProgram(mountain_shader);
     opengl_uniform(mountain_shader, "projection", projection);
     if (m_activated)
@@ -188,6 +190,10 @@ void mountain::display_scene(vec4 clipPlane)
     opengl_uniform(mountain_shader, "light", light);
     opengl_uniform(mountain_shader, "plane", clipPlane);
     opengl_uniform(mountain_shader, "fog_falloff", 0.1f);
+
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, texture_snow);
+    opengl_uniform(mountain_shader, "image_texture_snow", 1);
 
     glUseProgram(sun_shader);
     opengl_uniform(sun_shader, "projection", projection);
