@@ -19,6 +19,7 @@ countryside::countryside(user_parameters *user, std::function<void(scene_type)> 
     set_skybox();
     set_sun();
     set_water();
+    set_assets();
 
     // Configuration de la cam�ra
     camera_m.position_camera = vec3(0, 0, 0);
@@ -429,6 +430,7 @@ void countryside::display_scene(vec4 clipPlane)
 
     GLuint normal_shader = get_shader(shader_type::NORMAL);
     GLuint sun_shader = get_shader(shader_type::SUN);
+    GLuint ebly_shader = get_shader(shader_type::EBLY);
 
     glUseProgram(normal_shader);
     opengl_uniform(normal_shader, "projection", projection);
@@ -449,6 +451,31 @@ void countryside::display_scene(vec4 clipPlane)
     opengl_uniform(sun_shader, "light", light);
     opengl_uniform(sun_shader, "plane", clipPlane);
 
+    glUseProgram(ebly_shader);
+    opengl_uniform(ebly_shader, "projection", projection);
+    if (m_activated)
+        opengl_uniform(ebly_shader, "view", camera_m.matrix_view());
+    else
+        opengl_uniform(ebly_shader, "view", camera_c.matrix_view());
+    opengl_uniform(ebly_shader, "light", light);
+    opengl_uniform(ebly_shader, "plane", clipPlane);
+
+    opengl_uniform(ebly_shader, "ligne", 1.0f);
+    opengl_uniform(ebly_shader, "colonne", 1.0f);
+    draw(draw_fields_type1, this);
+
+    opengl_uniform(ebly_shader, "ligne", 7.0f);
+    opengl_uniform(ebly_shader, "colonne", 3.0f);
+    draw(draw_fields_type2, this);
+
+    opengl_uniform(ebly_shader, "ligne", 5.0f);
+    opengl_uniform(ebly_shader, "colonne", 4.0f);
+    draw(draw_fields_type3, this);
+
+    opengl_uniform(ebly_shader, "ligne", 5.0f);
+    opengl_uniform(ebly_shader, "colonne", 5.0f);
+    draw(draw_fields_type4, this);
+
     draw(path_visual, this);
     for (mesh_drawable field_visual : fields_visuals)
         draw(field_visual, this);
@@ -465,7 +492,77 @@ void countryside::display_scene(vec4 clipPlane)
         draw_wireframe(path_visual, this);
         draw_wireframe(sand_visual, this);
         draw_wireframe(sun_visual, this);
+        draw_wireframe(draw_fields_type1, this);
     }
 
     skybox.display_skybox(this);
+}
+
+void countryside::set_assets()
+{
+
+    vec3 up = vec3(0, 0, 0.04);
+    float coefal = 0;
+    for (int i = 0; i < fields.size(); i++)
+    {
+        switch (fields[i].type)
+        {
+        case field_type::UN:
+            for (int j = 0; j < fields[i].field_mesh.position.size() - 1; j++)
+            {
+                if (!((j + 1) % 10 == 0 or j > 88))
+                {
+                    coefal = rand_interval() + 0.5f;
+                    fields_type1.push_back(mesh_primitive_quadrangle(fields[i].field_mesh.position[j], fields[i].field_mesh.position[j + 1], fields[i].field_mesh.position[j + 1] + coefal * up, fields[i].field_mesh.position[j] + coefal * up));
+                    fields_type1.push_back(mesh_primitive_quadrangle(fields[i].field_mesh.position[j], fields[i].field_mesh.position[j + 11], fields[i].field_mesh.position[j + 11] + coefal * up, fields[i].field_mesh.position[j] + coefal * up));
+                }
+            }
+            break;
+
+        case field_type::DEUX:
+            for (int j = 0; j < fields[i].field_mesh.position.size() - 1; j++)
+            {
+                if (!((j + 1) % 10 == 0 or j > 88))
+                {
+                    coefal = rand_interval() + 0.5f;
+                    fields_type2.push_back(mesh_primitive_quadrangle(fields[i].field_mesh.position[j], fields[i].field_mesh.position[j + 1], fields[i].field_mesh.position[j + 1] + coefal * up, fields[i].field_mesh.position[j] + coefal * up));
+                    fields_type2.push_back(mesh_primitive_quadrangle(fields[i].field_mesh.position[j], fields[i].field_mesh.position[j + 11], fields[i].field_mesh.position[j + 11] + coefal * up, fields[i].field_mesh.position[j] + coefal * up));
+                }
+            }
+            break;
+        case field_type::TROIS:
+            for (int j = 0; j < fields[i].field_mesh.position.size() - 1; j++)
+            {
+                if (!((j + 1) % 10 == 0 or j > 88))
+                {
+                    coefal = rand_interval() + 0.5f;
+                    fields_type3.push_back(mesh_primitive_quadrangle(fields[i].field_mesh.position[j], fields[i].field_mesh.position[j + 11], fields[i].field_mesh.position[j + 11] + coefal * up, fields[i].field_mesh.position[j] + coefal * up));
+                    fields_type3.push_back(mesh_primitive_quadrangle(fields[i].field_mesh.position[j], fields[i].field_mesh.position[j + 1], fields[i].field_mesh.position[j + 1] + coefal * up, fields[i].field_mesh.position[j] + coefal * up));
+                }
+            }
+            break;
+        case field_type::QUATRE:
+            for (int j = 0; j < fields[i].field_mesh.position.size() - 1; j++)
+            {
+                if (!((j + 1) % 10 == 0 or j > 88))
+                {
+                    coefal = rand_interval() + 0.5f;
+                    fields_type4.push_back(mesh_primitive_quadrangle(fields[i].field_mesh.position[j], fields[i].field_mesh.position[j + 11], fields[i].field_mesh.position[j + 11] + coefal * up, fields[i].field_mesh.position[j] + coefal * up));
+                    fields_type4.push_back(mesh_primitive_quadrangle(fields[i].field_mesh.position[j], fields[i].field_mesh.position[j + 1], fields[i].field_mesh.position[j + 1] + coefal * up, fields[i].field_mesh.position[j] + coefal * up));
+                }
+            }
+            break;
+        }
+    }
+    GLuint ebly_shader = scene_visual::get_shader(shader_type::EBLY);
+    GLuint texture_atlas = scene_visual::get_texture(texture_type::GRASS_ATLAS);
+
+    draw_fields_type1 = mesh_drawable(fields_type1, ebly_shader);
+    draw_fields_type1.texture = texture_atlas;
+    draw_fields_type2 = mesh_drawable(fields_type2, ebly_shader);
+    draw_fields_type2.texture = texture_atlas;
+    draw_fields_type3 = mesh_drawable(fields_type3, ebly_shader);
+    draw_fields_type3.texture = texture_atlas;
+    draw_fields_type4 = mesh_drawable(fields_type4, ebly_shader);
+    draw_fields_type4.texture = texture_atlas;
 }

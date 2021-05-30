@@ -17,6 +17,8 @@
 #include "../assets/shaders/tree/tree.frag.glsl"
 #include "../assets/shaders/mountain/vert.glsl"
 #include "../assets/shaders/mountain/frag.glsl"
+#include "../assets/shaders/ebly/vert.glsl"
+#include "../assets/shaders/ebly/frag.glsl"
 
 using namespace vcl;
 
@@ -29,6 +31,7 @@ GLuint scene_visual::particle_shader = 0;
 GLuint scene_visual::tree_shader = 0;
 GLuint scene_visual::mountain_shader = 0;
 GLuint scene_visual::particle_mountain_shader = 0;
+GLuint scene_visual::ebly_shader = 0;
 
 GLuint scene_visual::texture_field_1 = 0;
 GLuint scene_visual::texture_field_2 = 0;
@@ -102,6 +105,7 @@ void scene_visual::init()
 	scene_visual::tree_shader = opengl_create_shader_program(tree_vertex, tree_fragment);
 	scene_visual::mountain_shader = opengl_create_shader_program(mountain_vert, mountain_frag);
 	scene_visual::particle_mountain_shader = opengl_create_shader_program(partic_vert, partic_mountain_frag);
+	scene_visual::ebly_shader = opengl_create_shader_program(ebly_vert, ebly_frag);
 
 	scene_visual::texture_field_1 = opengl_texture_to_gpu(image_load_png("../assets/textures/field/field_1.png"), GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT);
 	scene_visual::texture_field_2 = opengl_texture_to_gpu(image_load_png("../assets/textures/field/field_2.png"), GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT);
@@ -170,6 +174,8 @@ GLuint scene_visual::get_shader(shader_type shader_type)
 		return mountain_shader;
 	case shader_type::PARTICLE_MOUNTAIN:
 		return particle_mountain_shader;
+	case shader_type::EBLY:
+		return ebly_shader;
 	}
 }
 

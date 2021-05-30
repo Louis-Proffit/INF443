@@ -34,6 +34,10 @@ public:
 	vcl::mesh_drawable sand_visual;
 	vcl::mesh_drawable tractor_visual;
 	vcl::mesh_drawable sun_visual;
+	vcl::mesh_drawable draw_fields_type1;
+	vcl::mesh_drawable draw_fields_type2;
+	vcl::mesh_drawable draw_fields_type3;
+	vcl::mesh_drawable draw_fields_type4;
 
 	// Constructor and destructors;
 	countryside(user_parameters *user, std::function<void(scene_type)> swap_function);
@@ -54,6 +58,10 @@ private:
 	float border_proportion = 0.01f;
 	float sand_proportion = 0.5f;
 	int number_of_tractors = 3;
+	vcl::mesh fields_type1;
+	vcl::mesh fields_type2;
+	vcl::mesh fields_type3;
+	vcl::mesh fields_type4;
 
 	perlin_noise_parameters parameters{3, 0.1, 0.3, 2.0};
 
@@ -66,6 +74,7 @@ private:
 	void set_textures();
 	void set_skybox();
 	void set_sun();
+	void set_assets();
 	float get_altitude(vcl::vec2 const &position_in_plane);
 	vcl::mesh subdivide_path(vcl::mesh quadrangle);
 	vcl::mesh subdivide_field(vcl::mesh quadrangle);
