@@ -60,6 +60,7 @@ void mountain::display_visual()
         opengl_uniform(water_shader, "view", camera_c.matrix_view());
     opengl_uniform(water_shader, "light", light);
     opengl_uniform(water_shader, "fog_falloff", 0.06f);
+    opengl_uniform(water_shader, "use_fog", true);
     draw(wat.waterd, this);
 }
 
@@ -102,7 +103,7 @@ void mountain::set_terrain()
 
 void mountain::set_skybox()
 {
-    skybox.init_skybox(vec3(0, 0, 0), x_max - x_min + y_max - y_min, skybox_type::NEIGE, get_shader(shader_type::MOUNTAIN));
+    skybox.init_skybox(vec3(0, 0, 0), x_max - x_min + y_max - y_min, skybox_type::NEIGE, get_shader(shader_type::NORMAL));
 }
 
 void mountain::set_sun()
@@ -178,6 +179,7 @@ void mountain::display_scene(vec4 clipPlane)
 
     GLuint mountain_shader = get_shader(shader_type::MOUNTAIN);
     GLuint sun_shader = get_shader(shader_type::SUN);
+    GLuint normal_shader = get_shader(shader_type::NORMAL);
 
     GLuint texture_snow = scene_visual::get_texture(texture_type::SNOW);
 
@@ -205,14 +207,24 @@ void mountain::display_scene(vec4 clipPlane)
     opengl_uniform(sun_shader, "light", light);
     opengl_uniform(sun_shader, "plane", clipPlane);
 
+    glUseProgram(normal_shader);
+    opengl_uniform(normal_shader, "projection", projection);
+    if (m_activated)
+        opengl_uniform(normal_shader, "view", camera_m.matrix_view());
+    else
+        opengl_uniform(normal_shader, "view", camera_c.matrix_view());
+    ;
+    opengl_uniform(normal_shader, "light", light);
+    opengl_uniform(normal_shader, "plane", clipPlane);
+    opengl_uniform(normal_shader, "fog_falloff", 0.0015f);
+    opengl_uniform(normal_shader, "use_fog", true);
+
     draw(terrain_visual, this);
     if (user_reference->draw_wireframe)
         draw_wireframe(terrain_visual, this);
 
     /*draw(sun_visual, this);
     if (user_reference->draw_wireframe) draw_wireframe(sun_visual, this);*/
-    glUseProgram(mountain_shader);
-    opengl_uniform(mountain_shader, "fog_falloff", 0.001f);
 
     skybox.display_skybox(this);
 }

@@ -8,8 +8,8 @@ using namespace vcl;
 countryside::countryside(user_parameters *user, std::function<void(scene_type)> _swap_function) : environement(user, _swap_function)
 {
     x_min = -2.0;
-    x_min = -2.0;
-    y_max = 2.0;
+    y_min = -2.0;
+    x_max = 2.0;
     y_max = 2.0;
 
     // Configuration des visuels
@@ -18,6 +18,7 @@ countryside::countryside(user_parameters *user, std::function<void(scene_type)> 
     set_tractor();
     set_skybox();
     set_sun();
+    set_water();
 
     // Configuration de la cam�ra
     camera_m.position_camera = vec3(0, 0, 0);
@@ -32,54 +33,27 @@ countryside::countryside(user_parameters *user, std::function<void(scene_type)> 
 
 void countryside::display_visual()
 {
-    glClearColor(0.256f, 0.256f, 0.256f, 0.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
-    glClear(GL_DEPTH_BUFFER_BIT);
     user_reference->timer.update();
     float const time = user_reference->timer.t;
+    display_reflec_refrac(clipPlane);
+    glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_DEPTH_BUFFER_BIT);
+    display_scene(clipPlane);
     if (m_activated)
-        light = camera_m.position();
+        wat.set_Uniforms(fbos.getReflectionTexture(), fbos.getRefractionTexture(), camera_m.position(), fbos.movefactor);
     else
-        light = camera_c.position();
+        wat.set_Uniforms(fbos.getReflectionTexture(), fbos.getRefractionTexture(), camera_c.position(), fbos.movefactor);
 
-    GLuint normal_shader = get_shader(shader_type::NORMAL);
-    GLuint sun_shader = get_shader(shader_type::SUN);
-
-    glUseProgram(normal_shader);
-    opengl_uniform(normal_shader, "projection", projection);
+    glUseProgram(water_shader);
+    opengl_uniform(water_shader, "projection", projection);
     if (m_activated)
-        opengl_uniform(normal_shader, "view", camera_m.matrix_view());
+        opengl_uniform(water_shader, "view", camera_m.matrix_view());
     else
-        opengl_uniform(normal_shader, "view", camera_c.matrix_view());
-    opengl_uniform(normal_shader, "light", light);
-
-    glUseProgram(sun_shader);
-    opengl_uniform(sun_shader, "projection", projection);
-    if (m_activated)
-        opengl_uniform(sun_shader, "view", camera_m.matrix_view());
-    else
-        opengl_uniform(sun_shader, "view", camera_c.matrix_view());
-    opengl_uniform(sun_shader, "light", light);
-
-    draw(path_visual, this);
-    for (mesh_drawable field_visual : fields_visuals)
-        draw(field_visual, this);
-    for (vec3 position : tractor_positions)
-    {
-        tractor_visual.transform.translate = position;
-        draw(tractor_visual, this);
-    }
-    draw(sand_visual, this);
-    if (user_reference->draw_wireframe)
-    {
-        for (mesh_drawable field_visual : fields_visuals)
-            draw_wireframe(field_visual, this);
-        draw_wireframe(path_visual, this);
-        draw_wireframe(sand_visual, this);
-        draw_wireframe(sun_visual, this);
-    }
-
-    skybox.display_skybox(this);
+        opengl_uniform(water_shader, "view", camera_c.matrix_view());
+    opengl_uniform(water_shader, "light", light);
+    opengl_uniform(water_shader, "use_fog", false);
+    draw(wat.waterd, this);
 }
 
 void countryside::update_visual()
@@ -382,4 +356,116 @@ float countryside::profile(vec2 const &position_in_plane)
     }
     else
         return z_min;
+}
+
+void countryside::set_water()
+{
+    wat.init_water(scene_visual::water_shader);
+    fbos.initWaterFrameBuffers();
+    clipPlane = vec4(0, 0, 1, -wat.waterHeight);
+}
+
+void countryside::display_reflec_refrac(vec4 clipPlane)
+{
+    // Water Refraction rendering
+    fbos.movefactor += (0.3 / 58.0);
+    glEnable(GL_CLIP_DISTANCE0);
+    fbos.bindRefractionFrameBuffer();
+
+    glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_DEPTH_BUFFER_BIT);
+
+    display_scene(-clipPlane);
+
+    // Water Reflection rendering
+
+    fbos.bindReflectionFrameBuffer();
+    if (m_activated)
+    {
+        float pos = 2 * (camera_m.position().z - wat.waterHeight);
+        vec3 eye = camera_m.position();
+        camera_m.manipulator_rotate_2_axis(-2 * camera_m.rotation_orthogonal, 0);
+        camera_m.position_camera = eye - vec3(0, 0, pos);
+
+        glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_DEPTH_BUFFER_BIT);
+
+        display_scene(clipPlane);
+
+        camera_m.manipulator_rotate_2_axis(-2 * camera_m.rotation_orthogonal, 0);
+        camera_m.position_camera = eye;
+    }
+    else
+    {
+        vec3 eye = camera_c.position();
+        float pos = 2 * (eye.z - wat.waterHeight);
+        // std::cout << camera_c.center_of_rotation;
+        camera_c.look_at(eye - vec3(0, 0, pos), camera_c.center_of_rotation, vec3(0, 0, 1));
+
+        glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_DEPTH_BUFFER_BIT);
+
+        display_scene(clipPlane);
+        camera_c.look_at(eye, camera_c.center_of_rotation, vec3(0, 0, 1));
+    }
+    fbos.unbindCurrentFrameBuffer();
+    glDisable(GL_CLIP_DISTANCE0);
+}
+
+void countryside::display_scene(vec4 clipPlane)
+{
+    glClearColor(0.256f, 0.256f, 0.256f, 0.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_DEPTH_BUFFER_BIT);
+    user_reference->timer.update();
+    float const time = user_reference->timer.t;
+    if (m_activated)
+        light = camera_m.position();
+    else
+        light = camera_c.position();
+
+    GLuint normal_shader = get_shader(shader_type::NORMAL);
+    GLuint sun_shader = get_shader(shader_type::SUN);
+
+    glUseProgram(normal_shader);
+    opengl_uniform(normal_shader, "projection", projection);
+    if (m_activated)
+        opengl_uniform(normal_shader, "view", camera_m.matrix_view());
+    else
+        opengl_uniform(normal_shader, "view", camera_c.matrix_view());
+    opengl_uniform(normal_shader, "light", light);
+    opengl_uniform(normal_shader, "plane", clipPlane);
+    opengl_uniform(normal_shader, "use_fog", false);
+
+    glUseProgram(sun_shader);
+    opengl_uniform(sun_shader, "projection", projection);
+    if (m_activated)
+        opengl_uniform(sun_shader, "view", camera_m.matrix_view());
+    else
+        opengl_uniform(sun_shader, "view", camera_c.matrix_view());
+    opengl_uniform(sun_shader, "light", light);
+    opengl_uniform(sun_shader, "plane", clipPlane);
+
+    draw(path_visual, this);
+    for (mesh_drawable field_visual : fields_visuals)
+        draw(field_visual, this);
+    for (vec3 position : tractor_positions)
+    {
+        tractor_visual.transform.translate = position;
+        draw(tractor_visual, this);
+    }
+    draw(sand_visual, this);
+    if (user_reference->draw_wireframe)
+    {
+        for (mesh_drawable field_visual : fields_visuals)
+            draw_wireframe(field_visual, this);
+        draw_wireframe(path_visual, this);
+        draw_wireframe(sand_visual, this);
+        draw_wireframe(sun_visual, this);
+    }
+
+    skybox.display_skybox(this);
 }

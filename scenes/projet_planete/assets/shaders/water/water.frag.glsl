@@ -41,7 +41,8 @@ const float waveStrength = 0.003;
 const float shineDamper = 20.0;
 const float reflectivity = 0.6;
 
-uniform float fog_falloff = 0;
+uniform float fog_falloff = 0.00;
+uniform bool use_fog = false;
 
 void main()
 {
@@ -107,9 +108,9 @@ void main()
 	 
 
 	FragColor = mix(FragColor, vec4(0.0,0.3,0.5,1.0),0.2)+ vec4(specularHighlights,0.0);
-
+	if (use_fog) {
 	vec3 color_with_fog = w_depth*FragColor.xyz+(1-w_depth)*vec3(0.7,0.7,0.7);
 
-	FragColor = vec4(color_with_fog, FragColor.a);
+	FragColor = vec4(color_with_fog, FragColor.a);}
 }
 )";

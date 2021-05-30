@@ -3,6 +3,8 @@
 #include "vcl/vcl.hpp"
 #include <iostream>
 #include "scene_helper.hpp"
+#include "water/water.hpp"
+#include "water/waterfbuffer.hpp"
 
 enum class field_type
 {
@@ -24,17 +26,17 @@ struct field
 class countryside : public environement
 {
 public:
-	std::vector<field>				fields;
-	std::vector<vcl::mesh>			paths;
+	std::vector<field> fields;
+	std::vector<vcl::mesh> paths;
 	std::vector<vcl::mesh_drawable> fields_visuals;
-	vcl::mesh_drawable				path_visual;
-	std::vector<vcl::vec3>			tractor_positions;
-	vcl::mesh_drawable				sand_visual;
-	vcl::mesh_drawable				tractor_visual;
-	vcl::mesh_drawable				sun_visual;
+	vcl::mesh_drawable path_visual;
+	std::vector<vcl::vec3> tractor_positions;
+	vcl::mesh_drawable sand_visual;
+	vcl::mesh_drawable tractor_visual;
+	vcl::mesh_drawable sun_visual;
 
 	// Constructor and destructors;
-	countryside(user_parameters* user, std::function<void(scene_type)> swap_function);
+	countryside(user_parameters *user, std::function<void(scene_type)> swap_function);
 
 	// Redefine the virtuals
 	void display_visual();
@@ -64,9 +66,19 @@ private:
 	void set_textures();
 	void set_skybox();
 	void set_sun();
-	float get_altitude(vcl::vec2 const& position_in_plane);
+	float get_altitude(vcl::vec2 const &position_in_plane);
 	vcl::mesh subdivide_path(vcl::mesh quadrangle);
 	vcl::mesh subdivide_field(vcl::mesh quadrangle);
 	void shuffle();
-	float profile(vcl::vec2 const& position_in_plane);
+	float profile(vcl::vec2 const &position_in_plane);
+
+	// Affichage de l'eau
+
+	void set_water();
+	Water wat;
+	WaterFrameBuffers fbos;
+	vec4 clipPlane = vec4(0, 0, 0, 0);
+
+	void display_scene(vec4 clipPlane);
+	void display_reflec_refrac(vec4 clipPlane);
 };

@@ -22,8 +22,6 @@ public:
 	void display_interface();
 	float get_altitude(vcl::vec2 const &position_in_plane);
 
-	Particles snow;
-
 private:
 	typedef environement super;
 	float horizontal_scale;
@@ -38,17 +36,18 @@ private:
 	vcl::mesh_drawable terrain_visual;
 	vcl::mesh_drawable sun_visual;
 	heightmap_parameters parameters;
+	Particles snow;
 
 	std::vector<std::vector<float>> height_data;
 	void set_terrain();
 	void set_skybox();
 	void set_sun();
-	void set_water();
+
 	void set_snow();
 	float profile(vcl::vec2 const &position_in_plane);
 
 	// Pour l'affichage de l'eau
-
+	void set_water();
 	Water wat;
 	WaterFrameBuffers fbos;
 	vec4 clipPlane = vec4(0, 0, 0, 0);
