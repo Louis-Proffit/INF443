@@ -111,10 +111,10 @@ void forest::set_sand()
     vec3 inner_2 = forest_proportion * vec3(x_max, y_min, 0.0);
     vec3 inner_3 = forest_proportion * vec3(x_max, y_max, 0.0);
     vec3 inner_4 = forest_proportion * vec3(x_min, y_max, 0.0);
-    vec3 outer_1 = vec3(x_min, y_min, 0.0);
-    vec3 outer_2 = vec3(x_max, y_min, 0.0);
-    vec3 outer_3 = vec3(x_max, y_max, 0.0);
-    vec3 outer_4 = vec3(x_min, y_max, 0.0);
+    vec3 outer_1 = 2 * vec3(x_min, y_min, 0.0);
+    vec3 outer_2 = 2 * vec3(x_max, y_min, 0.0);
+    vec3 outer_3 = 2 * vec3(x_max, y_max, 0.0);
+    vec3 outer_4 = 2 * vec3(x_min, y_max, 0.0);
     sand.push_back(mesh_primitive_grid(inner_1, inner_2, outer_2, outer_1, N_big, N_small));
     sand.push_back(mesh_primitive_grid(inner_2, inner_3, outer_3, outer_2, N_big, N_small));
     sand.push_back(mesh_primitive_grid(inner_3, inner_4, outer_4, outer_3, N_big, N_small));

@@ -36,6 +36,8 @@ enum class texture_type
 	FIELD_2,
 	FIELD_3,
 	FIELD_4,
+	WATERDUDV,
+	WATERNORMAL,
 	SAND,
 	GRASS,
 	GRASS_ATLAS,
@@ -178,6 +180,8 @@ public:
 	static GLuint texture_field_3;
 	static GLuint texture_field_4;
 	static GLuint texture_grass;
+	static GLuint texture_waterdudv;
+	static GLuint texture_waternormal;
 	static GLuint texture_grass_atlas;
 	static GLuint texture_grass_billboard;
 	static GLuint texture_sand;

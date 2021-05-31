@@ -81,7 +81,8 @@ void planet::display_visual()
         draw(islands_visuals[i], this);
     }
 
-    for (int i = 0; i < orbiters.size(); i++) {
+    for (int i = 0; i < orbiters.size(); i++)
+    {
         orbiters[i].update(time);
         orbiters[i].display();
     }
@@ -221,19 +222,19 @@ void planet::set_islands()
         switch (terrain_types[i])
         {
         case scene_type::FOREST:
-            island_mesh = mesh_load_file_obj("assets/objects/oak/island_with_oak.obj");
+            island_mesh = mesh_load_file_obj("../assets/objects/oak/island_with_oak.obj");
             break;
         case scene_type::CITY:
-            island_mesh = mesh_load_file_obj("assets/objects/house/island_with_house.obj");
+            island_mesh = mesh_load_file_obj("../assets/objects/house/island_with_house.obj");
             break;
         case scene_type::DESERT:
-            island_mesh = mesh_load_file_obj("assets/objects/palm/island_with_palm.obj");
+            island_mesh = mesh_load_file_obj("../assets/objects/palm/island_with_palm.obj");
             break;
         case scene_type::MOUNTAIN:
-            island_mesh = mesh_load_file_obj("assets/objects/mountain/island_with_mountain.obj");
+            island_mesh = mesh_load_file_obj("../assets/objects/mountain/island_with_mountain.obj");
             break;
         case scene_type::FIELD:
-            island_mesh = mesh_load_file_obj("assets/objects/tractor/island_with_tractor.obj");
+            island_mesh = mesh_load_file_obj("../assets/objects/tractor/island_with_tractor.obj");
             break;
         }
 
@@ -254,8 +255,10 @@ void planet::set_skybox()
 
 void planet::set_orbiters()
 {
-    for (int i = 0; i < number_of_planes; i++) orbiters.push_back(orbiter(orbiter_type::PLANE));
-    for (int i = 0; i < number_of_satelites; i++) orbiters.push_back(orbiter(orbiter_type::SATELITE));
+    for (int i = 0; i < number_of_planes; i++)
+        orbiters.push_back(orbiter(orbiter_type::PLANE));
+    for (int i = 0; i < number_of_satelites; i++)
+        orbiters.push_back(orbiter(orbiter_type::SATELITE));
 }
 
 void planet::set_sun()

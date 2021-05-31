@@ -10,6 +10,7 @@ using namespace std;
 city::city(user_parameters *_user, std::function<void(scene_type)> swap_function) : environement(_user, swap_function)
 {
     // Configuration de la ville
+    set_water();
     init_car();
     init_sand();
     init_sidewalk();
@@ -57,99 +58,27 @@ city::city(user_parameters *_user, std::function<void(scene_type)> swap_function
 
 void city::display_visual()
 {
-    super::display_visual();
-
-    glClearColor(0.256f, 0.256f, 0.256f, 0.0f);
+    user_reference->timer.update();
+    float const time = user_reference->timer.t;
+    display_reflec_refrac(clipPlane);
+    glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     glClear(GL_DEPTH_BUFFER_BIT);
-    vec3 light = camera_c.position();
-
-    /* Shaders*/
-    GLuint normal_shader = scene_visual::get_shader(shader_type::NORMAL);
-    glUseProgram(normal_shader);
-    opengl_uniform(normal_shader, "projection", projection);
+    display_scene(clipPlane);
     if (m_activated)
-        opengl_uniform(normal_shader, "view", camera_m.matrix_view());
+        wat.set_Uniforms(fbos.getReflectionTexture(), fbos.getRefractionTexture(), camera_m.position(), fbos.movefactor);
     else
-        opengl_uniform(normal_shader, "view", camera_c.matrix_view());
-    opengl_uniform(normal_shader, "light", light);
+        wat.set_Uniforms(fbos.getReflectionTexture(), fbos.getRefractionTexture(), camera_c.position(), fbos.movefactor);
 
-    GLuint tree_shader = scene_visual::get_shader(shader_type::TREE);
-    glUseProgram(tree_shader);
-    opengl_uniform(tree_shader, "projection", projection);
+    glUseProgram(water_shader);
+    opengl_uniform(water_shader, "projection", projection);
     if (m_activated)
-        opengl_uniform(tree_shader, "view", camera_m.matrix_view());
+        opengl_uniform(water_shader, "view", camera_m.matrix_view());
     else
-        opengl_uniform(tree_shader, "view", camera_c.matrix_view());
-    opengl_uniform(tree_shader, "light", light);
-
-    /* Trees */
-    for (tree_located tree : trees)
-    {
-        switch (tree.type)
-        {
-        case tree_type::COOL:
-            tree_cool.translate(tree.position);
-            draw(tree_cool.dtrunk, this);
-            if (tree_cool.hasleaves)
-                draw(tree_cool.dleaves, this);
-            if (user_reference->draw_wireframe)
-            {
-                draw_wireframe(tree_cool.dtrunk, this);
-                if (tree_cool.hasleaves)
-                    draw_wireframe(tree_cool.dleaves, this);
-            }
-            break;
-        case tree_type::CLASSIC:
-            tree_classic.translate(tree.position);
-            draw(tree_real.dtrunk, this);
-            if (tree_real.hasleaves)
-                draw(tree_real.dleaves, this);
-            if (user_reference->draw_wireframe)
-            {
-                draw_wireframe(tree_real.dtrunk, this);
-                if (tree_real.hasleaves)
-                    draw_wireframe(tree_real.dleaves, this);
-            }
-            break;
-        case tree_type::REAL_1:
-            tree_real.translate(tree.position);
-            draw(tree_real.dtrunk, this);
-            if (tree_real.hasleaves)
-                draw(tree_real.dleaves, this);
-            if (user_reference->draw_wireframe)
-            {
-                draw_wireframe(tree_real.dtrunk, this);
-                if (tree_real.hasleaves)
-                    draw_wireframe(tree_real.dleaves, this);
-            }
-            break;
-        }
-    }
-    draw(sidewalk_visual, this);
-    if (user_reference->draw_wireframe)
-        draw_wireframe(sidewalk_visual, this);
-
-    draw(sand_visual, this);
-    if (user_reference->draw_wireframe)
-        draw_wireframe(sand_visual, this);
-
-    draw(car_visual, this);
-    if (user_reference->draw_wireframe)
-        draw_wireframe(car_visual, this);
-
-    draw(d_bat, this);
-    if (user_reference->draw_wireframe)
-        draw_wireframe(d_bat, this);
-    draw(d_roads, this);
-    if (user_reference->draw_wireframe)
-        draw_wireframe(d_roads, this);
-    draw(d_parcs, this);
-    if (user_reference->draw_wireframe)
-        draw_wireframe(d_parcs, this);
-    draw(d_ground, this);
-    if (user_reference->draw_wireframe)
-        draw_wireframe(d_ground, this);
+        opengl_uniform(water_shader, "view", camera_c.matrix_view());
+    opengl_uniform(water_shader, "light", light);
+    opengl_uniform(water_shader, "use_fog", false);
+    draw(wat.waterd, this);
 }
 
 void city::display_interface()
@@ -209,10 +138,10 @@ void city::init_sand()
     vec3 inner_2 = border_sidewalk_proportion * vec3(x_max, y_min, 0.0);
     vec3 inner_3 = border_sidewalk_proportion * vec3(x_max, y_max, 0.0);
     vec3 inner_4 = border_sidewalk_proportion * vec3(x_min, y_max, 0.0);
-    vec3 outer_1 = vec3(x_min, y_min, 0.0);
-    vec3 outer_2 = vec3(x_max, y_min, 0.0);
-    vec3 outer_3 = vec3(x_max, y_max, 0.0);
-    vec3 outer_4 = vec3(x_min, y_max, 0.0);
+    vec3 outer_1 = 2 * vec3(x_min, y_min, 0.0);
+    vec3 outer_2 = 2 * vec3(x_max, y_min, 0.0);
+    vec3 outer_3 = 2 * vec3(x_max, y_max, 0.0);
+    vec3 outer_4 = 2 * vec3(x_min, y_max, 0.0);
     side = mesh_primitive_grid(inner_1, inner_2, outer_2, outer_1, N2, N1);
     sand.push_back(side);
     side = mesh_primitive_grid(inner_2, inner_3, outer_3, outer_2, N2, N1);
@@ -244,7 +173,7 @@ void city::init_car()
     car_visual.transform = get_car_transform(0);
 }
 
-void city::init_sidewalk() 
+void city::init_sidewalk()
 {
     mesh sidewalk;
     int N1 = 100;
@@ -635,7 +564,8 @@ mesh city::compute_garden(vector<vec3> coords)
     int Nv = 15;
     // Pour compute les arbres, generer un vecteur de positions d'arbres et de hauteur, qui sera ensuite executé au moment du draw
     mesh sol = mesh_primitive_grid(coords[0], coords[3], coords[2], coords[1], Nu, Nv);
-    for (int i = 0; i < sol.position.size(); i++) {
+    for (int i = 0; i < sol.position.size(); i++)
+    {
         sol.uv[i] = 2 * sol.position[i].xy();
     }
     vec3 p00 = coords[0];
@@ -758,8 +688,8 @@ mesh city::compute_road_partial(vec3 const &p00, vec3 const &p10, vec3 const &p1
             vec3 xloc = normalize((p10 + p11) / 2 - (p01 + p00) / 2);
             vec3 yloc = normalize(p01 - p00);
             vec3 decalnormal = cross(xloc, yloc);
-            vec3 current_hor = p00 + 0.497f * (p01 - p00) + 0.005f * decalnormal;
-            vec3 current_vert = p00 + 0.005f * decalnormal;
+            vec3 current_hor = p00 + 0.497f * (p01 - p00) + eps * decalnormal;
+            vec3 current_vert = p00 + eps * decalnormal;
 
             for (auto j = 0; j < jmax; j++)
             {
@@ -779,8 +709,8 @@ mesh city::compute_road_partial(vec3 const &p00, vec3 const &p10, vec3 const &p1
             vec3 xloc = normalize((p01 + p11) / 2 - (p10 + p00) / 2);
             vec3 yloc = normalize(p10 - p00);
             vec3 decalnormal = cross(yloc, xloc);
-            vec3 current_hor = p00 + 0.497f * (p10 - p00) + 0.005f * decalnormal;
-            vec3 current_vert = p00 + 0.005f * decalnormal;
+            vec3 current_hor = p00 + 0.497f * (p10 - p00) + eps * decalnormal;
+            vec3 current_vert = p00 + eps * decalnormal;
 
             for (auto j = 0; j < jmax; j++)
             {
@@ -853,7 +783,7 @@ void city::init_tour()
     roads.push_back(compute_road_partial(vec3(p40, profile(p40)), vec3(p42, profile(p42)), vec3(p43, profile(p43)), vec3(p41, profile(p41)), true));
 }
 
-float city::profile(vec2 const& position_in_plane) 
+float city::profile(vec2 const &position_in_plane)
 {
     float z_min = -0.2;
     float z_max = 0.1;
@@ -871,7 +801,7 @@ float city::profile(vec2 const& position_in_plane)
         return z_min;
 }
 
-affine_rts city::get_car_transform(float t) 
+affine_rts city::get_car_transform(float t)
 {
     float scale = 0.08;
     float time_for_leg = 15.0f;
@@ -890,22 +820,183 @@ affine_rts city::get_car_transform(float t)
 
     assert_vcl(t <= 4, "Temps supérieur à la période");
 
-    if (t < 1) {
+    if (t < 1)
+    {
         position = t * cross_road_2 + (1 - t) * cross_road_1;
         _rotation = rotation(vec3(0, 0, 1), 0) * _rotation;
     }
-    else if (t < 2) {
+    else if (t < 2)
+    {
         position = (t - 1) * cross_road_3 + (2 - t) * cross_road_2;
         _rotation = rotation(vec3(0, 0, 1), -PI / 2) * _rotation;
     }
-    else if (t < 3) {
+    else if (t < 3)
+    {
         position = (t - 2) * cross_road_4 + (3 - t) * cross_road_3;
         _rotation = rotation(vec3(0, 0, 1), PI) * _rotation;
     }
-    else {
+    else
+    {
         position = (t - 3) * cross_road_1 + (4 - t) * cross_road_4;
         _rotation = rotation(vec3(0, 0, 1), PI / 2) * _rotation;
     }
 
     return affine_rts(_rotation, vec3(position, profile(position)), scale);
+}
+
+void city::set_water()
+{
+    wat.init_water(scene_visual::water_shader, -skybox_radius, skybox_radius, -skybox_radius, skybox_radius);
+    fbos.initWaterFrameBuffers();
+    clipPlane = vec4(0, 0, 1, -wat.waterHeight);
+}
+
+void city::display_reflec_refrac(vec4 clipPlane)
+{
+    // Water Refraction rendering
+    fbos.movefactor += (0.3 / 58.0);
+    glEnable(GL_CLIP_DISTANCE0);
+    fbos.bindRefractionFrameBuffer();
+
+    glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_DEPTH_BUFFER_BIT);
+
+    display_scene(-clipPlane);
+
+    // Water Reflection rendering
+
+    fbos.bindReflectionFrameBuffer();
+    if (m_activated)
+    {
+        float pos = 2 * (camera_m.position().z - wat.waterHeight);
+        vec3 eye = camera_m.position();
+        camera_m.manipulator_rotate_2_axis(-2 * camera_m.rotation_orthogonal, 0);
+        camera_m.position_camera = eye - vec3(0, 0, pos);
+
+        glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_DEPTH_BUFFER_BIT);
+
+        display_scene(clipPlane);
+
+        camera_m.manipulator_rotate_2_axis(-2 * camera_m.rotation_orthogonal, 0);
+        camera_m.position_camera = eye;
+    }
+    else
+    {
+        vec3 eye = camera_c.position();
+        float pos = 2 * (eye.z - wat.waterHeight);
+        // std::cout << camera_c.center_of_rotation;
+        camera_c.look_at(eye - vec3(0, 0, pos), camera_c.center_of_rotation, vec3(0, 0, 1));
+
+        glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_DEPTH_BUFFER_BIT);
+
+        display_scene(clipPlane);
+        camera_c.look_at(eye, camera_c.center_of_rotation, vec3(0, 0, 1));
+    }
+    fbos.unbindCurrentFrameBuffer();
+    glDisable(GL_CLIP_DISTANCE0);
+}
+
+void city::display_scene(vec4 clipPlane)
+{
+    super::display_visual();
+
+    glClearColor(0.256f, 0.256f, 0.256f, 0.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_DEPTH_BUFFER_BIT);
+    vec3 light = camera_c.position();
+
+    /* Shaders*/
+    GLuint normal_shader = scene_visual::get_shader(shader_type::NORMAL);
+    glUseProgram(normal_shader);
+    opengl_uniform(normal_shader, "projection", projection);
+    if (m_activated)
+        opengl_uniform(normal_shader, "view", camera_m.matrix_view());
+    else
+        opengl_uniform(normal_shader, "view", camera_c.matrix_view());
+    opengl_uniform(normal_shader, "light", light);
+    opengl_uniform(normal_shader, "plane", clipPlane);
+
+    GLuint tree_shader = scene_visual::get_shader(shader_type::TREE);
+    glUseProgram(tree_shader);
+    opengl_uniform(tree_shader, "projection", projection);
+    if (m_activated)
+        opengl_uniform(tree_shader, "view", camera_m.matrix_view());
+    else
+        opengl_uniform(tree_shader, "view", camera_c.matrix_view());
+    opengl_uniform(tree_shader, "light", light);
+    opengl_uniform(tree_shader, "plane", clipPlane);
+
+    skybox.display_skybox(this);
+    /* Trees */
+    for (tree_located tree : trees)
+    {
+        switch (tree.type)
+        {
+        case tree_type::COOL:
+            tree_cool.translate(tree.position);
+            draw(tree_cool.dtrunk, this);
+            if (tree_cool.hasleaves)
+                draw(tree_cool.dleaves, this);
+            if (user_reference->draw_wireframe)
+            {
+                draw_wireframe(tree_cool.dtrunk, this);
+                if (tree_cool.hasleaves)
+                    draw_wireframe(tree_cool.dleaves, this);
+            }
+            break;
+        case tree_type::CLASSIC:
+            tree_classic.translate(tree.position);
+            draw(tree_real.dtrunk, this);
+            if (tree_real.hasleaves)
+                draw(tree_real.dleaves, this);
+            if (user_reference->draw_wireframe)
+            {
+                draw_wireframe(tree_real.dtrunk, this);
+                if (tree_real.hasleaves)
+                    draw_wireframe(tree_real.dleaves, this);
+            }
+            break;
+        case tree_type::REAL_1:
+            tree_real.translate(tree.position);
+            draw(tree_real.dtrunk, this);
+            if (tree_real.hasleaves)
+                draw(tree_real.dleaves, this);
+            if (user_reference->draw_wireframe)
+            {
+                draw_wireframe(tree_real.dtrunk, this);
+                if (tree_real.hasleaves)
+                    draw_wireframe(tree_real.dleaves, this);
+            }
+            break;
+        }
+    }
+    draw(sidewalk_visual, this);
+    if (user_reference->draw_wireframe)
+        draw_wireframe(sidewalk_visual, this);
+
+    draw(sand_visual, this);
+    if (user_reference->draw_wireframe)
+        draw_wireframe(sand_visual, this);
+
+    draw(car_visual, this);
+    if (user_reference->draw_wireframe)
+        draw_wireframe(car_visual, this);
+
+    draw(d_bat, this);
+    if (user_reference->draw_wireframe)
+        draw_wireframe(d_bat, this);
+    draw(d_roads, this);
+    if (user_reference->draw_wireframe)
+        draw_wireframe(d_roads, this);
+    draw(d_parcs, this);
+    if (user_reference->draw_wireframe)
+        draw_wireframe(d_parcs, this);
+    draw(d_ground, this);
+    if (user_reference->draw_wireframe)
+        draw_wireframe(d_ground, this);
 }

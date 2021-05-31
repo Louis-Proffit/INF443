@@ -89,7 +89,7 @@ void Particles::initVaoVbo(GLuint shader)
         for (int i = 0; i < MaxParticles; i++)
         {
 
-            ParticlesContainer[i].life = 15.0f; // This particle will live 5 seconds.
+            ParticlesContainer[i].life = 15.0f; // This particle will live 15 seconds.
             vec3 randompos = vec3(
                 (x_max - x_min) * ((rand() / (float)RAND_MAX) - 0.5f),
                 (x_max - x_min) * ((rand() / (float)RAND_MAX) - 0.5f),
@@ -98,7 +98,6 @@ void Particles::initVaoVbo(GLuint shader)
             ParticlesContainer[i].pos = randompos;
             ParticlesContainer[i].speed = vec3(0, 0, 0);
 
-            // Very bad way to generate a random color
             ParticlesContainer[i].color.x = 0;
 
             ParticlesContainer[i].color.y = 0;
@@ -121,14 +120,14 @@ void Particles::initVaoVbo(GLuint shader)
     // The VBO containing the positions and sizes of the particles
     glGenBuffers(1, &particles_position_buffer);
     glBindBuffer(GL_ARRAY_BUFFER, particles_position_buffer);
-    // Initialize with empty (NULL) buffer : it will be updated later, each frame.
+
     glBufferData(GL_ARRAY_BUFFER, MaxParticles * 4 * sizeof(GLfloat), NULL, GL_STREAM_DRAW);
     opengl_check;
 
     // The VBO containing the colors of the particles
     glGenBuffers(1, &particles_color_buffer);
     glBindBuffer(GL_ARRAY_BUFFER, particles_color_buffer);
-    // Initialize with empty (NULL) buffer : it will be updated later, each frame.
+
     glBufferData(GL_ARRAY_BUFFER, MaxParticles * 4 * sizeof(GLubyte), NULL, GL_STREAM_DRAW);
     opengl_check;
 
@@ -146,7 +145,7 @@ void Particles::updateParticles(vec3 CameraPosition)
         for (int i = 0; i < newparticles; i++)
         {
             int particleIndex = FindUnusedParticle();
-            ParticlesContainer[particleIndex].life = 2.0f; // This particle will live 5 seconds.
+            ParticlesContainer[particleIndex].life = 2.0f; // This particle will live 2 seconds.
             vec3 randompos = vec3(
                 (x_max - x_min) * ((rand() / (float)RAND_MAX) - 0.5f),
                 (y_max - y_min) * ((rand() / (float)RAND_MAX) - 0.5f),
@@ -156,9 +155,7 @@ void Particles::updateParticles(vec3 CameraPosition)
 
             float spread = 1.5f;
             vec3 maindir = vec3(0.0f, 0.0, -1.0f);
-            // Very bad way to generate a random direction;
-            // See for instance http://stackoverflow.com/questions/5408276/python-uniform-spherical-distribution instead,
-            // combined with some user-controlled parameters (main direction, spread, etc)
+
             vec3 randomdir = vec3(
                 (rand() % 2000 - 1000.0f) / 1000.0f,
                 (rand() % 2000 - 1000.0f) / 1000.0f,
@@ -238,9 +235,7 @@ void Particles::updateParticles(vec3 CameraPosition)
 
             float spread = 0.5f;
             vec3 maindir = vec3(0.0f, 0.0, 1.0f);
-            // Very bad way to generate a random direction;
-            // See for instance http://stackoverflow.com/questions/5408276/python-uniform-spherical-distribution instead,
-            // combined with some user-controlled parameters (main direction, spread, etc)
+
             vec3 randomdir = vec3(
                 (rand() % 2000 - 1000.0f) / 1000.0f,
                 (rand() % 2000 - 1000.0f) / 1000.0f,
@@ -248,7 +243,6 @@ void Particles::updateParticles(vec3 CameraPosition)
 
             ParticlesContainer[particleIndex].speed = maindir + randomdir * spread;
 
-            // Very bad way to generate a random color
             ParticlesContainer[particleIndex].color.x = (rand() % 256) / 3;
             ParticlesContainer[particleIndex].color.y = (rand() % 256) / 3;
             ParticlesContainer[particleIndex].color.z = (rand() % 256) / 3;

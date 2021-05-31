@@ -2,6 +2,7 @@
 
 #include "vcl/vcl.hpp"
 #include <iostream>
+#include "helpers/scene_helper.hpp"
 
 using namespace vcl;
 
@@ -9,8 +10,8 @@ void Water::init_water(GLuint shad, float x_min, float x_max, float y_min, float
 {
     grid = mesh_primitive_grid(vec3(x_min, y_min, waterHeight), vec3(x_min, y_max, waterHeight), vec3(x_max, y_max, waterHeight), vec3(x_max, y_min, waterHeight), 100, 100);
     shader = shad;
-    dudvmap = opengl_texture_to_gpu(image_load_png("../../assets/water/waterdudv.png"), GL_REPEAT, GL_REPEAT);
-    normalMap = opengl_texture_to_gpu(image_load_png("../../assets/water/waternormal.png"), GL_REPEAT, GL_REPEAT);
+    dudvmap = scene_visual::get_texture(texture_type::WATERDUDV);
+    normalMap = scene_visual::get_texture(texture_type::WATERNORMAL);
     waterd = mesh_drawable(grid, shader);
 }
 void Water::set_Uniforms(GLuint reflectiontexture, GLuint refractiontexture, vec3 campos, float movefactor)

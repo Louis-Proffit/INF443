@@ -5,8 +5,8 @@
 #include "helpers/scene_helper.hpp"
 #include "helpers/particles.hpp"
 #include "L_systems/tree_LSys.hpp"
-#include "helpers/water/water.hpp"
-#include "helpers/water/waterfbuffer.hpp"
+#include "water/water.hpp"
+#include "water/waterfbuffer.hpp"
 class forest : public environement
 {
 public:

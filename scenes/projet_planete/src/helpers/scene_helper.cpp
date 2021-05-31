@@ -43,6 +43,8 @@ GLuint scene_visual::texture_field_1 = 0;
 GLuint scene_visual::texture_field_2 = 0;
 GLuint scene_visual::texture_field_3 = 0;
 GLuint scene_visual::texture_field_4 = 0;
+GLuint scene_visual::texture_waterdudv = 0;
+GLuint scene_visual::texture_waternormal = 0;
 GLuint scene_visual::texture_sand = 0;
 GLuint scene_visual::texture_grass = 0;
 GLuint scene_visual::texture_grass_atlas = 0;
@@ -120,6 +122,8 @@ void scene_visual::init()
 	scene_visual::texture_field_2 = opengl_texture_to_gpu(image_load_png("../assets/textures/field/field_2.png"), GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT);
 	scene_visual::texture_field_3 = opengl_texture_to_gpu(image_load_png("../assets/textures/field/field_3.png"), GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT);
 	scene_visual::texture_field_4 = opengl_texture_to_gpu(image_load_png("../assets/textures/field/field_4.png"), GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT);
+	scene_visual::texture_waterdudv = opengl_texture_to_gpu(image_load_png("../assets/textures/water/waterdudv.png"), GL_REPEAT, GL_REPEAT);
+	scene_visual::texture_waternormal = opengl_texture_to_gpu(image_load_png("../assets/textures/water/waternormal.png"), GL_REPEAT, GL_REPEAT);
 	scene_visual::texture_grass_billboard = opengl_texture_to_gpu(image_load_png("../assets/textures/grass/grass_billboard.png"), GL_REPEAT, GL_REPEAT);
 	scene_visual::texture_grass = opengl_texture_to_gpu(image_load_png("../assets/textures/grass/grass_1.png"), GL_REPEAT, GL_REPEAT);
 	scene_visual::texture_grass_atlas = opengl_texture_to_gpu(image_load_png("../assets/textures/grass/grass_atlas.png"), GL_REPEAT, GL_REPEAT);
@@ -207,6 +211,10 @@ GLuint scene_visual::get_texture(texture_type texture_type)
 		return texture_field_4;
 	case texture_type::SAND:
 		return texture_sand;
+	case texture_type::WATERDUDV:
+		return texture_waterdudv;
+	case texture_type::WATERNORMAL:
+		return texture_waternormal;
 	case texture_type::GRASS:
 		return texture_grass;
 	case texture_type::GRASS_ATLAS:

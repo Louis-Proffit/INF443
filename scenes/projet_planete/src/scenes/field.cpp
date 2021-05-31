@@ -123,10 +123,10 @@ void countryside::set_sand()
     vec3 inner_2 = border_proportion * vec3(x_max, y_min, 0.0);
     vec3 inner_3 = border_proportion * vec3(x_max, y_max, 0.0);
     vec3 inner_4 = border_proportion * vec3(x_min, y_max, 0.0);
-    vec3 outer_1 = vec3(x_min, y_min, 0.0);
-    vec3 outer_2 = vec3(x_max, y_min, 0.0);
-    vec3 outer_3 = vec3(x_max, y_max, 0.0);
-    vec3 outer_4 = vec3(x_min, y_max, 0.0);
+    vec3 outer_1 = 2 * vec3(x_min, y_min, 0.0);
+    vec3 outer_2 = 2 * vec3(x_max, y_min, 0.0);
+    vec3 outer_3 = 2 * vec3(x_max, y_max, 0.0);
+    vec3 outer_4 = 2 * vec3(x_min, y_max, 0.0);
     side = mesh_primitive_grid(inner_1, inner_2, outer_2, outer_1, N2, N1);
     sand.push_back(side);
     side = mesh_primitive_grid(inner_2, inner_3, outer_3, outer_2, N2, N1);
@@ -315,7 +315,13 @@ mesh countryside::subdivide_path(vcl::mesh quadrangle)
 
 mesh countryside::subdivide_field(vcl::mesh quadrangle)
 {
-    return mesh_primitive_grid(quadrangle.position[0], quadrangle.position[1], quadrangle.position[2], quadrangle.position[3], field_subdivisions, field_subdivisions);
+    mesh result = mesh_primitive_grid(quadrangle.position[0], quadrangle.position[1], quadrangle.position[2], quadrangle.position[3], field_subdivisions, field_subdivisions);
+
+    for (int i = 0; i < result.uv.size(); i++)
+    {
+        result.uv[i] = 2 * result.position[i].xy();
+    }
+    return result;
 }
 
 void countryside::shuffle()
@@ -507,8 +513,10 @@ void countryside::set_assets()
     for (int i = 0; i < fields.size(); i++)
     {
         ebly = mesh();
-        for (int j = 0; j < field_subdivisions - 1; j++) {
-            for (int k = 0; k < field_subdivisions - 1; k++) {
+        for (int j = 0; j < field_subdivisions - 1; j++)
+        {
+            for (int k = 0; k < field_subdivisions - 1; k++)
+            {
                 coefal = rand_interval() * height;
                 ebly.push_back(mesh_primitive_quadrangle(fields[i].field_mesh.position[j * field_subdivisions + k], fields[i].field_mesh.position[j * field_subdivisions + k + 1], fields[i].field_mesh.position[j * field_subdivisions + k + 1] + coefal * up, fields[i].field_mesh.position[j * field_subdivisions + k] + coefal * up));
                 ebly.push_back(mesh_primitive_quadrangle(fields[i].field_mesh.position[j * field_subdivisions + k], fields[i].field_mesh.position[(j + 1) * field_subdivisions + k + 1], fields[i].field_mesh.position[(j + 1) * field_subdivisions + k + 1] + coefal * up, fields[i].field_mesh.position[j * field_subdivisions + k] + coefal * up));

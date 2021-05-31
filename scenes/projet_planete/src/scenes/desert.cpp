@@ -74,7 +74,7 @@ void desert::set_terrain()
 {
     parameters = heightmap_parameters{0, 0, x_min, y_min, x_max, y_max};
     horizontal_scale = 0.6f;
-    height_data = generateFileHeightData("assets/heightmaps/desert.png", horizontal_scale);
+    height_data = generateFileHeightData("../assets/heightmaps/desert.png", horizontal_scale);
     terrain_mesh = createFromHeightData(height_data, parameters);
     for (int i = 0; i < terrain_mesh.position.size(); i++)
         terrain_mesh.position[i].z += profile(terrain_mesh.position[i].xy());
@@ -97,7 +97,7 @@ void desert::set_sun()
     sun_visual.shading.color = vec3(1.0, 1.0, 0.0);
 }
 
-float desert::get_altitude(vec2 const &new_position_in_plane) 
+float desert::get_altitude(vec2 const &new_position_in_plane)
 {
     float i_float = parameters.rows * (new_position_in_plane.x - x_min) / (x_max - x_min);
     float j_float = parameters.columns * (new_position_in_plane.y - y_min) / (y_max - y_min);

@@ -165,19 +165,11 @@ public:
         );
         opengl_check;
 
-        // These functions are specific to glDrawArrays*Instanced*.
-        // The first parameter is the attribute buffer we're talking about.
-        // The second parameter is the "rate at which generic vertex attributes advance when rendering multiple instances"
-        // http://www.opengl.org/sdk/docs/man/xhtml/glVertexAttribDivisor.xml
         glVertexAttribDivisor(0, 0); // particles vertices : always reuse the same 4 vertices -> 0
         glVertexAttribDivisor(1, 1); // positions : one per quad (its center)                 -> 1
         glVertexAttribDivisor(2, 1); // color : one per quad                                  -> 1
         opengl_check;
-        // Draw the particules !
-        // This draws many times a small triangle_strip (which looks like a quad).
-        // This is equivalent to :
-        // for(i in ParticlesCount) : glDrawArrays(GL_TRIANGLE_STRIP, 0, 4),
-        // but faster.
+
         glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 4, ParticlesCount);
 
         opengl_check;
