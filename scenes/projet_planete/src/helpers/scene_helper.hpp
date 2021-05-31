@@ -26,7 +26,8 @@ enum class shader_type
 	MOUNTAIN,
 	PARTICLE_MOUNTAIN,
 	EBLY,
-	FOREST
+	FOREST,
+	SMOOTH
 };
 
 enum class texture_type
@@ -170,6 +171,7 @@ public:
 	static GLuint particle_mountain_shader;
 	static GLuint ebly_shader;
 	static GLuint forest_shader;
+	static GLuint smooth_shader;
 
 	static GLuint texture_field_1;
 	static GLuint texture_field_2;
@@ -225,7 +227,7 @@ public:
 
 	void display_visual();
 	virtual float get_altitude(vcl::vec2 const &position) = 0;
-	float get_player_altitude(vcl::vec2 const& position);
+	float get_player_altitude(vcl::vec2 const &position);
 	void update_visual();
 	void display_interface();
 

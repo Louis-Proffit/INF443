@@ -133,7 +133,7 @@ void initialize()
 	user.display_frame = false;
 
 	// Initialisation de la plan�te
-	scene = new city(&user, swap_function);
+	scene = new forest(&user, swap_function);
 }
 
 void handle_window_update_callback(GLFWwindow *window, int width, int height)

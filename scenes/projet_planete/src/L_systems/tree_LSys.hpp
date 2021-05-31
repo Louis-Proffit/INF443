@@ -23,6 +23,7 @@ struct tree_located
 {
     tree_type type;
     vcl::vec3 position;
+    float taille;
 };
 
 class TreeGenerator
