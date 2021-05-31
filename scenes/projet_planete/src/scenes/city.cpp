@@ -11,6 +11,7 @@ city::city(user_parameters *_user, std::function<void(scene_type)> swap_function
 {
     // Configuration de la ville
     init_pate();
+    init_tour();
     init_ground();
     compute_pate(5);
     for (size_t i = 0; i < patepos.size(); i++)
@@ -25,6 +26,10 @@ city::city(user_parameters *_user, std::function<void(scene_type)> swap_function
     tree_classic.initTree(tree_type::CLASSIC, tree_shader);
     tree_cool.initTree(tree_type::COOL, tree_shader);
     tree_real.initTree(tree_type::REAL_1, tree_shader);
+
+    tree_classic.resize(0.5f);
+    tree_cool.resize(0.5f);
+    tree_real.resize(0.5f);
 
     // Configure meshes
     GLuint normal_shader = scene_visual::get_shader(shader_type::NORMAL);
@@ -146,10 +151,10 @@ void city::update_visual()
 void city::init_pate()
 {
     vector<vec3> initial;
-    initial.push_back(vec3(x_min, y_min, 0));
-    initial.push_back(vec3(x_min, y_max, 0));
-    initial.push_back(vec3(x_max, y_max, 0));
-    initial.push_back(vec3(x_max, y_min, 0));
+    initial.push_back(vec3((1 - prop) * x_min, (1 - prop) * y_min, 0));
+    initial.push_back(vec3((1 - prop) * x_min, (1 - prop) * y_max, 0));
+    initial.push_back(vec3((1 - prop) * x_max, (1 - prop) * y_max, 0));
+    initial.push_back(vec3((1 - prop) * x_max, (1 - prop) * y_min, 0));
     initial.push_back(vec3(0, 0, 0));
     patepos.push_back(initial);
 }
@@ -723,4 +728,9 @@ float city::get_altitude(vec2 const &new_position_in_plane)
         return player_height / 2;
     else
         return player_height;
+}
+
+void city::init_tour()
+{
+    roads.push_back(compute_road_partial(vec3((1 - prop) * x_min, y_min, 0), vec3((1 - prop) * x_min, (1 - prop) * y_min, 0), vec3((1 - prop) * x_max, (1 - prop) * y_min, 0), vec3((1 - prop) * x_max, y_min, 0), false));
 }

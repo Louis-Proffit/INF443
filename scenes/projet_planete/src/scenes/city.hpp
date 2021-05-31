@@ -29,6 +29,7 @@ public:
     TreeGenerator tree_cool;
     TreeGenerator tree_real;
     std::vector<tree_located> trees;
+    float prop = 0.1f;
 
     city(user_parameters *_user, std::function<void(scene_type)> swap_function);
     void display_visual();
@@ -43,6 +44,7 @@ public:
     void create_city(std::vector<vcl::vec3> coords);
     void merge_pat(std::vector<std::vector<vcl::vec3>> &base, std::vector<std::vector<vcl::vec3>> &to_add);
     void add_tree_positions(std::vector<tree_located> &to_add);
+    void init_tour();
     vcl::vec3 random_divider();
     vcl::mesh compute_batiment(std::vector<vcl::vec3> coords);
     vcl::mesh compute_garden(std::vector<vcl::vec3> coords);
