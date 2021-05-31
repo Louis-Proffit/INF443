@@ -1,4 +1,4 @@
-std::string normal_frag = R"(
+std::string ebly_frag = R"(
 #version 330 core
 
 in struct fragment_data
@@ -26,8 +26,6 @@ uniform float specular_exp = 64.0; // Specular exponent
 uniform bool use_texture = true;
 uniform bool texture_inverse_y = false;
 
-uniform float fog_falloff=0.0000;
-uniform bool use_fog = false;
 
 
 void main()
@@ -57,15 +55,13 @@ void main()
 	}
 	vec3 color_object  = fragment.color * color * color_image_texture.rgb;
 	vec3 color_shading = (Ka + Kd * diffuse) * color_object + Ks * specular * vec3(1.0, 1.0, 1.0);
-	if (use_fog) {
-	float depth = length(fragment.eye - fragment.position);
-	float w_depth = exp(-fog_falloff * depth * depth);
-	vec3 color_with_fog = w_depth * color_shading + (1 - w_depth) * vec3(0.7, 0.7, 0.7);
-
-	FragColor = vec4(color_with_fog, alpha * color_image_texture.a);}
-
-	else {
-		FragColor = vec4(color_shading, alpha * color_image_texture.a);
+	
+	//vec4 flow = texture(image_texture,fragment.uv);
+	if( color_image_texture[3] < 0.3) {
+		discard;
 	}
+	
+	FragColor = color_image_texture;
+	
 }
 )";

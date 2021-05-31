@@ -61,7 +61,10 @@ int main(int, char *argv[])
 
 		ImGui::End();
 		imgui_render_frame(window);
+		opengl_check;
+
 		glfwSwapBuffers(window);
+
 		glfwPollEvents();
 	}
 
@@ -79,32 +82,32 @@ void swap_function(scene_type scene_type)
 
 	case scene_type::PLANET:
 		std::cout << "Swap to planet" << std::endl;
-		delete scene;
+		//delete scene;
 		scene = new planet(&user, swap_function);
 		break;
 	case scene_type::CITY:
 		std::cout << "Swap to city" << std::endl;
-		delete scene;
+		//delete scene;
 		scene = new city(&user, swap_function);
 		break;
 	case scene_type::DESERT:
 		std::cout << "Swap to desert" << std::endl;
-		delete scene;
+		//delete scene;
 		scene = new desert(&user, swap_function);
 		break;
 	case scene_type::FIELD:
 		std::cout << "Swap to field" << std::endl;
-		delete scene;
+		//delete scene;
 		scene = new countryside(&user, swap_function);
 		break;
 	case scene_type::FOREST:
 		std::cout << "Swap to forest" << std::endl;
-		delete scene;
+		//delete scene;
 		scene = new forest(&user, swap_function);
 		break;
 	case scene_type::MOUNTAIN:
 		std::cout << "Swap to mountain" << std::endl;
-		delete scene;
+		//delete scene;
 		scene = new mountain(&user, swap_function);
 		break;
 	}

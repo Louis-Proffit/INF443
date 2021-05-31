@@ -199,7 +199,7 @@ void Particles::updateParticles(vec3 CameraPosition)
                     p.cameradistance = norm(p.pos - CameraPosition);
                     //ParticlesContainer[i].pos += vec3(0.0f,10.0f, 0.0f) * (float)delta;
 
-                    std::cout << p.pos << std::endl;
+                    //std::cout << p.pos << std::endl;
 
                     // Fill the GPU buffer
                     g_particule_position_size_data[4 * ParticlesCount + 0] = p.pos.x;

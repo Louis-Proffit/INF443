@@ -8,8 +8,8 @@ using namespace vcl;
 countryside::countryside(user_parameters *user, std::function<void(scene_type)> _swap_function) : environement(user, _swap_function)
 {
     x_min = -2.0;
-    x_min = -2.0;
-    y_max = 2.0;
+    y_min = -2.0;
+    x_max = 2.0;
     y_max = 2.0;
 
     // Configuration des visuels
@@ -18,6 +18,8 @@ countryside::countryside(user_parameters *user, std::function<void(scene_type)> 
     set_tractor();
     set_skybox();
     set_sun();
+    set_water();
+    set_assets();
 
     // Configuration de la cam�ra
     camera_m.position_camera = vec3(0, 0, 0);
@@ -32,53 +34,27 @@ countryside::countryside(user_parameters *user, std::function<void(scene_type)> 
 
 void countryside::display_visual()
 {
-    glClearColor(0.256f, 0.256f, 0.256f, 0.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
-    glClear(GL_DEPTH_BUFFER_BIT);
     user_reference->timer.update();
     float const time = user_reference->timer.t;
+    display_reflec_refrac(clipPlane);
+    glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_DEPTH_BUFFER_BIT);
+    display_scene(clipPlane);
     if (m_activated)
-        light = camera_m.position();
+        wat.set_Uniforms(fbos.getReflectionTexture(), fbos.getRefractionTexture(), camera_m.position(), fbos.movefactor);
     else
-        light = camera_c.position();
+        wat.set_Uniforms(fbos.getReflectionTexture(), fbos.getRefractionTexture(), camera_c.position(), fbos.movefactor);
 
-    GLuint normal_shader = get_shader(shader_type::NORMAL);
-    GLuint sun_shader = get_shader(shader_type::SUN);
-
-    glUseProgram(normal_shader);
-    opengl_uniform(normal_shader, "projection", projection);
+    glUseProgram(water_shader);
+    opengl_uniform(water_shader, "projection", projection);
     if (m_activated)
-        opengl_uniform(normal_shader, "view", camera_m.matrix_view());
+        opengl_uniform(water_shader, "view", camera_m.matrix_view());
     else
-        opengl_uniform(normal_shader, "view", camera_c.matrix_view());
-    opengl_uniform(normal_shader, "light", light);
-
-    glUseProgram(sun_shader);
-    opengl_uniform(sun_shader, "projection", projection);
-    if (m_activated)
-        opengl_uniform(sun_shader, "view", camera_m.matrix_view());
-    else
-        opengl_uniform(sun_shader, "view", camera_c.matrix_view());
-    opengl_uniform(sun_shader, "light", light);
-
-    draw(path_visual, this);
-    for (mesh_drawable field_visual : fields_visuals)
-        draw(field_visual, this);
-    for (vec3 position : tractor_positions) {
-        tractor_visual.transform.translate = position;
-        draw(tractor_visual, this);
-    }
-    draw(sand_visual, this);
-    if (user_reference->draw_wireframe) {
-        for (mesh_drawable field_visual : fields_visuals)
-            draw_wireframe(field_visual, this);
-        draw_wireframe(path_visual, this);
-        draw_wireframe(sand_visual, this);
-        draw_wireframe(sun_visual, this);
-    }
-        
-
-    skybox.display_skybox(this);
+        opengl_uniform(water_shader, "view", camera_c.matrix_view());
+    opengl_uniform(water_shader, "light", light);
+    opengl_uniform(water_shader, "use_fog", false);
+    draw(wat.waterd, this);
 }
 
 void countryside::update_visual()
@@ -126,7 +102,8 @@ void countryside::set_terrain()
 
     // Merge paths
     mesh path;
-    for (int i = 0; i < paths.size(); i++) {
+    for (int i = 0; i < paths.size(); i++)
+    {
         path.push_back(paths[i]);
     }
 
@@ -146,20 +123,22 @@ void countryside::set_sand()
     float delta = (x_max - x_min) * sand_proportion / 2.0;
     mesh side = mesh_primitive_grid(vec3(x_min - delta, y_min, 0), vec3(x_max + delta, y_min, 0), vec3(x_max + delta, y_min - delta, 0), vec3(x_min - delta, y_min - delta, 0), N2, N1); // Bas
     sand.push_back(side);
-    side.~mesh();
+    //side.~mesh();
     side = mesh_primitive_grid(vec3(x_min, y_max + delta, 0), vec3(x_min, y_min - delta, 0), vec3(x_min - delta, y_min - delta, 0), vec3(x_min - delta, y_max + delta, 0), N2, N1); // Gauche
     sand.push_back(side);
-    side.~mesh();
+    //side.~mesh();
     side = mesh_primitive_grid(vec3(x_max, y_max + delta, 0), vec3(x_max, y_min - delta, 0), vec3(x_max + delta, y_min - delta, 0), vec3(x_max + delta, y_max + delta, 0), N2, N1); // Gauche
     sand.push_back(side);
-    side.~mesh();
+    //side.~mesh();
     side = mesh_primitive_grid(vec3(x_min - delta, y_max, 0), vec3(x_max + delta, y_max, 0), vec3(x_max + delta, y_max + delta, 0), vec3(x_min - delta, y_max + delta, 0), N2, N1); // Haut
     sand.push_back(side);
 
-    for (int i = 0; i < sand.position.size(); i++) {
+    for (int i = 0; i < sand.position.size(); i++)
+    {
         sand.position[i].z += profile(sand.position[i].xy()) + parameters.height * noise_perlin(sand.position[i].xy(), parameters.octaves, parameters.persistency, parameters.frequency_gain);
     }
-    for (int i = 0; i < sand.position.size(); i++) {
+    for (int i = 0; i < sand.position.size(); i++)
+    {
         sand.uv[i].x = 2 * sand.position[i].x;
         sand.uv[i].y = 2 * sand.position[i].y;
     }
@@ -173,13 +152,13 @@ void countryside::set_border()
     float delta = (x_max - x_min) * border_proportion / 2.0;
     mesh side = mesh_primitive_quadrangle(vec3(x_min - delta, y_min, 0), vec3(x_max + delta, y_min, 0), vec3(x_max + delta, y_min - delta, 0), vec3(x_min - delta, y_min - delta, 0)); // Bas
     paths.push_back(side);
-    side.~mesh();
+    // //side.~mesh();
     side = mesh_primitive_quadrangle(vec3(x_min, y_max + delta, 0), vec3(x_min, y_min - delta, 0), vec3(x_min - delta, y_min - delta, 0), vec3(x_min - delta, y_max + delta, 0)); // Gauche
     paths.push_back(side);
-    side.~mesh();
+    //side.~mesh();
     side = mesh_primitive_quadrangle(vec3(x_max, y_max + delta, 0), vec3(x_max, y_min - delta, 0), vec3(x_max + delta, y_min - delta, 0), vec3(x_max + delta, y_max + delta, 0)); // Gauche
     paths.push_back(side);
-    side.~mesh();
+    // side.~mesh();
     side = mesh_primitive_quadrangle(vec3(x_min - delta, y_max, 0), vec3(x_max + delta, y_max, 0), vec3(x_max + delta, y_max + delta, 0), vec3(x_min - delta, y_max + delta, 0)); // Haut
     paths.push_back(side);
 }
@@ -195,9 +174,10 @@ void countryside::set_tractor()
     /* Set transform */
     tractor_positions.resize(number_of_tractors);
     vec3 position;
-    for (int i = 0; i < number_of_tractors; i++) {
+    for (int i = 0; i < number_of_tractors; i++)
+    {
         position = vec3(0.9 * x_min + 0.9 * rand_interval() * (x_max - x_min), 0.9 * y_min + 0.9 * rand_interval() * (y_max - y_min), 0);
-        position.z = parameters.height* noise_perlin(position.xy(), parameters.octaves, parameters.persistency, parameters.frequency_gain) + profile(position.xy());
+        position.z = parameters.height * noise_perlin(position.xy(), parameters.octaves, parameters.persistency, parameters.frequency_gain) + profile(position.xy());
         tractor_positions[i] = position;
         position.~vec3();
     }
@@ -266,8 +246,10 @@ void countryside::set_types()
 
 void countryside::set_textures()
 {
-    for (int i = 0; i < fields.size(); i++) {
-        switch (fields[i].type) {
+    for (int i = 0; i < fields.size(); i++)
+    {
+        switch (fields[i].type)
+        {
         case field_type::UN:
             fields_visuals[i].texture = scene_visual::get_texture(texture_type::FIELD_2);
             break;
@@ -296,7 +278,7 @@ void countryside::set_sun()
     sun_visual.shading.color = vec3(1.0, 1.0, 0.0);
 }
 
-float countryside::get_altitude(vcl::vec2 const& position_in_plane)
+float countryside::get_altitude(vcl::vec2 const &position_in_plane)
 {
     float dz = profile(position_in_plane);
     if (!user_reference->sneak)
@@ -337,23 +319,27 @@ mesh countryside::subdivide_field(vcl::mesh quadrangle)
 void countryside::shuffle()
 {
     // Shuffle paths
-    for (int i = 0; i < paths.size(); i++) {
-        for (int j = 0; j < paths[i].position.size(); j++) {
+    for (int i = 0; i < paths.size(); i++)
+    {
+        for (int j = 0; j < paths[i].position.size(); j++)
+        {
             paths[i].position[j].z += parameters.height * noise_perlin(paths[i].position[j].xy(), parameters.octaves, parameters.persistency, parameters.frequency_gain);
             paths[i].position[j].z += profile(paths[i].position[j].xy());
         }
     }
 
     // Shuffle fields
-    for (int i = 0; i < fields.size(); i++) {
-        for (int j = 0; j < fields[i].field_mesh.position.size(); j++) {
+    for (int i = 0; i < fields.size(); i++)
+    {
+        for (int j = 0; j < fields[i].field_mesh.position.size(); j++)
+        {
             fields[i].field_mesh.position[j].z += parameters.height * noise_perlin(fields[i].field_mesh.position[j].xy(), parameters.octaves, parameters.persistency, parameters.frequency_gain);
             fields[i].field_mesh.position[j].z += profile(fields[i].field_mesh.position[j].xy());
         }
     }
 }
 
-float countryside::profile(vec2 const& position_in_plane)
+float countryside::profile(vec2 const &position_in_plane)
 {
     float transition_down = 1.0;
     float transition_up = 1.2;
@@ -371,4 +357,212 @@ float countryside::profile(vec2 const& position_in_plane)
     }
     else
         return z_min;
+}
+
+void countryside::set_water()
+{
+    wat.init_water(scene_visual::water_shader);
+    fbos.initWaterFrameBuffers();
+    clipPlane = vec4(0, 0, 1, -wat.waterHeight);
+}
+
+void countryside::display_reflec_refrac(vec4 clipPlane)
+{
+    // Water Refraction rendering
+    fbos.movefactor += (0.3 / 58.0);
+    glEnable(GL_CLIP_DISTANCE0);
+    fbos.bindRefractionFrameBuffer();
+
+    glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_DEPTH_BUFFER_BIT);
+
+    display_scene(-clipPlane);
+
+    // Water Reflection rendering
+
+    fbos.bindReflectionFrameBuffer();
+    if (m_activated)
+    {
+        float pos = 2 * (camera_m.position().z - wat.waterHeight);
+        vec3 eye = camera_m.position();
+        camera_m.manipulator_rotate_2_axis(-2 * camera_m.rotation_orthogonal, 0);
+        camera_m.position_camera = eye - vec3(0, 0, pos);
+
+        glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_DEPTH_BUFFER_BIT);
+
+        display_scene(clipPlane);
+
+        camera_m.manipulator_rotate_2_axis(-2 * camera_m.rotation_orthogonal, 0);
+        camera_m.position_camera = eye;
+    }
+    else
+    {
+        vec3 eye = camera_c.position();
+        float pos = 2 * (eye.z - wat.waterHeight);
+        // std::cout << camera_c.center_of_rotation;
+        camera_c.look_at(eye - vec3(0, 0, pos), camera_c.center_of_rotation, vec3(0, 0, 1));
+
+        glClearColor(0.215f, 0.215f, 0.215f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_DEPTH_BUFFER_BIT);
+
+        display_scene(clipPlane);
+        camera_c.look_at(eye, camera_c.center_of_rotation, vec3(0, 0, 1));
+    }
+    fbos.unbindCurrentFrameBuffer();
+    glDisable(GL_CLIP_DISTANCE0);
+}
+
+void countryside::display_scene(vec4 clipPlane)
+{
+    glClearColor(0.256f, 0.256f, 0.256f, 0.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_DEPTH_BUFFER_BIT);
+    user_reference->timer.update();
+    float const time = user_reference->timer.t;
+    if (m_activated)
+        light = camera_m.position();
+    else
+        light = camera_c.position();
+
+    GLuint normal_shader = get_shader(shader_type::NORMAL);
+    GLuint sun_shader = get_shader(shader_type::SUN);
+    GLuint ebly_shader = get_shader(shader_type::EBLY);
+
+    glUseProgram(normal_shader);
+    opengl_uniform(normal_shader, "projection", projection);
+    if (m_activated)
+        opengl_uniform(normal_shader, "view", camera_m.matrix_view());
+    else
+        opengl_uniform(normal_shader, "view", camera_c.matrix_view());
+    opengl_uniform(normal_shader, "light", light);
+    opengl_uniform(normal_shader, "plane", clipPlane);
+    opengl_uniform(normal_shader, "use_fog", false);
+
+    glUseProgram(sun_shader);
+    opengl_uniform(sun_shader, "projection", projection);
+    if (m_activated)
+        opengl_uniform(sun_shader, "view", camera_m.matrix_view());
+    else
+        opengl_uniform(sun_shader, "view", camera_c.matrix_view());
+    opengl_uniform(sun_shader, "light", light);
+    opengl_uniform(sun_shader, "plane", clipPlane);
+
+    glUseProgram(ebly_shader);
+    opengl_uniform(ebly_shader, "projection", projection);
+    if (m_activated)
+        opengl_uniform(ebly_shader, "view", camera_m.matrix_view());
+    else
+        opengl_uniform(ebly_shader, "view", camera_c.matrix_view());
+    opengl_uniform(ebly_shader, "light", light);
+    opengl_uniform(ebly_shader, "plane", clipPlane);
+
+    opengl_uniform(ebly_shader, "ligne", 1.0f);
+    opengl_uniform(ebly_shader, "colonne", 1.0f);
+    draw(draw_fields_type1, this);
+
+    opengl_uniform(ebly_shader, "ligne", 7.0f);
+    opengl_uniform(ebly_shader, "colonne", 3.0f);
+    draw(draw_fields_type2, this);
+
+    opengl_uniform(ebly_shader, "ligne", 5.0f);
+    opengl_uniform(ebly_shader, "colonne", 4.0f);
+    draw(draw_fields_type3, this);
+
+    opengl_uniform(ebly_shader, "ligne", 5.0f);
+    opengl_uniform(ebly_shader, "colonne", 5.0f);
+    draw(draw_fields_type4, this);
+
+    draw(path_visual, this);
+    for (mesh_drawable field_visual : fields_visuals)
+        draw(field_visual, this);
+    for (vec3 position : tractor_positions)
+    {
+        tractor_visual.transform.translate = position;
+        draw(tractor_visual, this);
+    }
+    draw(sand_visual, this);
+    if (user_reference->draw_wireframe)
+    {
+        for (mesh_drawable field_visual : fields_visuals)
+            draw_wireframe(field_visual, this);
+        draw_wireframe(path_visual, this);
+        draw_wireframe(sand_visual, this);
+        draw_wireframe(sun_visual, this);
+        draw_wireframe(draw_fields_type1, this);
+    }
+
+    skybox.display_skybox(this);
+}
+
+void countryside::set_assets()
+{
+
+    vec3 up = vec3(0, 0, 0.04);
+    float coefal = 0;
+    for (int i = 0; i < fields.size(); i++)
+    {
+        switch (fields[i].type)
+        {
+        case field_type::UN:
+            for (int j = 0; j < fields[i].field_mesh.position.size() - 1; j++)
+            {
+                if (!((j + 1) % 10 == 0 or j > 88))
+                {
+                    coefal = rand_interval() + 0.5f;
+                    fields_type1.push_back(mesh_primitive_quadrangle(fields[i].field_mesh.position[j], fields[i].field_mesh.position[j + 1], fields[i].field_mesh.position[j + 1] + coefal * up, fields[i].field_mesh.position[j] + coefal * up));
+                    fields_type1.push_back(mesh_primitive_quadrangle(fields[i].field_mesh.position[j], fields[i].field_mesh.position[j + 11], fields[i].field_mesh.position[j + 11] + coefal * up, fields[i].field_mesh.position[j] + coefal * up));
+                }
+            }
+            break;
+
+        case field_type::DEUX:
+            for (int j = 0; j < fields[i].field_mesh.position.size() - 1; j++)
+            {
+                if (!((j + 1) % 10 == 0 or j > 88))
+                {
+                    coefal = rand_interval() + 0.5f;
+                    fields_type2.push_back(mesh_primitive_quadrangle(fields[i].field_mesh.position[j], fields[i].field_mesh.position[j + 1], fields[i].field_mesh.position[j + 1] + coefal * up, fields[i].field_mesh.position[j] + coefal * up));
+                    fields_type2.push_back(mesh_primitive_quadrangle(fields[i].field_mesh.position[j], fields[i].field_mesh.position[j + 11], fields[i].field_mesh.position[j + 11] + coefal * up, fields[i].field_mesh.position[j] + coefal * up));
+                }
+            }
+            break;
+        case field_type::TROIS:
+            for (int j = 0; j < fields[i].field_mesh.position.size() - 1; j++)
+            {
+                if (!((j + 1) % 10 == 0 or j > 88))
+                {
+                    coefal = rand_interval() + 0.5f;
+                    fields_type3.push_back(mesh_primitive_quadrangle(fields[i].field_mesh.position[j], fields[i].field_mesh.position[j + 11], fields[i].field_mesh.position[j + 11] + coefal * up, fields[i].field_mesh.position[j] + coefal * up));
+                    fields_type3.push_back(mesh_primitive_quadrangle(fields[i].field_mesh.position[j], fields[i].field_mesh.position[j + 1], fields[i].field_mesh.position[j + 1] + coefal * up, fields[i].field_mesh.position[j] + coefal * up));
+                }
+            }
+            break;
+        case field_type::QUATRE:
+            for (int j = 0; j < fields[i].field_mesh.position.size() - 1; j++)
+            {
+                if (!((j + 1) % 10 == 0 or j > 88))
+                {
+                    coefal = rand_interval() + 0.5f;
+                    fields_type4.push_back(mesh_primitive_quadrangle(fields[i].field_mesh.position[j], fields[i].field_mesh.position[j + 11], fields[i].field_mesh.position[j + 11] + coefal * up, fields[i].field_mesh.position[j] + coefal * up));
+                    fields_type4.push_back(mesh_primitive_quadrangle(fields[i].field_mesh.position[j], fields[i].field_mesh.position[j + 1], fields[i].field_mesh.position[j + 1] + coefal * up, fields[i].field_mesh.position[j] + coefal * up));
+                }
+            }
+            break;
+        }
+    }
+    GLuint ebly_shader = scene_visual::get_shader(shader_type::EBLY);
+    GLuint texture_atlas = scene_visual::get_texture(texture_type::GRASS_ATLAS);
+
+    draw_fields_type1 = mesh_drawable(fields_type1, ebly_shader);
+    draw_fields_type1.texture = texture_atlas;
+    draw_fields_type2 = mesh_drawable(fields_type2, ebly_shader);
+    draw_fields_type2.texture = texture_atlas;
+    draw_fields_type3 = mesh_drawable(fields_type3, ebly_shader);
+    draw_fields_type3.texture = texture_atlas;
+    draw_fields_type4 = mesh_drawable(fields_type4, ebly_shader);
+    draw_fields_type4.texture = texture_atlas;
 }

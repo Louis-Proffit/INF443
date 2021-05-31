@@ -60,6 +60,7 @@ void planet::display_visual()
     opengl_uniform(normal_shader, "projection", projection);
     opengl_uniform(normal_shader, "view", camera.matrix_view());
     opengl_uniform(normal_shader, "light", light);
+    opengl_uniform(normal_shader, "use_fog", false);
 
     glUseProgram(sun_shader);
     opengl_uniform(sun_shader, "projection", projection);
