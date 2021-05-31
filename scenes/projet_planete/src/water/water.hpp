@@ -15,7 +15,7 @@ public:
     GLuint normalMap = 0;
     GLuint shader = 0;
 
-    void init_water(GLuint shad);
+    void init_water(GLuint shad, float x_min = -10.0, float x_max = 10.0, float y_min = -10.0, float y_max = 10.0);
 
     void set_Uniforms(GLuint reflectiontexture, GLuint refractiontexture, vec3 campos, float movefactor);
 

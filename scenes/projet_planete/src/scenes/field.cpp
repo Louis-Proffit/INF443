@@ -7,10 +7,10 @@ using namespace vcl;
 
 countryside::countryside(user_parameters *user, std::function<void(scene_type)> _swap_function) : environement(user, _swap_function)
 {
-    x_min = -2.0;
-    y_min = -2.0;
-    x_max = 2.0;
-    y_max = 2.0;
+    x_min = -5.0;
+    y_min = -5.0;
+    x_max = 5.0;
+    y_max = 5.0;
 
     // Configuration des visuels
     set_terrain();
@@ -70,7 +70,7 @@ void countryside::display_interface()
 void countryside::set_terrain()
 {
     // Create fields and paths
-    fields.push_back({mesh_primitive_quadrangle({x_min, y_min, 0}, {x_max, y_min, 0}, {x_max, y_max, 0}, {x_min, y_max, 0})});
+    fields.push_back({mesh_primitive_quadrangle({x_min * field_proportion, y_min * field_proportion, 0}, {x_max * field_proportion, y_min * field_proportion, 0}, {x_max * field_proportion, y_max * field_proportion, 0}, {x_min * field_proportion, y_max * field_proportion, 0})});
     bool subdivide_again = true;
     int current_subdivisions = 0;
     while (subdivide_again)
@@ -88,7 +88,6 @@ void countryside::set_terrain()
         mesh quadrangle = paths[i];
         paths[i] = subdivide_path(quadrangle);
         //quadrangle.~mesh();
-        //delete quadrangle;
     }
     for (int i = 0; i < fields.size(); i++)
     {
@@ -117,20 +116,24 @@ void countryside::set_terrain()
 
 void countryside::set_sand()
 {
-    mesh sand;
+    mesh sand, side;
     int N1 = 100;
     int N2 = 500;
-    float delta = (x_max - x_min) * sand_proportion / 2.0;
-    mesh side = mesh_primitive_grid(vec3(x_min - delta, y_min, 0), vec3(x_max + delta, y_min, 0), vec3(x_max + delta, y_min - delta, 0), vec3(x_min - delta, y_min - delta, 0), N2, N1); // Bas
+    vec3 inner_1 = border_proportion * vec3(x_min, y_min, 0.0);
+    vec3 inner_2 = border_proportion * vec3(x_max, y_min, 0.0);
+    vec3 inner_3 = border_proportion * vec3(x_max, y_max, 0.0);
+    vec3 inner_4 = border_proportion * vec3(x_min, y_max, 0.0);
+    vec3 outer_1 = vec3(x_min, y_min, 0.0);
+    vec3 outer_2 = vec3(x_max, y_min, 0.0);
+    vec3 outer_3 = vec3(x_max, y_max, 0.0);
+    vec3 outer_4 = vec3(x_min, y_max, 0.0);
+    side = mesh_primitive_grid(inner_1, inner_2, outer_2, outer_1, N2, N1);
     sand.push_back(side);
-    //side.~mesh();
-    side = mesh_primitive_grid(vec3(x_min, y_max + delta, 0), vec3(x_min, y_min - delta, 0), vec3(x_min - delta, y_min - delta, 0), vec3(x_min - delta, y_max + delta, 0), N2, N1); // Gauche
+    side = mesh_primitive_grid(inner_2, inner_3, outer_3, outer_2, N2, N1);
     sand.push_back(side);
-    //side.~mesh();
-    side = mesh_primitive_grid(vec3(x_max, y_max + delta, 0), vec3(x_max, y_min - delta, 0), vec3(x_max + delta, y_min - delta, 0), vec3(x_max + delta, y_max + delta, 0), N2, N1); // Gauche
+    side = mesh_primitive_grid(inner_3, inner_4, outer_4, outer_3, N2, N1);
     sand.push_back(side);
-    //side.~mesh();
-    side = mesh_primitive_grid(vec3(x_min - delta, y_max, 0), vec3(x_max + delta, y_max, 0), vec3(x_max + delta, y_max + delta, 0), vec3(x_min - delta, y_max + delta, 0), N2, N1); // Haut
+    side = mesh_primitive_grid(inner_4, inner_1, outer_1, outer_4, N2, N1);
     sand.push_back(side);
 
     for (int i = 0; i < sand.position.size(); i++)
@@ -149,18 +152,19 @@ void countryside::set_sand()
 
 void countryside::set_border()
 {
-    float delta = (x_max - x_min) * border_proportion / 2.0;
-    mesh side = mesh_primitive_quadrangle(vec3(x_min - delta, y_min, 0), vec3(x_max + delta, y_min, 0), vec3(x_max + delta, y_min - delta, 0), vec3(x_min - delta, y_min - delta, 0)); // Bas
-    paths.push_back(side);
-    // //side.~mesh();
-    side = mesh_primitive_quadrangle(vec3(x_min, y_max + delta, 0), vec3(x_min, y_min - delta, 0), vec3(x_min - delta, y_min - delta, 0), vec3(x_min - delta, y_max + delta, 0)); // Gauche
-    paths.push_back(side);
-    //side.~mesh();
-    side = mesh_primitive_quadrangle(vec3(x_max, y_max + delta, 0), vec3(x_max, y_min - delta, 0), vec3(x_max + delta, y_min - delta, 0), vec3(x_max + delta, y_max + delta, 0)); // Gauche
-    paths.push_back(side);
-    // side.~mesh();
-    side = mesh_primitive_quadrangle(vec3(x_min - delta, y_max, 0), vec3(x_max + delta, y_max, 0), vec3(x_max + delta, y_max + delta, 0), vec3(x_min - delta, y_max + delta, 0)); // Haut
-    paths.push_back(side);
+    mesh side;
+    vec3 inner_1 = field_proportion * vec3(x_min, y_min, 0.0);
+    vec3 inner_2 = field_proportion * vec3(x_max, y_min, 0.0);
+    vec3 inner_3 = field_proportion * vec3(x_max, y_max, 0.0);
+    vec3 inner_4 = field_proportion * vec3(x_min, y_max, 0.0);
+    vec3 outer_1 = border_proportion * vec3(x_min, y_min, 0.0);
+    vec3 outer_2 = border_proportion * vec3(x_max, y_min, 0.0);
+    vec3 outer_3 = border_proportion * vec3(x_max, y_max, 0.0);
+    vec3 outer_4 = border_proportion * vec3(x_min, y_max, 0.0);
+    paths.push_back(mesh_primitive_quadrangle(inner_1, inner_2, outer_2, outer_1));
+    paths.push_back(mesh_primitive_quadrangle(inner_2, inner_3, outer_3, outer_2));
+    paths.push_back(mesh_primitive_quadrangle(inner_3, inner_4, outer_4, outer_3));
+    paths.push_back(mesh_primitive_quadrangle(inner_4, inner_1, outer_1, outer_4));
 }
 
 void countryside::set_tractor()
@@ -176,7 +180,7 @@ void countryside::set_tractor()
     vec3 position;
     for (int i = 0; i < number_of_tractors; i++)
     {
-        position = vec3(0.9 * x_min + 0.9 * rand_interval() * (x_max - x_min), 0.9 * y_min + 0.9 * rand_interval() * (y_max - y_min), 0);
+        position = field_proportion * vec3(0.9 * x_min + 0.9 * rand_interval() * (x_max - x_min), 0.9 * y_min + 0.9 * rand_interval() * (y_max - y_min), 0);
         position.z = parameters.height * noise_perlin(position.xy(), parameters.octaves, parameters.persistency, parameters.frequency_gain) + profile(position.xy());
         tractor_positions[i] = position;
         position.~vec3();
@@ -239,9 +243,7 @@ bool countryside::subdivide(int current_subdivisions)
 void countryside::set_types()
 {
     for (int i = 0; i < fields.size(); i++)
-    {
         fields[i].type = static_cast<field_type>(int(rand_interval() * 4));
-    }
 }
 
 void countryside::set_textures()
@@ -269,7 +271,7 @@ void countryside::set_textures()
 
 void countryside::set_skybox()
 {
-    skybox.init_skybox(vec3(0, 0, 0), x_max - x_min, skybox_type::FLEUVE, get_shader(shader_type::NORMAL));
+    skybox.init_skybox(vec3(0, 0, 0), skybox_radius, skybox_type::FLEUVE, get_shader(shader_type::NORMAL));
 }
 
 void countryside::set_sun()
@@ -341,18 +343,16 @@ void countryside::shuffle()
 
 float countryside::profile(vec2 const &position_in_plane)
 {
-    float transition_down = 1.0;
-    float transition_up = 1.2;
-    float z_min = -0.4;
-    float z_max = 0.2;
+    float z_min = -0.2;
+    float z_max = 0.1;
     float coord_x = std::max((position_in_plane.x - x_min) / (x_max - x_min), (x_max - position_in_plane.x) / (x_max - x_min));
     float coord_y = std::max((position_in_plane.y - y_min) / (y_max - y_min), (y_max - position_in_plane.y) / (y_max - y_min));
     float coord = std::max(coord_x, coord_y);
-    if (coord < transition_down)
+    if (coord < profile_transition_down)
         return z_max;
-    else if (coord < transition_up)
+    else if (coord < profile_transition_up)
     {
-        float t = 0.5 * (1 + cos(PI / (transition_up - transition_down) * (coord - transition_down)));
+        float t = 0.5 * (1 + cos(PI / (profile_transition_up - profile_transition_down) * (coord - profile_transition_down)));
         return t * z_max + (1 - t) * z_min;
     }
     else
@@ -361,7 +361,7 @@ float countryside::profile(vec2 const &position_in_plane)
 
 void countryside::set_water()
 {
-    wat.init_water(scene_visual::water_shader);
+    wat.init_water(scene_visual::water_shader, -skybox_radius, skybox_radius, -skybox_radius, skybox_radius);
     fbos.initWaterFrameBuffers();
     clipPlane = vec4(0, 0, 1, -wat.waterHeight);
 }
@@ -500,57 +500,33 @@ void countryside::display_scene(vec4 clipPlane)
 
 void countryside::set_assets()
 {
-
-    vec3 up = vec3(0, 0, 0.04);
-    float coefal = 0;
+    float height = 0.1;
+    vec3 up = vec3(0, 0, 1);
+    float coefal;
+    mesh ebly;
     for (int i = 0; i < fields.size(); i++)
     {
+        ebly = mesh();
+        for (int j = 0; j < field_subdivisions - 1; j++) {
+            for (int k = 0; k < field_subdivisions - 1; k++) {
+                coefal = rand_interval() * height;
+                ebly.push_back(mesh_primitive_quadrangle(fields[i].field_mesh.position[j * field_subdivisions + k], fields[i].field_mesh.position[j * field_subdivisions + k + 1], fields[i].field_mesh.position[j * field_subdivisions + k + 1] + coefal * up, fields[i].field_mesh.position[j * field_subdivisions + k] + coefal * up));
+                ebly.push_back(mesh_primitive_quadrangle(fields[i].field_mesh.position[j * field_subdivisions + k], fields[i].field_mesh.position[(j + 1) * field_subdivisions + k + 1], fields[i].field_mesh.position[(j + 1) * field_subdivisions + k + 1] + coefal * up, fields[i].field_mesh.position[j * field_subdivisions + k] + coefal * up));
+            }
+        }
         switch (fields[i].type)
         {
         case field_type::UN:
-            for (int j = 0; j < fields[i].field_mesh.position.size() - 1; j++)
-            {
-                if (!((j + 1) % 10 == 0 or j > 88))
-                {
-                    coefal = rand_interval() + 0.5f;
-                    fields_type1.push_back(mesh_primitive_quadrangle(fields[i].field_mesh.position[j], fields[i].field_mesh.position[j + 1], fields[i].field_mesh.position[j + 1] + coefal * up, fields[i].field_mesh.position[j] + coefal * up));
-                    fields_type1.push_back(mesh_primitive_quadrangle(fields[i].field_mesh.position[j], fields[i].field_mesh.position[j + 11], fields[i].field_mesh.position[j + 11] + coefal * up, fields[i].field_mesh.position[j] + coefal * up));
-                }
-            }
+            fields_type1.push_back(ebly);
             break;
-
         case field_type::DEUX:
-            for (int j = 0; j < fields[i].field_mesh.position.size() - 1; j++)
-            {
-                if (!((j + 1) % 10 == 0 or j > 88))
-                {
-                    coefal = rand_interval() + 0.5f;
-                    fields_type2.push_back(mesh_primitive_quadrangle(fields[i].field_mesh.position[j], fields[i].field_mesh.position[j + 1], fields[i].field_mesh.position[j + 1] + coefal * up, fields[i].field_mesh.position[j] + coefal * up));
-                    fields_type2.push_back(mesh_primitive_quadrangle(fields[i].field_mesh.position[j], fields[i].field_mesh.position[j + 11], fields[i].field_mesh.position[j + 11] + coefal * up, fields[i].field_mesh.position[j] + coefal * up));
-                }
-            }
+            fields_type2.push_back(ebly);
             break;
         case field_type::TROIS:
-            for (int j = 0; j < fields[i].field_mesh.position.size() - 1; j++)
-            {
-                if (!((j + 1) % 10 == 0 or j > 88))
-                {
-                    coefal = rand_interval() + 0.5f;
-                    fields_type3.push_back(mesh_primitive_quadrangle(fields[i].field_mesh.position[j], fields[i].field_mesh.position[j + 11], fields[i].field_mesh.position[j + 11] + coefal * up, fields[i].field_mesh.position[j] + coefal * up));
-                    fields_type3.push_back(mesh_primitive_quadrangle(fields[i].field_mesh.position[j], fields[i].field_mesh.position[j + 1], fields[i].field_mesh.position[j + 1] + coefal * up, fields[i].field_mesh.position[j] + coefal * up));
-                }
-            }
+            fields_type3.push_back(ebly);
             break;
         case field_type::QUATRE:
-            for (int j = 0; j < fields[i].field_mesh.position.size() - 1; j++)
-            {
-                if (!((j + 1) % 10 == 0 or j > 88))
-                {
-                    coefal = rand_interval() + 0.5f;
-                    fields_type4.push_back(mesh_primitive_quadrangle(fields[i].field_mesh.position[j], fields[i].field_mesh.position[j + 11], fields[i].field_mesh.position[j + 11] + coefal * up, fields[i].field_mesh.position[j] + coefal * up));
-                    fields_type4.push_back(mesh_primitive_quadrangle(fields[i].field_mesh.position[j], fields[i].field_mesh.position[j + 1], fields[i].field_mesh.position[j + 1] + coefal * up, fields[i].field_mesh.position[j] + coefal * up));
-                }
-            }
+            fields_type4.push_back(ebly);
             break;
         }
     }

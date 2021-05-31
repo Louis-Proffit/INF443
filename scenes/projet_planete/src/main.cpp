@@ -122,6 +122,7 @@ void initialize()
 	segments_drawable::default_shader = shader_uniform_color;*/
 	scene_visual::init();
 	mesh_drawable::default_shader = scene_visual::get_shader(shader_type::NORMAL);
+	curve_drawable::default_shader = scene_visual::get_shader(shader_type::NORMAL);
 
 	GLuint const texture_white = opengl_texture_to_gpu(image_raw{1, 1, image_color_type::rgba, {255, 255, 255, 255}});
 	mesh_drawable::default_texture = texture_white;

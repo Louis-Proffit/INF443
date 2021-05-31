@@ -7,12 +7,12 @@ hierarchy_mesh_drawable get_boat_mesh_drawable(vec3 rotation_axis, float rotatio
 hierarchy_mesh_drawable get_satelite_mesh_drawable(vec3 rotation_axis, float rotation_angle);
 hierarchy_mesh_drawable get_sun_mesh_drawable(vec3 rotation_axis, float rotation_angle);
 
-/*void orbiter::display(scene_environment const& scene, user_interaction_parameters const& user)
+void orbiter::display()
 {
 	draw(orbiter_visual, this);
+	trajectory_visual.visual.color = vec3(1, 0, 0);
 	draw(trajectory_visual, this);
-	if (user.draw_wireframe) draw_wireframe(orbiter_visual, this);
-}*/
+}
 
 void orbiter::update(float time)
 {
@@ -30,12 +30,12 @@ orbiter::orbiter(orbiter_type _orbiter_type)
 	current_rotate = 0;
 	switch (_orbiter_type) {
 	case orbiter_type::PLANE:
-		trajectory_visual = trajectory_drawable(10);
+		trajectory_visual = trajectory_drawable(100);
 		orbiter_visual = get_plane_mesh_drawable(rotation_axis, rotation_angle);
 		rotation_speed = plane_rotation_speed;
 		break;
 	case orbiter_type::SATELITE:
-		trajectory_visual = trajectory_drawable(50);
+		trajectory_visual = trajectory_drawable(500);
 		orbiter_visual = get_satelite_mesh_drawable(rotation_axis, rotation_angle);
 		rotation_speed = satelite_rotation_speed;
 		break;
@@ -56,17 +56,17 @@ hierarchy_mesh_drawable get_plane_mesh_drawable(vec3 rotation_axis, float rotati
 {
 
 	hierarchy_mesh_drawable plane_visual;
-
+	GLuint normal_shader = scene_visual::get_shader(shader_type::NORMAL);
 	mesh_drawable center = mesh_drawable();
 	mesh_drawable rotated_center = mesh_drawable();
-	mesh_drawable body = mesh_drawable(mesh_primitive_cylinder(plane_body_radius, { 0, 0, 0 }, { plane_body_length, 0, 0 }));
-	mesh_drawable nose = mesh_drawable(mesh_primitive_ellipsoid({ plane_nose_length, plane_body_radius, plane_body_radius }));
-	mesh_drawable rear = mesh_drawable(mesh_primitive_ellipsoid({ plane_rear_length, plane_body_radius, plane_body_radius }));
-	mesh_drawable left_wing = mesh_drawable(mesh_primitive_quadrangle({ 0, 0, 0 }, { -plane_wing_fleche, -plane_wing_span, 0 }, { -plane_wing_fleche - plane_wing_outer_length, -plane_wing_span, 0 }, { -plane_wing_inner_length, 0, 0 }));
-	mesh_drawable right_wing = mesh_drawable(mesh_primitive_quadrangle({ 0, 0, 0 }, { -plane_wing_fleche, plane_wing_span, 0 }, { -plane_wing_fleche - plane_wing_outer_length, plane_wing_span, 0 }, { -plane_wing_inner_length, 0, 0 }));
-	mesh_drawable fin = mesh_drawable(mesh_primitive_quadrangle({ 0, 0, 0 }, { plane_fin_inner_length, 0, 0 }, { plane_fin_inner_length - plane_fin_fleche, 0, plane_fin_span }, { plane_fin_inner_length - plane_fin_fleche - plane_fin_outer_length, 0, plane_fin_span }));
-	mesh_drawable rear_wing_left = mesh_drawable(mesh_primitive_quadrangle({ 0, 0, 0 }, { plane_rear_wing_inner_length, 0, 0 }, { plane_rear_wing_inner_length - plane_rear_wing_fleche, -plane_rear_wing_span, 0 }, { plane_rear_wing_inner_length - plane_rear_wing_fleche - plane_rear_wing_outer_length, -plane_rear_wing_span, 0 }));
-	mesh_drawable rear_wing_right = mesh_drawable(mesh_primitive_quadrangle({ 0, 0, 0 }, { plane_rear_wing_inner_length, 0, 0 }, { plane_rear_wing_inner_length - plane_rear_wing_fleche, plane_rear_wing_span, 0 }, { plane_rear_wing_inner_length - plane_rear_wing_fleche - plane_rear_wing_outer_length, plane_rear_wing_span, 0 }));
+	mesh_drawable body = mesh_drawable(mesh_primitive_cylinder(plane_body_radius, { 0, 0, 0 }, { plane_body_length, 0, 0 }), normal_shader);
+	mesh_drawable nose = mesh_drawable(mesh_primitive_ellipsoid({ plane_nose_length, plane_body_radius, plane_body_radius }), normal_shader);
+	mesh_drawable rear = mesh_drawable(mesh_primitive_ellipsoid({ plane_rear_length, plane_body_radius, plane_body_radius }), normal_shader);
+	mesh_drawable left_wing = mesh_drawable(mesh_primitive_quadrangle({ 0, 0, 0 }, { -plane_wing_fleche, -plane_wing_span, 0 }, { -plane_wing_fleche - plane_wing_outer_length, -plane_wing_span, 0 }, { -plane_wing_inner_length, 0, 0 }), normal_shader);
+	mesh_drawable right_wing = mesh_drawable(mesh_primitive_quadrangle({ 0, 0, 0 }, { -plane_wing_fleche, plane_wing_span, 0 }, { -plane_wing_fleche - plane_wing_outer_length, plane_wing_span, 0 }, { -plane_wing_inner_length, 0, 0 }), normal_shader);
+	mesh_drawable fin = mesh_drawable(mesh_primitive_quadrangle({ 0, 0, 0 }, { plane_fin_inner_length, 0, 0 }, { plane_fin_inner_length - plane_fin_fleche, 0, plane_fin_span }, { plane_fin_inner_length - plane_fin_fleche - plane_fin_outer_length, 0, plane_fin_span }), normal_shader);
+	mesh_drawable rear_wing_left = mesh_drawable(mesh_primitive_quadrangle({ 0, 0, 0 }, { plane_rear_wing_inner_length, 0, 0 }, { plane_rear_wing_inner_length - plane_rear_wing_fleche, -plane_rear_wing_span, 0 }, { plane_rear_wing_inner_length - plane_rear_wing_fleche - plane_rear_wing_outer_length, -plane_rear_wing_span, 0 }), normal_shader);
+	mesh_drawable rear_wing_right = mesh_drawable(mesh_primitive_quadrangle({ 0, 0, 0 }, { plane_rear_wing_inner_length, 0, 0 }, { plane_rear_wing_inner_length - plane_rear_wing_fleche, plane_rear_wing_span, 0 }, { plane_rear_wing_inner_length - plane_rear_wing_fleche - plane_rear_wing_outer_length, plane_rear_wing_span, 0 }), normal_shader);
 
 	body.shading.color = vec3(0, 0, 1);
 	nose.shading.color = vec3(0, 0, 1);
@@ -99,17 +99,18 @@ hierarchy_mesh_drawable get_plane_mesh_drawable(vec3 rotation_axis, float rotati
 hierarchy_mesh_drawable get_satelite_mesh_drawable(vec3 rotation_axis, float rotation_angle)
 {
 	hierarchy_mesh_drawable satelite_visual;
+	GLuint normal_shader = scene_visual::get_shader(shader_type::NORMAL);
 
 	mesh_drawable center = mesh_drawable();
 	mesh_drawable rotated_center = mesh_drawable();
-	mesh_drawable body = mesh_drawable(mesh_primitive_cube({ 0, 0, 0 }, satelite_body_height));
-	mesh_drawable link = mesh_drawable(mesh_primitive_cylinder(satelite_link_radius, { 0, -satelite_link_length / 2, 0 }, { 0, satelite_link_length / 2, 0 }));
+	mesh_drawable body = mesh_drawable(mesh_primitive_cube({ 0, 0, 0 }, satelite_body_height), normal_shader);
+	mesh_drawable link = mesh_drawable(mesh_primitive_cylinder(satelite_link_radius, { 0, -satelite_link_length / 2, 0 }, { 0, satelite_link_length / 2, 0 }), normal_shader);
 	mesh_drawable panel = mesh_drawable(mesh_primitive_quadrangle(
 		{ -satelite_panel_height / 2, -satelite_panel_width / 2, 0 },
 		{ satelite_panel_height / 2, -satelite_panel_width / 2, 0 },
 		{ satelite_panel_height / 2, satelite_panel_width / 2, 0 },
 		{ -satelite_panel_height / 2, satelite_panel_width / 2, 0 }
-	));
+	), normal_shader);
 
 	body.shading.color = vec3(1, 0.9, 0); // Jaune
 	link.shading.color = vec3(0, 0, 0); // Noir
@@ -137,10 +138,11 @@ hierarchy_mesh_drawable get_boat_mesh_drawable(vec3 rotation_axis, float rotatio
 {
 
 	hierarchy_mesh_drawable boat_visual;
+	GLuint normal_shader = scene_visual::get_shader(shader_type::NORMAL);
 
 	mesh_drawable center = mesh_drawable();
 	mesh_drawable rotated_center = mesh_drawable();
-	mesh_drawable body = mesh_drawable(mesh_load_file_obj("assets/objects/boat/boat.obj"));
+	mesh_drawable body = mesh_drawable(mesh_load_file_obj("assets/objects/boat/boat.obj"), normal_shader);
 
 	body.shading.color = color_sea_high;
 
@@ -159,10 +161,11 @@ hierarchy_mesh_drawable get_sun_mesh_drawable(vec3 rotation_axis, float rotation
 {
 
 	hierarchy_mesh_drawable sun_visual;
+	GLuint normal_shader = scene_visual::get_shader(shader_type::SUN);
 
 	mesh_drawable center = mesh_drawable();
 	mesh_drawable rotated_center = mesh_drawable();
-	mesh_drawable body = mesh_drawable(mesh_primitive_sphere(sun_radius));
+	mesh_drawable body = mesh_drawable(mesh_primitive_sphere(sun_radius), normal_shader);
 
 	body.shading.color = vec3(1.0, 1.0, 0.0);
 

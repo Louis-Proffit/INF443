@@ -3,6 +3,7 @@
 #include "vcl/vcl.hpp"
 #include "constants.hpp"
 #include "scene_helper.hpp"
+#include "orbiters.hpp"
 
 struct picking_structure {
 	bool active;
@@ -19,6 +20,10 @@ public:
 	vcl::buffer<scene_type> terrain_types;
 	vcl::buffer<vcl::mesh_drawable> islands_visuals;
 	vcl::mesh_float_drawable planet_visual;
+
+	std::vector<orbiter> orbiters;
+	int number_of_planes = 5;
+	int number_of_satelites = 3;
 
 	vcl::mesh sun;
 	vcl::mesh_drawable sun_visual;
@@ -42,6 +47,7 @@ private:
 	void set_islands();
 	void set_planet();
 	void set_skybox();
+	void set_orbiters();
 	void set_sun();
 };
 
