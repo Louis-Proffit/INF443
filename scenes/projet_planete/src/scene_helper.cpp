@@ -19,6 +19,8 @@
 #include "../assets/shaders/mountain/frag.glsl"
 #include "../assets/shaders/ebly/vert.glsl"
 #include "../assets/shaders/ebly/frag.glsl"
+#include "../assets/shaders/forest/vert.glsl"
+#include "../assets/shaders/forest/frag.glsl"
 
 using namespace vcl;
 
@@ -32,6 +34,7 @@ GLuint scene_visual::tree_shader = 0;
 GLuint scene_visual::mountain_shader = 0;
 GLuint scene_visual::particle_mountain_shader = 0;
 GLuint scene_visual::ebly_shader = 0;
+GLuint scene_visual::forest_shader = 0;
 
 GLuint scene_visual::texture_field_1 = 0;
 GLuint scene_visual::texture_field_2 = 0;
@@ -46,6 +49,7 @@ GLuint scene_visual::texture_snowflake = 0;
 GLuint scene_visual::texture_lowpoly = 0;
 GLuint scene_visual::texture_rock = 0;
 GLuint scene_visual::texture_snow = 0;
+GLuint scene_visual::texture_fern2 = 0;
 GLuint scene_visual::texture_sb_desert_haut = 0;
 GLuint scene_visual::texture_sb_desert_bas = 0;
 GLuint scene_visual::texture_sb_desert_gauche = 0;
@@ -106,6 +110,7 @@ void scene_visual::init()
 	scene_visual::mountain_shader = opengl_create_shader_program(mountain_vert, mountain_frag);
 	scene_visual::particle_mountain_shader = opengl_create_shader_program(partic_vert, partic_mountain_frag);
 	scene_visual::ebly_shader = opengl_create_shader_program(ebly_vert, ebly_frag);
+	scene_visual::forest_shader = opengl_create_shader_program(forest_vert, forest_frag);
 
 	scene_visual::texture_field_1 = opengl_texture_to_gpu(image_load_png("../assets/textures/field/field_1.png"), GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT);
 	scene_visual::texture_field_2 = opengl_texture_to_gpu(image_load_png("../assets/textures/field/field_2.png"), GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT);
@@ -118,6 +123,7 @@ void scene_visual::init()
 	scene_visual::texture_snow = opengl_texture_to_gpu(image_load_png("../assets/textures/mountain/snow.png"), GL_REPEAT, GL_REPEAT);
 	scene_visual::texture_sand = opengl_texture_to_gpu(image_load_png("../assets/textures/desert/sand_1.png"), GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT);
 	scene_visual::texture_fire = opengl_texture_to_gpu(image_load_png("../assets/textures/fire/fire.png"), GL_REPEAT, GL_REPEAT);
+	scene_visual::texture_fern2 = opengl_texture_to_gpu(image_load_png("../assets/textures/tree/fern2.png"), GL_REPEAT, GL_REPEAT);
 	scene_visual::texture_snowflake = opengl_texture_to_gpu(image_load_png("../assets/textures/snow/snowflake_3.png"), GL_REPEAT, GL_REPEAT);
 	scene_visual::texture_lowpoly = opengl_texture_to_gpu(image_load_png("../assets/textures/lowpoly_palette.png"), GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
 	scene_visual::texture_sb_desert_haut = opengl_texture_to_gpu(image_load_png("../assets/skyboxes/desert/top.png"), GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
@@ -176,6 +182,8 @@ GLuint scene_visual::get_shader(shader_type shader_type)
 		return particle_mountain_shader;
 	case shader_type::EBLY:
 		return ebly_shader;
+	case shader_type::FOREST:
+		return forest_shader;
 	}
 }
 
@@ -209,6 +217,8 @@ GLuint scene_visual::get_texture(texture_type texture_type)
 		return texture_rock;
 	case texture_type::SNOW:
 		return texture_snow;
+	case texture_type::FERN2:
+		return texture_fern2;
 	case texture_type::SB_DESERT_HAUT:
 		return texture_sb_desert_haut;
 	case texture_type::SB_DESERT_BAS:

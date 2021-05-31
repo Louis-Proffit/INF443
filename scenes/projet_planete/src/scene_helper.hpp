@@ -25,7 +25,8 @@ enum class shader_type
 	TREE,
 	MOUNTAIN,
 	PARTICLE_MOUNTAIN,
-	EBLY
+	EBLY,
+	FOREST
 };
 
 enum class texture_type
@@ -43,6 +44,7 @@ enum class texture_type
 	LOWPOLY,
 	ROCK,
 	SNOW,
+	FERN2,
 	SB_DESERT_HAUT,
 	SB_DESERT_BAS,
 	SB_DESERT_GAUCHE,
@@ -167,6 +169,7 @@ public:
 	static GLuint mountain_shader;
 	static GLuint particle_mountain_shader;
 	static GLuint ebly_shader;
+	static GLuint forest_shader;
 
 	static GLuint texture_field_1;
 	static GLuint texture_field_2;
@@ -179,6 +182,7 @@ public:
 	static GLuint texture_rock;
 	static GLuint texture_fire;
 	static GLuint texture_snow;
+	static GLuint texture_fern2;
 	static GLuint texture_snowflake;
 	static GLuint texture_lowpoly;
 

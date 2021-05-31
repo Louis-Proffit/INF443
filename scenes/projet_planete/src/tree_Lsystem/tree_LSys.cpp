@@ -173,7 +173,8 @@ void TreeGenerator::GenerateLeave(vec3 startingPoint, vec3 translationVector, fl
 
 void TreeGenerator::initTree(tree_type tree_type, GLuint shader, bool blockleaves)
 {
-    switch (tree_type) {
+    switch (tree_type)
+    {
     case tree_type::REAL_1:
         m_system.ClearAxioms();
         translationOffset = .1f;
@@ -196,6 +197,8 @@ void TreeGenerator::initTree(tree_type tree_type, GLuint shader, bool blockleave
         m_system.AddAxiom('H', "F[[[[xH]XH]yH]YH]tFH");
         m_system.AddAxiom('F', "FF");
         GenerateModel("H", 4, "Test", vec3(0, 0, 0), .01f, shader);
+        dtrunk.texture = opengl_texture_to_gpu(image_load_png("../assets/textures/tree/trunk.png"));
+        dleaves.texture = opengl_texture_to_gpu(image_load_png("../assets/textures/tree/fern2.png"));
         break;
     case tree_type::REAL_3:
         std::cout << "Generating RealTree3" << std::endl;
@@ -230,6 +233,8 @@ void TreeGenerator::initTree(tree_type tree_type, GLuint shader, bool blockleave
         scaleOffset = 1.0f;
         m_system.AddAxiom('R', "F[ZxR][ZyR][ZzR][YxR][YyR][YzR][XxR][XyR][XzR][xR][yR][zR]FR");
         m_system.AddAxiom('F', "FF");
+        dtrunk.texture = opengl_texture_to_gpu(image_load_png("../assets/textures/tree/trunk.png"));
+        dleaves.texture = opengl_texture_to_gpu(image_load_png("../assets/textures/tree/pine.png"));
         GenerateModel("R", 4, "Tree2", vec3(0, 0, 0), .01f, shader);
         break;
     case tree_type::SAPIN:
@@ -289,15 +294,22 @@ void TreeGenerator::initTree(tree_type tree_type, GLuint shader, bool blockleave
 tree_type TreeGenerator::random_tree_type()
 {
     float random = rand_interval();
-    if (random < 0.33) return tree_type::CLASSIC;
-    else if (random < 0.66) return tree_type::COOL;
-    if (random < 1.0) return tree_type::REAL_1;
+    if (random < 0.33)
+        return tree_type::CLASSIC;
+    else if (random < 0.66)
+        return tree_type::COOL;
+    if (random < 1.0)
+        return tree_type::REAL_1;
 }
 
 void TreeGenerator::translate(vec3 _translation)
 {
     dtrunk.transform.translate = _translation;
     dleaves.transform.translate = _translation;
-    dtrunk.transform.scale = 0.8f;
-    dleaves.transform.scale = 0.8f;
+}
+
+void TreeGenerator::resize(float taille)
+{
+    dtrunk.transform.scale = taille;
+    dleaves.transform.scale = taille;
 }
