@@ -211,19 +211,31 @@
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\simplexnoise\simplexnoise1234.cpp">
       <Filter>third_party\src\simplexnoise</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\heightmap.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\L_systems\LSystem.cpp">
+      <Filter>src\L_systems</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\L_systems\tree.cpp">
+      <Filter>src\L_systems</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\L_systems\tree_LSys.cpp">
+      <Filter>src\L_systems</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\helpers\heightmap.cpp">
+      <Filter>src\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\helpers\orbiters.cpp">
+      <Filter>src\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\helpers\particles.cpp">
+      <Filter>src\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\helpers\scene_helper.cpp">
+      <Filter>src\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\helpers\skybox.cpp">
+      <Filter>src\helpers</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\main.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\orbiters.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\particles.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\city.cpp">
@@ -243,18 +255,6 @@
     </ClCompile>
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.cpp">
       <Filter>src\scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\terrain.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\tree_Lsystem\LSystem.cpp">
-      <Filter>src\tree_Lsystem</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\tree_Lsystem\tree.cpp">
-      <Filter>src\tree_Lsystem</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\tree_Lsystem\tree_LSys.cpp">
-      <Filter>src\tree_Lsystem</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\water\water.cpp">
       <Filter>src\water</Filter>
@@ -1392,20 +1392,32 @@
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\library\third_party\src\simplexnoise\simplexnoise1234.hpp">
       <Filter>third_party\src\simplexnoise</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\constants.hpp">
-      <Filter>src</Filter>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\L_systems\LSystem.hpp">
+      <Filter>src\L_systems</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\heightmap.hpp">
-      <Filter>src</Filter>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\L_systems\tree.hpp">
+      <Filter>src\L_systems</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\orbiters.hpp">
-      <Filter>src</Filter>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\L_systems\tree_LSys.hpp">
+      <Filter>src\L_systems</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\particles.hpp">
-      <Filter>src</Filter>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\helpers\constants.hpp">
+      <Filter>src\helpers</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp">
-      <Filter>src</Filter>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\helpers\heightmap.hpp">
+      <Filter>src\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\helpers\orbiters.hpp">
+      <Filter>src\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\helpers\particles.hpp">
+      <Filter>src\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\helpers\scene_helper.hpp">
+      <Filter>src\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\helpers\skybox.hpp">
+      <Filter>src\helpers</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\city.hpp">
       <Filter>src\scenes</Filter>
@@ -1425,18 +1437,6 @@
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\planet.hpp">
       <Filter>src\scenes</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\terrain.hpp">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\tree_Lsystem\LSystem.hpp">
-      <Filter>src\tree_Lsystem</Filter>
-    </ClInclude>
-    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\tree_Lsystem\tree.hpp">
-      <Filter>src\tree_Lsystem</Filter>
-    </ClInclude>
-    <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\tree_Lsystem\tree_LSys.hpp">
-      <Filter>src\tree_Lsystem</Filter>
-    </ClInclude>
     <ClInclude Include="C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\water\water.hpp">
       <Filter>src\water</Filter>
     </ClInclude>
@@ -1451,11 +1451,14 @@
     <Filter Include="src">
       <UniqueIdentifier>{C7C38833-8C4F-3F6E-8C92-F54D03036F07}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\L_systems">
+      <UniqueIdentifier>{5ADFC790-0EAD-3EEC-8500-58C9C7FD1CA4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\helpers">
+      <UniqueIdentifier>{D94A2896-8967-3447-BBE0-6DCA9D036007}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\scenes">
       <UniqueIdentifier>{190009DE-719D-3C1A-8321-C8FE69152ACD}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\tree_Lsystem">
-      <UniqueIdentifier>{C04E0226-C2A9-3FEC-BCCB-7D6B5B457F37}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\water">
       <UniqueIdentifier>{764AB5FF-A075-311C-B8E4-7105E3DA0123}</UniqueIdentifier>

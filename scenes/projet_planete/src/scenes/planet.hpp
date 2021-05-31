@@ -1,9 +1,9 @@
 #pragma once
 
 #include "vcl/vcl.hpp"
-#include "constants.hpp"
-#include "scene_helper.hpp"
-#include "orbiters.hpp"
+#include "helpers/constants.hpp"
+#include "helpers/scene_helper.hpp"
+#include "helpers/orbiters.hpp"
 
 struct picking_structure {
 	bool active;

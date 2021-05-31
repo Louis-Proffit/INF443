@@ -2,9 +2,9 @@
 
 #include "vcl/vcl.hpp"
 #include <iostream>
-#include "scene_helper.hpp"
-#include "particles.hpp"
-#include "tree_Lsystem/tree_LSys.hpp"
+#include "helpers/scene_helper.hpp"
+#include "helpers/particles.hpp"
+#include "L_systems/tree_LSys.hpp"
 
 class forest : public environement
 {

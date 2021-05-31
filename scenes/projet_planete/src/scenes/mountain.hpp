@@ -2,12 +2,11 @@
 
 #include "vcl/vcl.hpp"
 #include <iostream>
-#include "scene_helper.hpp"
-#include "skybox.hpp"
-#include "heightmap.hpp"
+#include "helpers/scene_helper.hpp"
+#include "helpers/heightmap.hpp"
 #include "water/water.hpp"
 #include "water/waterfbuffer.hpp"
-#include "particles.hpp"
+#include "helpers/particles.hpp"
 
 class mountain : public environement
 {

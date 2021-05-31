@@ -1,7 +1,7 @@
 #include "vcl/vcl.hpp"
 #include <iostream>
 
-#include "scene_helper.hpp"
+#include "helpers/scene_helper.hpp"
 #include "scenes/city.hpp"
 #include "scenes/mountain.hpp"
 #include "scenes/desert.hpp"

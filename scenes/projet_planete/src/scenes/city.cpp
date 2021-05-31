@@ -10,6 +10,9 @@ using namespace std;
 city::city(user_parameters *_user, std::function<void(scene_type)> swap_function) : environement(_user, swap_function)
 {
     // Configuration de la ville
+    init_car();
+    init_sand();
+    init_sidewalk();
     init_pate();
     init_tour();
     init_ground();
@@ -123,6 +126,17 @@ void city::display_visual()
             break;
         }
     }
+    draw(sidewalk_visual, this);
+    if (user_reference->draw_wireframe)
+        draw_wireframe(sidewalk_visual, this);
+
+    draw(sand_visual, this);
+    if (user_reference->draw_wireframe)
+        draw_wireframe(sand_visual, this);
+
+    draw(car_visual, this);
+    if (user_reference->draw_wireframe)
+        draw_wireframe(car_visual, this);
 
     draw(d_bat, this);
     if (user_reference->draw_wireframe)
@@ -146,15 +160,20 @@ void city::display_interface()
 void city::update_visual()
 {
     super::update_visual();
+    car_visual.transform = get_car_transform(user_reference->fps_record.t);
 }
 
 void city::init_pate()
 {
     vector<vec3> initial;
-    initial.push_back(vec3((1 - prop) * x_min, (1 - prop) * y_min, 0));
-    initial.push_back(vec3((1 - prop) * x_min, (1 - prop) * y_max, 0));
-    initial.push_back(vec3((1 - prop) * x_max, (1 - prop) * y_max, 0));
-    initial.push_back(vec3((1 - prop) * x_max, (1 - prop) * y_min, 0));
+    vec2 p_1 = city_proportion * vec2(x_min, y_min);
+    vec2 p_2 = city_proportion * vec2(x_min, y_max);
+    vec2 p_3 = city_proportion * vec2(x_max, y_max);
+    vec2 p_4 = city_proportion * vec2(x_max, y_min);
+    initial.push_back(vec3(p_1, profile(p_1)));
+    initial.push_back(vec3(p_2, profile(p_2)));
+    initial.push_back(vec3(p_3, profile(p_3)));
+    initial.push_back(vec3(p_4, profile(p_4)));
     initial.push_back(vec3(0, 0, 0));
     patepos.push_back(initial);
 }
@@ -164,16 +183,92 @@ void city::init_ground()
     ground.position.resize(4);
     ground.connectivity.resize(2);
     ground.uv.resize(4);
-    ground.position[0] = vec3(x_min, y_min, -eps);
-    ground.position[1] = vec3(x_max, y_min, -eps);
-    ground.position[2] = vec3(x_max, y_max, -eps);
-    ground.position[3] = vec3(x_min, y_max, -eps);
+    vec2 p_1 = city_proportion * vec2(x_min, y_min);
+    vec2 p_2 = city_proportion * vec2(x_min, y_max);
+    vec2 p_3 = city_proportion * vec2(x_max, y_max);
+    vec2 p_4 = city_proportion * vec2(x_max, y_min);
+    std::cout << profile(p_1) << std::endl;
+    ground.position[0] = vec3(p_1, profile(p_1) - eps);
+    ground.position[1] = vec3(p_2, profile(p_2) - eps);
+    ground.position[2] = vec3(p_3, profile(p_3) - eps);
+    ground.position[3] = vec3(p_4, profile(p_4) - eps);
     ground.connectivity[0] = uint3(0, 1, 2);
     ground.connectivity[1] = uint3(0, 2, 3);
     ground.uv[0] = vec2(0, 0);
     ground.uv[1] = vec2((x_max - x_min) / texture_unit_length, 0);
     ground.uv[2] = vec2((x_max - x_min) / texture_unit_length, (y_max - y_min) / texture_unit_length);
     ground.uv[3] = vec2(0, (y_max - y_min) / texture_unit_length);
+}
+
+void city::init_sand()
+{
+    mesh sand, side;
+    int N1 = 100;
+    int N2 = 500;
+    vec3 inner_1 = border_sidewalk_proportion * vec3(x_min, y_min, 0.0);
+    vec3 inner_2 = border_sidewalk_proportion * vec3(x_max, y_min, 0.0);
+    vec3 inner_3 = border_sidewalk_proportion * vec3(x_max, y_max, 0.0);
+    vec3 inner_4 = border_sidewalk_proportion * vec3(x_min, y_max, 0.0);
+    vec3 outer_1 = vec3(x_min, y_min, 0.0);
+    vec3 outer_2 = vec3(x_max, y_min, 0.0);
+    vec3 outer_3 = vec3(x_max, y_max, 0.0);
+    vec3 outer_4 = vec3(x_min, y_max, 0.0);
+    side = mesh_primitive_grid(inner_1, inner_2, outer_2, outer_1, N2, N1);
+    sand.push_back(side);
+    side = mesh_primitive_grid(inner_2, inner_3, outer_3, outer_2, N2, N1);
+    sand.push_back(side);
+    side = mesh_primitive_grid(inner_3, inner_4, outer_4, outer_3, N2, N1);
+    sand.push_back(side);
+    side = mesh_primitive_grid(inner_4, inner_1, outer_1, outer_4, N2, N1);
+    sand.push_back(side);
+
+    for (int i = 0; i < sand.position.size(); i++)
+    {
+        sand.position[i].z += profile(sand.position[i].xy());
+    }
+    for (int i = 0; i < sand.position.size(); i++)
+    {
+        sand.uv[i] = 0.5 * sand.position[i].xy();
+    }
+    GLuint normal_shader = get_shader(shader_type::NORMAL);
+    sand_visual = mesh_drawable(sand, normal_shader);
+    sand_visual.texture = get_texture(texture_type::SAND);
+}
+
+void city::init_car()
+{
+    mesh car = mesh_load_file_obj("../assets/objects/car/car.obj");
+    GLuint normal_shader = get_shader(shader_type::NORMAL);
+    car_visual = mesh_drawable(car, normal_shader);
+    car_visual.texture = get_texture(texture_type::LOWPOLY);
+    car_visual.transform = get_car_transform(0);
+}
+
+void city::init_sidewalk() 
+{
+    mesh sidewalk;
+    int N1 = 100;
+    int N2 = 500;
+    vec3 inner_1 = border_road_proportion * vec3(x_min, y_min, 0.0);
+    vec3 inner_2 = border_road_proportion * vec3(x_max, y_min, 0.0);
+    vec3 inner_3 = border_road_proportion * vec3(x_max, y_max, 0.0);
+    vec3 inner_4 = border_road_proportion * vec3(x_min, y_max, 0.0);
+    vec3 outer_1 = border_sidewalk_proportion * vec3(x_min, y_min, 0.0);
+    vec3 outer_2 = border_sidewalk_proportion * vec3(x_max, y_min, 0.0);
+    vec3 outer_3 = border_sidewalk_proportion * vec3(x_max, y_max, 0.0);
+    vec3 outer_4 = border_sidewalk_proportion * vec3(x_min, y_max, 0.0);
+    sidewalk.push_back(mesh_primitive_grid(inner_1, inner_2, outer_2, outer_1, N2, N1));
+    sidewalk.push_back(mesh_primitive_grid(inner_2, inner_3, outer_3, outer_2, N2, N1));
+    sidewalk.push_back(mesh_primitive_grid(inner_3, inner_4, outer_4, outer_3, N2, N1));
+    sidewalk.push_back(mesh_primitive_grid(inner_4, inner_1, outer_1, outer_4, N2, N1));
+
+    for (int i = 0; i < sidewalk.position.size(); i++)
+    {
+        sidewalk.position[i].z += profile(sidewalk.position[i].xy());
+    }
+    GLuint normal_shader = get_shader(shader_type::NORMAL);
+    sidewalk_visual = mesh_drawable(sidewalk, normal_shader);
+    sidewalk_visual.shading.color = vec3(0.5, 0.5, 0.5);
 }
 
 vec3 city::random_divider()
@@ -455,22 +550,20 @@ void city::add_tree_positions(vector<tree_located> &to_add)
 
 void city::compute_pate(int nb)
 {
-    vector<vector<vec3>> base = patepos;
+    patepos;
     for (int j = 0; j < nb; j++)
     {
         vector<vector<vec3>> current;
-        for (size_t i = 0; i < base.size(); i++)
+        for (size_t i = 0; i < patepos.size(); i++)
         {
-            vector<vector<vec3>> to_add = subdivise(base[i]);
+            vector<vector<vec3>> to_add = subdivise(patepos[i]);
             for (size_t z = 0; z < to_add.size(); z++)
                 current.push_back(to_add[z]);
-            //merge_pat(current, subdivise(base[i]));
         }
-        base.clear();
-        merge_pat(base, current);
+        patepos.clear();
+        merge_pat(patepos, current);
         current.clear();
     }
-    patepos = base;
 }
 
 mesh city::compute_batiment(vector<vec3> coords)
@@ -542,13 +635,8 @@ mesh city::compute_garden(vector<vec3> coords)
     int Nv = 15;
     // Pour compute les arbres, generer un vecteur de positions d'arbres et de hauteur, qui sera ensuite executé au moment du draw
     mesh sol = mesh_primitive_grid(coords[0], coords[3], coords[2], coords[1], Nu, Nv);
-    sol.uv.clear();
-    for (size_t ku = 0; ku < size_t(Nu); ++ku)
-    {
-        for (size_t kv = 0; kv < size_t(Nv); ++kv)
-        {
-            sol.uv.push_back(vec2(ku, kv));
-        }
+    for (int i = 0; i < sol.position.size(); i++) {
+        sol.uv[i] = 2 * sol.position[i].xy();
     }
     vec3 p00 = coords[0];
     vec3 p10 = coords[3];
@@ -724,13 +812,100 @@ mesh city::compute_road_partial(vec3 const &p00, vec3 const &p10, vec3 const &p1
 
 float city::get_altitude(vec2 const &new_position_in_plane)
 {
-    if (user_reference->sneak)
-        return player_height / 2;
-    else
-        return player_height;
+    return profile(new_position_in_plane);
 }
 
 void city::init_tour()
 {
-    roads.push_back(compute_road_partial(vec3((1 - prop) * x_min, y_min, 0), vec3((1 - prop) * x_min, (1 - prop) * y_min, 0), vec3((1 - prop) * x_max, (1 - prop) * y_min, 0), vec3((1 - prop) * x_max, y_min, 0), false));
+    mesh side;
+    vec2 p10 = city_proportion * vec2(x_min, y_min);
+    vec2 p20 = city_proportion * vec2(x_min, y_max);
+    vec2 p30 = city_proportion * vec2(x_max, y_max);
+    vec2 p40 = city_proportion * vec2(x_max, y_min);
+
+    vec2 p11 = vec2(city_proportion * x_min, border_road_proportion * y_min);
+    vec2 p12 = vec2(border_road_proportion * x_min, city_proportion * y_min);
+
+    vec2 p21 = vec2(border_road_proportion * x_min, city_proportion * y_max);
+    vec2 p22 = vec2(city_proportion * x_min, border_road_proportion * y_max);
+
+    vec2 p31 = vec2(city_proportion * x_max, border_road_proportion * y_max);
+    vec2 p32 = vec2(border_road_proportion * x_max, city_proportion * y_max);
+
+    vec2 p41 = vec2(border_road_proportion * x_max, city_proportion * y_min);
+    vec2 p42 = vec2(city_proportion * x_max, border_road_proportion * y_min);
+
+    vec2 p13 = border_road_proportion * vec2(x_min, y_min);
+    vec2 p23 = border_road_proportion * vec2(x_min, y_max);
+    vec2 p33 = border_road_proportion * vec2(x_max, y_max);
+    vec2 p43 = border_road_proportion * vec2(x_max, y_min);
+
+    // Roads
+    roads.push_back(compute_road_partial(vec3(p10, profile(p10)), vec3(p20, profile(p20)), vec3(p21, profile(p21)), vec3(p12, profile(p12)), false));
+    roads.push_back(compute_road_partial(vec3(p20, profile(p20)), vec3(p30, profile(p30)), vec3(p31, profile(p31)), vec3(p22, profile(p22)), false));
+    roads.push_back(compute_road_partial(vec3(p30, profile(p30)), vec3(p40, profile(p40)), vec3(p41, profile(p41)), vec3(p32, profile(p32)), false));
+    roads.push_back(compute_road_partial(vec3(p40, profile(p40)), vec3(p10, profile(p10)), vec3(p11, profile(p11)), vec3(p42, profile(p42)), false));
+
+    // Crossroads
+    roads.push_back(compute_road_partial(vec3(p10, profile(p10)), vec3(p12, profile(p12)), vec3(p13, profile(p13)), vec3(p11, profile(p11)), true));
+    roads.push_back(compute_road_partial(vec3(p20, profile(p20)), vec3(p22, profile(p22)), vec3(p23, profile(p23)), vec3(p21, profile(p21)), true));
+    roads.push_back(compute_road_partial(vec3(p30, profile(p30)), vec3(p32, profile(p32)), vec3(p33, profile(p33)), vec3(p31, profile(p31)), true));
+    roads.push_back(compute_road_partial(vec3(p40, profile(p40)), vec3(p42, profile(p42)), vec3(p43, profile(p43)), vec3(p41, profile(p41)), true));
+}
+
+float city::profile(vec2 const& position_in_plane) 
+{
+    float z_min = -0.2;
+    float z_max = 0.1;
+    float coord_x = std::max(position_in_plane.x / x_max, position_in_plane.x / x_min);
+    float coord_y = std::max(position_in_plane.y / y_max, position_in_plane.y / y_min);
+    float coord = std::max(coord_x, coord_y);
+    if (coord < profile_transition_down)
+        return z_max;
+    else if (coord < profile_transition_up)
+    {
+        float t = 0.5 * (1 + cos(PI / (profile_transition_up - profile_transition_down) * (coord - profile_transition_down)));
+        return t * z_max + (1 - t) * z_min;
+    }
+    else
+        return z_min;
+}
+
+affine_rts city::get_car_transform(float t) 
+{
+    float scale = 0.08;
+    float time_for_leg = 15.0f;
+
+    rotation _rotation = rotation(vec3(1, 0, 0), PI / 2);
+    vec2 cross_road_1 = ((border_road_proportion - city_proportion) * 0.5 + city_proportion) * vec2(x_min, y_min);
+    vec2 cross_road_2 = ((border_road_proportion - city_proportion) * 0.5 + city_proportion) * vec2(x_min, y_max);
+    vec2 cross_road_3 = ((border_road_proportion - city_proportion) * 0.5 + city_proportion) * vec2(x_max, y_max);
+    vec2 cross_road_4 = ((border_road_proportion - city_proportion) * 0.5 + city_proportion) * vec2(x_max, y_min);
+
+    assert_vcl(t >= 0, "Temps négatif");
+
+    vec2 position;
+    t = t / time_for_leg;
+    t = fmod(t, 4.0);
+
+    assert_vcl(t <= 4, "Temps supérieur à la période");
+
+    if (t < 1) {
+        position = t * cross_road_2 + (1 - t) * cross_road_1;
+        _rotation = rotation(vec3(0, 0, 1), 0) * _rotation;
+    }
+    else if (t < 2) {
+        position = (t - 1) * cross_road_3 + (2 - t) * cross_road_2;
+        _rotation = rotation(vec3(0, 0, 1), -PI / 2) * _rotation;
+    }
+    else if (t < 3) {
+        position = (t - 2) * cross_road_4 + (3 - t) * cross_road_3;
+        _rotation = rotation(vec3(0, 0, 1), PI) * _rotation;
+    }
+    else {
+        position = (t - 3) * cross_road_1 + (4 - t) * cross_road_4;
+        _rotation = rotation(vec3(0, 0, 1), PI / 2) * _rotation;
+    }
+
+    return affine_rts(_rotation, vec3(position, profile(position)), scale);
 }

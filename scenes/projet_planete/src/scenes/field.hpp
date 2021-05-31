@@ -2,7 +2,7 @@
 
 #include "vcl/vcl.hpp"
 #include <iostream>
-#include "scene_helper.hpp"
+#include "helpers/scene_helper.hpp"
 #include "water/water.hpp"
 #include "water/waterfbuffer.hpp"
 

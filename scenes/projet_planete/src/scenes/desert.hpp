@@ -1,8 +1,8 @@
 #pragma once
 
 #include "vcl/vcl.hpp"
-#include "scene_helper.hpp"
-#include "heightmap.hpp"
+#include "helpers/scene_helper.hpp"
+#include "helpers/heightmap.hpp"
 #include "water/water.hpp"
 #include "water/waterfbuffer.hpp"
 
