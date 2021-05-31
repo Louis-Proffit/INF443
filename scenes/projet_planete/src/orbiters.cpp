@@ -9,9 +9,9 @@ hierarchy_mesh_drawable get_sun_mesh_drawable(vec3 rotation_axis, float rotation
 
 /*void orbiter::display(scene_environment const& scene, user_interaction_parameters const& user)
 {
-	draw(orbiter_visual, scene);
-	draw(trajectory_visual, scene);
-	if (user.draw_wireframe) draw_wireframe(orbiter_visual, scene);
+	draw(orbiter_visual, this);
+	draw(trajectory_visual, this);
+	if (user.draw_wireframe) draw_wireframe(orbiter_visual, this);
 }*/
 
 void orbiter::update(float time)

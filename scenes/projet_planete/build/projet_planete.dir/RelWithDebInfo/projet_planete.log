@@ -1,24 +1,2 @@
-﻿  field.cpp
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\field.hpp(51,16): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\field.hpp(56,54): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\field.cpp(45,28): warning C4458: declaration of 'normal_shader' hides class member
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(158,16): message : see declaration of 'scene_visual::normal_shader'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\field.cpp(46,25): warning C4458: declaration of 'sun_shader' hides class member
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(159,16): message : see declaration of 'scene_visual::sun_shader'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\field.cpp(133,28): warning C4458: declaration of 'normal_shader' hides class member
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(158,16): message : see declaration of 'scene_visual::normal_shader'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\field.cpp(166,28): warning C4458: declaration of 'normal_shader' hides class member
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(158,16): message : see declaration of 'scene_visual::normal_shader'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\field.cpp(190,28): warning C4458: declaration of 'normal_shader' hides class member
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scene_helper.hpp(158,16): message : see declaration of 'scene_visual::normal_shader'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\field.cpp(192,42): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\field.cpp(359,30): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\field.cpp(360,23): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\field.cpp(361,22): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Louis Proffit\OneDrive\Git\INF443\library\vcl\display\drawable\mesh_drawable/mesh_drawable.hpp(51,56): warning C4100: 'scene': unreferenced formal parameter
-C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\src\scenes\field.cpp(64): message : see reference to function template instantiation 'void vcl::draw<countryside*>(const vcl::mesh_drawable &,const SCENE &)' being compiled
-          with
-          [
-              SCENE=countryside *
-          ]
+﻿  orbiters.cpp
   projet_planete.vcxproj -> C:\Users\Louis Proffit\OneDrive\Git\INF443\scenes\projet_planete\build\RelWithDebInfo\projet_planete.exe
