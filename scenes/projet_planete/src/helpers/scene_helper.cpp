@@ -362,7 +362,7 @@ void environement::update_visual()
 			if (user_reference->state.mouse_click_left && !user_reference->state.key_ctrl)
 				camera_c.manipulator_rotate_trackball(p0, p1);
 			if (user_reference->state.mouse_click_left && user_reference->state.key_ctrl)
-				camera_c.manipulator_translate_in_plane(p1 - p0);
+				camera_c.manipulator_translate_in_plane(p1 - p0, true);
 			if (user_reference->state.mouse_click_right)
 				camera_c.manipulator_scale_distance_to_center((p1 - p0).y);
 		}

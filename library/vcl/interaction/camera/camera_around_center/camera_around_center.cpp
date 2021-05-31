@@ -36,9 +36,16 @@ namespace vcl
 		distance_to_center *= (1.0f + magnitude);
 		distance_to_center = std::max(distance_to_center, 0.01f);
 	}
-	void camera_around_center::manipulator_translate_in_plane(vec2 const& tr)
+	void camera_around_center::manipulator_translate_in_plane(vec2 const& tr, bool keep_z)
 	{
-		center_of_rotation -= translation_in_plane(tr, orientation_camera);
+		if (keep_z) {
+			float previous_z = center_of_rotation.z;
+			center_of_rotation -= translation_in_plane(tr, orientation_camera);
+			center_of_rotation.z = previous_z;
+		}
+		else {
+			center_of_rotation -= translation_in_plane(tr, orientation_camera);
+		}
 	}
 
 	void camera_around_center::look_at(vec3 const& eye, vec3 const& center, vec3 const& up)

@@ -24,7 +24,7 @@ namespace vcl
 	    void manipulator_rotate_trackball(vec2 const& p0, vec2 const& p1);
 		void manipulator_rotate_roll_pitch_yaw(float roll, float pitch, float yaw);
 	    void manipulator_scale_distance_to_center(float magnitude);
-		void manipulator_translate_in_plane(vec2 const& tr);
+		void manipulator_translate_in_plane(vec2 const& tr, bool keep_z);
 
 		void look_at(vec3 const& eye, vec3 const& center, vec3 const& up);
 	};

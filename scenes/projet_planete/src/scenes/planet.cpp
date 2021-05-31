@@ -102,7 +102,7 @@ void planet::update_visual()
         if (user_reference->state.mouse_click_left && !user_reference->state.key_ctrl)
             camera.manipulator_rotate_trackball(p0, p1);
         if (user_reference->state.mouse_click_left && user_reference->state.key_ctrl)
-            camera.manipulator_translate_in_plane(p1 - p0);
+            camera.manipulator_translate_in_plane(p1 - p0, false);
         if (user_reference->state.mouse_click_right)
             camera.manipulator_scale_distance_to_center((p1 - p0).y);
     }
