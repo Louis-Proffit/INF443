@@ -20,6 +20,7 @@ planet::planet(user_parameters *user, std::function<void(scene_type)> _swap_func
 
     // Configuration des visuels
     set_planet();
+    set_orbiters();
     set_islands();
     set_skybox();
     set_sun();
@@ -78,6 +79,11 @@ void planet::display_visual()
         else
             islands_visuals[i].shading.color = vec3(1, 1, 1);
         draw(islands_visuals[i], this);
+    }
+
+    for (int i = 0; i < orbiters.size(); i++) {
+        orbiters[i].update(time);
+        orbiters[i].display();
     }
 
     skybox.display_skybox(this);
@@ -244,6 +250,12 @@ void planet::set_islands()
 void planet::set_skybox()
 {
     skybox.init_skybox(vec3(0, 0, 0), 10, skybox_type::SPACE, get_shader(shader_type::NORMAL));
+}
+
+void planet::set_orbiters()
+{
+    for (int i = 0; i < number_of_planes; i++) orbiters.push_back(orbiter(orbiter_type::PLANE));
+    for (int i = 0; i < number_of_satelites; i++) orbiters.push_back(orbiter(orbiter_type::SATELITE));
 }
 
 void planet::set_sun()

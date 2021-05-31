@@ -5,9 +5,9 @@
 
 using namespace vcl;
 
-void Water::init_water(GLuint shad)
+void Water::init_water(GLuint shad, float x_min, float x_max, float y_min, float y_max)
 {
-    grid = mesh_primitive_grid(vec3(-10, -10, waterHeight), vec3(-10, 10, waterHeight), vec3(10, 10, waterHeight), vec3(10, -10, waterHeight), 100, 100);
+    grid = mesh_primitive_grid(vec3(x_min, y_min, waterHeight), vec3(x_min, y_max, waterHeight), vec3(x_max, y_max, waterHeight), vec3(x_max, y_min, waterHeight), 100, 100);
     shader = shad;
     dudvmap = opengl_texture_to_gpu(image_load_png("../../assets/water/waterdudv.png"), GL_REPEAT, GL_REPEAT);
     normalMap = opengl_texture_to_gpu(image_load_png("../../assets/water/waternormal.png"), GL_REPEAT, GL_REPEAT);

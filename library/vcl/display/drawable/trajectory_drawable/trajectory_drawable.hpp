@@ -29,7 +29,6 @@ namespace vcl
 			glUseProgram(trajectory.visual.shader); opengl_check;
 
 			// Send uniforms for this shader
-			opengl_uniform(trajectory.visual.shader, scene);
 			opengl_uniform(trajectory.visual.shader, "color", trajectory.visual.color);
 			opengl_uniform(trajectory.visual.shader, "model", trajectory.visual.transform.matrix());
 

@@ -50,14 +50,18 @@ public:
 private:
 	typedef environement super;
 	float random_compression = 0.3f; // les champs sont r�guliers si le coeff vaut 0, et peuvent �tre triangles si on atteint 1
-
-	float field_min_dimension = 0.5f;
-	int field_subdivisions = 30;
+	float field_min_dimension = 0.3f;
 	float path_proportion = 0.05f; // proportion du champ sur laquelle on empi�te pour faire un chemin
+	int field_subdivisions = 10;
 	float path_dz = 0.005;
-	float border_proportion = 0.01f;
-	float sand_proportion = 0.5f;
+
+	float field_proportion = 0.80; // Up to border
+	float border_proportion = 0.81; // Between field and sand
+	float profile_transition_down = 0.85; // Terrain goes down here
+	float profile_transition_up = 0.95; // Terrain stops going up
+	float skybox_radius = 10.0f;
 	int number_of_tractors = 3;
+
 	vcl::mesh fields_type1;
 	vcl::mesh fields_type2;
 	vcl::mesh fields_type3;

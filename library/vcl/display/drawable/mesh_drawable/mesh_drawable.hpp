@@ -12,7 +12,7 @@ namespace vcl
 	{
 		mesh_drawable();
 		// Send mesh data to GPU and store IDs into vbo. Set also shader and texture.
-		explicit mesh_drawable(mesh const& data_to_send, GLuint shader=default_shader, GLuint texture=default_texture, GLuint draw_type=GL_DYNAMIC_DRAW);
+		explicit mesh_drawable(mesh const& data_to_send, GLuint shader, GLuint texture=default_texture, GLuint draw_type=GL_DYNAMIC_DRAW);
 
 		// Stores VBO ID in GPU_elements_id
 		std::map<std::string, GLuint> vbo;
