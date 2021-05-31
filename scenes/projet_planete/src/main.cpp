@@ -133,11 +133,7 @@ void initialize()
 	user.display_frame = false;
 
 	// Initialisation de la plan�te
-<<<<<<< HEAD
 	scene = new forest(&user, swap_function);
-=======
-	scene = new planet(&user, swap_function);
->>>>>>> refs/remotes/origin/main
 }
 
 void handle_window_update_callback(GLFWwindow *window, int width, int height)

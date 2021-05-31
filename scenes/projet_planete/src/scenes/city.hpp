@@ -35,8 +35,6 @@ public:
     void update_visual();
     void display_interface();
 
-    void init_city();
-    // void init_pate_water();
     void init_pate();
     void init_ground();
     void compute_pate(int nb);
@@ -50,6 +48,6 @@ public:
     vcl::mesh compute_windows_on_quadrangle(vcl::vec3 const &p00, vcl::vec3 const &p10, vcl::vec3 const &p11, vcl::vec3 const &p01);
     vcl::mesh compute_road_partial(vcl::vec3 const &p00, vcl::vec3 const &p10, vcl::vec3 const &p11, vcl::vec3 const &p01, bool const &isspecial);
     std::vector<std::vector<vcl::vec3>> subdivise(std::vector<vcl::vec3> pate);
-    // std::vector<vcl::vec3> getIntersection(float a, float b, float c); // Parametres: equation cartesienne de droite ax+by+c =0
+
     float get_altitude(vcl::vec2 const &new_position_in_plane);
 };

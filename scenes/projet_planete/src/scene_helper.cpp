@@ -296,6 +296,14 @@ void environement::display_visual()
 	skybox.display_skybox(this);
 }
 
+float environement::get_player_altitude(vcl::vec2 const& position)
+{
+	float dz;
+	if (user_reference->sneak) dz = player_height / 2;
+	else dz = player_height;
+	return get_altitude(position) + dz;
+}
+
 void environement::update_visual()
 {
 	vec2 const &p0 = user_reference->mouse_prev;
@@ -328,7 +336,7 @@ void environement::update_visual()
 			dp = dp *= user_reference->player_speed / fps;
 
 		camera_m.manipulator_set_translation(dp);
-		float new_z = get_altitude(camera_m.position_camera.xy());
+		float new_z = get_player_altitude(camera_m.position_camera.xy());
 		camera_m.manipulator_set_altitude(new_z);
 	}
 	else

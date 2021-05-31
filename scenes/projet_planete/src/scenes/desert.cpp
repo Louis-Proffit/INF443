@@ -97,7 +97,7 @@ void desert::set_sun()
     sun_visual.shading.color = vec3(1.0, 1.0, 0.0);
 }
 
-float desert::get_altitude(vec2 const &new_position_in_plane)
+float desert::get_altitude(vec2 const &new_position_in_plane) 
 {
     float i_float = parameters.rows * (new_position_in_plane.x - x_min) / (x_max - x_min);
     float j_float = parameters.columns * (new_position_in_plane.y - y_min) / (y_max - y_min);

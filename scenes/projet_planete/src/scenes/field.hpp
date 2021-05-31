@@ -79,11 +79,12 @@ private:
 	void set_skybox();
 	void set_sun();
 	void set_assets();
-	float get_altitude(vcl::vec2 const &position_in_plane);
 	vcl::mesh subdivide_path(vcl::mesh quadrangle);
 	vcl::mesh subdivide_field(vcl::mesh quadrangle);
 	void shuffle();
+
 	float profile(vcl::vec2 const &position_in_plane);
+	float get_altitude(vcl::vec2 const& position_in_plane);
 
 	// Affichage de l'eau
 

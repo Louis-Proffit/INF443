@@ -225,6 +225,7 @@ public:
 
 	void display_visual();
 	virtual float get_altitude(vcl::vec2 const &position) = 0;
+	float get_player_altitude(vcl::vec2 const& position);
 	void update_visual();
 	void display_interface();
 

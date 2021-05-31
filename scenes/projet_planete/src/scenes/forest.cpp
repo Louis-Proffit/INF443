@@ -7,6 +7,10 @@ using namespace vcl;
 
 forest::forest(user_parameters *user, std::function<void(scene_type)> _swap_function) : environement(user, _swap_function)
 {
+    x_min = -5.0f;
+    x_max = 5.0f;
+    y_min = -5.0f;
+    y_max = 5.0f;
 
     // Configuration des visuels
     set_terrain();
@@ -27,6 +31,10 @@ forest::forest(user_parameters *user, std::function<void(scene_type)> _swap_func
     tree_cool.resize(0.5f);
     tree_real.resize(0.5f);
     tree_classic.resize(0.5f);
+
+    // Tests
+    vec2 position = 0.8 * vec2(x_min, x_min);
+    std::cout << profile(position) << std::endl;
 }
 
 void forest::display_visual()
@@ -160,21 +168,17 @@ void forest::display_interface()
 
 void forest::set_terrain()
 {
-    int Nu = 40;
-    int Nv = 40;
-    mesh = mesh_primitive_grid({x_min, y_min, 0}, {x_max, y_min, 0}, {x_max, y_max, 0}, {x_min, y_max, 0}, Nu, Nv);
-    for (int i = 0; i < Nu; i++)
-    {
-        for (int j = 0; j < Nv; j++)
-        {
-            const float u = i / (Nu - 1.0f);
-            const float v = j / (Nv - 1.0f);
-            float x = 2 * (x_max - x_min) * (u - 0.5f);
-            float y = 2 * (y_max - y_min) * (v - 0.5f);
+    vec3 p_1 = forest_proportion * vec3(x_min, y_min, 0.0);
+    vec3 p_2 = forest_proportion * vec3(x_max, y_min, 0.0);
+    vec3 p_3 = forest_proportion * vec3(x_max, y_max, 0.0);
+    vec3 p_4 = forest_proportion * vec3(x_min, y_max, 0.0);
 
-            mesh.position[j + Nv * i].z += parameters.height * noise_perlin(mesh.position[j + Nv * i], parameters.octaves, parameters.persistency, parameters.frequency_gain);
-            mesh.uv[j + Nv * i] = vec2(x, y);
-        }
+    int N_terrain = forest_proportion * N;
+    mesh = mesh_primitive_grid(p_1, p_2, p_3, p_4, N_terrain, N_terrain);
+    for (int i = 0; i < mesh.position.size() ; i++)
+    {
+        mesh.position[i].z = get_altitude(mesh.position[i].xy());
+        mesh.uv[i] = mesh.position[i].xy();
     }
     visual = mesh_drawable(mesh, get_shader(shader_type::NORMAL));
     visual.texture = scene_visual::get_texture(texture_type::GRASS);
@@ -182,7 +186,7 @@ void forest::set_terrain()
 
 void forest::set_skybox()
 {
-    skybox.init_skybox(vec3(0, 0, 0), 10, skybox_type::SUNDOWN, get_shader(shader_type::NORMAL));
+    skybox.init_skybox(vec3(0, 0, 0), skybox_radius, skybox_type::SUNDOWN, get_shader(shader_type::NORMAL));
 }
 
 void forest::set_sun()
@@ -193,26 +197,25 @@ void forest::set_sun()
 
 void forest::set_sand()
 {
-    vcl::mesh sand;
-    int N1 = 100;
-    int N2 = 500;
-    float delta = (x_max - x_min) * sand_proportion / 2.0;
-    vcl::mesh side;
-    side = mesh_primitive_grid(vec3(x_min - delta, y_min, 0), vec3(x_max + delta, y_min, 0), vec3(x_max + delta, y_min - delta, 0), vec3(x_min - delta, y_min - delta, 0), N2, N1); // Bas
-    sand.push_back(side);
-    //side.~mesh();
-    side = mesh_primitive_grid(vec3(x_min, y_max + delta, 0), vec3(x_min, y_min - delta, 0), vec3(x_min - delta, y_min - delta, 0), vec3(x_min - delta, y_max + delta, 0), N2, N1); // Gauche
-    sand.push_back(side);
-    //side.~mesh();
-    side = mesh_primitive_grid(vec3(x_max, y_max + delta, 0), vec3(x_max, y_min - delta, 0), vec3(x_max + delta, y_min - delta, 0), vec3(x_max + delta, y_max + delta, 0), N2, N1); // Gauche
-    sand.push_back(side);
-    //side.~mesh();
-    side = mesh_primitive_grid(vec3(x_min - delta, y_max, 0), vec3(x_max + delta, y_max, 0), vec3(x_max + delta, y_max + delta, 0), vec3(x_min - delta, y_max + delta, 0), N2, N1); // Haut
-    sand.push_back(side);
+    vcl::mesh sand, side;
+    int N_small = (1 - forest_proportion) / 2 * N;
+    int N_big = N;
+    vec3 inner_1 = forest_proportion * vec3(x_min, y_min, 0.0);
+    vec3 inner_2 = forest_proportion * vec3(x_max, y_min, 0.0);
+    vec3 inner_3 = forest_proportion * vec3(x_max, y_max, 0.0);
+    vec3 inner_4 = forest_proportion * vec3(x_min, y_max, 0.0);
+    vec3 outer_1 = vec3(x_min, y_min, 0.0);
+    vec3 outer_2 = vec3(x_max, y_min, 0.0);
+    vec3 outer_3 = vec3(x_max, y_max, 0.0);
+    vec3 outer_4 = vec3(x_min, y_max, 0.0);
+    sand.push_back(mesh_primitive_grid(inner_1, inner_2, outer_2, outer_1, N_big, N_small));
+    sand.push_back(mesh_primitive_grid(inner_2, inner_3, outer_3, outer_2, N_big, N_small));
+    sand.push_back(mesh_primitive_grid(inner_3, inner_4, outer_4, outer_3, N_big, N_small));
+    sand.push_back(mesh_primitive_grid(inner_4, inner_1, outer_1, outer_4, N_big, N_small));
 
     for (int i = 0; i < sand.position.size(); i++)
     {
-        sand.position[i].z += profile(sand.position[i].xy()) + parameters.height * noise_perlin(sand.position[i].xy(), parameters.octaves, parameters.persistency, parameters.frequency_gain);
+        sand.position[i].z = get_altitude(sand.position[i].xy());
     }
     for (int i = 0; i < sand.position.size(); i++)
     {
@@ -226,22 +229,25 @@ void forest::set_sand()
 
 float forest::profile(vec2 const &position_in_plane)
 {
-    float transition_down = 1.0;
-    float transition_up = 1.2;
-    float z_min = -0.4;
+    float z_min = -0.2;
     float z_max = 0.2;
-    float coord_x = std::max((position_in_plane.x - x_min) / (x_max - x_min), (x_max - position_in_plane.x) / (x_max - x_min));
-    float coord_y = std::max((position_in_plane.y - y_min) / (y_max - y_min), (y_max - position_in_plane.y) / (y_max - y_min));
+    float coord_x = std::max(position_in_plane.x / x_max, position_in_plane.x / x_min);
+    float coord_y = std::max(position_in_plane.y / y_max, position_in_plane.y / y_min);
     float coord = std::max(coord_x, coord_y);
-    if (coord < transition_down)
+    if (coord < profile_transition_down)
         return z_max;
-    else if (coord < transition_up)
+    else if (coord < profile_transition_up)
     {
-        float t = 0.5 * (1 + cos(PI / (transition_up - transition_down) * (coord - transition_down)));
+        float t = 0.5 * (1 + cos(PI / (profile_transition_up - profile_transition_down) * (coord - profile_transition_down)));
         return t * z_max + (1 - t) * z_min;
     }
     else
         return z_min;
+}
+
+float forest::get_altitude(vec2 const& position_on_terrain) 
+{
+    return profile(position_on_terrain) + parameters.height * noise_perlin(position_on_terrain, parameters.octaves, parameters.persistency, parameters.frequency_gain);
 }
 
 void forest::set_grass()
@@ -253,7 +259,8 @@ void forest::set_grass()
         vec3 decal_vert = vec3(0, 0, 0.05);
         float alpha = 2 * pi * rand_interval();
         vec3 decal_hor = cos(alpha) * xloc + sin(alpha) * yloc;
-        vec3 pos = vec3((x_max - x_min) * (rand_interval() - 0.5f), (y_max - y_min) * (rand_interval() - 0.5f), 0.1);
+        vec3 pos = forest_proportion * vec3((x_max - x_min) * (rand_interval() - 0.5f), (y_max - y_min) * (rand_interval() - 0.5f), 0.0);
+        pos.z = get_altitude(pos.xy());
         grass.push_back(mesh_primitive_quadrangle(pos, pos + decal_hor, pos + decal_hor + decal_vert, pos + decal_vert));
         float row = rand() % 8;
         float column = rand() % 8;
@@ -288,11 +295,12 @@ std::vector<vcl::vec3> forest::generate_positions_on_terrain(int N)
     {
         float u = (x_max - x_min) * (rand_interval() - 0.5f);
         float v = (y_max - y_min) * (rand_interval() - 0.5f);
-        vec3 p = vec3(u, v, 0.1);
+        vec3 p = forest_proportion * vec3(u, v, 0);
+        p.z = get_altitude(p.xy());
         bool enlv = false;
         for (vec3 q : res)
         {
-            if (((q.x - p.x) * (q.x - p.x) + (q.y - p.y) * (q.y - p.y)) < 0.50) // Passer environ à 0.20 pour eviter les collisions entre les tree
+            if (((q.x - p.x) * (q.x - p.x) + (q.y - p.y) * (q.y - p.y)) < 0.20) // Passer environ à 0.20 pour eviter les collisions entre les tree
             {
                 enlv = true;
             }
@@ -304,12 +312,4 @@ std::vector<vcl::vec3> forest::generate_positions_on_terrain(int N)
         }
     }
     return res;
-}
-float forest::get_altitude(vcl::vec2 const &position_in_plane)
-{
-    float z = parameters.height * noise_perlin(position_in_plane, parameters.octaves, parameters.persistency, parameters.frequency_gain);
-    if (user_reference->sneak)
-        return player_height / 2 + z;
-    else
-        return player_height + z;
 }
