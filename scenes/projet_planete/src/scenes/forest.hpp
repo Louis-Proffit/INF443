@@ -30,13 +30,14 @@ public:
 private:
 	typedef environement super;
 	perlin_noise_parameters parameters{3, 0.1, 0.3, 2.0};
-	float x_min = -5.0f;
-	float y_min = -5.0f;
-	float x_max = 5.0f;
-	float y_max = 5.0f;
 	int nb_tree = 100;
 	int nb_particles = 30000;
-	float sand_proportion = 0.5f;
+	int N = 200;
+	float forest_proportion = 0.6f;
+	float profile_transition_down = 0.6f;
+	float profile_transition_up = 0.8f;
+	float skybox_radius = 10.0f;
+
 	vcl::mesh grass;
 	buffer<vcl::vec3> buff_vecgrass;
 	buffer<float> buff_floatgrass;

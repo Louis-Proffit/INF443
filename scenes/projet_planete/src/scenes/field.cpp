@@ -345,8 +345,8 @@ float countryside::profile(vec2 const &position_in_plane)
 {
     float z_min = -0.2;
     float z_max = 0.1;
-    float coord_x = std::max((position_in_plane.x - x_min) / (x_max - x_min), (x_max - position_in_plane.x) / (x_max - x_min));
-    float coord_y = std::max((position_in_plane.y - y_min) / (y_max - y_min), (y_max - position_in_plane.y) / (y_max - y_min));
+    float coord_x = std::max(position_in_plane.x / x_max, position_in_plane.x / x_min);
+    float coord_y = std::max(position_in_plane.y / y_max, position_in_plane.y / y_min);
     float coord = std::max(coord_x, coord_y);
     if (coord < profile_transition_down)
         return z_max;
