@@ -5,7 +5,8 @@
 
 #define PI 3.14159265359f
 
-enum class tree_type {
+enum class tree_type
+{
     CLASSIC,
     REAL_1,
     REAL_2,
@@ -42,6 +43,8 @@ public:
     void GenerateLeave(vcl::vec3 startingPoint, vcl::vec3 translationVector, float height);
 
     void translate(vcl::vec3 _translation);
+
+    void resize(float taille);
 
     void initTree(tree_type treename, GLuint shader, bool blockleaves = false);
 
