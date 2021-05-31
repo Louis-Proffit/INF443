@@ -18,6 +18,7 @@ out struct fragment_data
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
+uniform vec4 plane = vec4(0 ,0 , -1 ,1);
 
 void main()
 {
@@ -27,6 +28,7 @@ void main()
     fragment.uv = uv;
     fragment.eye = vec3(inverse(view) * vec4(0, 0, 0, 1.0));
 
+    gl_ClipDistance[0] = dot(model*vec4(position,1.0), plane);
     gl_Position = projection * view * model * vec4(position, 1.0);
 }
 )";

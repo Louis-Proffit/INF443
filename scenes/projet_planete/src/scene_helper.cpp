@@ -21,6 +21,8 @@
 #include "../assets/shaders/ebly/frag.glsl"
 #include "../assets/shaders/forest/vert.glsl"
 #include "../assets/shaders/forest/frag.glsl"
+#include "../assets/shaders/smooth/vert.glsl"
+#include "../assets/shaders/smooth/frag.glsl"
 
 using namespace vcl;
 
@@ -35,6 +37,7 @@ GLuint scene_visual::mountain_shader = 0;
 GLuint scene_visual::particle_mountain_shader = 0;
 GLuint scene_visual::ebly_shader = 0;
 GLuint scene_visual::forest_shader = 0;
+GLuint scene_visual::smooth_shader = 0;
 
 GLuint scene_visual::texture_field_1 = 0;
 GLuint scene_visual::texture_field_2 = 0;
@@ -111,6 +114,7 @@ void scene_visual::init()
 	scene_visual::particle_mountain_shader = opengl_create_shader_program(partic_vert, partic_mountain_frag);
 	scene_visual::ebly_shader = opengl_create_shader_program(ebly_vert, ebly_frag);
 	scene_visual::forest_shader = opengl_create_shader_program(forest_vert, forest_frag);
+	scene_visual::smooth_shader = opengl_create_shader_program(smooth_vert, smooth_frag);
 
 	scene_visual::texture_field_1 = opengl_texture_to_gpu(image_load_png("../assets/textures/field/field_1.png"), GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT);
 	scene_visual::texture_field_2 = opengl_texture_to_gpu(image_load_png("../assets/textures/field/field_2.png"), GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT);
@@ -184,6 +188,8 @@ GLuint scene_visual::get_shader(shader_type shader_type)
 		return ebly_shader;
 	case shader_type::FOREST:
 		return forest_shader;
+	case shader_type::SMOOTH:
+		return smooth_shader;
 	}
 }
 
@@ -296,11 +302,13 @@ void environement::display_visual()
 	skybox.display_skybox(this);
 }
 
-float environement::get_player_altitude(vcl::vec2 const& position)
+float environement::get_player_altitude(vcl::vec2 const &position)
 {
 	float dz;
-	if (user_reference->sneak) dz = player_height / 2;
-	else dz = player_height;
+	if (user_reference->sneak)
+		dz = player_height / 2;
+	else
+		dz = player_height;
 	return get_altitude(position) + dz;
 }
 
