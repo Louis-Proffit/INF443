@@ -51,8 +51,8 @@ private:
 	typedef environement super;
 	float random_compression = 0.3f; // les champs sont r�guliers si le coeff vaut 0, et peuvent �tre triangles si on atteint 1
 
-	float field_min_dimension = 0.3f;
-	int field_subdivisions = 10;
+	float field_min_dimension = 0.5f;
+	int field_subdivisions = 30;
 	float path_proportion = 0.05f; // proportion du champ sur laquelle on empi�te pour faire un chemin
 	float path_dz = 0.005;
 	float border_proportion = 0.01f;

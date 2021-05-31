@@ -16,6 +16,7 @@ void initialize();
 void handle_window_update_callback(GLFWwindow *window, int width, int height);
 void handle_mouse_update_callback(GLFWwindow *window, double mouse_x_pos, double mouse_y_pos);
 void handle_kb_update_callback(GLFWwindow *window, int i, int j, int k, int l);
+void handle_mouse_click_callback(GLFWwindow* window, int i, int j, int k);
 
 user_parameters user;
 scene_visual *scene = 0;
@@ -30,6 +31,7 @@ int main(int, char *argv[])
 	initialize();
 	handle_window_update_callback(window, window_width, window_height);
 	glfwSetCursorPosCallback(window, handle_mouse_update_callback);
+	glfwSetMouseButtonCallback(window, handle_mouse_click_callback);
 	glfwSetKeyCallback(window, handle_kb_update_callback);
 	glfwSetWindowSizeCallback(window, handle_window_update_callback);
 
@@ -130,17 +132,29 @@ void initialize()
 	user.display_frame = false;
 
 	// Initialisation de la plan�te
+<<<<<<< HEAD
 	scene = new forest(&user, swap_function);
+=======
+	scene = new planet(&user, swap_function);
+>>>>>>> refs/remotes/origin/main
 }
 
 void handle_window_update_callback(GLFWwindow *window, int width, int height)
 {
 	scene->handle_window_size_callback(width, height);
 }
+
 void handle_mouse_update_callback(GLFWwindow *window, double mouse_x_pos, double mouse_y_pos)
 {
 	user.state = glfw_current_state(window);
 	user.mouse_curr = glfw_get_mouse_cursor(window, mouse_x_pos, mouse_y_pos);
+	scene->update_visual();
+}
+
+void handle_mouse_click_callback(GLFWwindow* window, int i, int j, int k)
+{
+	user.state = glfw_current_state(window);
+	user.mouse_curr = glfw_get_mouse_cursor(window);
 	scene->update_visual();
 }
 
