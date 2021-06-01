@@ -2,6 +2,7 @@
 
 #include "vcl/vcl.hpp"
 #include <iostream>
+#include "helpers/scene_helper.hpp"
 
 using namespace vcl;
 
@@ -61,7 +62,8 @@ public:
     void unbindCurrentFrameBuffer()
     { //call to switch to default frame buffer
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        glViewport(0, 0, 2580, 2048);
+        glViewport(0, 0, scene_visual::display_w, scene_visual::display_h);
+        // glViewport(0, 0, 2580, 2048);
         opengl_check;
     }
 

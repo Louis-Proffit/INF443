@@ -86,6 +86,9 @@ GLuint scene_visual::texture_sb_sundown_droite = 0;
 GLuint scene_visual::texture_sb_sundown_devant = 0;
 GLuint scene_visual::texture_sb_sundown_derriere = 0;
 
+int scene_visual::display_h = 0;
+int scene_visual::display_w = 0;
+
 scene_visual::scene_visual(user_parameters *user, std::function<void(scene_type)> _swap_function)
 {
 	user_reference = user;
@@ -95,6 +98,8 @@ scene_visual::scene_visual(user_parameters *user, std::function<void(scene_type)
 void scene_visual::handle_window_size_callback(int width, int height)
 {
 	glViewport(0, 0, width, height);
+	display_w = width;
+	display_h = height;
 	float const aspect = width / static_cast<float>(height);
 	float const fov = 50.0f * pi / 180.0f;
 	float const z_min = 0.1f;

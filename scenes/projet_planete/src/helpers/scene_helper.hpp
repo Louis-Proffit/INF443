@@ -222,6 +222,9 @@ public:
 	static GLuint texture_sb_sundown_droite;
 	static GLuint texture_sb_sundown_devant;
 	static GLuint texture_sb_sundown_derriere;
+
+	static int display_w;
+	static int display_h;
 };
 
 class environement : public scene_visual
