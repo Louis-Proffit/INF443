@@ -172,7 +172,7 @@ void countryside::set_tractor()
     mesh tractor = mesh_load_file_obj("../assets/objects/tractor/tractor.obj");
     GLuint normal_shader = scene_visual::get_shader(shader_type::NORMAL);
     tractor_visual = mesh_drawable(tractor, normal_shader);
-    tractor_visual.transform.scale = 0.02;
+    tractor_visual.transform.scale = 0.04;
     tractor_visual.texture = get_texture(texture_type::LOWPOLY);
 
     /* Set transform */

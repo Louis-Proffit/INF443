@@ -90,7 +90,7 @@ void mountain::display_interface()
 void mountain::set_terrain()
 {
     parameters = heightmap_parameters{0, 0, x_min, y_min, x_max, y_max};
-    horizontal_scale = 2.0f;
+    horizontal_scale = 1.2f;
     height_data = generateFileHeightData("../assets/heightmaps/mountain3.png", horizontal_scale);
     terrain_mesh = createFromHeightData(height_data, parameters);
     for (int i = 0; i < terrain_mesh.position.size(); i++)
