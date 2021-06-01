@@ -138,7 +138,9 @@ void initialize()
 
 void handle_window_update_callback(GLFWwindow *window, int width, int height)
 {
-	scene->handle_window_size_callback(width, height);
+	int display_w, display_h;
+	glfwGetFramebufferSize(window, &display_w, &display_h);
+	scene->handle_window_size_callback(display_w, display_h);
 }
 
 void handle_mouse_update_callback(GLFWwindow *window, double mouse_x_pos, double mouse_y_pos)
