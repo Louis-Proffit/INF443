@@ -1,5 +1,6 @@
 *.zip
 *.mp4
+*/build
 CMakeLists.txt.user
 CMakeCache.txt
 CMakeFiles
